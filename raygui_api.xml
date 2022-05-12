@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="Windows-1252" ?>
+<raylibAPI>
+    <Defines count="7">
+        <Define name="RAYGUI_H" type="GUARD" value="" desc="" />
+        <Define name="RAYGUI_VERSION" type="STRING" value="3.0" desc="" />
+        <Define name="RAYGUIAPI" type="UNKNOWN" value="__declspec(dllexport)" desc="We are building the library as a Win32 shared library (.dll)" />
+        <Define name="RAYGUI_MALLOC(sz)" type="MACRO" value="malloc(sz)" desc="" />
+        <Define name="RAYGUI_CALLOC(n,sz)" type="MACRO" value="calloc(n,sz)" desc="" />
+        <Define name="RAYGUI_FREE(p)" type="MACRO" value="free(p)" desc="" />
+        <Define name="TRACELOG(level, ...)" type="MACRO" value="(void)0" desc="" />
+    </Defines>
+    <Structs count="8">
+        <Struct name="Vector2" fieldCount="2" desc="Vector2 type">
+            <Field type="float" name="x" desc="" />
+            <Field type="float" name="y" desc="" />
+        </Struct>
+        <Struct name="Vector3" fieldCount="3" desc="Vector3 type                 // -- ConvertHSVtoRGB(), ConvertRGBtoHSV()">
+            <Field type="float" name="x" desc="" />
+            <Field type="float" name="y" desc="" />
+            <Field type="float" name="z" desc="" />
+        </Struct>
+        <Struct name="Color" fieldCount="4" desc="Color type, RGBA (32bit)">
+            <Field type="unsigned char" name="r" desc="" />
+            <Field type="unsigned char" name="g" desc="" />
+            <Field type="unsigned char" name="b" desc="" />
+            <Field type="unsigned char" name="a" desc="" />
+        </Struct>
+        <Struct name="Rectangle" fieldCount="4" desc="Rectangle type">
+            <Field type="float" name="x" desc="" />
+            <Field type="float" name="y" desc="" />
+            <Field type="float" name="width" desc="" />
+            <Field type="float" name="height" desc="" />
+        </Struct>
+        <Struct name="Texture2D" fieldCount="5" desc="It should be redesigned to be provided by user">
+            <Field type="unsigned int" name="id" desc="OpenGL texture id" />
+            <Field type="int" name="width" desc="Texture base width" />
+            <Field type="int" name="height" desc="Texture base height" />
+            <Field type="int" name="mipmaps" desc="Mipmap levels, 1 by default" />
+            <Field type="int" name="format" desc="Data format (PixelFormat type)" />
+        </Struct>
+        <Struct name="GlyphInfo" fieldCount="5" desc="GlyphInfo, font characters glyphs info">
+            <Field type="int" name="value" desc="Character value (Unicode)" />
+            <Field type="int" name="offsetX" desc="Character offset X when drawing" />
+            <Field type="int" name="offsetY" desc="Character offset Y when drawing" />
+            <Field type="int" name="advanceX" desc="Character advance position X" />
+            <Field type="Image" name="image" desc="Character image data" />
+        </Struct>
+        <Struct name="Font" fieldCount="5" desc="It should be redesigned to be provided by user">
+            <Field type="int" name="baseSize" desc="Base size (default chars height)" />
+            <Field type="int" name="glyphCount" desc="Number of characters" />
+            <Field type="Texture2D" name="texture" desc="Characters texture atlas" />
+            <Field type="Rectangle *" name="recs" desc="Characters rectangles in texture" />
+            <Field type="GlyphInfo *" name="chars" desc="Characters info data" />
+        </Struct>
+        <Struct name="GuiStyleProp" fieldCount="3" desc="Style property">
+            <Field type="unsigned short" name="controlId" desc="" />
+            <Field type="unsigned short" name="propertyId" desc="" />
+            <Field type="int" name="propertyValue" desc="" />
+        </Struct>
+    </Structs>
+    <Aliases count="0">
+    </Aliases>
+    <Enums count="17">
+        <Enum name="GuiControlState" valueCount="4" desc="Gui control state">
+            <Value name="GUI_STATE_NORMAL" integer="0" desc="" />
+            <Value name="GUI_STATE_FOCUSED" integer="1" desc="" />
+            <Value name="GUI_STATE_PRESSED" integer="2" desc="" />
+            <Value name="GUI_STATE_DISABLED" integer="3" desc="" />
+        </Enum>
+        <Enum name="GuiTextAlignment" valueCount="3" desc="Gui control text alignment">
+            <Value name="GUI_TEXT_ALIGN_LEFT" integer="0" desc="" />
+            <Value name="GUI_TEXT_ALIGN_CENTER" integer="1" desc="" />
+            <Value name="GUI_TEXT_ALIGN_RIGHT" integer="2" desc="" />
+        </Enum>
+        <Enum name="GuiControl" valueCount="16" desc="Gui controls">
+            <Value name="DEFAULT" integer="0" desc="Generic control -> populates to all controls when set" />
+            <Value name="LABEL" integer="1" desc="Used also for: LABELBUTTON" />
+            <Value name="BUTTON" integer="2" desc="" />
+            <Value name="TOGGLE" integer="3" desc="Used also for: TOGGLEGROUP" />
+            <Value name="SLIDER" integer="4" desc="Used also for: SLIDERBAR" />
+            <Value name="PROGRESSBAR" integer="5" desc="" />
+            <Value name="CHECKBOX" integer="6" desc="" />
+            <Value name="COMBOBOX" integer="7" desc="" />
+            <Value name="DROPDOWNBOX" integer="8" desc="" />
+            <Value name="TEXTBOX" integer="9" desc="Used also for: TEXTBOXMULTI" />
+            <Value name="VALUEBOX" integer="10" desc="" />
+            <Value name="SPINNER" integer="11" desc="" />
+            <Value name="LISTVIEW" integer="12" desc="" />
+            <Value name="COLORPICKER" integer="13" desc="" />
+            <Value name="SCROLLBAR" integer="14" desc="" />
+            <Value name="STATUSBAR" integer="15" desc="" />
+        </Enum>
+        <Enum name="GuiControlProperty" valueCount="16" desc="Gui base properties for every control">
+            <Value name="BORDER_COLOR_NORMAL" integer="0" desc="" />
+            <Value name="BASE_COLOR_NORMAL" integer="1" desc="" />
+            <Value name="TEXT_COLOR_NORMAL" integer="2" desc="" />
+            <Value name="BORDER_COLOR_FOCUSED" integer="3" desc="" />
+            <Value name="BASE_COLOR_FOCUSED" integer="4" desc="" />
+            <Value name="TEXT_COLOR_FOCUSED" integer="5" desc="" />
+            <Value name="BORDER_COLOR_PRESSED" integer="6" desc="" />
+            <Value name="BASE_COLOR_PRESSED" integer="7" desc="" />
+            <Value name="TEXT_COLOR_PRESSED" integer="8" desc="" />
+            <Value name="BORDER_COLOR_DISABLED" integer="9" desc="" />
+            <Value name="BASE_COLOR_DISABLED" integer="10" desc="" />
+            <Value name="TEXT_COLOR_DISABLED" integer="11" desc="" />
+            <Value name="BORDER_WIDTH" integer="12" desc="" />
+            <Value name="TEXT_PADDING" integer="13" desc="" />
+            <Value name="TEXT_ALIGNMENT" integer="14" desc="" />
+            <Value name="RESERVED" integer="15" desc="" />
+        </Enum>
+        <Enum name="GuiDefaultProperty" valueCount="4" desc="DEFAULT extended properties">
+            <Value name="TEXT_SIZE" integer="16" desc="" />
+            <Value name="TEXT_SPACING" integer="17" desc="" />
+            <Value name="LINE_COLOR" integer="18" desc="" />
+            <Value name="BACKGROUND_COLOR" integer="19" desc="" />
+        </Enum>
+        <Enum name="GuiToggleProperty" valueCount="1" desc="Toggle/ToggleGroup">
+            <Value name="GROUP_PADDING" integer="16" desc="" />
+        </Enum>
+        <Enum name="GuiSliderProperty" valueCount="2" desc="Slider/SliderBar">
+            <Value name="SLIDER_WIDTH" integer="16" desc="" />
+            <Value name="SLIDER_PADDING" integer="17" desc="" />
+        </Enum>
+        <Enum name="GuiProgressBarProperty" valueCount="1" desc="ProgressBar">
+            <Value name="PROGRESS_PADDING" integer="16" desc="" />
+        </Enum>
+        <Enum name="GuiCheckBoxProperty" valueCount="1" desc="CheckBox">
+            <Value name="CHECK_PADDING" integer="16" desc="" />
+        </Enum>
+        <Enum name="GuiComboBoxProperty" valueCount="2" desc="ComboBox">
+            <Value name="COMBO_BUTTON_WIDTH" integer="16" desc="" />
+            <Value name="COMBO_BUTTON_PADDING" integer="17" desc="" />
+        </Enum>
+        <Enum name="GuiDropdownBoxProperty" valueCount="2" desc="DropdownBox">
+            <Value name="ARROW_PADDING" integer="16" desc="" />
+            <Value name="DROPDOWN_ITEMS_PADDING" integer="17" desc="" />
+        </Enum>
+        <Enum name="GuiTextBoxProperty" valueCount="4" desc="TextBox/TextBoxMulti/ValueBox/Spinner">
+            <Value name="TEXT_INNER_PADDING" integer="16" desc="" />
+            <Value name="TEXT_LINES_PADDING" integer="17" desc="" />
+            <Value name="COLOR_SELECTED_FG" integer="18" desc="" />
+            <Value name="COLOR_SELECTED_BG" integer="19" desc="" />
+        </Enum>
+        <Enum name="GuiSpinnerProperty" valueCount="2" desc="Spinner">
+            <Value name="SPIN_BUTTON_WIDTH" integer="16" desc="" />
+            <Value name="SPIN_BUTTON_PADDING" integer="17" desc="" />
+        </Enum>
+        <Enum name="GuiScrollBarProperty" valueCount="6" desc="ScrollBar">
+            <Value name="ARROWS_SIZE" integer="16" desc="" />
+            <Value name="ARROWS_VISIBLE" integer="17" desc="" />
+            <Value name="SCROLL_SLIDER_PADDING" integer="18" desc="" />
+            <Value name="SCROLL_SLIDER_SIZE" integer="19" desc="" />
+            <Value name="SCROLL_PADDING" integer="20" desc="" />
+            <Value name="SCROLL_SPEED" integer="21" desc="" />
+        </Enum>
+        <Enum name="GuiScrollBarSide" valueCount="2" desc="ScrollBar side">
+            <Value name="SCROLLBAR_LEFT_SIDE" integer="0" desc="" />
+            <Value name="SCROLLBAR_RIGHT_SIDE" integer="1" desc="" />
+        </Enum>
+        <Enum name="GuiListViewProperty" valueCount="4" desc="ListView">
+            <Value name="LIST_ITEMS_HEIGHT" integer="16" desc="" />
+            <Value name="LIST_ITEMS_PADDING" integer="17" desc="" />
+            <Value name="SCROLLBAR_WIDTH" integer="18" desc="" />
+            <Value name="SCROLLBAR_SIDE" integer="19" desc="" />
+        </Enum>
+        <Enum name="GuiColorPickerProperty" valueCount="5" desc="ColorPicker">
+            <Value name="COLOR_SELECTOR_SIZE" integer="16" desc="" />
+            <Value name="HUEBAR_WIDTH" integer="17" desc="Right hue bar width" />
+            <Value name="HUEBAR_PADDING" integer="18" desc="Right hue bar separation from panel" />
+            <Value name="HUEBAR_SELECTOR_HEIGHT" integer="19" desc="Right hue bar selector height" />
+            <Value name="HUEBAR_SELECTOR_OVERFLOW" integer="20" desc="Right hue bar selector overflow" />
+        </Enum>
+    </Enums>
+    <Callbacks count="0">
+    </Callbacks>
+    <Functions count="56">
+        <Function name="GuiEnable" retType="void" paramCount="0" desc="Enable gui controls (global state)">
+        </Function>
+        <Function name="GuiDisable" retType="void" paramCount="0" desc="Disable gui controls (global state)">
+        </Function>
+        <Function name="GuiLock" retType="void" paramCount="0" desc="Lock gui controls (global state)">
+        </Function>
+        <Function name="GuiUnlock" retType="void" paramCount="0" desc="Unlock gui controls (global state)">
+        </Function>
+        <Function name="GuiIsLocked" retType="bool" paramCount="0" desc="Check if gui is locked (global state)">
+        </Function>
+        <Function name="GuiFade" retType="void" paramCount="1" desc="Set gui controls alpha (global state), alpha goes from 0.0f to 1.0f">
+            <Param type="float" name="alpha" desc="" />
+        </Function>
+        <Function name="GuiSetState" retType="void" paramCount="1" desc="Set gui state (global state)">
+            <Param type="int" name="state" desc="" />
+        </Function>
+        <Function name="GuiGetState" retType="int" paramCount="0" desc="Get gui state (global state)">
+        </Function>
+        <Function name="GuiSetFont" retType="void" paramCount="1" desc="Set gui custom font (global state)">
+            <Param type="Font" name="font" desc="" />
+        </Function>
+        <Function name="GuiGetFont" retType="Font" paramCount="0" desc="Get gui custom font (global state)">
+        </Function>
+        <Function name="GuiSetStyle" retType="void" paramCount="3" desc="Set one style property">
+            <Param type="int" name="control" desc="" />
+            <Param type="int" name="property" desc="" />
+            <Param type="int" name="value" desc="" />
+        </Function>
+        <Function name="GuiGetStyle" retType="int" paramCount="2" desc="Get one style property">
+            <Param type="int" name="control" desc="" />
+            <Param type="int" name="property" desc="" />
+        </Function>
+        <Function name="GuiWindowBox" retType="bool" paramCount="2" desc="Window Box control, shows a window that can be closed">
+            <Param type="Rectangle" name="bounds" desc="" />
+            <Param type="const char *" name="title" desc="" />
+        </Function>
+        <Function name="GuiGroupBox" retType="void" paramCount="2" desc="Group Box control with text name">
+            <Param type="Rectangle" name="bounds" desc="" />
+            <Param type="const char *" name="text" desc="" />
+        </Function>
+        <Function name="GuiLine" retType="void" paramCount="2" desc="Line separator control, could contain text">
+            <Param type="Rectangle" name="bounds" desc="" />
+            <Param type="const char *" name="text" desc="" />
+        </Function>
+        <Function name="GuiPanel" retType="void" paramCount="1" desc="Panel control, useful to group controls">
+            <Param type="Rectangle" name="bounds" desc="" />
+        </Function>
+        <Function name="GuiScrollPanel" retType="Rectangle" paramCount="3" desc="Scroll Panel control">
+            <Param type="Rectangle" name="bounds" desc="" />
+            <Param type="Rectangle" name="content" desc="" />
+            <Param type="Vector2 *" name="scroll" desc="" />
+        </Function>
+        <Function name="GuiLabel" retType="void" paramCount="2" desc="Label control, shows text">
+            <Param type="Rectangle" name="bounds" desc="" />
+            <Param type="const char *" name="text" desc="" />
+        </Function>
+        <Function name="GuiButton" retType="bool" paramCount="2" desc="Button control, returns true when clicked">
+            <Param type="Rectangle" name="bounds" desc="" />
+            <Param type="const char *" name="text" desc="" />
+        </Function>
+        <Function name="GuiLabelButton" retType="bool" paramCount="2" desc="Label button control, show true when clicked">
+            <Param type="Rectangle" name="bounds" desc="" />
+            <Param type="const char *" name="text" desc="" />
+        </Function>
+        <Function name="GuiToggle" retType="bool" paramCount="3" desc="Toggle Button control, returns true when active">
+            <Param type="Rectangle" name="bounds" desc="" />
+            <Param type="const char *" name="text" desc="" />
+            <Param type="bool" name="active" desc="" />
+        </Function>
+        <Function name="GuiToggleGroup" retType="int" paramCount="3" desc="Toggle Group control, returns active toggle index">
+            <Param type="Rectangle" name="bounds" desc="" />
+            <Param type="const char *" name="text" desc="" />
+            <Param type="int" name="active" desc="" />
+        </Function>
+        <Function name="GuiCheckBox" retType="bool" paramCount="3" desc="Check Box control, returns true when active">
+            <Param type="Rectangle" name="bounds" desc="" />
+            <Param type="const char *" name="text" desc="" />
+            <Param type="bool" name="checked" desc="" />
+        </Function>
+        <Function name="GuiComboBox" retType="int" paramCount="3" desc="Combo Box control, returns selected item index">
+            <Param type="Rectangle" name="bounds" desc="" />
+            <Param type="const char *" name="text" desc="" />
+            <Param type="int" name="active" desc="" />
+        </Function>
+        <Function name="GuiDropdownBox" retType="bool" paramCount="4" desc="Dropdown Box control, returns selected item">
+            <Param type="Rectangle" name="bounds" desc="" />
+            <Param type="const char *" name="text" desc="" />
+            <Param type="int *" name="active" desc="" />
+            <Param type="bool" name="editMode" desc="" />
+        </Function>
+        <Function name="GuiSpinner" retType="bool" paramCount="6" desc="Spinner control, returns selected value">
+            <Param type="Rectangle" name="bounds" desc="" />
+            <Param type="const char *" name="text" desc="" />
+            <Param type="int *" name="value" desc="" />
+            <Param type="int" name="minValue" desc="" />
+            <Param type="int" name="maxValue" desc="" />
+            <Param type="bool" name="editMode" desc="" />
+        </Function>
+        <Function name="GuiValueBox" retType="bool" paramCount="6" desc="Value Box control, updates input text with numbers">
+            <Param type="Rectangle" name="bounds" desc="" />
+            <Param type="const char *" name="text" desc="" />
+            <Param type="int *" name="value" desc="" />
+            <Param type="int" name="minValue" desc="" />
+            <Param type="int" name="maxValue" desc="" />
+            <Param type="bool" name="editMode" desc="" />
+        </Function>
+        <Function name="GuiTextBox" retType="bool" paramCount="4" desc="Text Box control, updates input text">
+            <Param type="Rectangle" name="bounds" desc="" />
+            <Param type="char *" name="text" desc="" />
+            <Param type="int" name="textSize" desc="" />
+            <Param type="bool" name="editMode" desc="" />
+        </Function>
+        <Function name="GuiTextBoxMulti" retType="bool" paramCount="4" desc="Text Box control with multiple lines">
+            <Param type="Rectangle" name="bounds" desc="" />
+            <Param type="char *" name="text" desc="" />
+            <Param type="int" name="textSize" desc="" />
+            <Param type="bool" name="editMode" desc="" />
+        </Function>
+        <Function name="GuiSlider" retType="float" paramCount="6" desc="Slider control, returns selected value">
+            <Param type="Rectangle" name="bounds" desc="" />
+            <Param type="const char *" name="textLeft" desc="" />
+            <Param type="const char *" name="textRight" desc="" />
+            <Param type="float" name="value" desc="" />
+            <Param type="float" name="minValue" desc="" />
+            <Param type="float" name="maxValue" desc="" />
+        </Function>
+        <Function name="GuiSliderBar" retType="float" paramCount="6" desc="Slider Bar control, returns selected value">
+            <Param type="Rectangle" name="bounds" desc="" />
+            <Param type="const char *" name="textLeft" desc="" />
+            <Param type="const char *" name="textRight" desc="" />
+            <Param type="float" name="value" desc="" />
+            <Param type="float" name="minValue" desc="" />
+            <Param type="float" name="maxValue" desc="" />
+        </Function>
+        <Function name="GuiProgressBar" retType="float" paramCount="6" desc="Progress Bar control, shows current progress value">
+            <Param type="Rectangle" name="bounds" desc="" />
+            <Param type="const char *" name="textLeft" desc="" />
+            <Param type="const char *" name="textRight" desc="" />
+            <Param type="float" name="value" desc="" />
+            <Param type="float" name="minValue" desc="" />
+            <Param type="float" name="maxValue" desc="" />
+        </Function>
+        <Function name="GuiStatusBar" retType="void" paramCount="2" desc="Status Bar control, shows info text">
+            <Param type="Rectangle" name="bounds" desc="" />
+            <Param type="const char *" name="text" desc="" />
+        </Function>
+        <Function name="GuiDummyRec" retType="void" paramCount="2" desc="Dummy control for placeholders">
+            <Param type="Rectangle" name="bounds" desc="" />
+            <Param type="const char *" name="text" desc="" />
+        </Function>
+        <Function name="GuiScrollBar" retType="int" paramCount="4" desc="Scroll Bar control">
+            <Param type="Rectangle" name="bounds" desc="" />
+            <Param type="int" name="value" desc="" />
+            <Param type="int" name="minValue" desc="" />
+            <Param type="int" name="maxValue" desc="" />
+        </Function>
+        <Function name="GuiGrid" retType="Vector2" paramCount="3" desc="Grid control">
+            <Param type="Rectangle" name="bounds" desc="" />
+            <Param type="float" name="spacing" desc="" />
+            <Param type="int" name="subdivs" desc="" />
+        </Function>
+        <Function name="GuiListView" retType="int" paramCount="4" desc="List View control, returns selected list item index">
+            <Param type="Rectangle" name="bounds" desc="" />
+            <Param type="const char *" name="text" desc="" />
+            <Param type="int *" name="scrollIndex" desc="" />
+            <Param type="int" name="active" desc="" />
+        </Function>
+        <Function name="GuiListViewEx" retType="int" paramCount="6" desc="List View with extended parameters">
+            <Param type="Rectangle" name="bounds" desc="" />
+            <Param type="const char **" name="text" desc="" />
+            <Param type="int" name="count" desc="" />
+            <Param type="int *" name="focus" desc="" />
+            <Param type="int *" name="scrollIndex" desc="" />
+            <Param type="int" name="active" desc="" />
+        </Function>
+        <Function name="GuiMessageBox" retType="int" paramCount="4" desc="Message Box control, displays a message">
+            <Param type="Rectangle" name="bounds" desc="" />
+            <Param type="const char *" name="title" desc="" />
+            <Param type="const char *" name="message" desc="" />
+            <Param type="const char *" name="buttons" desc="" />
+        </Function>
+        <Function name="GuiTextInputBox" retType="int" paramCount="5" desc="Text Input Box control, ask for text">
+            <Param type="Rectangle" name="bounds" desc="" />
+            <Param type="const char *" name="title" desc="" />
+            <Param type="const char *" name="message" desc="" />
+            <Param type="const char *" name="buttons" desc="" />
+            <Param type="char *" name="text" desc="" />
+        </Function>
+        <Function name="GuiColorPicker" retType="Color" paramCount="2" desc="Color Picker control (multiple color controls)">
+            <Param type="Rectangle" name="bounds" desc="" />
+            <Param type="Color" name="color" desc="" />
+        </Function>
+        <Function name="GuiColorPanel" retType="Color" paramCount="2" desc="Color Panel control">
+            <Param type="Rectangle" name="bounds" desc="" />
+            <Param type="Color" name="color" desc="" />
+        </Function>
+        <Function name="GuiColorBarAlpha" retType="float" paramCount="2" desc="Color Bar Alpha control">
+            <Param type="Rectangle" name="bounds" desc="" />
+            <Param type="float" name="alpha" desc="" />
+        </Function>
+        <Function name="GuiColorBarHue" retType="float" paramCount="2" desc="Color Bar Hue control">
+            <Param type="Rectangle" name="bounds" desc="" />
+            <Param type="float" name="value" desc="" />
+        </Function>
+        <Function name="GuiLoadStyle" retType="void" paramCount="1" desc="Load style file over global style variable (.rgs)">
+            <Param type="const char *" name="fileName" desc="" />
+        </Function>
+        <Function name="GuiLoadStyleDefault" retType="void" paramCount="0" desc="Load style default over global style">
+        </Function>
+        <Function name="LoadGuiStyle" retType="GuiStyle" paramCount="1" desc="Load style from file (.rgs)">
+            <Param type="const char *" name="fileName" desc="" />
+        </Function>
+        <Function name="UnloadGuiStyle" retType="void" paramCount="1" desc="Unload style">
+            <Param type="GuiStyle" name="style" desc="" />
+        </Function>
+        <Function name="GuiIconText" retType="const char *" paramCount="2" desc="Get text with icon id prepended (if supported)">
+            <Param type="int" name="iconId" desc="" />
+            <Param type="const char *" name="text" desc="" />
+        </Function>
+        <Function name="GuiDrawIcon" retType="void" paramCount="5" desc="">
+            <Param type="int" name="iconId" desc="" />
+            <Param type="int" name="posX" desc="" />
+            <Param type="int" name="posY" desc="" />
+            <Param type="int" name="pixelSize" desc="" />
+            <Param type="Color" name="color" desc="" />
+        </Function>
+        <Function name="GuiGetIcons" retType="unsigned int *" paramCount="0" desc="Get full icons data pointer">
+        </Function>
+        <Function name="GuiGetIconData" retType="unsigned int *" paramCount="1" desc="Get icon bit data">
+            <Param type="int" name="iconId" desc="" />
+        </Function>
+        <Function name="GuiSetIconData" retType="void" paramCount="2" desc="Set icon bit data">
+            <Param type="int" name="iconId" desc="" />
+            <Param type="unsigned int *" name="data" desc="" />
+        </Function>
+        <Function name="GuiSetIconPixel" retType="void" paramCount="3" desc="Set icon pixel value">
+            <Param type="int" name="iconId" desc="" />
+            <Param type="int" name="x" desc="" />
+            <Param type="int" name="y" desc="" />
+        </Function>
+        <Function name="GuiClearIconPixel" retType="void" paramCount="3" desc="Clear icon pixel value">
+            <Param type="int" name="iconId" desc="" />
+            <Param type="int" name="x" desc="" />
+            <Param type="int" name="y" desc="" />
+        </Function>
+        <Function name="GuiCheckIconPixel" retType="bool" paramCount="3" desc="Check icon pixel value">
+            <Param type="int" name="iconId" desc="" />
+            <Param type="int" name="x" desc="" />
+            <Param type="int" name="y" desc="" />
+        </Function>
+    </Functions>
+</raylibAPI>
