@@ -1,6 +1,6 @@
-RAYLIB_VERSION=4.0.0
-PARSER=vendor/raylib-parser/parser/raylib_parser
-RAYLIB=vendor/raylib
+RAYLIB_VERSION?=4.0.0
+PARSER?=vendor/raylib-parser/parser/raylib_parser
+RAYLIB?=vendor/raylib
 EXTENSION?=txt
 FORMAT?=DEFAULT
 
