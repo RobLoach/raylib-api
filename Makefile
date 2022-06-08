@@ -1,6 +1,5 @@
 RAYLIB_VERSION?=4.0.0
-PARSER_ROOT?=vendor/raylib-parser
-PARSER?=$(PARSER_ROOT)/parser/raylib_parser
+PARSER?=vendor/raylib-parser/parser/raylib_parser
 RAYLIB?=vendor/raylib
 EXTENSION?=txt
 FORMAT?=DEFAULT
@@ -11,14 +10,16 @@ all:
 	FORMAT=XML EXTENSION=xml $(MAKE) parse
 	FORMAT=LUA EXTENSION=lua $(MAKE) parse
 
-$(PARSER_ROOT):
-	git clone https://github.com/raysan5/raylib.git --depth 2 $(PARSER_ROOT)
+vendor/raylib-parser:
+	git clone https://github.com/raysan5/raylib.git --depth 2 vendor/raylib-parser
 
-$(RAYLIB):
-	git clone https://github.com/raysan5/raylib.git --depth 1 --branch $(RAYLIB_VERSION) $(RAYLIB)
+vendor/raylib:
+	git clone https://github.com/raysan5/raylib.git --depth 1 --branch $(RAYLIB_VERSION) vendor/raylib
 
-$(PARSER): $(PARSER_ROOT)
-	$(MAKE) -C $(PARSER_ROOT)/parser
+vendor: vendor/raylib-parser vendor/raylib
+
+$(PARSER): vendor
+	$(MAKE) -C vendor/raylib-parser/parser
 
 parse: $(PARSER)
 	$(PARSER) -i $(RAYLIB)/src/raylib.h -o raylib_api.$(EXTENSION) -f $(FORMAT) -d RLAPI
@@ -30,4 +31,4 @@ parse: $(PARSER)
 	$(PARSER) -i $(RAYLIB)/src/rlgl.h -o rlgl_api.$(EXTENSION) -f $(FORMAT) -d RLAPI -t "RLGL IMPLEMENTATION"
 
 clean:
-	rm -rf $(PARSER_ROOT) $(RAYLIB) *.json *.txt *.xml *.lua
+	rm -rf $(PARSER) vendor *.json *.txt *.xml *.lua
