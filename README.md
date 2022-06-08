@@ -1,8 +1,44 @@
-# raylib-api
+# raylib-api [![@raylib/api](http://img.shields.io/npm/v/@raylib/api.svg)](https://npmjs.org/package/@raylib/api "@raylib/api on npm")
 
-Exports of the raylib API through [raylib's parser](https://github.com/raysan5/raylib/tree/master/parser).
+Exports of the [raylib](https://github.com/raysan5/raylib/) API through [raylib's parser](https://github.com/raysan5/raylib/tree/master/parser).
 
 **Target Version:** 4.0.0
+
+## Features
+
+Versioned exports of the latest raylib APIs through the latest version of the [parser](https://github.com/raysan5/raylib/tree/master/parser):
+
+- easings
+- physac
+- raygui
+- raylib
+- raymath
+- rlgl
+- rmem
+
+## Usage
+
+Since this is just data, there are a few ways to use *raylib-api*...
+
+### [Node.js](https://www.npmjs.com/package/@raylib/api)
+
+``` bash
+npm install @raylib/api
+```
+
+``` js
+const raylibApi = require('@raylib/api')
+```
+
+### git
+
+``` bash
+# Clone
+git clone https://github.com/RobLoach/raylib-api.git
+
+# Submodule
+git submodule add https://github.com/RobLoach/raylib-api.git
+```
 
 ## Update
 
