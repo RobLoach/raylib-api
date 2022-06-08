@@ -31,4 +31,4 @@ parse: $(PARSER)
 	$(PARSER) -i $(RAYLIB)/src/rlgl.h -o rlgl.$(EXTENSION) -f $(FORMAT) -d RLAPI -t "RLGL IMPLEMENTATION"
 
 clean:
-	rm -rf $(PARSER) vendor *.json *.txt *.xml *.lua
+	rm -rf vendor
