@@ -14,6 +14,14 @@
   "keywords": [
     "raylib"
   ],
+  "files": [
+    "*.json",
+    "*.lua",
+    "*.txt",
+    "*.xml",
+    "*.md",
+    "*.js"
+  ],
   "author": "Rob Loach",
   "license": "Zlib",
   "bugs": {

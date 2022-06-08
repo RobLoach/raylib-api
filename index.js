@@ -1,9 +1,9 @@
 module.exports = {
-    easings: require('./easings_api.json'),
-    physac: require('./physac_api.json'),
-    raygui: require('./raygui_api.json'),
-    raylib: require('./raylib_api.json'),
-    raymath: require('./raymath_api.json'),
-    rlgl: require('./rlgl_api.json'),
-    rmem: require('./rmem_api.json')
+    easings: require('./easings.json'),
+    physac: require('./physac.json'),
+    raygui: require('./raygui.json'),
+    raylib: require('./raylib.json'),
+    raymath: require('./raymath.json'),
+    rlgl: require('./rlgl.json'),
+    rmem: require('./rmem.json')
 }

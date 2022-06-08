@@ -22,13 +22,13 @@ $(PARSER): vendor
 	$(MAKE) -C vendor/raylib-parser/parser
 
 parse: $(PARSER)
-	$(PARSER) -i $(RAYLIB)/src/raylib.h -o raylib_api.$(EXTENSION) -f $(FORMAT) -d RLAPI
-	$(PARSER) -i $(RAYLIB)/src/raymath.h -o raymath_api.$(EXTENSION) -f $(FORMAT) -d RMAPI
-	$(PARSER) -i $(RAYLIB)/src/extras/easings.h -o easings_api.$(EXTENSION) -f $(FORMAT) -d EASEDEF
-	$(PARSER) -i $(RAYLIB)/src/extras/physac.h -o physac_api.$(EXTENSION) -f $(FORMAT) -d PHYSACDEF -t "PHYSAC IMPLEMENTATION"
-	$(PARSER) -i $(RAYLIB)/src/extras/raygui.h -o raygui_api.$(EXTENSION) -f $(FORMAT) -d RAYGUIAPI -t "RAYGUI IMPLEMENTATION"
-	$(PARSER) -i $(RAYLIB)/src/extras/rmem.h -o rmem_api.$(EXTENSION) -f $(FORMAT) -d RMEMAPI -t "RMEM IMPLEMENTATION"
-	$(PARSER) -i $(RAYLIB)/src/rlgl.h -o rlgl_api.$(EXTENSION) -f $(FORMAT) -d RLAPI -t "RLGL IMPLEMENTATION"
+	$(PARSER) -i $(RAYLIB)/src/raylib.h -o raylib.$(EXTENSION) -f $(FORMAT) -d RLAPI
+	$(PARSER) -i $(RAYLIB)/src/raymath.h -o raymath.$(EXTENSION) -f $(FORMAT) -d RMAPI
+	$(PARSER) -i $(RAYLIB)/src/extras/easings.h -o easings.$(EXTENSION) -f $(FORMAT) -d EASEDEF
+	$(PARSER) -i $(RAYLIB)/src/extras/physac.h -o physac.$(EXTENSION) -f $(FORMAT) -d PHYSACDEF -t "PHYSAC IMPLEMENTATION"
+	$(PARSER) -i $(RAYLIB)/src/extras/raygui.h -o raygui.$(EXTENSION) -f $(FORMAT) -d RAYGUIAPI -t "RAYGUI IMPLEMENTATION"
+	$(PARSER) -i $(RAYLIB)/src/extras/rmem.h -o rmem.$(EXTENSION) -f $(FORMAT) -d RMEMAPI -t "RMEM IMPLEMENTATION"
+	$(PARSER) -i $(RAYLIB)/src/rlgl.h -o rlgl.$(EXTENSION) -f $(FORMAT) -d RLAPI -t "RLGL IMPLEMENTATION"
 
 clean:
 	rm -rf $(PARSER) vendor *.json *.txt *.xml *.lua
