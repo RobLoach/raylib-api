@@ -1,4 +1,4 @@
-RAYLIB_VERSION?=4.0.0
+RAYLIB_VERSION?=4.2.0
 PARSER?=vendor/raylib-parser/parser/raylib_parser
 RAYLIB?=vendor/raylib
 EXTENSION?=txt
@@ -16,7 +16,16 @@ vendor/raylib-parser:
 vendor/raylib:
 	git clone https://github.com/raysan5/raylib.git --depth 1 --branch $(RAYLIB_VERSION) vendor/raylib
 
-vendor: vendor/raylib-parser vendor/raylib
+vendor/reasings:
+	git clone https://github.com/raylib-extras/reasings.git --depth 1 vendor/reasings
+
+vendor/rmem:
+	git clone https://github.com/raylib-extras/rmem.git --depth 1 vendor/rmem
+
+vendor/raygui:
+	git clone https://github.com/raysan5/raygui.git --depth 1 vendor/raygui
+
+vendor: vendor/raylib-parser vendor/raylib vendor/reasings vendor/rmem vendor/raygui
 
 $(PARSER): vendor
 	$(MAKE) -C vendor/raylib-parser/parser
@@ -24,11 +33,10 @@ $(PARSER): vendor
 parse: $(PARSER)
 	$(PARSER) -i $(RAYLIB)/src/raylib.h -o raylib.$(EXTENSION) -f $(FORMAT) -d RLAPI
 	$(PARSER) -i $(RAYLIB)/src/raymath.h -o raymath.$(EXTENSION) -f $(FORMAT) -d RMAPI
-	$(PARSER) -i $(RAYLIB)/src/extras/easings.h -o easings.$(EXTENSION) -f $(FORMAT) -d EASEDEF
-	$(PARSER) -i $(RAYLIB)/src/extras/physac.h -o physac.$(EXTENSION) -f $(FORMAT) -d PHYSACDEF -t "PHYSAC IMPLEMENTATION"
-	$(PARSER) -i $(RAYLIB)/src/extras/raygui.h -o raygui.$(EXTENSION) -f $(FORMAT) -d RAYGUIAPI -t "RAYGUI IMPLEMENTATION"
-	$(PARSER) -i $(RAYLIB)/src/extras/rmem.h -o rmem.$(EXTENSION) -f $(FORMAT) -d RMEMAPI -t "RMEM IMPLEMENTATION"
 	$(PARSER) -i $(RAYLIB)/src/rlgl.h -o rlgl.$(EXTENSION) -f $(FORMAT) -d RLAPI -t "RLGL IMPLEMENTATION"
+	$(PARSER) -i vendor/reasings/src/reasings.h -o reasings.$(EXTENSION) -f $(FORMAT) -d EASEDEF
+	$(PARSER) -i vendor/raygui/src/raygui.h -o raygui.$(EXTENSION) -f $(FORMAT) -d RAYGUIAPI -t "RAYGUI IMPLEMENTATION"
+	$(PARSER) -i vendor/rmem/src/rmem.h -o rmem.$(EXTENSION) -f $(FORMAT) -d RMEMAPI -t "RMEM IMPLEMENTATION"
 
 clean:
 	rm -rf vendor

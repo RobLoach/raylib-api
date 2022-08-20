@@ -6,7 +6,7 @@
         <Define name="RMEM_VERSION" type="STRING" value="v1.3" desc="changelog at bottom of header." />
     </Defines>
     <Structs count="6">
-        <Struct name="MemNode" fieldCount="3" desc="Memory Pool">
+        <Struct name="MemNode" fieldCount="3" desc="Memory pool node">
             <Field type="size_t" name="size" desc="" />
             <Field type="MemNode *" name="next" desc="" />
             <Field type="MemNode *" name="prev" desc="" />
@@ -16,24 +16,24 @@
             <Field type="MemNode *" name="tail" desc="" />
             <Field type="size_t" name="len" desc="" />
         </Struct>
-        <Struct name="Arena" fieldCount="3" desc="Arena allocator.">
+        <Struct name="Arena" fieldCount="3" desc="Arena allocator">
             <Field type="uintptr_t" name="mem" desc="" />
             <Field type="uintptr_t" name="offs" desc="" />
             <Field type="size_t" name="size" desc="" />
         </Struct>
-        <Struct name="MemPool" fieldCount="3" desc="">
+        <Struct name="MemPool" fieldCount="3" desc="Memory pool">
             <Field type="AllocList" name="large" desc="" />
             <Field type="AllocList[MEMPOOL_BUCKET_SIZE]" name="buckets" desc="" />
             <Field type="Arena" name="arena" desc="" />
         </Struct>
-        <Struct name="ObjPool" fieldCount="5" desc="Object Pool">
+        <Struct name="ObjPool" fieldCount="5" desc="Object pool">
             <Field type="uintptr_t" name="mem" desc="" />
             <Field type="uintptr_t" name="offs" desc="" />
             <Field type="size_t" name="objSize" desc="" />
             <Field type="size_t" name="freeBlocks" desc="" />
             <Field type="size_t" name="memSize" desc="" />
         </Struct>
-        <Struct name="BiStack" fieldCount="4" desc="Double-Ended Stack aka Deque">
+        <Struct name="BiStack" fieldCount="4" desc="Double-ended stack (aka Deque)">
             <Field type="uintptr_t" name="mem" desc="" />
             <Field type="uintptr_t" name="front" desc="" />
             <Field type="uintptr_t" name="back" desc="" />

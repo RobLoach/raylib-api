@@ -9,7 +9,13 @@ return {
     {
       name = "RAYLIB_VERSION",
       type = "STRING",
-      value = "4.0",
+      value = "4.2",
+      description = ""
+    },
+    {
+      name = "__declspec(x)",
+      type = "MACRO",
+      value = "__attribute__((x))",
       description = ""
     },
     {
@@ -785,7 +791,7 @@ return {
         {
           type = "float *",
           name = "texcoords2",
-          description = "Vertex second texture coordinates (useful for lightmaps) (shader-location = 5)"
+          description = "Vertex texture second coordinates (UV - 2 components per vertex) (shader-location = 5)"
         },
         {
           type = "float *",
@@ -1110,6 +1116,11 @@ return {
           description = "Pointer to internal data used by the audio system"
         },
         {
+          type = "rAudioProcessor *",
+          name = "processor",
+          description = "Pointer to internal data processor, useful for audio effects"
+        },
+        {
           type = "unsigned int",
           name = "sampleRate",
           description = "Frequency (samples per second)"
@@ -1274,6 +1285,27 @@ return {
           description = "VR distortion scale in"
         }
       }
+    },
+    {
+      name = "FilePathList",
+      description = "File path list",
+      fields = {
+        {
+          type = "unsigned int",
+          name = "capacity",
+          description = "Filepaths max entries"
+        },
+        {
+          type = "unsigned int",
+          name = "count",
+          description = "Filepaths entries count"
+        },
+        {
+          type = "char **",
+          name = "paths",
+          description = "Filepaths entries"
+        }
+      }
     }
   },
   aliases = {
@@ -1367,6 +1399,11 @@ return {
           name = "FLAG_WINDOW_HIGHDPI",
           value = 8192,
           description = "Set to support HighDPI"
+        },
+        {
+          name = "FLAG_WINDOW_MOUSE_PASSTHROUGH",
+          value = 16384,
+          description = "Set to support mouse passthrough, only supported when FLAG_WINDOW_UNDECORATED"
         },
         {
           name = "FLAG_MSAA_4X_HINT",
@@ -2608,7 +2645,7 @@ return {
         {
           name = "TEXTURE_FILTER_POINT",
           value = 0,
-          description = "No filter, just pixel aproximation"
+          description = "No filter, just pixel approximation"
         },
         {
           name = "TEXTURE_FILTER_BILINEAR",
@@ -2750,9 +2787,14 @@ return {
           description = "Blend textures subtracting colors (alternative)"
         },
         {
-          name = "BLEND_CUSTOM",
+          name = "BLEND_ALPHA_PREMULTIPLY",
           value = 5,
-          description = "Belnd textures using custom src/dst factors (use rlSetBlendMode())"
+          description = "Blend premultiplied textures considering alpha"
+        },
+        {
+          name = "BLEND_CUSTOM",
+          value = 6,
+          description = "Blend textures using custom src/dst factors (use rlSetBlendMode())"
         }
       }
     },
@@ -2932,6 +2974,15 @@ return {
         {type = "const char *", name = "fileName"},
         {type = "char *", name = "text"}
       }
+    },
+    {
+      name = "AudioCallback",
+      description = "",
+      returnType = "void",
+      params = {
+        {type = "void *", name = "bufferData"},
+        {type = "unsigned int", name = "frames"}
+      }
     }
   },
   functions = {
@@ -3000,7 +3051,7 @@ return {
     },
     {
       name = "SetWindowState",
-      description = "Set window configuration state using flags",
+      description = "Set window configuration state using flags (only PLATFORM_DESKTOP)",
       returnType = "void",
       params = {
         {type = "unsigned int", name = "flags"}
@@ -3086,6 +3137,14 @@ return {
       }
     },
     {
+      name = "SetWindowOpacity",
+      description = "Set window opacity [0.0f..1.0f] (only PLATFORM_DESKTOP)",
+      returnType = "void",
+      params = {
+        {type = "float", name = "opacity"}
+      }
+    },
+    {
       name = "GetWindowHandle",
       description = "Get native window handle",
       returnType = "void *"
@@ -3098,6 +3157,16 @@ return {
     {
       name = "GetScreenHeight",
       description = "Get current screen height",
+      returnType = "int"
+    },
+    {
+      name = "GetRenderWidth",
+      description = "Get current render width (it considers HiDPI)",
+      returnType = "int"
+    },
+    {
+      name = "GetRenderHeight",
+      description = "Get current render height (it considers HiDPI)",
       returnType = "int"
     },
     {
@@ -3120,7 +3189,7 @@ return {
     },
     {
       name = "GetMonitorWidth",
-      description = "Get specified monitor width (max available by monitor)",
+      description = "Get specified monitor width (current video mode used by monitor)",
       returnType = "int",
       params = {
         {type = "int", name = "monitor"}
@@ -3128,7 +3197,7 @@ return {
     },
     {
       name = "GetMonitorHeight",
-      description = "Get specified monitor height (max available by monitor)",
+      description = "Get specified monitor height (current video mode used by monitor)",
       returnType = "int",
       params = {
         {type = "int", name = "monitor"}
@@ -3190,6 +3259,16 @@ return {
       returnType = "const char *"
     },
     {
+      name = "EnableEventWaiting",
+      description = "Enable waiting for events on EndDrawing(), no automatic event polling",
+      returnType = "void"
+    },
+    {
+      name = "DisableEventWaiting",
+      description = "Disable waiting for events on EndDrawing(), automatic events polling",
+      returnType = "void"
+    },
+    {
       name = "SwapScreenBuffer",
       description = "Swap back buffer with front buffer (screen drawing)",
       returnType = "void"
@@ -3201,10 +3280,10 @@ return {
     },
     {
       name = "WaitTime",
-      description = "Wait for some milliseconds (halt program execution)",
+      description = "Wait for some time (halt program execution)",
       returnType = "void",
       params = {
-        {type = "float", name = "ms"}
+        {type = "double", name = "seconds"}
       }
     },
     {
@@ -3487,6 +3566,15 @@ return {
       }
     },
     {
+      name = "GetScreenToWorld2D",
+      description = "Get the world space position for a 2d camera screen space position",
+      returnType = "Vector2",
+      params = {
+        {type = "Vector2", name = "position"},
+        {type = "Camera2D", name = "camera"}
+      }
+    },
+    {
       name = "GetWorldToScreenEx",
       description = "Get size position for a 3d world space position",
       returnType = "Vector2",
@@ -3500,15 +3588,6 @@ return {
     {
       name = "GetWorldToScreen2D",
       description = "Get the screen space position for a 2d camera world space position",
-      returnType = "Vector2",
-      params = {
-        {type = "Vector2", name = "position"},
-        {type = "Camera2D", name = "camera"}
-      }
-    },
-    {
-      name = "GetScreenToWorld2D",
-      description = "Get the world space position for a 2d camera screen space position",
       returnType = "Vector2",
       params = {
         {type = "Vector2", name = "position"},
@@ -3615,6 +3694,14 @@ return {
       }
     },
     {
+      name = "OpenURL",
+      description = "Open URL with default system browser (if available)",
+      returnType = "void",
+      params = {
+        {type = "const char *", name = "url"}
+      }
+    },
+    {
       name = "SetTraceLogCallback",
       description = "Set custom trace log",
       returnType = "void",
@@ -3682,6 +3769,16 @@ return {
       }
     },
     {
+      name = "ExportDataAsCode",
+      description = "Export data to code (.h), returns true on success",
+      returnType = "bool",
+      params = {
+        {type = "const char *", name = "data"},
+        {type = "unsigned int", name = "size"},
+        {type = "const char *", name = "fileName"}
+      }
+    },
+    {
       name = "LoadFileText",
       description = "Load text data from file (read), returns a '\\0' terminated string",
       returnType = "char *",
@@ -3732,6 +3829,14 @@ return {
       }
     },
     {
+      name = "GetFileLength",
+      description = "Get file length in bytes (NOTE: GetFileSize() conflicts with windows.h)",
+      returnType = "int",
+      params = {
+        {type = "const char *", name = "fileName"}
+      }
+    },
+    {
       name = "GetFileExtension",
       description = "Get pointer to extension for a filename string (includes dot: '.png')",
       returnType = "const char *",
@@ -3777,18 +3882,9 @@ return {
       returnType = "const char *"
     },
     {
-      name = "GetDirectoryFiles",
-      description = "Get filenames in a directory path (memory should be freed)",
-      returnType = "char **",
-      params = {
-        {type = "const char *", name = "dirPath"},
-        {type = "int *", name = "count"}
-      }
-    },
-    {
-      name = "ClearDirectoryFiles",
-      description = "Clear directory files paths buffers (free memory)",
-      returnType = "void"
+      name = "GetApplicationDirectory",
+      description = "Get the directory if the running application (uses static string)",
+      returnType = "const char *"
     },
     {
       name = "ChangeDirectory",
@@ -3799,22 +3895,56 @@ return {
       }
     },
     {
+      name = "IsPathFile",
+      description = "Check if a given path is a file or a directory",
+      returnType = "bool",
+      params = {
+        {type = "const char *", name = "path"}
+      }
+    },
+    {
+      name = "LoadDirectoryFiles",
+      description = "Load directory filepaths",
+      returnType = "FilePathList",
+      params = {
+        {type = "const char *", name = "dirPath"}
+      }
+    },
+    {
+      name = "LoadDirectoryFilesEx",
+      description = "Load directory filepaths with extension filtering and recursive directory scan",
+      returnType = "FilePathList",
+      params = {
+        {type = "const char *", name = "basePath"},
+        {type = "const char *", name = "filter"},
+        {type = "bool", name = "scanSubdirs"}
+      }
+    },
+    {
+      name = "UnloadDirectoryFiles",
+      description = "Unload filepaths",
+      returnType = "void",
+      params = {
+        {type = "FilePathList", name = "files"}
+      }
+    },
+    {
       name = "IsFileDropped",
       description = "Check if a file has been dropped into window",
       returnType = "bool"
     },
     {
-      name = "GetDroppedFiles",
-      description = "Get dropped files names (memory should be freed)",
-      returnType = "char **",
-      params = {
-        {type = "int *", name = "count"}
-      }
+      name = "LoadDroppedFiles",
+      description = "Load dropped filepaths",
+      returnType = "FilePathList"
     },
     {
-      name = "ClearDroppedFiles",
-      description = "Clear dropped files paths buffer (free memory)",
-      returnType = "void"
+      name = "UnloadDroppedFiles",
+      description = "Unload dropped filepaths",
+      returnType = "void",
+      params = {
+        {type = "FilePathList", name = "files"}
+      }
     },
     {
       name = "GetFileModTime",
@@ -3826,66 +3956,41 @@ return {
     },
     {
       name = "CompressData",
-      description = "Compress data (DEFLATE algorithm)",
+      description = "Compress data (DEFLATE algorithm), memory must be MemFree()",
       returnType = "unsigned char *",
       params = {
-        {type = "unsigned char *", name = "data"},
-        {type = "int", name = "dataLength"},
-        {type = "int *", name = "compDataLength"}
+        {type = "const unsigned char *", name = "data"},
+        {type = "int", name = "dataSize"},
+        {type = "int *", name = "compDataSize"}
       }
     },
     {
       name = "DecompressData",
-      description = "Decompress data (DEFLATE algorithm)",
+      description = "Decompress data (DEFLATE algorithm), memory must be MemFree()",
       returnType = "unsigned char *",
       params = {
-        {type = "unsigned char *", name = "compData"},
-        {type = "int", name = "compDataLength"},
-        {type = "int *", name = "dataLength"}
+        {type = "const unsigned char *", name = "compData"},
+        {type = "int", name = "compDataSize"},
+        {type = "int *", name = "dataSize"}
       }
     },
     {
       name = "EncodeDataBase64",
-      description = "Encode data to Base64 string",
+      description = "Encode data to Base64 string, memory must be MemFree()",
       returnType = "char *",
       params = {
         {type = "const unsigned char *", name = "data"},
-        {type = "int", name = "dataLength"},
-        {type = "int *", name = "outputLength"}
+        {type = "int", name = "dataSize"},
+        {type = "int *", name = "outputSize"}
       }
     },
     {
       name = "DecodeDataBase64",
-      description = "Decode Base64 string data",
+      description = "Decode Base64 string data, memory must be MemFree()",
       returnType = "unsigned char *",
       params = {
-        {type = "unsigned char *", name = "data"},
-        {type = "int *", name = "outputLength"}
-      }
-    },
-    {
-      name = "SaveStorageValue",
-      description = "Save integer value to storage file (to defined position), returns true on success",
-      returnType = "bool",
-      params = {
-        {type = "unsigned int", name = "position"},
-        {type = "int", name = "value"}
-      }
-    },
-    {
-      name = "LoadStorageValue",
-      description = "Load integer value from storage file (from defined position)",
-      returnType = "int",
-      params = {
-        {type = "unsigned int", name = "position"}
-      }
-    },
-    {
-      name = "OpenURL",
-      description = "Open URL with default system browser (if available)",
-      returnType = "void",
-      params = {
-        {type = "const char *", name = "url"}
+        {type = "const unsigned char *", name = "data"},
+        {type = "int *", name = "outputSize"}
       }
     },
     {
@@ -4101,8 +4206,13 @@ return {
     },
     {
       name = "GetMouseWheelMove",
-      description = "Get mouse wheel movement Y",
+      description = "Get mouse wheel movement for X or Y, whichever is larger",
       returnType = "float"
+    },
+    {
+      name = "GetMouseWheelMoveV",
+      description = "Get mouse wheel movement for both X and Y",
+      returnType = "Vector2"
     },
     {
       name = "SetMouseCursor",
@@ -5703,7 +5813,7 @@ return {
     },
     {
       name = "LoadFontEx",
-      description = "Load font from file with extended parameters",
+      description = "Load font from file with extended parameters, use NULL for fontChars and 0 for glyphCount to load the default character set",
       returnType = "Font",
       params = {
         {type = "const char *", name = "fileName"},
@@ -5772,10 +5882,19 @@ return {
     },
     {
       name = "UnloadFont",
-      description = "Unload Font from GPU memory (VRAM)",
+      description = "Unload font from GPU memory (VRAM)",
       returnType = "void",
       params = {
         {type = "Font", name = "font"}
+      }
+    },
+    {
+      name = "ExportFontAsCode",
+      description = "Export font as code file, returns true on success",
+      returnType = "bool",
+      params = {
+        {type = "Font", name = "font"},
+        {type = "const char *", name = "fileName"}
       }
     },
     {
@@ -5836,6 +5955,20 @@ return {
         {type = "int", name = "codepoint"},
         {type = "Vector2", name = "position"},
         {type = "float", name = "fontSize"},
+        {type = "Color", name = "tint"}
+      }
+    },
+    {
+      name = "DrawTextCodepoints",
+      description = "Draw multiple character (codepoint)",
+      returnType = "void",
+      params = {
+        {type = "Font", name = "font"},
+        {type = "const int *", name = "codepoints"},
+        {type = "int", name = "count"},
+        {type = "Vector2", name = "position"},
+        {type = "float", name = "fontSize"},
+        {type = "float", name = "spacing"},
         {type = "Color", name = "tint"}
       }
     },
@@ -5934,7 +6067,7 @@ return {
       description = "Encode text as codepoints array into UTF-8 text string (WARNING: memory must be freed!)",
       returnType = "char *",
       params = {
-        {type = "int *", name = "codepoints"},
+        {type = "const int *", name = "codepoints"},
         {type = "int", name = "length"}
       }
     },
@@ -6465,7 +6598,7 @@ return {
       params = {
         {type = "Mesh", name = "mesh"},
         {type = "int", name = "index"},
-        {type = "void *", name = "data"},
+        {type = "const void *", name = "data"},
         {type = "int", name = "dataSize"},
         {type = "int", name = "offset"}
       }
@@ -6495,7 +6628,7 @@ return {
       params = {
         {type = "Mesh", name = "mesh"},
         {type = "Material", name = "material"},
-        {type = "Matrix *", name = "transforms"},
+        {type = "const Matrix *", name = "transforms"},
         {type = "int", name = "instances"}
       }
     },
@@ -6519,14 +6652,6 @@ return {
     {
       name = "GenMeshTangents",
       description = "Compute mesh tangents",
-      returnType = "void",
-      params = {
-        {type = "Mesh *", name = "mesh"}
-      }
-    },
-    {
-      name = "GenMeshBinormals",
-      description = "Compute mesh binormals",
       returnType = "void",
       params = {
         {type = "Mesh *", name = "mesh"}
@@ -6716,7 +6841,7 @@ return {
       description = "Unload animation array data",
       returnType = "void",
       params = {
-        {type = "ModelAnimation*", name = "animations"},
+        {type = "ModelAnimation *", name = "animations"},
         {type = "unsigned int", name = "count"}
       }
     },
@@ -6776,15 +6901,6 @@ return {
       params = {
         {type = "Ray", name = "ray"},
         {type = "BoundingBox", name = "box"}
-      }
-    },
-    {
-      name = "GetRayCollisionModel",
-      description = "Get collision info between ray and model",
-      returnType = "RayCollision",
-      params = {
-        {type = "Ray", name = "ray"},
-        {type = "Model", name = "model"}
       }
     },
     {
@@ -6998,14 +7114,12 @@ return {
       }
     },
     {
-      name = "WaveFormat",
-      description = "Convert wave data to desired format",
+      name = "SetSoundPan",
+      description = "Set pan for a sound (0.5 is center)",
       returnType = "void",
       params = {
-        {type = "Wave *", name = "wave"},
-        {type = "int", name = "sampleRate"},
-        {type = "int", name = "sampleSize"},
-        {type = "int", name = "channels"}
+        {type = "Sound", name = "sound"},
+        {type = "float", name = "pan"}
       }
     },
     {
@@ -7027,8 +7141,19 @@ return {
       }
     },
     {
+      name = "WaveFormat",
+      description = "Convert wave data to desired format",
+      returnType = "void",
+      params = {
+        {type = "Wave *", name = "wave"},
+        {type = "int", name = "sampleRate"},
+        {type = "int", name = "sampleSize"},
+        {type = "int", name = "channels"}
+      }
+    },
+    {
       name = "LoadWaveSamples",
-      description = "Load samples data from wave as a floats array",
+      description = "Load samples data from wave as a 32bit float data array",
       returnType = "float *",
       params = {
         {type = "Wave", name = "wave"}
@@ -7056,7 +7181,7 @@ return {
       returnType = "Music",
       params = {
         {type = "const char *", name = "fileType"},
-        {type = "unsigned char *", name = "data"},
+        {type = "const unsigned char *", name = "data"},
         {type = "int", name = "dataSize"}
       }
     },
@@ -7141,6 +7266,15 @@ return {
       params = {
         {type = "Music", name = "music"},
         {type = "float", name = "pitch"}
+      }
+    },
+    {
+      name = "SetMusicPan",
+      description = "Set pan for a music (0.5 is center)",
+      returnType = "void",
+      params = {
+        {type = "Music", name = "music"},
+        {type = "float", name = "pan"}
       }
     },
     {
@@ -7254,11 +7388,47 @@ return {
       }
     },
     {
+      name = "SetAudioStreamPan",
+      description = "Set pan for audio stream (0.5 is centered)",
+      returnType = "void",
+      params = {
+        {type = "AudioStream", name = "stream"},
+        {type = "float", name = "pan"}
+      }
+    },
+    {
       name = "SetAudioStreamBufferSizeDefault",
       description = "Default size for new audio streams",
       returnType = "void",
       params = {
         {type = "int", name = "size"}
+      }
+    },
+    {
+      name = "SetAudioStreamCallback",
+      description = "Audio thread callback to request new data",
+      returnType = "void",
+      params = {
+        {type = "AudioStream", name = "stream"},
+        {type = "AudioCallback", name = "callback"}
+      }
+    },
+    {
+      name = "AttachAudioStreamProcessor",
+      description = "Attach audio stream processor to stream",
+      returnType = "void",
+      params = {
+        {type = "AudioStream", name = "stream"},
+        {type = "AudioCallback", name = "processor"}
+      }
+    },
+    {
+      name = "DetachAudioStreamProcessor",
+      description = "Detach audio stream processor from stream",
+      returnType = "void",
+      params = {
+        {type = "AudioStream", name = "stream"},
+        {type = "AudioCallback", name = "processor"}
       }
     }
   }

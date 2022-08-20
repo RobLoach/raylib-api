@@ -22,7 +22,7 @@ return {
   structs = {
     {
       name = "MemNode",
-      description = "Memory Pool",
+      description = "Memory pool node",
       fields = {
         {
           type = "size_t",
@@ -64,7 +64,7 @@ return {
     },
     {
       name = "Arena",
-      description = "Arena allocator.",
+      description = "Arena allocator",
       fields = {
         {
           type = "uintptr_t",
@@ -85,7 +85,7 @@ return {
     },
     {
       name = "MemPool",
-      description = "",
+      description = "Memory pool",
       fields = {
         {
           type = "AllocList",
@@ -106,7 +106,7 @@ return {
     },
     {
       name = "ObjPool",
-      description = "Object Pool",
+      description = "Object pool",
       fields = {
         {
           type = "uintptr_t",
@@ -137,7 +137,7 @@ return {
     },
     {
       name = "BiStack",
-      description = "Double-Ended Stack aka Deque",
+      description = "Double-ended stack (aka Deque)",
       fields = {
         {
           type = "uintptr_t",

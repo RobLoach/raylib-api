@@ -1,5 +1,5 @@
 
-Defines found: 7
+Defines found: 10
 
 Define 001: RAYGUI_H
   Name: RAYGUI_H
@@ -9,7 +9,7 @@ Define 001: RAYGUI_H
 Define 002: RAYGUI_VERSION
   Name: RAYGUI_VERSION
   Type: STRING
-  Value: "3.0"
+  Value: "3.2"
   Description: 
 Define 003: RAYGUIAPI
   Name: RAYGUIAPI
@@ -31,10 +31,25 @@ Define 006: RAYGUI_FREE(p)
   Type: MACRO
   Value: free(p)
   Description: 
-Define 007: TRACELOG(level, ...)
-  Name: TRACELOG(level, ...)
+Define 007: RAYGUI_SUPPORT_LOG_INFO
+  Name: RAYGUI_SUPPORT_LOG_INFO
+  Type: GUARD
+  Value: 
+  Description: 
+Define 008: RAYGUI_LOG(...)
+  Name: RAYGUI_LOG(...)
   Type: MACRO
-  Value: (void)0
+  Value: printf(__VA_ARGS__)
+  Description: 
+Define 009: SCROLLBAR_LEFT_SIDE
+  Name: SCROLLBAR_LEFT_SIDE
+  Type: INT
+  Value: 0
+  Description: 
+Define 010: SCROLLBAR_RIGHT_SIDE
+  Name: SCROLLBAR_RIGHT_SIDE
+  Type: INT
+  Value: 1
   Description: 
 
 Structures found: 8
@@ -93,26 +108,26 @@ Struct 08: GuiStyleProp (3 fields)
   Description: Style property
   Field[1]: unsigned short controlId 
   Field[2]: unsigned short propertyId 
-  Field[3]: int propertyValue 
+  Field[3]: unsigned int propertyValue 
 
 Aliases found: 0
 
 
 Enums found: 17
 
-Enum 01: GuiControlState (4 values)
-  Name: GuiControlState
+Enum 01: GuiState (4 values)
+  Name: GuiState
   Description: Gui control state
-  Value[GUI_STATE_NORMAL]: 0
-  Value[GUI_STATE_FOCUSED]: 1
-  Value[GUI_STATE_PRESSED]: 2
-  Value[GUI_STATE_DISABLED]: 3
+  Value[STATE_NORMAL]: 0
+  Value[STATE_FOCUSED]: 1
+  Value[STATE_PRESSED]: 2
+  Value[STATE_DISABLED]: 3
 Enum 02: GuiTextAlignment (3 values)
   Name: GuiTextAlignment
   Description: Gui control text alignment
-  Value[GUI_TEXT_ALIGN_LEFT]: 0
-  Value[GUI_TEXT_ALIGN_CENTER]: 1
-  Value[GUI_TEXT_ALIGN_RIGHT]: 2
+  Value[TEXT_ALIGN_LEFT]: 0
+  Value[TEXT_ALIGN_CENTER]: 1
+  Value[TEXT_ALIGN_RIGHT]: 2
 Enum 03: GuiControl (16 values)
   Name: GuiControl
   Description: Gui controls
@@ -171,33 +186,7 @@ Enum 08: GuiProgressBarProperty (1 values)
   Name: GuiProgressBarProperty
   Description: ProgressBar
   Value[PROGRESS_PADDING]: 16
-Enum 09: GuiCheckBoxProperty (1 values)
-  Name: GuiCheckBoxProperty
-  Description: CheckBox
-  Value[CHECK_PADDING]: 16
-Enum 10: GuiComboBoxProperty (2 values)
-  Name: GuiComboBoxProperty
-  Description: ComboBox
-  Value[COMBO_BUTTON_WIDTH]: 16
-  Value[COMBO_BUTTON_PADDING]: 17
-Enum 11: GuiDropdownBoxProperty (2 values)
-  Name: GuiDropdownBoxProperty
-  Description: DropdownBox
-  Value[ARROW_PADDING]: 16
-  Value[DROPDOWN_ITEMS_PADDING]: 17
-Enum 12: GuiTextBoxProperty (4 values)
-  Name: GuiTextBoxProperty
-  Description: TextBox/TextBoxMulti/ValueBox/Spinner
-  Value[TEXT_INNER_PADDING]: 16
-  Value[TEXT_LINES_PADDING]: 17
-  Value[COLOR_SELECTED_FG]: 18
-  Value[COLOR_SELECTED_BG]: 19
-Enum 13: GuiSpinnerProperty (2 values)
-  Name: GuiSpinnerProperty
-  Description: Spinner
-  Value[SPIN_BUTTON_WIDTH]: 16
-  Value[SPIN_BUTTON_PADDING]: 17
-Enum 14: GuiScrollBarProperty (6 values)
+Enum 09: GuiScrollBarProperty (6 values)
   Name: GuiScrollBarProperty
   Description: ScrollBar
   Value[ARROWS_SIZE]: 16
@@ -206,19 +195,38 @@ Enum 14: GuiScrollBarProperty (6 values)
   Value[SCROLL_SLIDER_SIZE]: 19
   Value[SCROLL_PADDING]: 20
   Value[SCROLL_SPEED]: 21
-Enum 15: GuiScrollBarSide (2 values)
-  Name: GuiScrollBarSide
-  Description: ScrollBar side
-  Value[SCROLLBAR_LEFT_SIDE]: 0
-  Value[SCROLLBAR_RIGHT_SIDE]: 1
-Enum 16: GuiListViewProperty (4 values)
+Enum 10: GuiCheckBoxProperty (1 values)
+  Name: GuiCheckBoxProperty
+  Description: CheckBox
+  Value[CHECK_PADDING]: 16
+Enum 11: GuiComboBoxProperty (2 values)
+  Name: GuiComboBoxProperty
+  Description: ComboBox
+  Value[COMBO_BUTTON_WIDTH]: 16
+  Value[COMBO_BUTTON_SPACING]: 17
+Enum 12: GuiDropdownBoxProperty (2 values)
+  Name: GuiDropdownBoxProperty
+  Description: DropdownBox
+  Value[ARROW_PADDING]: 16
+  Value[DROPDOWN_ITEMS_SPACING]: 17
+Enum 13: GuiTextBoxProperty (2 values)
+  Name: GuiTextBoxProperty
+  Description: TextBox/TextBoxMulti/ValueBox/Spinner
+  Value[TEXT_INNER_PADDING]: 16
+  Value[TEXT_LINES_SPACING]: 17
+Enum 14: GuiSpinnerProperty (2 values)
+  Name: GuiSpinnerProperty
+  Description: Spinner
+  Value[SPIN_BUTTON_WIDTH]: 16
+  Value[SPIN_BUTTON_SPACING]: 17
+Enum 15: GuiListViewProperty (4 values)
   Name: GuiListViewProperty
   Description: ListView
   Value[LIST_ITEMS_HEIGHT]: 16
-  Value[LIST_ITEMS_PADDING]: 17
+  Value[LIST_ITEMS_SPACING]: 17
   Value[SCROLLBAR_WIDTH]: 18
   Value[SCROLLBAR_SIDE]: 19
-Enum 17: GuiColorPickerProperty (5 values)
+Enum 16: GuiColorPickerProperty (5 values)
   Name: GuiColorPickerProperty
   Description: ColorPicker
   Value[COLOR_SELECTOR_SIZE]: 16
@@ -226,11 +234,270 @@ Enum 17: GuiColorPickerProperty (5 values)
   Value[HUEBAR_PADDING]: 18
   Value[HUEBAR_SELECTOR_HEIGHT]: 19
   Value[HUEBAR_SELECTOR_OVERFLOW]: 20
+Enum 17: GuiIconName (256 values)
+  Name: GuiIconName
+  Description: 
+  Value[ICON_NONE]: 0
+  Value[ICON_FOLDER_FILE_OPEN]: 1
+  Value[ICON_FILE_SAVE_CLASSIC]: 2
+  Value[ICON_FOLDER_OPEN]: 3
+  Value[ICON_FOLDER_SAVE]: 4
+  Value[ICON_FILE_OPEN]: 5
+  Value[ICON_FILE_SAVE]: 6
+  Value[ICON_FILE_EXPORT]: 7
+  Value[ICON_FILE_ADD]: 8
+  Value[ICON_FILE_DELETE]: 9
+  Value[ICON_FILETYPE_TEXT]: 10
+  Value[ICON_FILETYPE_AUDIO]: 11
+  Value[ICON_FILETYPE_IMAGE]: 12
+  Value[ICON_FILETYPE_PLAY]: 13
+  Value[ICON_FILETYPE_VIDEO]: 14
+  Value[ICON_FILETYPE_INFO]: 15
+  Value[ICON_FILE_COPY]: 16
+  Value[ICON_FILE_CUT]: 17
+  Value[ICON_FILE_PASTE]: 18
+  Value[ICON_CURSOR_HAND]: 19
+  Value[ICON_CURSOR_POINTER]: 20
+  Value[ICON_CURSOR_CLASSIC]: 21
+  Value[ICON_PENCIL]: 22
+  Value[ICON_PENCIL_BIG]: 23
+  Value[ICON_BRUSH_CLASSIC]: 24
+  Value[ICON_BRUSH_PAINTER]: 25
+  Value[ICON_WATER_DROP]: 26
+  Value[ICON_COLOR_PICKER]: 27
+  Value[ICON_RUBBER]: 28
+  Value[ICON_COLOR_BUCKET]: 29
+  Value[ICON_TEXT_T]: 30
+  Value[ICON_TEXT_A]: 31
+  Value[ICON_SCALE]: 32
+  Value[ICON_RESIZE]: 33
+  Value[ICON_FILTER_POINT]: 34
+  Value[ICON_FILTER_BILINEAR]: 35
+  Value[ICON_CROP]: 36
+  Value[ICON_CROP_ALPHA]: 37
+  Value[ICON_SQUARE_TOGGLE]: 38
+  Value[ICON_SYMMETRY]: 39
+  Value[ICON_SYMMETRY_HORIZONTAL]: 40
+  Value[ICON_SYMMETRY_VERTICAL]: 41
+  Value[ICON_LENS]: 42
+  Value[ICON_LENS_BIG]: 43
+  Value[ICON_EYE_ON]: 44
+  Value[ICON_EYE_OFF]: 45
+  Value[ICON_FILTER_TOP]: 46
+  Value[ICON_FILTER]: 47
+  Value[ICON_TARGET_POINT]: 48
+  Value[ICON_TARGET_SMALL]: 49
+  Value[ICON_TARGET_BIG]: 50
+  Value[ICON_TARGET_MOVE]: 51
+  Value[ICON_CURSOR_MOVE]: 52
+  Value[ICON_CURSOR_SCALE]: 53
+  Value[ICON_CURSOR_SCALE_RIGHT]: 54
+  Value[ICON_CURSOR_SCALE_LEFT]: 55
+  Value[ICON_UNDO]: 56
+  Value[ICON_REDO]: 57
+  Value[ICON_REREDO]: 58
+  Value[ICON_MUTATE]: 59
+  Value[ICON_ROTATE]: 60
+  Value[ICON_REPEAT]: 61
+  Value[ICON_SHUFFLE]: 62
+  Value[ICON_EMPTYBOX]: 63
+  Value[ICON_TARGET]: 64
+  Value[ICON_TARGET_SMALL_FILL]: 65
+  Value[ICON_TARGET_BIG_FILL]: 66
+  Value[ICON_TARGET_MOVE_FILL]: 67
+  Value[ICON_CURSOR_MOVE_FILL]: 68
+  Value[ICON_CURSOR_SCALE_FILL]: 69
+  Value[ICON_CURSOR_SCALE_RIGHT_FILL]: 70
+  Value[ICON_CURSOR_SCALE_LEFT_FILL]: 71
+  Value[ICON_UNDO_FILL]: 72
+  Value[ICON_REDO_FILL]: 73
+  Value[ICON_REREDO_FILL]: 74
+  Value[ICON_MUTATE_FILL]: 75
+  Value[ICON_ROTATE_FILL]: 76
+  Value[ICON_REPEAT_FILL]: 77
+  Value[ICON_SHUFFLE_FILL]: 78
+  Value[ICON_EMPTYBOX_SMALL]: 79
+  Value[ICON_BOX]: 80
+  Value[ICON_BOX_TOP]: 81
+  Value[ICON_BOX_TOP_RIGHT]: 82
+  Value[ICON_BOX_RIGHT]: 83
+  Value[ICON_BOX_BOTTOM_RIGHT]: 84
+  Value[ICON_BOX_BOTTOM]: 85
+  Value[ICON_BOX_BOTTOM_LEFT]: 86
+  Value[ICON_BOX_LEFT]: 87
+  Value[ICON_BOX_TOP_LEFT]: 88
+  Value[ICON_BOX_CENTER]: 89
+  Value[ICON_BOX_CIRCLE_MASK]: 90
+  Value[ICON_POT]: 91
+  Value[ICON_ALPHA_MULTIPLY]: 92
+  Value[ICON_ALPHA_CLEAR]: 93
+  Value[ICON_DITHERING]: 94
+  Value[ICON_MIPMAPS]: 95
+  Value[ICON_BOX_GRID]: 96
+  Value[ICON_GRID]: 97
+  Value[ICON_BOX_CORNERS_SMALL]: 98
+  Value[ICON_BOX_CORNERS_BIG]: 99
+  Value[ICON_FOUR_BOXES]: 100
+  Value[ICON_GRID_FILL]: 101
+  Value[ICON_BOX_MULTISIZE]: 102
+  Value[ICON_ZOOM_SMALL]: 103
+  Value[ICON_ZOOM_MEDIUM]: 104
+  Value[ICON_ZOOM_BIG]: 105
+  Value[ICON_ZOOM_ALL]: 106
+  Value[ICON_ZOOM_CENTER]: 107
+  Value[ICON_BOX_DOTS_SMALL]: 108
+  Value[ICON_BOX_DOTS_BIG]: 109
+  Value[ICON_BOX_CONCENTRIC]: 110
+  Value[ICON_BOX_GRID_BIG]: 111
+  Value[ICON_OK_TICK]: 112
+  Value[ICON_CROSS]: 113
+  Value[ICON_ARROW_LEFT]: 114
+  Value[ICON_ARROW_RIGHT]: 115
+  Value[ICON_ARROW_DOWN]: 116
+  Value[ICON_ARROW_UP]: 117
+  Value[ICON_ARROW_LEFT_FILL]: 118
+  Value[ICON_ARROW_RIGHT_FILL]: 119
+  Value[ICON_ARROW_DOWN_FILL]: 120
+  Value[ICON_ARROW_UP_FILL]: 121
+  Value[ICON_AUDIO]: 122
+  Value[ICON_FX]: 123
+  Value[ICON_WAVE]: 124
+  Value[ICON_WAVE_SINUS]: 125
+  Value[ICON_WAVE_SQUARE]: 126
+  Value[ICON_WAVE_TRIANGULAR]: 127
+  Value[ICON_CROSS_SMALL]: 128
+  Value[ICON_PLAYER_PREVIOUS]: 129
+  Value[ICON_PLAYER_PLAY_BACK]: 130
+  Value[ICON_PLAYER_PLAY]: 131
+  Value[ICON_PLAYER_PAUSE]: 132
+  Value[ICON_PLAYER_STOP]: 133
+  Value[ICON_PLAYER_NEXT]: 134
+  Value[ICON_PLAYER_RECORD]: 135
+  Value[ICON_MAGNET]: 136
+  Value[ICON_LOCK_CLOSE]: 137
+  Value[ICON_LOCK_OPEN]: 138
+  Value[ICON_CLOCK]: 139
+  Value[ICON_TOOLS]: 140
+  Value[ICON_GEAR]: 141
+  Value[ICON_GEAR_BIG]: 142
+  Value[ICON_BIN]: 143
+  Value[ICON_HAND_POINTER]: 144
+  Value[ICON_LASER]: 145
+  Value[ICON_COIN]: 146
+  Value[ICON_EXPLOSION]: 147
+  Value[ICON_1UP]: 148
+  Value[ICON_PLAYER]: 149
+  Value[ICON_PLAYER_JUMP]: 150
+  Value[ICON_KEY]: 151
+  Value[ICON_DEMON]: 152
+  Value[ICON_TEXT_POPUP]: 153
+  Value[ICON_GEAR_EX]: 154
+  Value[ICON_CRACK]: 155
+  Value[ICON_CRACK_POINTS]: 156
+  Value[ICON_STAR]: 157
+  Value[ICON_DOOR]: 158
+  Value[ICON_EXIT]: 159
+  Value[ICON_MODE_2D]: 160
+  Value[ICON_MODE_3D]: 161
+  Value[ICON_CUBE]: 162
+  Value[ICON_CUBE_FACE_TOP]: 163
+  Value[ICON_CUBE_FACE_LEFT]: 164
+  Value[ICON_CUBE_FACE_FRONT]: 165
+  Value[ICON_CUBE_FACE_BOTTOM]: 166
+  Value[ICON_CUBE_FACE_RIGHT]: 167
+  Value[ICON_CUBE_FACE_BACK]: 168
+  Value[ICON_CAMERA]: 169
+  Value[ICON_SPECIAL]: 170
+  Value[ICON_LINK_NET]: 171
+  Value[ICON_LINK_BOXES]: 172
+  Value[ICON_LINK_MULTI]: 173
+  Value[ICON_LINK]: 174
+  Value[ICON_LINK_BROKE]: 175
+  Value[ICON_TEXT_NOTES]: 176
+  Value[ICON_NOTEBOOK]: 177
+  Value[ICON_SUITCASE]: 178
+  Value[ICON_SUITCASE_ZIP]: 179
+  Value[ICON_MAILBOX]: 180
+  Value[ICON_MONITOR]: 181
+  Value[ICON_PRINTER]: 182
+  Value[ICON_PHOTO_CAMERA]: 183
+  Value[ICON_PHOTO_CAMERA_FLASH]: 184
+  Value[ICON_HOUSE]: 185
+  Value[ICON_HEART]: 186
+  Value[ICON_CORNER]: 187
+  Value[ICON_VERTICAL_BARS]: 188
+  Value[ICON_VERTICAL_BARS_FILL]: 189
+  Value[ICON_LIFE_BARS]: 190
+  Value[ICON_INFO]: 191
+  Value[ICON_CROSSLINE]: 192
+  Value[ICON_HELP]: 193
+  Value[ICON_FILETYPE_ALPHA]: 194
+  Value[ICON_FILETYPE_HOME]: 195
+  Value[ICON_LAYERS_VISIBLE]: 196
+  Value[ICON_LAYERS]: 197
+  Value[ICON_WINDOW]: 198
+  Value[ICON_HIDPI]: 199
+  Value[ICON_FILETYPE_BINARY]: 200
+  Value[ICON_HEX]: 201
+  Value[ICON_SHIELD]: 202
+  Value[ICON_FILE_NEW]: 203
+  Value[ICON_FOLDER_ADD]: 204
+  Value[ICON_ALARM]: 205
+  Value[ICON_206]: 206
+  Value[ICON_207]: 207
+  Value[ICON_208]: 208
+  Value[ICON_209]: 209
+  Value[ICON_210]: 210
+  Value[ICON_211]: 211
+  Value[ICON_212]: 212
+  Value[ICON_213]: 213
+  Value[ICON_214]: 214
+  Value[ICON_215]: 215
+  Value[ICON_216]: 216
+  Value[ICON_217]: 217
+  Value[ICON_218]: 218
+  Value[ICON_219]: 219
+  Value[ICON_220]: 220
+  Value[ICON_221]: 221
+  Value[ICON_222]: 222
+  Value[ICON_223]: 223
+  Value[ICON_224]: 224
+  Value[ICON_225]: 225
+  Value[ICON_226]: 226
+  Value[ICON_227]: 227
+  Value[ICON_228]: 228
+  Value[ICON_229]: 229
+  Value[ICON_230]: 230
+  Value[ICON_231]: 231
+  Value[ICON_232]: 232
+  Value[ICON_233]: 233
+  Value[ICON_234]: 234
+  Value[ICON_235]: 235
+  Value[ICON_236]: 236
+  Value[ICON_237]: 237
+  Value[ICON_238]: 238
+  Value[ICON_239]: 239
+  Value[ICON_240]: 240
+  Value[ICON_241]: 241
+  Value[ICON_242]: 242
+  Value[ICON_243]: 243
+  Value[ICON_244]: 244
+  Value[ICON_245]: 245
+  Value[ICON_246]: 246
+  Value[ICON_247]: 247
+  Value[ICON_248]: 248
+  Value[ICON_249]: 249
+  Value[ICON_250]: 250
+  Value[ICON_251]: 251
+  Value[ICON_252]: 252
+  Value[ICON_253]: 253
+  Value[ICON_254]: 254
+  Value[ICON_255]: 255
 
 Callbacks found: 0
 
 
-Functions found: 56
+Functions found: 54
 
 Function 001: GuiEnable() (0 input parameters)
   Name: GuiEnable
@@ -313,18 +580,20 @@ Function 015: GuiLine() (2 input parameters)
   Description: Line separator control, could contain text
   Param[1]: bounds (type: Rectangle)
   Param[2]: text (type: const char *)
-Function 016: GuiPanel() (1 input parameters)
+Function 016: GuiPanel() (2 input parameters)
   Name: GuiPanel
   Return type: void
   Description: Panel control, useful to group controls
   Param[1]: bounds (type: Rectangle)
-Function 017: GuiScrollPanel() (3 input parameters)
+  Param[2]: text (type: const char *)
+Function 017: GuiScrollPanel() (4 input parameters)
   Name: GuiScrollPanel
   Return type: Rectangle
   Description: Scroll Panel control
   Param[1]: bounds (type: Rectangle)
-  Param[2]: content (type: Rectangle)
-  Param[3]: scroll (type: Vector2 *)
+  Param[2]: text (type: const char *)
+  Param[3]: content (type: Rectangle)
+  Param[4]: scroll (type: Vector2 *)
 Function 018: GuiLabel() (2 input parameters)
   Name: GuiLabel
   Return type: void
@@ -457,22 +726,15 @@ Function 034: GuiDummyRec() (2 input parameters)
   Description: Dummy control for placeholders
   Param[1]: bounds (type: Rectangle)
   Param[2]: text (type: const char *)
-Function 035: GuiScrollBar() (4 input parameters)
-  Name: GuiScrollBar
-  Return type: int
-  Description: Scroll Bar control
-  Param[1]: bounds (type: Rectangle)
-  Param[2]: value (type: int)
-  Param[3]: minValue (type: int)
-  Param[4]: maxValue (type: int)
-Function 036: GuiGrid() (3 input parameters)
+Function 035: GuiGrid() (4 input parameters)
   Name: GuiGrid
   Return type: Vector2
-  Description: Grid control
+  Description: Grid control, returns mouse cell position
   Param[1]: bounds (type: Rectangle)
-  Param[2]: spacing (type: float)
-  Param[3]: subdivs (type: int)
-Function 037: GuiListView() (4 input parameters)
+  Param[2]: text (type: const char *)
+  Param[3]: spacing (type: float)
+  Param[4]: subdivs (type: int)
+Function 036: GuiListView() (4 input parameters)
   Name: GuiListView
   Return type: int
   Description: List View control, returns selected list item index
@@ -480,7 +742,7 @@ Function 037: GuiListView() (4 input parameters)
   Param[2]: text (type: const char *)
   Param[3]: scrollIndex (type: int *)
   Param[4]: active (type: int)
-Function 038: GuiListViewEx() (6 input parameters)
+Function 037: GuiListViewEx() (6 input parameters)
   Name: GuiListViewEx
   Return type: int
   Description: List View with extended parameters
@@ -490,7 +752,7 @@ Function 038: GuiListViewEx() (6 input parameters)
   Param[4]: focus (type: int *)
   Param[5]: scrollIndex (type: int *)
   Param[6]: active (type: int)
-Function 039: GuiMessageBox() (4 input parameters)
+Function 038: GuiMessageBox() (4 input parameters)
   Name: GuiMessageBox
   Return type: int
   Description: Message Box control, displays a message
@@ -498,66 +760,62 @@ Function 039: GuiMessageBox() (4 input parameters)
   Param[2]: title (type: const char *)
   Param[3]: message (type: const char *)
   Param[4]: buttons (type: const char *)
-Function 040: GuiTextInputBox() (5 input parameters)
+Function 039: GuiTextInputBox() (7 input parameters)
   Name: GuiTextInputBox
   Return type: int
-  Description: Text Input Box control, ask for text
+  Description: Text Input Box control, ask for text, supports secret
   Param[1]: bounds (type: Rectangle)
   Param[2]: title (type: const char *)
   Param[3]: message (type: const char *)
   Param[4]: buttons (type: const char *)
   Param[5]: text (type: char *)
-Function 041: GuiColorPicker() (2 input parameters)
+  Param[6]: textMaxSize (type: int)
+  Param[7]: secretViewActive (type: int *)
+Function 040: GuiColorPicker() (3 input parameters)
   Name: GuiColorPicker
   Return type: Color
   Description: Color Picker control (multiple color controls)
   Param[1]: bounds (type: Rectangle)
-  Param[2]: color (type: Color)
-Function 042: GuiColorPanel() (2 input parameters)
+  Param[2]: text (type: const char *)
+  Param[3]: color (type: Color)
+Function 041: GuiColorPanel() (3 input parameters)
   Name: GuiColorPanel
   Return type: Color
   Description: Color Panel control
   Param[1]: bounds (type: Rectangle)
-  Param[2]: color (type: Color)
-Function 043: GuiColorBarAlpha() (2 input parameters)
+  Param[2]: text (type: const char *)
+  Param[3]: color (type: Color)
+Function 042: GuiColorBarAlpha() (3 input parameters)
   Name: GuiColorBarAlpha
   Return type: float
   Description: Color Bar Alpha control
   Param[1]: bounds (type: Rectangle)
-  Param[2]: alpha (type: float)
-Function 044: GuiColorBarHue() (2 input parameters)
+  Param[2]: text (type: const char *)
+  Param[3]: alpha (type: float)
+Function 043: GuiColorBarHue() (3 input parameters)
   Name: GuiColorBarHue
   Return type: float
   Description: Color Bar Hue control
   Param[1]: bounds (type: Rectangle)
-  Param[2]: value (type: float)
-Function 045: GuiLoadStyle() (1 input parameters)
+  Param[2]: text (type: const char *)
+  Param[3]: value (type: float)
+Function 044: GuiLoadStyle() (1 input parameters)
   Name: GuiLoadStyle
   Return type: void
   Description: Load style file over global style variable (.rgs)
   Param[1]: fileName (type: const char *)
-Function 046: GuiLoadStyleDefault() (0 input parameters)
+Function 045: GuiLoadStyleDefault() (0 input parameters)
   Name: GuiLoadStyleDefault
   Return type: void
   Description: Load style default over global style
   No input parameters
-Function 047: LoadGuiStyle() (1 input parameters)
-  Name: LoadGuiStyle
-  Return type: GuiStyle
-  Description: Load style from file (.rgs)
-  Param[1]: fileName (type: const char *)
-Function 048: UnloadGuiStyle() (1 input parameters)
-  Name: UnloadGuiStyle
-  Return type: void
-  Description: Unload style
-  Param[1]: style (type: GuiStyle)
-Function 049: GuiIconText() (2 input parameters)
+Function 046: GuiIconText() (2 input parameters)
   Name: GuiIconText
   Return type: const char *
   Description: Get text with icon id prepended (if supported)
   Param[1]: iconId (type: int)
   Param[2]: text (type: const char *)
-Function 050: GuiDrawIcon() (5 input parameters)
+Function 047: GuiDrawIcon() (5 input parameters)
   Name: GuiDrawIcon
   Return type: void
   Description: 
@@ -566,37 +824,42 @@ Function 050: GuiDrawIcon() (5 input parameters)
   Param[3]: posY (type: int)
   Param[4]: pixelSize (type: int)
   Param[5]: color (type: Color)
-Function 051: GuiGetIcons() (0 input parameters)
+Function 048: GuiGetIcons() (0 input parameters)
   Name: GuiGetIcons
   Return type: unsigned int *
   Description: Get full icons data pointer
   No input parameters
-Function 052: GuiGetIconData() (1 input parameters)
+Function 049: GuiGetIconData() (1 input parameters)
   Name: GuiGetIconData
   Return type: unsigned int *
   Description: Get icon bit data
   Param[1]: iconId (type: int)
-Function 053: GuiSetIconData() (2 input parameters)
+Function 050: GuiSetIconData() (2 input parameters)
   Name: GuiSetIconData
   Return type: void
   Description: Set icon bit data
   Param[1]: iconId (type: int)
   Param[2]: data (type: unsigned int *)
-Function 054: GuiSetIconPixel() (3 input parameters)
+Function 051: GuiSetIconScale() (1 input parameters)
+  Name: GuiSetIconScale
+  Return type: void
+  Description: Set icon scale (1 by default)
+  Param[1]: scale (type: unsigned int)
+Function 052: GuiSetIconPixel() (3 input parameters)
   Name: GuiSetIconPixel
   Return type: void
   Description: Set icon pixel value
   Param[1]: iconId (type: int)
   Param[2]: x (type: int)
   Param[3]: y (type: int)
-Function 055: GuiClearIconPixel() (3 input parameters)
+Function 053: GuiClearIconPixel() (3 input parameters)
   Name: GuiClearIconPixel
   Return type: void
   Description: Clear icon pixel value
   Param[1]: iconId (type: int)
   Param[2]: x (type: int)
   Param[3]: y (type: int)
-Function 056: GuiCheckIconPixel() (3 input parameters)
+Function 054: GuiCheckIconPixel() (3 input parameters)
   Name: GuiCheckIconPixel
   Return type: bool
   Description: Check icon pixel value

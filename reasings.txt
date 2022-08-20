@@ -1,14 +1,14 @@
 
 Defines found: 4
 
-Define 001: EASINGS_H
-  Name: EASINGS_H
+Define 001: REASINGS_H
+  Name: REASINGS_H
   Type: GUARD
   Value: 
   Description: 
-Define 002: EASINGS_STATIC_INLINE
-  Name: EASINGS_STATIC_INLINE
-  Type: UNKNOWN
+Define 002: REASINGS_STATIC_INLINE
+  Name: REASINGS_STATIC_INLINE
+  Type: GUARD
   Value: 
   Description: NOTE: By default, compile functions as static inline
 Define 003: EASEDEF
@@ -39,7 +39,7 @@ Functions found: 28
 Function 001: EaseLinearNone() (4 input parameters)
   Name: EaseLinearNone
   Return type: float
-  Description: 
+  Description: Ease: Linear
   Param[1]: t (type: float)
   Param[2]: b (type: float)
   Param[3]: c (type: float)
@@ -47,7 +47,7 @@ Function 001: EaseLinearNone() (4 input parameters)
 Function 002: EaseLinearIn() (4 input parameters)
   Name: EaseLinearIn
   Return type: float
-  Description: 
+  Description: Ease: Linear In
   Param[1]: t (type: float)
   Param[2]: b (type: float)
   Param[3]: c (type: float)
@@ -55,7 +55,7 @@ Function 002: EaseLinearIn() (4 input parameters)
 Function 003: EaseLinearOut() (4 input parameters)
   Name: EaseLinearOut
   Return type: float
-  Description: 
+  Description: Ease: Linear Out
   Param[1]: t (type: float)
   Param[2]: b (type: float)
   Param[3]: c (type: float)
@@ -63,7 +63,7 @@ Function 003: EaseLinearOut() (4 input parameters)
 Function 004: EaseLinearInOut() (4 input parameters)
   Name: EaseLinearInOut
   Return type: float
-  Description: 
+  Description: Ease: Linear In Out
   Param[1]: t (type: float)
   Param[2]: b (type: float)
   Param[3]: c (type: float)
@@ -71,7 +71,7 @@ Function 004: EaseLinearInOut() (4 input parameters)
 Function 005: EaseSineIn() (4 input parameters)
   Name: EaseSineIn
   Return type: float
-  Description: 
+  Description: Ease: Sine In
   Param[1]: t (type: float)
   Param[2]: b (type: float)
   Param[3]: c (type: float)
@@ -79,7 +79,7 @@ Function 005: EaseSineIn() (4 input parameters)
 Function 006: EaseSineOut() (4 input parameters)
   Name: EaseSineOut
   Return type: float
-  Description: 
+  Description: Ease: Sine Out
   Param[1]: t (type: float)
   Param[2]: b (type: float)
   Param[3]: c (type: float)
@@ -87,7 +87,7 @@ Function 006: EaseSineOut() (4 input parameters)
 Function 007: EaseSineInOut() (4 input parameters)
   Name: EaseSineInOut
   Return type: float
-  Description: 
+  Description: Ease: Sine Out
   Param[1]: t (type: float)
   Param[2]: b (type: float)
   Param[3]: c (type: float)
@@ -95,7 +95,7 @@ Function 007: EaseSineInOut() (4 input parameters)
 Function 008: EaseCircIn() (4 input parameters)
   Name: EaseCircIn
   Return type: float
-  Description: 
+  Description: Ease: Circular In
   Param[1]: t (type: float)
   Param[2]: b (type: float)
   Param[3]: c (type: float)
@@ -103,7 +103,7 @@ Function 008: EaseCircIn() (4 input parameters)
 Function 009: EaseCircOut() (4 input parameters)
   Name: EaseCircOut
   Return type: float
-  Description: 
+  Description: Ease: Circular Out
   Param[1]: t (type: float)
   Param[2]: b (type: float)
   Param[3]: c (type: float)
@@ -111,7 +111,7 @@ Function 009: EaseCircOut() (4 input parameters)
 Function 010: EaseCircInOut() (4 input parameters)
   Name: EaseCircInOut
   Return type: float
-  Description: 
+  Description: Ease: Circular In Out
   Param[1]: t (type: float)
   Param[2]: b (type: float)
   Param[3]: c (type: float)
@@ -119,7 +119,7 @@ Function 010: EaseCircInOut() (4 input parameters)
 Function 011: EaseCubicIn() (4 input parameters)
   Name: EaseCubicIn
   Return type: float
-  Description: 
+  Description: Ease: Cubic In
   Param[1]: t (type: float)
   Param[2]: b (type: float)
   Param[3]: c (type: float)
@@ -127,7 +127,7 @@ Function 011: EaseCubicIn() (4 input parameters)
 Function 012: EaseCubicOut() (4 input parameters)
   Name: EaseCubicOut
   Return type: float
-  Description: 
+  Description: Ease: Cubic Out
   Param[1]: t (type: float)
   Param[2]: b (type: float)
   Param[3]: c (type: float)
@@ -135,7 +135,7 @@ Function 012: EaseCubicOut() (4 input parameters)
 Function 013: EaseCubicInOut() (4 input parameters)
   Name: EaseCubicInOut
   Return type: float
-  Description: 
+  Description: Ease: Cubic In Out
   Param[1]: t (type: float)
   Param[2]: b (type: float)
   Param[3]: c (type: float)
@@ -143,7 +143,7 @@ Function 013: EaseCubicInOut() (4 input parameters)
 Function 014: EaseQuadIn() (4 input parameters)
   Name: EaseQuadIn
   Return type: float
-  Description: 
+  Description: Ease: Quadratic In
   Param[1]: t (type: float)
   Param[2]: b (type: float)
   Param[3]: c (type: float)
@@ -151,7 +151,7 @@ Function 014: EaseQuadIn() (4 input parameters)
 Function 015: EaseQuadOut() (4 input parameters)
   Name: EaseQuadOut
   Return type: float
-  Description: 
+  Description: Ease: Quadratic Out
   Param[1]: t (type: float)
   Param[2]: b (type: float)
   Param[3]: c (type: float)
@@ -159,7 +159,7 @@ Function 015: EaseQuadOut() (4 input parameters)
 Function 016: EaseQuadInOut() (4 input parameters)
   Name: EaseQuadInOut
   Return type: float
-  Description: 
+  Description: Ease: Quadratic In Out
   Param[1]: t (type: float)
   Param[2]: b (type: float)
   Param[3]: c (type: float)
@@ -167,7 +167,7 @@ Function 016: EaseQuadInOut() (4 input parameters)
 Function 017: EaseExpoIn() (4 input parameters)
   Name: EaseExpoIn
   Return type: float
-  Description: 
+  Description: Ease: Exponential In
   Param[1]: t (type: float)
   Param[2]: b (type: float)
   Param[3]: c (type: float)
@@ -175,7 +175,7 @@ Function 017: EaseExpoIn() (4 input parameters)
 Function 018: EaseExpoOut() (4 input parameters)
   Name: EaseExpoOut
   Return type: float
-  Description: 
+  Description: Ease: Exponential Out
   Param[1]: t (type: float)
   Param[2]: b (type: float)
   Param[3]: c (type: float)
@@ -183,7 +183,7 @@ Function 018: EaseExpoOut() (4 input parameters)
 Function 019: EaseExpoInOut() (4 input parameters)
   Name: EaseExpoInOut
   Return type: float
-  Description: 
+  Description: Ease: Exponential In Out
   Param[1]: t (type: float)
   Param[2]: b (type: float)
   Param[3]: c (type: float)
@@ -191,7 +191,7 @@ Function 019: EaseExpoInOut() (4 input parameters)
 Function 020: EaseBackIn() (4 input parameters)
   Name: EaseBackIn
   Return type: float
-  Description: 
+  Description: Ease: Back In
   Param[1]: t (type: float)
   Param[2]: b (type: float)
   Param[3]: c (type: float)
@@ -199,7 +199,7 @@ Function 020: EaseBackIn() (4 input parameters)
 Function 021: EaseBackOut() (4 input parameters)
   Name: EaseBackOut
   Return type: float
-  Description: 
+  Description: Ease: Back Out
   Param[1]: t (type: float)
   Param[2]: b (type: float)
   Param[3]: c (type: float)
@@ -207,7 +207,7 @@ Function 021: EaseBackOut() (4 input parameters)
 Function 022: EaseBackInOut() (4 input parameters)
   Name: EaseBackInOut
   Return type: float
-  Description: 
+  Description: Ease: Back In Out
   Param[1]: t (type: float)
   Param[2]: b (type: float)
   Param[3]: c (type: float)
@@ -215,7 +215,7 @@ Function 022: EaseBackInOut() (4 input parameters)
 Function 023: EaseBounceOut() (4 input parameters)
   Name: EaseBounceOut
   Return type: float
-  Description: 
+  Description: Ease: Bounce Out
   Param[1]: t (type: float)
   Param[2]: b (type: float)
   Param[3]: c (type: float)
@@ -223,7 +223,7 @@ Function 023: EaseBounceOut() (4 input parameters)
 Function 024: EaseBounceIn() (4 input parameters)
   Name: EaseBounceIn
   Return type: float
-  Description: 
+  Description: Ease: Bounce In
   Param[1]: t (type: float)
   Param[2]: b (type: float)
   Param[3]: c (type: float)
@@ -231,7 +231,7 @@ Function 024: EaseBounceIn() (4 input parameters)
 Function 025: EaseBounceInOut() (4 input parameters)
   Name: EaseBounceInOut
   Return type: float
-  Description: 
+  Description: Ease: Bounce In Out
   Param[1]: t (type: float)
   Param[2]: b (type: float)
   Param[3]: c (type: float)
@@ -239,7 +239,7 @@ Function 025: EaseBounceInOut() (4 input parameters)
 Function 026: EaseElasticIn() (4 input parameters)
   Name: EaseElasticIn
   Return type: float
-  Description: 
+  Description: Ease: Elastic In
   Param[1]: t (type: float)
   Param[2]: b (type: float)
   Param[3]: c (type: float)
@@ -247,7 +247,7 @@ Function 026: EaseElasticIn() (4 input parameters)
 Function 027: EaseElasticOut() (4 input parameters)
   Name: EaseElasticOut
   Return type: float
-  Description: 
+  Description: Ease: Elastic Out
   Param[1]: t (type: float)
   Param[2]: b (type: float)
   Param[3]: c (type: float)
@@ -255,7 +255,7 @@ Function 027: EaseElasticOut() (4 input parameters)
 Function 028: EaseElasticInOut() (4 input parameters)
   Name: EaseElasticInOut
   Return type: float
-  Description: 
+  Description: Ease: Elastic In Out
   Param[1]: t (type: float)
   Param[2]: b (type: float)
   Param[3]: c (type: float)

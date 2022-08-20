@@ -19,6 +19,12 @@ return {
       description = ""
     },
     {
+      name = "EPSILON",
+      type = "FLOAT",
+      value = 0.000001,
+      description = ""
+    },
+    {
       name = "DEG2RAD",
       type = "FLOAT_MATH",
       value = "(PI/180.0f)",
@@ -301,6 +307,25 @@ return {
       }
     },
     {
+      name = "Wrap",
+      description = "",
+      returnType = "float",
+      params = {
+        {type = "float", name = "value"},
+        {type = "float", name = "min"},
+        {type = "float", name = "max"}
+      }
+    },
+    {
+      name = "FloatEquals",
+      description = "",
+      returnType = "int",
+      params = {
+        {type = "float", name = "x"},
+        {type = "float", name = "y"}
+      }
+    },
+    {
       name = "Vector2Zero",
       description = "",
       returnType = "Vector2"
@@ -381,6 +406,15 @@ return {
       }
     },
     {
+      name = "Vector2DistanceSqr",
+      description = "",
+      returnType = "float",
+      params = {
+        {type = "Vector2", name = "v1"},
+        {type = "Vector2", name = "v2"}
+      }
+    },
+    {
       name = "Vector2Angle",
       description = "",
       returnType = "float",
@@ -433,6 +467,15 @@ return {
       }
     },
     {
+      name = "Vector2Transform",
+      description = "",
+      returnType = "Vector2",
+      params = {
+        {type = "Vector2", name = "v"},
+        {type = "Matrix", name = "mat"}
+      }
+    },
+    {
       name = "Vector2Lerp",
       description = "",
       returnType = "Vector2",
@@ -468,6 +511,43 @@ return {
         {type = "Vector2", name = "v"},
         {type = "Vector2", name = "target"},
         {type = "float", name = "maxDistance"}
+      }
+    },
+    {
+      name = "Vector2Invert",
+      description = "",
+      returnType = "Vector2",
+      params = {
+        {type = "Vector2", name = "v"}
+      }
+    },
+    {
+      name = "Vector2Clamp",
+      description = "",
+      returnType = "Vector2",
+      params = {
+        {type = "Vector2", name = "v"},
+        {type = "Vector2", name = "min"},
+        {type = "Vector2", name = "max"}
+      }
+    },
+    {
+      name = "Vector2ClampValue",
+      description = "",
+      returnType = "Vector2",
+      params = {
+        {type = "Vector2", name = "v"},
+        {type = "float", name = "min"},
+        {type = "float", name = "max"}
+      }
+    },
+    {
+      name = "Vector2Equals",
+      description = "",
+      returnType = "int",
+      params = {
+        {type = "Vector2", name = "p"},
+        {type = "Vector2", name = "q"}
       }
     },
     {
@@ -586,9 +666,18 @@ return {
       }
     },
     {
+      name = "Vector3DistanceSqr",
+      description = "",
+      returnType = "float",
+      params = {
+        {type = "Vector3", name = "v1"},
+        {type = "Vector3", name = "v2"}
+      }
+    },
+    {
       name = "Vector3Angle",
       description = "",
-      returnType = "Vector2",
+      returnType = "float",
       params = {
         {type = "Vector3", name = "v1"},
         {type = "Vector3", name = "v2"}
@@ -644,6 +733,16 @@ return {
       params = {
         {type = "Vector3", name = "v"},
         {type = "Quaternion", name = "q"}
+      }
+    },
+    {
+      name = "Vector3RotateByAxisAngle",
+      description = "",
+      returnType = "Vector3",
+      params = {
+        {type = "Vector3", name = "v"},
+        {type = "Vector3", name = "axis"},
+        {type = "float", name = "angle"}
       }
     },
     {
@@ -713,6 +812,53 @@ return {
       }
     },
     {
+      name = "Vector3Invert",
+      description = "",
+      returnType = "Vector3",
+      params = {
+        {type = "Vector3", name = "v"}
+      }
+    },
+    {
+      name = "Vector3Clamp",
+      description = "",
+      returnType = "Vector3",
+      params = {
+        {type = "Vector3", name = "v"},
+        {type = "Vector3", name = "min"},
+        {type = "Vector3", name = "max"}
+      }
+    },
+    {
+      name = "Vector3ClampValue",
+      description = "",
+      returnType = "Vector3",
+      params = {
+        {type = "Vector3", name = "v"},
+        {type = "float", name = "min"},
+        {type = "float", name = "max"}
+      }
+    },
+    {
+      name = "Vector3Equals",
+      description = "",
+      returnType = "int",
+      params = {
+        {type = "Vector3", name = "p"},
+        {type = "Vector3", name = "q"}
+      }
+    },
+    {
+      name = "Vector3Refract",
+      description = "",
+      returnType = "Vector3",
+      params = {
+        {type = "Vector3", name = "v"},
+        {type = "Vector3", name = "n"},
+        {type = "float", name = "r"}
+      }
+    },
+    {
       name = "MatrixDeterminant",
       description = "",
       returnType = "float",
@@ -738,14 +884,6 @@ return {
     },
     {
       name = "MatrixInvert",
-      description = "",
-      returnType = "Matrix",
-      params = {
-        {type = "Matrix", name = "mat"}
-      }
-    },
-    {
-      name = "MatrixNormalize",
       description = "",
       returnType = "Matrix",
       params = {
@@ -832,7 +970,7 @@ return {
       description = "",
       returnType = "Matrix",
       params = {
-        {type = "Vector3", name = "ang"}
+        {type = "Vector3", name = "angle"}
       }
     },
     {
@@ -840,7 +978,7 @@ return {
       description = "",
       returnType = "Matrix",
       params = {
-        {type = "Vector3", name = "ang"}
+        {type = "Vector3", name = "angle"}
       }
     },
     {
@@ -1099,6 +1237,15 @@ return {
       params = {
         {type = "Quaternion", name = "q"},
         {type = "Matrix", name = "mat"}
+      }
+    },
+    {
+      name = "QuaternionEquals",
+      description = "",
+      returnType = "int",
+      params = {
+        {type = "Quaternion", name = "p"},
+        {type = "Quaternion", name = "q"}
       }
     }
   }

@@ -859,7 +859,7 @@ return {
         {
           name = "RL_TEXTURE_FILTER_POINT",
           value = 0,
-          description = "No filter, just pixel aproximation"
+          description = "No filter, just pixel approximation"
         },
         {
           name = "RL_TEXTURE_FILTER_BILINEAR",
@@ -918,9 +918,14 @@ return {
           description = "Blend textures subtracting colors (alternative)"
         },
         {
-          name = "RL_BLEND_CUSTOM",
+          name = "RL_BLEND_ALPHA_PREMULTIPLY",
           value = 5,
-          description = "Belnd textures using custom src/dst factors (use SetBlendModeCustom())"
+          description = "Blend premultiplied textures considering alpha"
+        },
+        {
+          name = "RL_BLEND_CUSTOM",
+          value = 6,
+          description = "Blend textures using custom src/dst factors (use rlSetBlendFactors())"
         }
       }
     },
@@ -1658,9 +1663,25 @@ return {
       returnType = "int"
     },
     {
+      name = "rlSetFramebufferWidth",
+      description = "Set current framebuffer width",
+      returnType = "void",
+      params = {
+        {type = "int", name = "width"}
+      }
+    },
+    {
       name = "rlGetFramebufferWidth",
       description = "Get default framebuffer width",
       returnType = "int"
+    },
+    {
+      name = "rlSetFramebufferHeight",
+      description = "Set current framebuffer height",
+      returnType = "void",
+      params = {
+        {type = "int", name = "height"}
+      }
     },
     {
       name = "rlGetFramebufferHeight",
@@ -1746,7 +1767,7 @@ return {
       description = "Load a vertex buffer attribute",
       returnType = "unsigned int",
       params = {
-        {type = "void *", name = "buffer"},
+        {type = "const void *", name = "buffer"},
         {type = "int", name = "size"},
         {type = "bool", name = "dynamic"}
       }
@@ -1756,7 +1777,7 @@ return {
       description = "Load a new attributes element buffer",
       returnType = "unsigned int",
       params = {
-        {type = "void *", name = "buffer"},
+        {type = "const void *", name = "buffer"},
         {type = "int", name = "size"},
         {type = "bool", name = "dynamic"}
       }
@@ -1767,7 +1788,18 @@ return {
       returnType = "void",
       params = {
         {type = "unsigned int", name = "bufferId"},
-        {type = "void *", name = "data"},
+        {type = "const void *", name = "data"},
+        {type = "int", name = "dataSize"},
+        {type = "int", name = "offset"}
+      }
+    },
+    {
+      name = "rlUpdateVertexBufferElements",
+      description = "Update vertex buffer elements with new data",
+      returnType = "void",
+      params = {
+        {type = "unsigned int", name = "id"},
+        {type = "const void *", name = "data"},
         {type = "int", name = "dataSize"},
         {type = "int", name = "offset"}
       }
@@ -1798,7 +1830,7 @@ return {
         {type = "int", name = "type"},
         {type = "bool", name = "normalized"},
         {type = "int", name = "stride"},
-        {type = "void *", name = "pointer"}
+        {type = "const void *", name = "pointer"}
       }
     },
     {
@@ -1837,7 +1869,7 @@ return {
       params = {
         {type = "int", name = "offset"},
         {type = "int", name = "count"},
-        {type = "void *", name = "buffer"}
+        {type = "const void *", name = "buffer"}
       }
     },
     {
@@ -1857,7 +1889,7 @@ return {
       params = {
         {type = "int", name = "offset"},
         {type = "int", name = "count"},
-        {type = "void *", name = "buffer"},
+        {type = "const void *", name = "buffer"},
         {type = "int", name = "instances"}
       }
     },
@@ -1866,7 +1898,7 @@ return {
       description = "Load texture in GPU",
       returnType = "unsigned int",
       params = {
-        {type = "void *", name = "data"},
+        {type = "const void *", name = "data"},
         {type = "int", name = "width"},
         {type = "int", name = "height"},
         {type = "int", name = "format"},
@@ -1888,7 +1920,7 @@ return {
       description = "Load texture cubemap",
       returnType = "unsigned int",
       params = {
-        {type = "void *", name = "data"},
+        {type = "const void *", name = "data"},
         {type = "int", name = "size"},
         {type = "int", name = "format"}
       }
@@ -1913,9 +1945,9 @@ return {
       returnType = "void",
       params = {
         {type = "int", name = "format"},
-        {type = "int *", name = "glInternalFormat"},
-        {type = "int *", name = "glFormat"},
-        {type = "int *", name = "glType"}
+        {type = "unsigned int *", name = "glInternalFormat"},
+        {type = "unsigned int *", name = "glFormat"},
+        {type = "unsigned int *", name = "glType"}
       }
     },
     {

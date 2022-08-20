@@ -21,7 +21,7 @@ Structures found: 6
 
 Struct 01: MemNode (3 fields)
   Name: MemNode
-  Description: Memory Pool
+  Description: Memory pool node
   Field[1]: size_t size 
   Field[2]: MemNode * next 
   Field[3]: MemNode * prev 
@@ -33,19 +33,19 @@ Struct 02: AllocList (3 fields)
   Field[3]: size_t len 
 Struct 03: Arena (3 fields)
   Name: Arena
-  Description: Arena allocator.
+  Description: Arena allocator
   Field[1]: uintptr_t mem 
   Field[2]: uintptr_t offs 
   Field[3]: size_t size 
 Struct 04: MemPool (3 fields)
   Name: MemPool
-  Description: 
+  Description: Memory pool
   Field[1]: AllocList large 
   Field[2]: AllocList[MEMPOOL_BUCKET_SIZE] buckets 
   Field[3]: Arena arena 
 Struct 05: ObjPool (5 fields)
   Name: ObjPool
-  Description: Object Pool
+  Description: Object pool
   Field[1]: uintptr_t mem 
   Field[2]: uintptr_t offs 
   Field[3]: size_t objSize 
@@ -53,7 +53,7 @@ Struct 05: ObjPool (5 fields)
   Field[5]: size_t memSize 
 Struct 06: BiStack (4 fields)
   Name: BiStack
-  Description: Double-Ended Stack aka Deque
+  Description: Double-ended stack (aka Deque)
   Field[1]: uintptr_t mem 
   Field[2]: uintptr_t front 
   Field[3]: uintptr_t back 

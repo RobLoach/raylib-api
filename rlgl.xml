@@ -173,20 +173,21 @@
             <Value name="RL_PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA" integer="21" desc="2 bpp" />
         </Enum>
         <Enum name="rlTextureFilter" valueCount="6" desc="Texture parameters: filter mode">
-            <Value name="RL_TEXTURE_FILTER_POINT" integer="0" desc="No filter, just pixel aproximation" />
+            <Value name="RL_TEXTURE_FILTER_POINT" integer="0" desc="No filter, just pixel approximation" />
             <Value name="RL_TEXTURE_FILTER_BILINEAR" integer="1" desc="Linear filtering" />
             <Value name="RL_TEXTURE_FILTER_TRILINEAR" integer="2" desc="Trilinear filtering (linear with mipmaps)" />
             <Value name="RL_TEXTURE_FILTER_ANISOTROPIC_4X" integer="3" desc="Anisotropic filtering 4x" />
             <Value name="RL_TEXTURE_FILTER_ANISOTROPIC_8X" integer="4" desc="Anisotropic filtering 8x" />
             <Value name="RL_TEXTURE_FILTER_ANISOTROPIC_16X" integer="5" desc="Anisotropic filtering 16x" />
         </Enum>
-        <Enum name="rlBlendMode" valueCount="6" desc="Color blending modes (pre-defined)">
+        <Enum name="rlBlendMode" valueCount="7" desc="Color blending modes (pre-defined)">
             <Value name="RL_BLEND_ALPHA" integer="0" desc="Blend textures considering alpha (default)" />
             <Value name="RL_BLEND_ADDITIVE" integer="1" desc="Blend textures adding colors" />
             <Value name="RL_BLEND_MULTIPLIED" integer="2" desc="Blend textures multiplying colors" />
             <Value name="RL_BLEND_ADD_COLORS" integer="3" desc="Blend textures adding colors (alternative)" />
             <Value name="RL_BLEND_SUBTRACT_COLORS" integer="4" desc="Blend textures subtracting colors (alternative)" />
-            <Value name="RL_BLEND_CUSTOM" integer="5" desc="Belnd textures using custom src/dst factors (use SetBlendModeCustom())" />
+            <Value name="RL_BLEND_ALPHA_PREMULTIPLY" integer="5" desc="Blend premultiplied textures considering alpha" />
+            <Value name="RL_BLEND_CUSTOM" integer="6" desc="Blend textures using custom src/dst factors (use rlSetBlendFactors())" />
         </Enum>
         <Enum name="rlShaderLocationIndex" valueCount="26" desc="Shader location point type">
             <Value name="RL_SHADER_LOC_VERTEX_POSITION" integer="0" desc="Shader location: vertex attribute: position" />
@@ -236,7 +237,7 @@
     </Enums>
     <Callbacks count="0">
     </Callbacks>
-    <Functions count="141">
+    <Functions count="144">
         <Function name="rlMatrixMode" retType="void" paramCount="1" desc="Choose the current matrix to be transformed">
             <Param type="int" name="mode" desc="" />
         </Function>
@@ -464,7 +465,13 @@
         </Function>
         <Function name="rlGetVersion" retType="int" paramCount="0" desc="Get current OpenGL version">
         </Function>
+        <Function name="rlSetFramebufferWidth" retType="void" paramCount="1" desc="Set current framebuffer width">
+            <Param type="int" name="width" desc="" />
+        </Function>
         <Function name="rlGetFramebufferWidth" retType="int" paramCount="0" desc="Get default framebuffer width">
+        </Function>
+        <Function name="rlSetFramebufferHeight" retType="void" paramCount="1" desc="Set current framebuffer height">
+            <Param type="int" name="height" desc="" />
         </Function>
         <Function name="rlGetFramebufferHeight" retType="int" paramCount="0" desc="Get default framebuffer height">
         </Function>
@@ -498,18 +505,24 @@
         <Function name="rlLoadVertexArray" retType="unsigned int" paramCount="0" desc="Load vertex array (vao) if supported">
         </Function>
         <Function name="rlLoadVertexBuffer" retType="unsigned int" paramCount="3" desc="Load a vertex buffer attribute">
-            <Param type="void *" name="buffer" desc="" />
+            <Param type="const void *" name="buffer" desc="" />
             <Param type="int" name="size" desc="" />
             <Param type="bool" name="dynamic" desc="" />
         </Function>
         <Function name="rlLoadVertexBufferElement" retType="unsigned int" paramCount="3" desc="Load a new attributes element buffer">
-            <Param type="void *" name="buffer" desc="" />
+            <Param type="const void *" name="buffer" desc="" />
             <Param type="int" name="size" desc="" />
             <Param type="bool" name="dynamic" desc="" />
         </Function>
         <Function name="rlUpdateVertexBuffer" retType="void" paramCount="4" desc="Update GPU buffer with new data">
             <Param type="unsigned int" name="bufferId" desc="" />
-            <Param type="void *" name="data" desc="" />
+            <Param type="const void *" name="data" desc="" />
+            <Param type="int" name="dataSize" desc="" />
+            <Param type="int" name="offset" desc="" />
+        </Function>
+        <Function name="rlUpdateVertexBufferElements" retType="void" paramCount="4" desc="Update vertex buffer elements with new data">
+            <Param type="unsigned int" name="id" desc="" />
+            <Param type="const void *" name="data" desc="" />
             <Param type="int" name="dataSize" desc="" />
             <Param type="int" name="offset" desc="" />
         </Function>
@@ -525,7 +538,7 @@
             <Param type="int" name="type" desc="" />
             <Param type="bool" name="normalized" desc="" />
             <Param type="int" name="stride" desc="" />
-            <Param type="void *" name="pointer" desc="" />
+            <Param type="const void *" name="pointer" desc="" />
         </Function>
         <Function name="rlSetVertexAttributeDivisor" retType="void" paramCount="2" desc="">
             <Param type="unsigned int" name="index" desc="" />
@@ -544,7 +557,7 @@
         <Function name="rlDrawVertexArrayElements" retType="void" paramCount="3" desc="">
             <Param type="int" name="offset" desc="" />
             <Param type="int" name="count" desc="" />
-            <Param type="void *" name="buffer" desc="" />
+            <Param type="const void *" name="buffer" desc="" />
         </Function>
         <Function name="rlDrawVertexArrayInstanced" retType="void" paramCount="3" desc="">
             <Param type="int" name="offset" desc="" />
@@ -554,11 +567,11 @@
         <Function name="rlDrawVertexArrayElementsInstanced" retType="void" paramCount="4" desc="">
             <Param type="int" name="offset" desc="" />
             <Param type="int" name="count" desc="" />
-            <Param type="void *" name="buffer" desc="" />
+            <Param type="const void *" name="buffer" desc="" />
             <Param type="int" name="instances" desc="" />
         </Function>
         <Function name="rlLoadTexture" retType="unsigned int" paramCount="5" desc="Load texture in GPU">
-            <Param type="void *" name="data" desc="" />
+            <Param type="const void *" name="data" desc="" />
             <Param type="int" name="width" desc="" />
             <Param type="int" name="height" desc="" />
             <Param type="int" name="format" desc="" />
@@ -570,7 +583,7 @@
             <Param type="bool" name="useRenderBuffer" desc="" />
         </Function>
         <Function name="rlLoadTextureCubemap" retType="unsigned int" paramCount="3" desc="Load texture cubemap">
-            <Param type="void *" name="data" desc="" />
+            <Param type="const void *" name="data" desc="" />
             <Param type="int" name="size" desc="" />
             <Param type="int" name="format" desc="" />
         </Function>
@@ -585,9 +598,9 @@
         </Function>
         <Function name="rlGetGlTextureFormats" retType="void" paramCount="4" desc="Get OpenGL internal formats">
             <Param type="int" name="format" desc="" />
-            <Param type="int *" name="glInternalFormat" desc="" />
-            <Param type="int *" name="glFormat" desc="" />
-            <Param type="int *" name="glType" desc="" />
+            <Param type="unsigned int *" name="glInternalFormat" desc="" />
+            <Param type="unsigned int *" name="glFormat" desc="" />
+            <Param type="unsigned int *" name="glType" desc="" />
         </Function>
         <Function name="rlGetPixelFormatName" retType="const char *" paramCount="1" desc="Get name string for pixel format">
             <Param type="unsigned int" name="format" desc="" />

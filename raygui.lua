@@ -9,7 +9,7 @@ return {
     {
       name = "RAYGUI_VERSION",
       type = "STRING",
-      value = "3.0",
+      value = "3.2",
       description = ""
     },
     {
@@ -37,9 +37,27 @@ return {
       description = ""
     },
     {
-      name = "TRACELOG(level, ...)",
+      name = "RAYGUI_SUPPORT_LOG_INFO",
+      type = "GUARD",
+      value = "",
+      description = ""
+    },
+    {
+      name = "RAYGUI_LOG(...)",
       type = "MACRO",
-      value = "(void)0",
+      value = "printf(__VA_ARGS__)",
+      description = ""
+    },
+    {
+      name = "SCROLLBAR_LEFT_SIDE",
+      type = "INT",
+      value = 0,
+      description = ""
+    },
+    {
+      name = "SCROLLBAR_RIGHT_SIDE",
+      type = "INT",
+      value = 1,
       description = ""
     }
   },
@@ -241,7 +259,7 @@ return {
           description = ""
         },
         {
-          type = "int",
+          type = "unsigned int",
           name = "propertyValue",
           description = ""
         }
@@ -252,26 +270,26 @@ return {
   },
   enums = {
     {
-      name = "GuiControlState",
+      name = "GuiState",
       description = "Gui control state",
       values = {
         {
-          name = "GUI_STATE_NORMAL",
+          name = "STATE_NORMAL",
           value = 0,
           description = ""
         },
         {
-          name = "GUI_STATE_FOCUSED",
+          name = "STATE_FOCUSED",
           value = 1,
           description = ""
         },
         {
-          name = "GUI_STATE_PRESSED",
+          name = "STATE_PRESSED",
           value = 2,
           description = ""
         },
         {
-          name = "GUI_STATE_DISABLED",
+          name = "STATE_DISABLED",
           value = 3,
           description = ""
         }
@@ -282,17 +300,17 @@ return {
       description = "Gui control text alignment",
       values = {
         {
-          name = "GUI_TEXT_ALIGN_LEFT",
+          name = "TEXT_ALIGN_LEFT",
           value = 0,
           description = ""
         },
         {
-          name = "GUI_TEXT_ALIGN_CENTER",
+          name = "TEXT_ALIGN_CENTER",
           value = 1,
           description = ""
         },
         {
-          name = "GUI_TEXT_ALIGN_RIGHT",
+          name = "TEXT_ALIGN_RIGHT",
           value = 2,
           description = ""
         }
@@ -305,7 +323,7 @@ return {
         {
           name = "DEFAULT",
           value = 0,
-          description = "Generic control -> populates to all controls when set"
+          description = ""
         },
         {
           name = "LABEL",
@@ -360,7 +378,7 @@ return {
         {
           name = "SPINNER",
           value = 11,
-          description = ""
+          description = "Uses: BUTTON, VALUEBOX"
         },
         {
           name = "LISTVIEW",
@@ -477,22 +495,22 @@ return {
         {
           name = "TEXT_SIZE",
           value = 16,
-          description = ""
+          description = "Text size (glyphs max height)"
         },
         {
           name = "TEXT_SPACING",
           value = 17,
-          description = ""
+          description = "Text spacing between glyphs"
         },
         {
           name = "LINE_COLOR",
           value = 18,
-          description = ""
+          description = "Line control color"
         },
         {
           name = "BACKGROUND_COLOR",
           value = 19,
-          description = ""
+          description = "Background color"
         }
       }
     },
@@ -503,7 +521,7 @@ return {
         {
           name = "GROUP_PADDING",
           value = 16,
-          description = ""
+          description = "ToggleGroup separation between toggles"
         }
       }
     },
@@ -514,12 +532,12 @@ return {
         {
           name = "SLIDER_WIDTH",
           value = 16,
-          description = ""
+          description = "Slider size of internal bar"
         },
         {
           name = "SLIDER_PADDING",
           value = 17,
-          description = ""
+          description = "Slider/SliderBar internal bar padding"
         }
       }
     },
@@ -530,92 +548,7 @@ return {
         {
           name = "PROGRESS_PADDING",
           value = 16,
-          description = ""
-        }
-      }
-    },
-    {
-      name = "GuiCheckBoxProperty",
-      description = "CheckBox",
-      values = {
-        {
-          name = "CHECK_PADDING",
-          value = 16,
-          description = ""
-        }
-      }
-    },
-    {
-      name = "GuiComboBoxProperty",
-      description = "ComboBox",
-      values = {
-        {
-          name = "COMBO_BUTTON_WIDTH",
-          value = 16,
-          description = ""
-        },
-        {
-          name = "COMBO_BUTTON_PADDING",
-          value = 17,
-          description = ""
-        }
-      }
-    },
-    {
-      name = "GuiDropdownBoxProperty",
-      description = "DropdownBox",
-      values = {
-        {
-          name = "ARROW_PADDING",
-          value = 16,
-          description = ""
-        },
-        {
-          name = "DROPDOWN_ITEMS_PADDING",
-          value = 17,
-          description = ""
-        }
-      }
-    },
-    {
-      name = "GuiTextBoxProperty",
-      description = "TextBox/TextBoxMulti/ValueBox/Spinner",
-      values = {
-        {
-          name = "TEXT_INNER_PADDING",
-          value = 16,
-          description = ""
-        },
-        {
-          name = "TEXT_LINES_PADDING",
-          value = 17,
-          description = ""
-        },
-        {
-          name = "COLOR_SELECTED_FG",
-          value = 18,
-          description = ""
-        },
-        {
-          name = "COLOR_SELECTED_BG",
-          value = 19,
-          description = ""
-        }
-      }
-    },
-    {
-      name = "GuiSpinnerProperty",
-      description = "Spinner",
-      values = {
-        {
-          name = "SPIN_BUTTON_WIDTH",
-          value = 16,
-          description = ""
-        },
-        {
-          name = "SPIN_BUTTON_PADDING",
-          value = 17,
-          description = ""
+          description = "ProgressBar internal padding"
         }
       }
     },
@@ -636,7 +569,7 @@ return {
         {
           name = "SCROLL_SLIDER_PADDING",
           value = 18,
-          description = ""
+          description = "(SLIDERBAR, SLIDER_PADDING)"
         },
         {
           name = "SCROLL_SLIDER_SIZE",
@@ -656,18 +589,77 @@ return {
       }
     },
     {
-      name = "GuiScrollBarSide",
-      description = "ScrollBar side",
+      name = "GuiCheckBoxProperty",
+      description = "CheckBox",
       values = {
         {
-          name = "SCROLLBAR_LEFT_SIDE",
-          value = 0,
-          description = ""
+          name = "CHECK_PADDING",
+          value = 16,
+          description = "CheckBox internal check padding"
+        }
+      }
+    },
+    {
+      name = "GuiComboBoxProperty",
+      description = "ComboBox",
+      values = {
+        {
+          name = "COMBO_BUTTON_WIDTH",
+          value = 16,
+          description = "ComboBox right button width"
         },
         {
-          name = "SCROLLBAR_RIGHT_SIDE",
-          value = 1,
-          description = ""
+          name = "COMBO_BUTTON_SPACING",
+          value = 17,
+          description = "ComboBox button separation"
+        }
+      }
+    },
+    {
+      name = "GuiDropdownBoxProperty",
+      description = "DropdownBox",
+      values = {
+        {
+          name = "ARROW_PADDING",
+          value = 16,
+          description = "DropdownBox arrow separation from border and items"
+        },
+        {
+          name = "DROPDOWN_ITEMS_SPACING",
+          value = 17,
+          description = "DropdownBox items separation"
+        }
+      }
+    },
+    {
+      name = "GuiTextBoxProperty",
+      description = "TextBox/TextBoxMulti/ValueBox/Spinner",
+      values = {
+        {
+          name = "TEXT_INNER_PADDING",
+          value = 16,
+          description = "TextBox/TextBoxMulti/ValueBox/Spinner inner text padding"
+        },
+        {
+          name = "TEXT_LINES_SPACING",
+          value = 17,
+          description = "TextBoxMulti lines separation"
+        }
+      }
+    },
+    {
+      name = "GuiSpinnerProperty",
+      description = "Spinner",
+      values = {
+        {
+          name = "SPIN_BUTTON_WIDTH",
+          value = 16,
+          description = "Spinner left/right buttons width"
+        },
+        {
+          name = "SPIN_BUTTON_SPACING",
+          value = 17,
+          description = "Spinner buttons separation"
         }
       }
     },
@@ -678,22 +670,22 @@ return {
         {
           name = "LIST_ITEMS_HEIGHT",
           value = 16,
-          description = ""
+          description = "ListView items height"
         },
         {
-          name = "LIST_ITEMS_PADDING",
+          name = "LIST_ITEMS_SPACING",
           value = 17,
-          description = ""
+          description = "ListView items separation"
         },
         {
           name = "SCROLLBAR_WIDTH",
           value = 18,
-          description = ""
+          description = "ListView scrollbar size (usually width)"
         },
         {
           name = "SCROLLBAR_SIDE",
           value = 19,
-          description = ""
+          description = "ListView scrollbar side (0-left, 1-right)"
         }
       }
     },
@@ -709,22 +701,1308 @@ return {
         {
           name = "HUEBAR_WIDTH",
           value = 17,
-          description = "Right hue bar width"
+          description = "ColorPicker right hue bar width"
         },
         {
           name = "HUEBAR_PADDING",
           value = 18,
-          description = "Right hue bar separation from panel"
+          description = "ColorPicker right hue bar separation from panel"
         },
         {
           name = "HUEBAR_SELECTOR_HEIGHT",
           value = 19,
-          description = "Right hue bar selector height"
+          description = "ColorPicker right hue bar selector height"
         },
         {
           name = "HUEBAR_SELECTOR_OVERFLOW",
           value = 20,
-          description = "Right hue bar selector overflow"
+          description = "ColorPicker right hue bar selector overflow"
+        }
+      }
+    },
+    {
+      name = "GuiIconName",
+      description = "",
+      values = {
+        {
+          name = "ICON_NONE",
+          value = 0,
+          description = ""
+        },
+        {
+          name = "ICON_FOLDER_FILE_OPEN",
+          value = 1,
+          description = ""
+        },
+        {
+          name = "ICON_FILE_SAVE_CLASSIC",
+          value = 2,
+          description = ""
+        },
+        {
+          name = "ICON_FOLDER_OPEN",
+          value = 3,
+          description = ""
+        },
+        {
+          name = "ICON_FOLDER_SAVE",
+          value = 4,
+          description = ""
+        },
+        {
+          name = "ICON_FILE_OPEN",
+          value = 5,
+          description = ""
+        },
+        {
+          name = "ICON_FILE_SAVE",
+          value = 6,
+          description = ""
+        },
+        {
+          name = "ICON_FILE_EXPORT",
+          value = 7,
+          description = ""
+        },
+        {
+          name = "ICON_FILE_ADD",
+          value = 8,
+          description = ""
+        },
+        {
+          name = "ICON_FILE_DELETE",
+          value = 9,
+          description = ""
+        },
+        {
+          name = "ICON_FILETYPE_TEXT",
+          value = 10,
+          description = ""
+        },
+        {
+          name = "ICON_FILETYPE_AUDIO",
+          value = 11,
+          description = ""
+        },
+        {
+          name = "ICON_FILETYPE_IMAGE",
+          value = 12,
+          description = ""
+        },
+        {
+          name = "ICON_FILETYPE_PLAY",
+          value = 13,
+          description = ""
+        },
+        {
+          name = "ICON_FILETYPE_VIDEO",
+          value = 14,
+          description = ""
+        },
+        {
+          name = "ICON_FILETYPE_INFO",
+          value = 15,
+          description = ""
+        },
+        {
+          name = "ICON_FILE_COPY",
+          value = 16,
+          description = ""
+        },
+        {
+          name = "ICON_FILE_CUT",
+          value = 17,
+          description = ""
+        },
+        {
+          name = "ICON_FILE_PASTE",
+          value = 18,
+          description = ""
+        },
+        {
+          name = "ICON_CURSOR_HAND",
+          value = 19,
+          description = ""
+        },
+        {
+          name = "ICON_CURSOR_POINTER",
+          value = 20,
+          description = ""
+        },
+        {
+          name = "ICON_CURSOR_CLASSIC",
+          value = 21,
+          description = ""
+        },
+        {
+          name = "ICON_PENCIL",
+          value = 22,
+          description = ""
+        },
+        {
+          name = "ICON_PENCIL_BIG",
+          value = 23,
+          description = ""
+        },
+        {
+          name = "ICON_BRUSH_CLASSIC",
+          value = 24,
+          description = ""
+        },
+        {
+          name = "ICON_BRUSH_PAINTER",
+          value = 25,
+          description = ""
+        },
+        {
+          name = "ICON_WATER_DROP",
+          value = 26,
+          description = ""
+        },
+        {
+          name = "ICON_COLOR_PICKER",
+          value = 27,
+          description = ""
+        },
+        {
+          name = "ICON_RUBBER",
+          value = 28,
+          description = ""
+        },
+        {
+          name = "ICON_COLOR_BUCKET",
+          value = 29,
+          description = ""
+        },
+        {
+          name = "ICON_TEXT_T",
+          value = 30,
+          description = ""
+        },
+        {
+          name = "ICON_TEXT_A",
+          value = 31,
+          description = ""
+        },
+        {
+          name = "ICON_SCALE",
+          value = 32,
+          description = ""
+        },
+        {
+          name = "ICON_RESIZE",
+          value = 33,
+          description = ""
+        },
+        {
+          name = "ICON_FILTER_POINT",
+          value = 34,
+          description = ""
+        },
+        {
+          name = "ICON_FILTER_BILINEAR",
+          value = 35,
+          description = ""
+        },
+        {
+          name = "ICON_CROP",
+          value = 36,
+          description = ""
+        },
+        {
+          name = "ICON_CROP_ALPHA",
+          value = 37,
+          description = ""
+        },
+        {
+          name = "ICON_SQUARE_TOGGLE",
+          value = 38,
+          description = ""
+        },
+        {
+          name = "ICON_SYMMETRY",
+          value = 39,
+          description = ""
+        },
+        {
+          name = "ICON_SYMMETRY_HORIZONTAL",
+          value = 40,
+          description = ""
+        },
+        {
+          name = "ICON_SYMMETRY_VERTICAL",
+          value = 41,
+          description = ""
+        },
+        {
+          name = "ICON_LENS",
+          value = 42,
+          description = ""
+        },
+        {
+          name = "ICON_LENS_BIG",
+          value = 43,
+          description = ""
+        },
+        {
+          name = "ICON_EYE_ON",
+          value = 44,
+          description = ""
+        },
+        {
+          name = "ICON_EYE_OFF",
+          value = 45,
+          description = ""
+        },
+        {
+          name = "ICON_FILTER_TOP",
+          value = 46,
+          description = ""
+        },
+        {
+          name = "ICON_FILTER",
+          value = 47,
+          description = ""
+        },
+        {
+          name = "ICON_TARGET_POINT",
+          value = 48,
+          description = ""
+        },
+        {
+          name = "ICON_TARGET_SMALL",
+          value = 49,
+          description = ""
+        },
+        {
+          name = "ICON_TARGET_BIG",
+          value = 50,
+          description = ""
+        },
+        {
+          name = "ICON_TARGET_MOVE",
+          value = 51,
+          description = ""
+        },
+        {
+          name = "ICON_CURSOR_MOVE",
+          value = 52,
+          description = ""
+        },
+        {
+          name = "ICON_CURSOR_SCALE",
+          value = 53,
+          description = ""
+        },
+        {
+          name = "ICON_CURSOR_SCALE_RIGHT",
+          value = 54,
+          description = ""
+        },
+        {
+          name = "ICON_CURSOR_SCALE_LEFT",
+          value = 55,
+          description = ""
+        },
+        {
+          name = "ICON_UNDO",
+          value = 56,
+          description = ""
+        },
+        {
+          name = "ICON_REDO",
+          value = 57,
+          description = ""
+        },
+        {
+          name = "ICON_REREDO",
+          value = 58,
+          description = ""
+        },
+        {
+          name = "ICON_MUTATE",
+          value = 59,
+          description = ""
+        },
+        {
+          name = "ICON_ROTATE",
+          value = 60,
+          description = ""
+        },
+        {
+          name = "ICON_REPEAT",
+          value = 61,
+          description = ""
+        },
+        {
+          name = "ICON_SHUFFLE",
+          value = 62,
+          description = ""
+        },
+        {
+          name = "ICON_EMPTYBOX",
+          value = 63,
+          description = ""
+        },
+        {
+          name = "ICON_TARGET",
+          value = 64,
+          description = ""
+        },
+        {
+          name = "ICON_TARGET_SMALL_FILL",
+          value = 65,
+          description = ""
+        },
+        {
+          name = "ICON_TARGET_BIG_FILL",
+          value = 66,
+          description = ""
+        },
+        {
+          name = "ICON_TARGET_MOVE_FILL",
+          value = 67,
+          description = ""
+        },
+        {
+          name = "ICON_CURSOR_MOVE_FILL",
+          value = 68,
+          description = ""
+        },
+        {
+          name = "ICON_CURSOR_SCALE_FILL",
+          value = 69,
+          description = ""
+        },
+        {
+          name = "ICON_CURSOR_SCALE_RIGHT_FILL",
+          value = 70,
+          description = ""
+        },
+        {
+          name = "ICON_CURSOR_SCALE_LEFT_FILL",
+          value = 71,
+          description = ""
+        },
+        {
+          name = "ICON_UNDO_FILL",
+          value = 72,
+          description = ""
+        },
+        {
+          name = "ICON_REDO_FILL",
+          value = 73,
+          description = ""
+        },
+        {
+          name = "ICON_REREDO_FILL",
+          value = 74,
+          description = ""
+        },
+        {
+          name = "ICON_MUTATE_FILL",
+          value = 75,
+          description = ""
+        },
+        {
+          name = "ICON_ROTATE_FILL",
+          value = 76,
+          description = ""
+        },
+        {
+          name = "ICON_REPEAT_FILL",
+          value = 77,
+          description = ""
+        },
+        {
+          name = "ICON_SHUFFLE_FILL",
+          value = 78,
+          description = ""
+        },
+        {
+          name = "ICON_EMPTYBOX_SMALL",
+          value = 79,
+          description = ""
+        },
+        {
+          name = "ICON_BOX",
+          value = 80,
+          description = ""
+        },
+        {
+          name = "ICON_BOX_TOP",
+          value = 81,
+          description = ""
+        },
+        {
+          name = "ICON_BOX_TOP_RIGHT",
+          value = 82,
+          description = ""
+        },
+        {
+          name = "ICON_BOX_RIGHT",
+          value = 83,
+          description = ""
+        },
+        {
+          name = "ICON_BOX_BOTTOM_RIGHT",
+          value = 84,
+          description = ""
+        },
+        {
+          name = "ICON_BOX_BOTTOM",
+          value = 85,
+          description = ""
+        },
+        {
+          name = "ICON_BOX_BOTTOM_LEFT",
+          value = 86,
+          description = ""
+        },
+        {
+          name = "ICON_BOX_LEFT",
+          value = 87,
+          description = ""
+        },
+        {
+          name = "ICON_BOX_TOP_LEFT",
+          value = 88,
+          description = ""
+        },
+        {
+          name = "ICON_BOX_CENTER",
+          value = 89,
+          description = ""
+        },
+        {
+          name = "ICON_BOX_CIRCLE_MASK",
+          value = 90,
+          description = ""
+        },
+        {
+          name = "ICON_POT",
+          value = 91,
+          description = ""
+        },
+        {
+          name = "ICON_ALPHA_MULTIPLY",
+          value = 92,
+          description = ""
+        },
+        {
+          name = "ICON_ALPHA_CLEAR",
+          value = 93,
+          description = ""
+        },
+        {
+          name = "ICON_DITHERING",
+          value = 94,
+          description = ""
+        },
+        {
+          name = "ICON_MIPMAPS",
+          value = 95,
+          description = ""
+        },
+        {
+          name = "ICON_BOX_GRID",
+          value = 96,
+          description = ""
+        },
+        {
+          name = "ICON_GRID",
+          value = 97,
+          description = ""
+        },
+        {
+          name = "ICON_BOX_CORNERS_SMALL",
+          value = 98,
+          description = ""
+        },
+        {
+          name = "ICON_BOX_CORNERS_BIG",
+          value = 99,
+          description = ""
+        },
+        {
+          name = "ICON_FOUR_BOXES",
+          value = 100,
+          description = ""
+        },
+        {
+          name = "ICON_GRID_FILL",
+          value = 101,
+          description = ""
+        },
+        {
+          name = "ICON_BOX_MULTISIZE",
+          value = 102,
+          description = ""
+        },
+        {
+          name = "ICON_ZOOM_SMALL",
+          value = 103,
+          description = ""
+        },
+        {
+          name = "ICON_ZOOM_MEDIUM",
+          value = 104,
+          description = ""
+        },
+        {
+          name = "ICON_ZOOM_BIG",
+          value = 105,
+          description = ""
+        },
+        {
+          name = "ICON_ZOOM_ALL",
+          value = 106,
+          description = ""
+        },
+        {
+          name = "ICON_ZOOM_CENTER",
+          value = 107,
+          description = ""
+        },
+        {
+          name = "ICON_BOX_DOTS_SMALL",
+          value = 108,
+          description = ""
+        },
+        {
+          name = "ICON_BOX_DOTS_BIG",
+          value = 109,
+          description = ""
+        },
+        {
+          name = "ICON_BOX_CONCENTRIC",
+          value = 110,
+          description = ""
+        },
+        {
+          name = "ICON_BOX_GRID_BIG",
+          value = 111,
+          description = ""
+        },
+        {
+          name = "ICON_OK_TICK",
+          value = 112,
+          description = ""
+        },
+        {
+          name = "ICON_CROSS",
+          value = 113,
+          description = ""
+        },
+        {
+          name = "ICON_ARROW_LEFT",
+          value = 114,
+          description = ""
+        },
+        {
+          name = "ICON_ARROW_RIGHT",
+          value = 115,
+          description = ""
+        },
+        {
+          name = "ICON_ARROW_DOWN",
+          value = 116,
+          description = ""
+        },
+        {
+          name = "ICON_ARROW_UP",
+          value = 117,
+          description = ""
+        },
+        {
+          name = "ICON_ARROW_LEFT_FILL",
+          value = 118,
+          description = ""
+        },
+        {
+          name = "ICON_ARROW_RIGHT_FILL",
+          value = 119,
+          description = ""
+        },
+        {
+          name = "ICON_ARROW_DOWN_FILL",
+          value = 120,
+          description = ""
+        },
+        {
+          name = "ICON_ARROW_UP_FILL",
+          value = 121,
+          description = ""
+        },
+        {
+          name = "ICON_AUDIO",
+          value = 122,
+          description = ""
+        },
+        {
+          name = "ICON_FX",
+          value = 123,
+          description = ""
+        },
+        {
+          name = "ICON_WAVE",
+          value = 124,
+          description = ""
+        },
+        {
+          name = "ICON_WAVE_SINUS",
+          value = 125,
+          description = ""
+        },
+        {
+          name = "ICON_WAVE_SQUARE",
+          value = 126,
+          description = ""
+        },
+        {
+          name = "ICON_WAVE_TRIANGULAR",
+          value = 127,
+          description = ""
+        },
+        {
+          name = "ICON_CROSS_SMALL",
+          value = 128,
+          description = ""
+        },
+        {
+          name = "ICON_PLAYER_PREVIOUS",
+          value = 129,
+          description = ""
+        },
+        {
+          name = "ICON_PLAYER_PLAY_BACK",
+          value = 130,
+          description = ""
+        },
+        {
+          name = "ICON_PLAYER_PLAY",
+          value = 131,
+          description = ""
+        },
+        {
+          name = "ICON_PLAYER_PAUSE",
+          value = 132,
+          description = ""
+        },
+        {
+          name = "ICON_PLAYER_STOP",
+          value = 133,
+          description = ""
+        },
+        {
+          name = "ICON_PLAYER_NEXT",
+          value = 134,
+          description = ""
+        },
+        {
+          name = "ICON_PLAYER_RECORD",
+          value = 135,
+          description = ""
+        },
+        {
+          name = "ICON_MAGNET",
+          value = 136,
+          description = ""
+        },
+        {
+          name = "ICON_LOCK_CLOSE",
+          value = 137,
+          description = ""
+        },
+        {
+          name = "ICON_LOCK_OPEN",
+          value = 138,
+          description = ""
+        },
+        {
+          name = "ICON_CLOCK",
+          value = 139,
+          description = ""
+        },
+        {
+          name = "ICON_TOOLS",
+          value = 140,
+          description = ""
+        },
+        {
+          name = "ICON_GEAR",
+          value = 141,
+          description = ""
+        },
+        {
+          name = "ICON_GEAR_BIG",
+          value = 142,
+          description = ""
+        },
+        {
+          name = "ICON_BIN",
+          value = 143,
+          description = ""
+        },
+        {
+          name = "ICON_HAND_POINTER",
+          value = 144,
+          description = ""
+        },
+        {
+          name = "ICON_LASER",
+          value = 145,
+          description = ""
+        },
+        {
+          name = "ICON_COIN",
+          value = 146,
+          description = ""
+        },
+        {
+          name = "ICON_EXPLOSION",
+          value = 147,
+          description = ""
+        },
+        {
+          name = "ICON_1UP",
+          value = 148,
+          description = ""
+        },
+        {
+          name = "ICON_PLAYER",
+          value = 149,
+          description = ""
+        },
+        {
+          name = "ICON_PLAYER_JUMP",
+          value = 150,
+          description = ""
+        },
+        {
+          name = "ICON_KEY",
+          value = 151,
+          description = ""
+        },
+        {
+          name = "ICON_DEMON",
+          value = 152,
+          description = ""
+        },
+        {
+          name = "ICON_TEXT_POPUP",
+          value = 153,
+          description = ""
+        },
+        {
+          name = "ICON_GEAR_EX",
+          value = 154,
+          description = ""
+        },
+        {
+          name = "ICON_CRACK",
+          value = 155,
+          description = ""
+        },
+        {
+          name = "ICON_CRACK_POINTS",
+          value = 156,
+          description = ""
+        },
+        {
+          name = "ICON_STAR",
+          value = 157,
+          description = ""
+        },
+        {
+          name = "ICON_DOOR",
+          value = 158,
+          description = ""
+        },
+        {
+          name = "ICON_EXIT",
+          value = 159,
+          description = ""
+        },
+        {
+          name = "ICON_MODE_2D",
+          value = 160,
+          description = ""
+        },
+        {
+          name = "ICON_MODE_3D",
+          value = 161,
+          description = ""
+        },
+        {
+          name = "ICON_CUBE",
+          value = 162,
+          description = ""
+        },
+        {
+          name = "ICON_CUBE_FACE_TOP",
+          value = 163,
+          description = ""
+        },
+        {
+          name = "ICON_CUBE_FACE_LEFT",
+          value = 164,
+          description = ""
+        },
+        {
+          name = "ICON_CUBE_FACE_FRONT",
+          value = 165,
+          description = ""
+        },
+        {
+          name = "ICON_CUBE_FACE_BOTTOM",
+          value = 166,
+          description = ""
+        },
+        {
+          name = "ICON_CUBE_FACE_RIGHT",
+          value = 167,
+          description = ""
+        },
+        {
+          name = "ICON_CUBE_FACE_BACK",
+          value = 168,
+          description = ""
+        },
+        {
+          name = "ICON_CAMERA",
+          value = 169,
+          description = ""
+        },
+        {
+          name = "ICON_SPECIAL",
+          value = 170,
+          description = ""
+        },
+        {
+          name = "ICON_LINK_NET",
+          value = 171,
+          description = ""
+        },
+        {
+          name = "ICON_LINK_BOXES",
+          value = 172,
+          description = ""
+        },
+        {
+          name = "ICON_LINK_MULTI",
+          value = 173,
+          description = ""
+        },
+        {
+          name = "ICON_LINK",
+          value = 174,
+          description = ""
+        },
+        {
+          name = "ICON_LINK_BROKE",
+          value = 175,
+          description = ""
+        },
+        {
+          name = "ICON_TEXT_NOTES",
+          value = 176,
+          description = ""
+        },
+        {
+          name = "ICON_NOTEBOOK",
+          value = 177,
+          description = ""
+        },
+        {
+          name = "ICON_SUITCASE",
+          value = 178,
+          description = ""
+        },
+        {
+          name = "ICON_SUITCASE_ZIP",
+          value = 179,
+          description = ""
+        },
+        {
+          name = "ICON_MAILBOX",
+          value = 180,
+          description = ""
+        },
+        {
+          name = "ICON_MONITOR",
+          value = 181,
+          description = ""
+        },
+        {
+          name = "ICON_PRINTER",
+          value = 182,
+          description = ""
+        },
+        {
+          name = "ICON_PHOTO_CAMERA",
+          value = 183,
+          description = ""
+        },
+        {
+          name = "ICON_PHOTO_CAMERA_FLASH",
+          value = 184,
+          description = ""
+        },
+        {
+          name = "ICON_HOUSE",
+          value = 185,
+          description = ""
+        },
+        {
+          name = "ICON_HEART",
+          value = 186,
+          description = ""
+        },
+        {
+          name = "ICON_CORNER",
+          value = 187,
+          description = ""
+        },
+        {
+          name = "ICON_VERTICAL_BARS",
+          value = 188,
+          description = ""
+        },
+        {
+          name = "ICON_VERTICAL_BARS_FILL",
+          value = 189,
+          description = ""
+        },
+        {
+          name = "ICON_LIFE_BARS",
+          value = 190,
+          description = ""
+        },
+        {
+          name = "ICON_INFO",
+          value = 191,
+          description = ""
+        },
+        {
+          name = "ICON_CROSSLINE",
+          value = 192,
+          description = ""
+        },
+        {
+          name = "ICON_HELP",
+          value = 193,
+          description = ""
+        },
+        {
+          name = "ICON_FILETYPE_ALPHA",
+          value = 194,
+          description = ""
+        },
+        {
+          name = "ICON_FILETYPE_HOME",
+          value = 195,
+          description = ""
+        },
+        {
+          name = "ICON_LAYERS_VISIBLE",
+          value = 196,
+          description = ""
+        },
+        {
+          name = "ICON_LAYERS",
+          value = 197,
+          description = ""
+        },
+        {
+          name = "ICON_WINDOW",
+          value = 198,
+          description = ""
+        },
+        {
+          name = "ICON_HIDPI",
+          value = 199,
+          description = ""
+        },
+        {
+          name = "ICON_FILETYPE_BINARY",
+          value = 200,
+          description = ""
+        },
+        {
+          name = "ICON_HEX",
+          value = 201,
+          description = ""
+        },
+        {
+          name = "ICON_SHIELD",
+          value = 202,
+          description = ""
+        },
+        {
+          name = "ICON_FILE_NEW",
+          value = 203,
+          description = ""
+        },
+        {
+          name = "ICON_FOLDER_ADD",
+          value = 204,
+          description = ""
+        },
+        {
+          name = "ICON_ALARM",
+          value = 205,
+          description = ""
+        },
+        {
+          name = "ICON_206",
+          value = 206,
+          description = ""
+        },
+        {
+          name = "ICON_207",
+          value = 207,
+          description = ""
+        },
+        {
+          name = "ICON_208",
+          value = 208,
+          description = ""
+        },
+        {
+          name = "ICON_209",
+          value = 209,
+          description = ""
+        },
+        {
+          name = "ICON_210",
+          value = 210,
+          description = ""
+        },
+        {
+          name = "ICON_211",
+          value = 211,
+          description = ""
+        },
+        {
+          name = "ICON_212",
+          value = 212,
+          description = ""
+        },
+        {
+          name = "ICON_213",
+          value = 213,
+          description = ""
+        },
+        {
+          name = "ICON_214",
+          value = 214,
+          description = ""
+        },
+        {
+          name = "ICON_215",
+          value = 215,
+          description = ""
+        },
+        {
+          name = "ICON_216",
+          value = 216,
+          description = ""
+        },
+        {
+          name = "ICON_217",
+          value = 217,
+          description = ""
+        },
+        {
+          name = "ICON_218",
+          value = 218,
+          description = ""
+        },
+        {
+          name = "ICON_219",
+          value = 219,
+          description = ""
+        },
+        {
+          name = "ICON_220",
+          value = 220,
+          description = ""
+        },
+        {
+          name = "ICON_221",
+          value = 221,
+          description = ""
+        },
+        {
+          name = "ICON_222",
+          value = 222,
+          description = ""
+        },
+        {
+          name = "ICON_223",
+          value = 223,
+          description = ""
+        },
+        {
+          name = "ICON_224",
+          value = 224,
+          description = ""
+        },
+        {
+          name = "ICON_225",
+          value = 225,
+          description = ""
+        },
+        {
+          name = "ICON_226",
+          value = 226,
+          description = ""
+        },
+        {
+          name = "ICON_227",
+          value = 227,
+          description = ""
+        },
+        {
+          name = "ICON_228",
+          value = 228,
+          description = ""
+        },
+        {
+          name = "ICON_229",
+          value = 229,
+          description = ""
+        },
+        {
+          name = "ICON_230",
+          value = 230,
+          description = ""
+        },
+        {
+          name = "ICON_231",
+          value = 231,
+          description = ""
+        },
+        {
+          name = "ICON_232",
+          value = 232,
+          description = ""
+        },
+        {
+          name = "ICON_233",
+          value = 233,
+          description = ""
+        },
+        {
+          name = "ICON_234",
+          value = 234,
+          description = ""
+        },
+        {
+          name = "ICON_235",
+          value = 235,
+          description = ""
+        },
+        {
+          name = "ICON_236",
+          value = 236,
+          description = ""
+        },
+        {
+          name = "ICON_237",
+          value = 237,
+          description = ""
+        },
+        {
+          name = "ICON_238",
+          value = 238,
+          description = ""
+        },
+        {
+          name = "ICON_239",
+          value = 239,
+          description = ""
+        },
+        {
+          name = "ICON_240",
+          value = 240,
+          description = ""
+        },
+        {
+          name = "ICON_241",
+          value = 241,
+          description = ""
+        },
+        {
+          name = "ICON_242",
+          value = 242,
+          description = ""
+        },
+        {
+          name = "ICON_243",
+          value = 243,
+          description = ""
+        },
+        {
+          name = "ICON_244",
+          value = 244,
+          description = ""
+        },
+        {
+          name = "ICON_245",
+          value = 245,
+          description = ""
+        },
+        {
+          name = "ICON_246",
+          value = 246,
+          description = ""
+        },
+        {
+          name = "ICON_247",
+          value = 247,
+          description = ""
+        },
+        {
+          name = "ICON_248",
+          value = 248,
+          description = ""
+        },
+        {
+          name = "ICON_249",
+          value = 249,
+          description = ""
+        },
+        {
+          name = "ICON_250",
+          value = 250,
+          description = ""
+        },
+        {
+          name = "ICON_251",
+          value = 251,
+          description = ""
+        },
+        {
+          name = "ICON_252",
+          value = 252,
+          description = ""
+        },
+        {
+          name = "ICON_253",
+          value = 253,
+          description = ""
+        },
+        {
+          name = "ICON_254",
+          value = 254,
+          description = ""
+        },
+        {
+          name = "ICON_255",
+          value = 255,
+          description = ""
         }
       }
     }
@@ -842,7 +2120,8 @@ return {
       description = "Panel control, useful to group controls",
       returnType = "void",
       params = {
-        {type = "Rectangle", name = "bounds"}
+        {type = "Rectangle", name = "bounds"},
+        {type = "const char *", name = "text"}
       }
     },
     {
@@ -851,6 +2130,7 @@ return {
       returnType = "Rectangle",
       params = {
         {type = "Rectangle", name = "bounds"},
+        {type = "const char *", name = "text"},
         {type = "Rectangle", name = "content"},
         {type = "Vector2 *", name = "scroll"}
       }
@@ -1039,22 +2319,12 @@ return {
       }
     },
     {
-      name = "GuiScrollBar",
-      description = "Scroll Bar control",
-      returnType = "int",
-      params = {
-        {type = "Rectangle", name = "bounds"},
-        {type = "int", name = "value"},
-        {type = "int", name = "minValue"},
-        {type = "int", name = "maxValue"}
-      }
-    },
-    {
       name = "GuiGrid",
-      description = "Grid control",
+      description = "Grid control, returns mouse cell position",
       returnType = "Vector2",
       params = {
         {type = "Rectangle", name = "bounds"},
+        {type = "const char *", name = "text"},
         {type = "float", name = "spacing"},
         {type = "int", name = "subdivs"}
       }
@@ -1096,14 +2366,16 @@ return {
     },
     {
       name = "GuiTextInputBox",
-      description = "Text Input Box control, ask for text",
+      description = "Text Input Box control, ask for text, supports secret",
       returnType = "int",
       params = {
         {type = "Rectangle", name = "bounds"},
         {type = "const char *", name = "title"},
         {type = "const char *", name = "message"},
         {type = "const char *", name = "buttons"},
-        {type = "char *", name = "text"}
+        {type = "char *", name = "text"},
+        {type = "int", name = "textMaxSize"},
+        {type = "int *", name = "secretViewActive"}
       }
     },
     {
@@ -1112,6 +2384,7 @@ return {
       returnType = "Color",
       params = {
         {type = "Rectangle", name = "bounds"},
+        {type = "const char *", name = "text"},
         {type = "Color", name = "color"}
       }
     },
@@ -1121,6 +2394,7 @@ return {
       returnType = "Color",
       params = {
         {type = "Rectangle", name = "bounds"},
+        {type = "const char *", name = "text"},
         {type = "Color", name = "color"}
       }
     },
@@ -1130,6 +2404,7 @@ return {
       returnType = "float",
       params = {
         {type = "Rectangle", name = "bounds"},
+        {type = "const char *", name = "text"},
         {type = "float", name = "alpha"}
       }
     },
@@ -1139,6 +2414,7 @@ return {
       returnType = "float",
       params = {
         {type = "Rectangle", name = "bounds"},
+        {type = "const char *", name = "text"},
         {type = "float", name = "value"}
       }
     },
@@ -1154,22 +2430,6 @@ return {
       name = "GuiLoadStyleDefault",
       description = "Load style default over global style",
       returnType = "void"
-    },
-    {
-      name = "LoadGuiStyle",
-      description = "Load style from file (.rgs)",
-      returnType = "GuiStyle",
-      params = {
-        {type = "const char *", name = "fileName"}
-      }
-    },
-    {
-      name = "UnloadGuiStyle",
-      description = "Unload style",
-      returnType = "void",
-      params = {
-        {type = "GuiStyle", name = "style"}
-      }
     },
     {
       name = "GuiIconText",
@@ -1212,6 +2472,14 @@ return {
       params = {
         {type = "int", name = "iconId"},
         {type = "unsigned int *", name = "data"}
+      }
+    },
+    {
+      name = "GuiSetIconScale",
+      description = "Set icon scale (1 by default)",
+      returnType = "void",
+      params = {
+        {type = "unsigned int", name = "scale"}
       }
     },
     {

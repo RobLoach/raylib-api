@@ -1,14 +1,14 @@
 return {
   defines = {
     {
-      name = "EASINGS_H",
+      name = "REASINGS_H",
       type = "GUARD",
       value = "",
       description = ""
     },
     {
-      name = "EASINGS_STATIC_INLINE",
-      type = "UNKNOWN",
+      name = "REASINGS_STATIC_INLINE",
+      type = "GUARD",
       value = "",
       description = "NOTE: By default, compile functions as static inline"
     },
@@ -36,7 +36,7 @@ return {
   functions = {
     {
       name = "EaseLinearNone",
-      description = "",
+      description = "Ease: Linear",
       returnType = "float",
       params = {
         {type = "float", name = "t"},
@@ -47,7 +47,7 @@ return {
     },
     {
       name = "EaseLinearIn",
-      description = "",
+      description = "Ease: Linear In",
       returnType = "float",
       params = {
         {type = "float", name = "t"},
@@ -58,7 +58,7 @@ return {
     },
     {
       name = "EaseLinearOut",
-      description = "",
+      description = "Ease: Linear Out",
       returnType = "float",
       params = {
         {type = "float", name = "t"},
@@ -69,7 +69,7 @@ return {
     },
     {
       name = "EaseLinearInOut",
-      description = "",
+      description = "Ease: Linear In Out",
       returnType = "float",
       params = {
         {type = "float", name = "t"},
@@ -80,7 +80,7 @@ return {
     },
     {
       name = "EaseSineIn",
-      description = "",
+      description = "Ease: Sine In",
       returnType = "float",
       params = {
         {type = "float", name = "t"},
@@ -91,7 +91,7 @@ return {
     },
     {
       name = "EaseSineOut",
-      description = "",
+      description = "Ease: Sine Out",
       returnType = "float",
       params = {
         {type = "float", name = "t"},
@@ -102,7 +102,7 @@ return {
     },
     {
       name = "EaseSineInOut",
-      description = "",
+      description = "Ease: Sine Out",
       returnType = "float",
       params = {
         {type = "float", name = "t"},
@@ -113,7 +113,7 @@ return {
     },
     {
       name = "EaseCircIn",
-      description = "",
+      description = "Ease: Circular In",
       returnType = "float",
       params = {
         {type = "float", name = "t"},
@@ -124,7 +124,7 @@ return {
     },
     {
       name = "EaseCircOut",
-      description = "",
+      description = "Ease: Circular Out",
       returnType = "float",
       params = {
         {type = "float", name = "t"},
@@ -135,7 +135,7 @@ return {
     },
     {
       name = "EaseCircInOut",
-      description = "",
+      description = "Ease: Circular In Out",
       returnType = "float",
       params = {
         {type = "float", name = "t"},
@@ -146,7 +146,7 @@ return {
     },
     {
       name = "EaseCubicIn",
-      description = "",
+      description = "Ease: Cubic In",
       returnType = "float",
       params = {
         {type = "float", name = "t"},
@@ -157,7 +157,7 @@ return {
     },
     {
       name = "EaseCubicOut",
-      description = "",
+      description = "Ease: Cubic Out",
       returnType = "float",
       params = {
         {type = "float", name = "t"},
@@ -168,7 +168,7 @@ return {
     },
     {
       name = "EaseCubicInOut",
-      description = "",
+      description = "Ease: Cubic In Out",
       returnType = "float",
       params = {
         {type = "float", name = "t"},
@@ -179,7 +179,7 @@ return {
     },
     {
       name = "EaseQuadIn",
-      description = "",
+      description = "Ease: Quadratic In",
       returnType = "float",
       params = {
         {type = "float", name = "t"},
@@ -190,7 +190,7 @@ return {
     },
     {
       name = "EaseQuadOut",
-      description = "",
+      description = "Ease: Quadratic Out",
       returnType = "float",
       params = {
         {type = "float", name = "t"},
@@ -201,7 +201,7 @@ return {
     },
     {
       name = "EaseQuadInOut",
-      description = "",
+      description = "Ease: Quadratic In Out",
       returnType = "float",
       params = {
         {type = "float", name = "t"},
@@ -212,7 +212,7 @@ return {
     },
     {
       name = "EaseExpoIn",
-      description = "",
+      description = "Ease: Exponential In",
       returnType = "float",
       params = {
         {type = "float", name = "t"},
@@ -223,7 +223,7 @@ return {
     },
     {
       name = "EaseExpoOut",
-      description = "",
+      description = "Ease: Exponential Out",
       returnType = "float",
       params = {
         {type = "float", name = "t"},
@@ -234,7 +234,7 @@ return {
     },
     {
       name = "EaseExpoInOut",
-      description = "",
+      description = "Ease: Exponential In Out",
       returnType = "float",
       params = {
         {type = "float", name = "t"},
@@ -245,7 +245,7 @@ return {
     },
     {
       name = "EaseBackIn",
-      description = "",
+      description = "Ease: Back In",
       returnType = "float",
       params = {
         {type = "float", name = "t"},
@@ -256,7 +256,7 @@ return {
     },
     {
       name = "EaseBackOut",
-      description = "",
+      description = "Ease: Back Out",
       returnType = "float",
       params = {
         {type = "float", name = "t"},
@@ -267,7 +267,7 @@ return {
     },
     {
       name = "EaseBackInOut",
-      description = "",
+      description = "Ease: Back In Out",
       returnType = "float",
       params = {
         {type = "float", name = "t"},
@@ -278,7 +278,7 @@ return {
     },
     {
       name = "EaseBounceOut",
-      description = "",
+      description = "Ease: Bounce Out",
       returnType = "float",
       params = {
         {type = "float", name = "t"},
@@ -289,7 +289,7 @@ return {
     },
     {
       name = "EaseBounceIn",
-      description = "",
+      description = "Ease: Bounce In",
       returnType = "float",
       params = {
         {type = "float", name = "t"},
@@ -300,7 +300,7 @@ return {
     },
     {
       name = "EaseBounceInOut",
-      description = "",
+      description = "Ease: Bounce In Out",
       returnType = "float",
       params = {
         {type = "float", name = "t"},
@@ -311,7 +311,7 @@ return {
     },
     {
       name = "EaseElasticIn",
-      description = "",
+      description = "Ease: Elastic In",
       returnType = "float",
       params = {
         {type = "float", name = "t"},
@@ -322,7 +322,7 @@ return {
     },
     {
       name = "EaseElasticOut",
-      description = "",
+      description = "Ease: Elastic Out",
       returnType = "float",
       params = {
         {type = "float", name = "t"},
@@ -333,7 +333,7 @@ return {
     },
     {
       name = "EaseElasticInOut",
-      description = "",
+      description = "Ease: Elastic In Out",
       returnType = "float",
       params = {
         {type = "float", name = "t"},

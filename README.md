@@ -2,14 +2,13 @@
 
 Exports of the [raylib](https://github.com/raysan5/raylib/) API through [raylib's parser](https://github.com/raysan5/raylib/tree/master/parser).
 
-**Target Version:** 4.0.0
+**Target Version:** 4.2.0
 
 ## Features
 
 Versioned exports of the latest raylib APIs through the latest version of the [parser](https://github.com/raysan5/raylib/tree/master/parser):
 
-- easings
-- physac
+- reasings
 - raygui
 - raylib
 - raymath

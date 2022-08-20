@@ -859,7 +859,7 @@
         {
           "name": "RL_TEXTURE_FILTER_POINT",
           "value": 0,
-          "description": "No filter, just pixel aproximation"
+          "description": "No filter, just pixel approximation"
         },
         {
           "name": "RL_TEXTURE_FILTER_BILINEAR",
@@ -918,9 +918,14 @@
           "description": "Blend textures subtracting colors (alternative)"
         },
         {
-          "name": "RL_BLEND_CUSTOM",
+          "name": "RL_BLEND_ALPHA_PREMULTIPLY",
           "value": 5,
-          "description": "Belnd textures using custom src/dst factors (use SetBlendModeCustom())"
+          "description": "Blend premultiplied textures considering alpha"
+        },
+        {
+          "name": "RL_BLEND_CUSTOM",
+          "value": 6,
+          "description": "Blend textures using custom src/dst factors (use rlSetBlendFactors())"
         }
       ]
     },
@@ -1913,9 +1918,31 @@
       "returnType": "int"
     },
     {
+      "name": "rlSetFramebufferWidth",
+      "description": "Set current framebuffer width",
+      "returnType": "void",
+      "params": [
+        {
+          "type": "int",
+          "name": "width"
+        }
+      ]
+    },
+    {
       "name": "rlGetFramebufferWidth",
       "description": "Get default framebuffer width",
       "returnType": "int"
+    },
+    {
+      "name": "rlSetFramebufferHeight",
+      "description": "Set current framebuffer height",
+      "returnType": "void",
+      "params": [
+        {
+          "type": "int",
+          "name": "height"
+        }
+      ]
     },
     {
       "name": "rlGetFramebufferHeight",
@@ -2023,7 +2050,7 @@
       "returnType": "unsigned int",
       "params": [
         {
-          "type": "void *",
+          "type": "const void *",
           "name": "buffer"
         },
         {
@@ -2042,7 +2069,7 @@
       "returnType": "unsigned int",
       "params": [
         {
-          "type": "void *",
+          "type": "const void *",
           "name": "buffer"
         },
         {
@@ -2065,7 +2092,30 @@
           "name": "bufferId"
         },
         {
-          "type": "void *",
+          "type": "const void *",
+          "name": "data"
+        },
+        {
+          "type": "int",
+          "name": "dataSize"
+        },
+        {
+          "type": "int",
+          "name": "offset"
+        }
+      ]
+    },
+    {
+      "name": "rlUpdateVertexBufferElements",
+      "description": "Update vertex buffer elements with new data",
+      "returnType": "void",
+      "params": [
+        {
+          "type": "unsigned int",
+          "name": "id"
+        },
+        {
+          "type": "const void *",
           "name": "data"
         },
         {
@@ -2126,7 +2176,7 @@
           "name": "stride"
         },
         {
-          "type": "void *",
+          "type": "const void *",
           "name": "pointer"
         }
       ]
@@ -2198,7 +2248,7 @@
           "name": "count"
         },
         {
-          "type": "void *",
+          "type": "const void *",
           "name": "buffer"
         }
       ]
@@ -2236,7 +2286,7 @@
           "name": "count"
         },
         {
-          "type": "void *",
+          "type": "const void *",
           "name": "buffer"
         },
         {
@@ -2251,7 +2301,7 @@
       "returnType": "unsigned int",
       "params": [
         {
-          "type": "void *",
+          "type": "const void *",
           "name": "data"
         },
         {
@@ -2297,7 +2347,7 @@
       "returnType": "unsigned int",
       "params": [
         {
-          "type": "void *",
+          "type": "const void *",
           "name": "data"
         },
         {
@@ -2355,15 +2405,15 @@
           "name": "format"
         },
         {
-          "type": "int *",
+          "type": "unsigned int *",
           "name": "glInternalFormat"
         },
         {
-          "type": "int *",
+          "type": "unsigned int *",
           "name": "glFormat"
         },
         {
-          "type": "int *",
+          "type": "unsigned int *",
           "name": "glType"
         }
       ]
