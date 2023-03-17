@@ -25,7 +25,10 @@ vendor/rmem:
 vendor/raygui:
 	git clone https://github.com/raysan5/raygui.git --depth 1 vendor/raygui
 
-vendor: vendor/raylib-parser vendor/raylib vendor/reasings vendor/rmem vendor/raygui
+vendor/rres:
+	git clone https://github.com/raysan5/rres.git --depth 1 vendor/rres
+
+vendor: vendor/raylib-parser vendor/raylib vendor/reasings vendor/rmem vendor/raygui vendor/rres
 
 $(PARSER): vendor
 	$(MAKE) -C vendor/raylib-parser/parser
@@ -37,6 +40,7 @@ parse: $(PARSER)
 	$(PARSER) -i vendor/reasings/src/reasings.h -o reasings.$(EXTENSION) -f $(FORMAT) -d EASEDEF
 	$(PARSER) -i vendor/raygui/src/raygui.h -o raygui.$(EXTENSION) -f $(FORMAT) -d RAYGUIAPI -t "RAYGUI IMPLEMENTATION"
 	$(PARSER) -i vendor/rmem/src/rmem.h -o rmem.$(EXTENSION) -f $(FORMAT) -d RMEMAPI -t "RMEM IMPLEMENTATION"
+	$(PARSER) -i vendor/rres/src/rres.h -o rres.$(EXTENSION) -f $(FORMAT) -d RRESAPI -t "RRES IMPLEMENTATION"
 
 clean:
 	rm -rf vendor

@@ -1,6 +1,6 @@
 {
   "name": "@raylib/api",
-  "version": "4.2.0",
+  "version": "4.2.1",
   "description": "raylib-api: Exports of the raylib API in various file formats.",
   "main": "index.js",
   "scripts": {
