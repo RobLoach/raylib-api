@@ -14,6 +14,7 @@ Versioned exports of the latest raylib APIs through the latest version of the [p
 - raymath
 - rlgl
 - rmem
+- rres
 
 ## Usage
 
