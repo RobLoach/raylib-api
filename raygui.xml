@@ -12,7 +12,7 @@
         <Define name="SCROLLBAR_LEFT_SIDE" type="INT" value="0" desc="" />
         <Define name="SCROLLBAR_RIGHT_SIDE" type="INT" value="1" desc="" />
     </Defines>
-    <Structs count="8">
+    <Structs count="9">
         <Struct name="Vector2" fieldCount="2" desc="Vector2 type">
             <Field type="float" name="x" desc="" />
             <Field type="float" name="y" desc="" />
@@ -41,6 +41,13 @@
             <Field type="int" name="mipmaps" desc="Mipmap levels, 1 by default" />
             <Field type="int" name="format" desc="Data format (PixelFormat type)" />
         </Struct>
+        <Struct name="Image" fieldCount="5" desc="Image, pixel data stored in CPU memory (RAM)">
+            <Field type="void *" name="data" desc="Image raw data" />
+            <Field type="int" name="width" desc="Image base width" />
+            <Field type="int" name="height" desc="Image base height" />
+            <Field type="int" name="mipmaps" desc="Mipmap levels, 1 by default" />
+            <Field type="int" name="format" desc="Data format (PixelFormat type)" />
+        </Struct>
         <Struct name="GlyphInfo" fieldCount="5" desc="GlyphInfo, font characters glyphs info">
             <Field type="int" name="value" desc="Character value (Unicode)" />
             <Field type="int" name="offsetX" desc="Character offset X when drawing" />
@@ -48,12 +55,13 @@
             <Field type="int" name="advanceX" desc="Character advance position X" />
             <Field type="Image" name="image" desc="Character image data" />
         </Struct>
-        <Struct name="Font" fieldCount="5" desc="It should be redesigned to be provided by user">
+        <Struct name="Font" fieldCount="6" desc="It should be redesigned to be provided by user">
             <Field type="int" name="baseSize" desc="Base size (default chars height)" />
-            <Field type="int" name="glyphCount" desc="Number of characters" />
-            <Field type="Texture2D" name="texture" desc="Characters texture atlas" />
-            <Field type="Rectangle *" name="recs" desc="Characters rectangles in texture" />
-            <Field type="GlyphInfo *" name="chars" desc="Characters info data" />
+            <Field type="int" name="glyphCount" desc="Number of glyph characters" />
+            <Field type="int" name="glyphPadding" desc="Padding around the glyph characters" />
+            <Field type="Texture2D" name="texture" desc="Texture atlas containing the glyphs" />
+            <Field type="Rectangle *" name="recs" desc="Rectangles in texture for the glyphs" />
+            <Field type="GlyphInfo *" name="glyphs" desc="Glyphs info data" />
         </Struct>
         <Struct name="GuiStyleProp" fieldCount="3" desc="Style property">
             <Field type="unsigned short" name="controlId" desc="" />
@@ -374,19 +382,19 @@
             <Value name="ICON_FILE_NEW" integer="203" desc="" />
             <Value name="ICON_FOLDER_ADD" integer="204" desc="" />
             <Value name="ICON_ALARM" integer="205" desc="" />
-            <Value name="ICON_206" integer="206" desc="" />
-            <Value name="ICON_207" integer="207" desc="" />
-            <Value name="ICON_208" integer="208" desc="" />
-            <Value name="ICON_209" integer="209" desc="" />
-            <Value name="ICON_210" integer="210" desc="" />
-            <Value name="ICON_211" integer="211" desc="" />
-            <Value name="ICON_212" integer="212" desc="" />
-            <Value name="ICON_213" integer="213" desc="" />
-            <Value name="ICON_214" integer="214" desc="" />
-            <Value name="ICON_215" integer="215" desc="" />
-            <Value name="ICON_216" integer="216" desc="" />
-            <Value name="ICON_217" integer="217" desc="" />
-            <Value name="ICON_218" integer="218" desc="" />
+            <Value name="ICON_CPU" integer="206" desc="" />
+            <Value name="ICON_ROM" integer="207" desc="" />
+            <Value name="ICON_STEP_OVER" integer="208" desc="" />
+            <Value name="ICON_STEP_INTO" integer="209" desc="" />
+            <Value name="ICON_STEP_OUT" integer="210" desc="" />
+            <Value name="ICON_RESTART" integer="211" desc="" />
+            <Value name="ICON_BREAKPOINT_ON" integer="212" desc="" />
+            <Value name="ICON_BREAKPOINT_OFF" integer="213" desc="" />
+            <Value name="ICON_BURGER_MENU" integer="214" desc="" />
+            <Value name="ICON_CASE_SENSITIVE" integer="215" desc="" />
+            <Value name="ICON_REG_EXP" integer="216" desc="" />
+            <Value name="ICON_FOLDER" integer="217" desc="" />
+            <Value name="ICON_FILE" integer="218" desc="" />
             <Value name="ICON_219" integer="219" desc="" />
             <Value name="ICON_220" integer="220" desc="" />
             <Value name="ICON_221" integer="221" desc="" />
@@ -476,6 +484,12 @@
         <Function name="GuiPanel" retType="void" paramCount="2" desc="Panel control, useful to group controls">
             <Param type="Rectangle" name="bounds" desc="" />
             <Param type="const char *" name="text" desc="" />
+        </Function>
+        <Function name="GuiTabBar" retType="int" paramCount="4" desc="Tab Bar control, returns TAB to be closed or -1">
+            <Param type="Rectangle" name="bounds" desc="" />
+            <Param type="const char **" name="text" desc="" />
+            <Param type="int" name="count" desc="" />
+            <Param type="int *" name="active" desc="" />
         </Function>
         <Function name="GuiScrollPanel" retType="Rectangle" paramCount="4" desc="Scroll Panel control">
             <Param type="Rectangle" name="bounds" desc="" />
@@ -641,9 +655,22 @@
         </Function>
         <Function name="GuiLoadStyleDefault" retType="void" paramCount="0" desc="Load style default over global style">
         </Function>
+        <Function name="GuiEnableTooltip" retType="void" paramCount="0" desc="Enable gui tooltips (global state)">
+        </Function>
+        <Function name="GuiDisableTooltip" retType="void" paramCount="0" desc="Disable gui tooltips (global state)">
+        </Function>
+        <Function name="GuiSetTooltip" retType="void" paramCount="1" desc="Set tooltip string">
+            <Param type="const char *" name="tooltip" desc="" />
+        </Function>
         <Function name="GuiIconText" retType="const char *" paramCount="2" desc="Get text with icon id prepended (if supported)">
             <Param type="int" name="iconId" desc="" />
             <Param type="const char *" name="text" desc="" />
+        </Function>
+        <Function name="GuiGetIcons" retType="unsigned int *" paramCount="0" desc="Get raygui icons data pointer">
+        </Function>
+        <Function name="GuiLoadIcons" retType="char **" paramCount="2" desc="Load raygui icons file (.rgi) into internal icons data">
+            <Param type="const char *" name="fileName" desc="" />
+            <Param type="bool" name="loadIconsName" desc="" />
         </Function>
         <Function name="GuiDrawIcon" retType="void" paramCount="5" desc="">
             <Param type="int" name="iconId" desc="" />
@@ -652,32 +679,8 @@
             <Param type="int" name="pixelSize" desc="" />
             <Param type="Color" name="color" desc="" />
         </Function>
-        <Function name="GuiGetIcons" retType="unsigned int *" paramCount="0" desc="Get full icons data pointer">
-        </Function>
-        <Function name="GuiGetIconData" retType="unsigned int *" paramCount="1" desc="Get icon bit data">
-            <Param type="int" name="iconId" desc="" />
-        </Function>
-        <Function name="GuiSetIconData" retType="void" paramCount="2" desc="Set icon bit data">
-            <Param type="int" name="iconId" desc="" />
-            <Param type="unsigned int *" name="data" desc="" />
-        </Function>
-        <Function name="GuiSetIconScale" retType="void" paramCount="1" desc="Set icon scale (1 by default)">
-            <Param type="unsigned int" name="scale" desc="" />
-        </Function>
-        <Function name="GuiSetIconPixel" retType="void" paramCount="3" desc="Set icon pixel value">
-            <Param type="int" name="iconId" desc="" />
-            <Param type="int" name="x" desc="" />
-            <Param type="int" name="y" desc="" />
-        </Function>
-        <Function name="GuiClearIconPixel" retType="void" paramCount="3" desc="Clear icon pixel value">
-            <Param type="int" name="iconId" desc="" />
-            <Param type="int" name="x" desc="" />
-            <Param type="int" name="y" desc="" />
-        </Function>
-        <Function name="GuiCheckIconPixel" retType="bool" paramCount="3" desc="Check icon pixel value">
-            <Param type="int" name="iconId" desc="" />
-            <Param type="int" name="x" desc="" />
-            <Param type="int" name="y" desc="" />
+        <Function name="GuiSetIconScale" retType="void" paramCount="1" desc="Set icon drawing size">
+            <Param type="int" name="scale" desc="" />
         </Function>
     </Functions>
 </raylibAPI>

@@ -183,6 +183,37 @@
       ]
     },
     {
+      "name": "Image",
+      "description": "Image, pixel data stored in CPU memory (RAM)",
+      "fields": [
+        {
+          "type": "void *",
+          "name": "data",
+          "description": "Image raw data"
+        },
+        {
+          "type": "int",
+          "name": "width",
+          "description": "Image base width"
+        },
+        {
+          "type": "int",
+          "name": "height",
+          "description": "Image base height"
+        },
+        {
+          "type": "int",
+          "name": "mipmaps",
+          "description": "Mipmap levels, 1 by default"
+        },
+        {
+          "type": "int",
+          "name": "format",
+          "description": "Data format (PixelFormat type)"
+        }
+      ]
+    },
+    {
       "name": "GlyphInfo",
       "description": "GlyphInfo, font characters glyphs info",
       "fields": [
@@ -225,22 +256,27 @@
         {
           "type": "int",
           "name": "glyphCount",
-          "description": "Number of characters"
+          "description": "Number of glyph characters"
+        },
+        {
+          "type": "int",
+          "name": "glyphPadding",
+          "description": "Padding around the glyph characters"
         },
         {
           "type": "Texture2D",
           "name": "texture",
-          "description": "Characters texture atlas"
+          "description": "Texture atlas containing the glyphs"
         },
         {
           "type": "Rectangle *",
           "name": "recs",
-          "description": "Characters rectangles in texture"
+          "description": "Rectangles in texture for the glyphs"
         },
         {
           "type": "GlyphInfo *",
-          "name": "chars",
-          "description": "Characters info data"
+          "name": "glyphs",
+          "description": "Glyphs info data"
         }
       ]
     },
@@ -1755,67 +1791,67 @@
           "description": ""
         },
         {
-          "name": "ICON_206",
+          "name": "ICON_CPU",
           "value": 206,
           "description": ""
         },
         {
-          "name": "ICON_207",
+          "name": "ICON_ROM",
           "value": 207,
           "description": ""
         },
         {
-          "name": "ICON_208",
+          "name": "ICON_STEP_OVER",
           "value": 208,
           "description": ""
         },
         {
-          "name": "ICON_209",
+          "name": "ICON_STEP_INTO",
           "value": 209,
           "description": ""
         },
         {
-          "name": "ICON_210",
+          "name": "ICON_STEP_OUT",
           "value": 210,
           "description": ""
         },
         {
-          "name": "ICON_211",
+          "name": "ICON_RESTART",
           "value": 211,
           "description": ""
         },
         {
-          "name": "ICON_212",
+          "name": "ICON_BREAKPOINT_ON",
           "value": 212,
           "description": ""
         },
         {
-          "name": "ICON_213",
+          "name": "ICON_BREAKPOINT_OFF",
           "value": 213,
           "description": ""
         },
         {
-          "name": "ICON_214",
+          "name": "ICON_BURGER_MENU",
           "value": 214,
           "description": ""
         },
         {
-          "name": "ICON_215",
+          "name": "ICON_CASE_SENSITIVE",
           "value": 215,
           "description": ""
         },
         {
-          "name": "ICON_216",
+          "name": "ICON_REG_EXP",
           "value": 216,
           "description": ""
         },
         {
-          "name": "ICON_217",
+          "name": "ICON_FOLDER",
           "value": 217,
           "description": ""
         },
         {
-          "name": "ICON_218",
+          "name": "ICON_FILE",
           "value": 218,
           "description": ""
         },
@@ -2169,6 +2205,29 @@
         {
           "type": "const char *",
           "name": "text"
+        }
+      ]
+    },
+    {
+      "name": "GuiTabBar",
+      "description": "Tab Bar control, returns TAB to be closed or -1",
+      "returnType": "int",
+      "params": [
+        {
+          "type": "Rectangle",
+          "name": "bounds"
+        },
+        {
+          "type": "const char **",
+          "name": "text"
+        },
+        {
+          "type": "int",
+          "name": "count"
+        },
+        {
+          "type": "int *",
+          "name": "active"
         }
       ]
     },
@@ -2798,6 +2857,27 @@
       "returnType": "void"
     },
     {
+      "name": "GuiEnableTooltip",
+      "description": "Enable gui tooltips (global state)",
+      "returnType": "void"
+    },
+    {
+      "name": "GuiDisableTooltip",
+      "description": "Disable gui tooltips (global state)",
+      "returnType": "void"
+    },
+    {
+      "name": "GuiSetTooltip",
+      "description": "Set tooltip string",
+      "returnType": "void",
+      "params": [
+        {
+          "type": "const char *",
+          "name": "tooltip"
+        }
+      ]
+    },
+    {
       "name": "GuiIconText",
       "description": "Get text with icon id prepended (if supported)",
       "returnType": "const char *",
@@ -2809,6 +2889,26 @@
         {
           "type": "const char *",
           "name": "text"
+        }
+      ]
+    },
+    {
+      "name": "GuiGetIcons",
+      "description": "Get raygui icons data pointer",
+      "returnType": "unsigned int *"
+    },
+    {
+      "name": "GuiLoadIcons",
+      "description": "Load raygui icons file (.rgi) into internal icons data",
+      "returnType": "char **",
+      "params": [
+        {
+          "type": "const char *",
+          "name": "fileName"
+        },
+        {
+          "type": "bool",
+          "name": "loadIconsName"
         }
       ]
     },
@@ -2840,101 +2940,13 @@
       ]
     },
     {
-      "name": "GuiGetIcons",
-      "description": "Get full icons data pointer",
-      "returnType": "unsigned int *"
-    },
-    {
-      "name": "GuiGetIconData",
-      "description": "Get icon bit data",
-      "returnType": "unsigned int *",
-      "params": [
-        {
-          "type": "int",
-          "name": "iconId"
-        }
-      ]
-    },
-    {
-      "name": "GuiSetIconData",
-      "description": "Set icon bit data",
-      "returnType": "void",
-      "params": [
-        {
-          "type": "int",
-          "name": "iconId"
-        },
-        {
-          "type": "unsigned int *",
-          "name": "data"
-        }
-      ]
-    },
-    {
       "name": "GuiSetIconScale",
-      "description": "Set icon scale (1 by default)",
+      "description": "Set icon drawing size",
       "returnType": "void",
       "params": [
         {
-          "type": "unsigned int",
+          "type": "int",
           "name": "scale"
-        }
-      ]
-    },
-    {
-      "name": "GuiSetIconPixel",
-      "description": "Set icon pixel value",
-      "returnType": "void",
-      "params": [
-        {
-          "type": "int",
-          "name": "iconId"
-        },
-        {
-          "type": "int",
-          "name": "x"
-        },
-        {
-          "type": "int",
-          "name": "y"
-        }
-      ]
-    },
-    {
-      "name": "GuiClearIconPixel",
-      "description": "Clear icon pixel value",
-      "returnType": "void",
-      "params": [
-        {
-          "type": "int",
-          "name": "iconId"
-        },
-        {
-          "type": "int",
-          "name": "x"
-        },
-        {
-          "type": "int",
-          "name": "y"
-        }
-      ]
-    },
-    {
-      "name": "GuiCheckIconPixel",
-      "description": "Check icon pixel value",
-      "returnType": "bool",
-      "params": [
-        {
-          "type": "int",
-          "name": "iconId"
-        },
-        {
-          "type": "int",
-          "name": "x"
-        },
-        {
-          "type": "int",
-          "name": "y"
         }
       ]
     }
