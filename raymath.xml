@@ -63,7 +63,7 @@
     </Enums>
     <Callbacks count="0">
     </Callbacks>
-    <Functions count="111">
+    <Functions count="112">
         <Function name="Clamp" retType="float" paramCount="3" desc="">
             <Param type="float" name="value" desc="" />
             <Param type="float" name="min" desc="" />
@@ -136,6 +136,10 @@
         <Function name="Vector2Angle" retType="float" paramCount="2" desc="">
             <Param type="Vector2" name="v1" desc="" />
             <Param type="Vector2" name="v2" desc="" />
+        </Function>
+        <Function name="Vector2LineAngle" retType="float" paramCount="2" desc="">
+            <Param type="Vector2" name="start" desc="" />
+            <Param type="Vector2" name="end" desc="" />
         </Function>
         <Function name="Vector2Scale" retType="Vector2" paramCount="2" desc="">
             <Param type="Vector2" name="v" desc="" />

@@ -424,6 +424,15 @@ return {
       }
     },
     {
+      name = "Vector2LineAngle",
+      description = "",
+      returnType = "float",
+      params = {
+        {type = "Vector2", name = "start"},
+        {type = "Vector2", name = "end"}
+      }
+    },
+    {
       name = "Vector2Scale",
       description = "",
       returnType = "Vector2",
