@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RobLoach/raylib_api.git"
+    "url": "git+https://github.com/RobLoach/raylib-api.git"
   },
   "keywords": [
     "raylib"
@@ -22,7 +22,7 @@
   "author": "Rob Loach",
   "license": "Zlib",
   "bugs": {
-    "url": "https://github.com/RobLoach/raylib_api/issues"
+    "url": "https://github.com/RobLoach/raylib-api/issues"
   },
-  "homepage": "https://github.com/RobLoach/raylib_api#readme"
+  "homepage": "https://github.com/RobLoach/raylib-api#readme"
 }
