@@ -9,7 +9,7 @@ return {
     {
       name = "RLGL_VERSION",
       type = "STRING",
-      value = "4.0",
+      value = "4.5",
       description = ""
     },
     {
@@ -181,6 +181,12 @@ return {
       description = "Anisotropic filter (custom identifier)"
     },
     {
+      name = "RL_TEXTURE_MIPMAP_BIAS_RATIO",
+      type = "INT",
+      value = 0x4000,
+      description = "Texture mipmap bias, percentage ratio (custom identifier)"
+    },
+    {
       name = "RL_TEXTURE_WRAP_REPEAT",
       type = "INT",
       value = 0x2901,
@@ -325,6 +331,174 @@ return {
       description = "GL_COMPUTE_SHADER"
     },
     {
+      name = "RL_ZERO",
+      type = "INT",
+      value = 0,
+      description = "GL_ZERO"
+    },
+    {
+      name = "RL_ONE",
+      type = "INT",
+      value = 1,
+      description = "GL_ONE"
+    },
+    {
+      name = "RL_SRC_COLOR",
+      type = "INT",
+      value = 0x0300,
+      description = "GL_SRC_COLOR"
+    },
+    {
+      name = "RL_ONE_MINUS_SRC_COLOR",
+      type = "INT",
+      value = 0x0301,
+      description = "GL_ONE_MINUS_SRC_COLOR"
+    },
+    {
+      name = "RL_SRC_ALPHA",
+      type = "INT",
+      value = 0x0302,
+      description = "GL_SRC_ALPHA"
+    },
+    {
+      name = "RL_ONE_MINUS_SRC_ALPHA",
+      type = "INT",
+      value = 0x0303,
+      description = "GL_ONE_MINUS_SRC_ALPHA"
+    },
+    {
+      name = "RL_DST_ALPHA",
+      type = "INT",
+      value = 0x0304,
+      description = "GL_DST_ALPHA"
+    },
+    {
+      name = "RL_ONE_MINUS_DST_ALPHA",
+      type = "INT",
+      value = 0x0305,
+      description = "GL_ONE_MINUS_DST_ALPHA"
+    },
+    {
+      name = "RL_DST_COLOR",
+      type = "INT",
+      value = 0x0306,
+      description = "GL_DST_COLOR"
+    },
+    {
+      name = "RL_ONE_MINUS_DST_COLOR",
+      type = "INT",
+      value = 0x0307,
+      description = "GL_ONE_MINUS_DST_COLOR"
+    },
+    {
+      name = "RL_SRC_ALPHA_SATURATE",
+      type = "INT",
+      value = 0x0308,
+      description = "GL_SRC_ALPHA_SATURATE"
+    },
+    {
+      name = "RL_CONSTANT_COLOR",
+      type = "INT",
+      value = 0x8001,
+      description = "GL_CONSTANT_COLOR"
+    },
+    {
+      name = "RL_ONE_MINUS_CONSTANT_COLOR",
+      type = "INT",
+      value = 0x8002,
+      description = "GL_ONE_MINUS_CONSTANT_COLOR"
+    },
+    {
+      name = "RL_CONSTANT_ALPHA",
+      type = "INT",
+      value = 0x8003,
+      description = "GL_CONSTANT_ALPHA"
+    },
+    {
+      name = "RL_ONE_MINUS_CONSTANT_ALPHA",
+      type = "INT",
+      value = 0x8004,
+      description = "GL_ONE_MINUS_CONSTANT_ALPHA"
+    },
+    {
+      name = "RL_FUNC_ADD",
+      type = "INT",
+      value = 0x8006,
+      description = "GL_FUNC_ADD"
+    },
+    {
+      name = "RL_MIN",
+      type = "INT",
+      value = 0x8007,
+      description = "GL_MIN"
+    },
+    {
+      name = "RL_MAX",
+      type = "INT",
+      value = 0x8008,
+      description = "GL_MAX"
+    },
+    {
+      name = "RL_FUNC_SUBTRACT",
+      type = "INT",
+      value = 0x800A,
+      description = "GL_FUNC_SUBTRACT"
+    },
+    {
+      name = "RL_FUNC_REVERSE_SUBTRACT",
+      type = "INT",
+      value = 0x800B,
+      description = "GL_FUNC_REVERSE_SUBTRACT"
+    },
+    {
+      name = "RL_BLEND_EQUATION",
+      type = "INT",
+      value = 0x8009,
+      description = "GL_BLEND_EQUATION"
+    },
+    {
+      name = "RL_BLEND_EQUATION_RGB",
+      type = "INT",
+      value = 0x8009,
+      description = "GL_BLEND_EQUATION_RGB   // (Same as BLEND_EQUATION)"
+    },
+    {
+      name = "RL_BLEND_EQUATION_ALPHA",
+      type = "INT",
+      value = 0x883D,
+      description = "GL_BLEND_EQUATION_ALPHA"
+    },
+    {
+      name = "RL_BLEND_DST_RGB",
+      type = "INT",
+      value = 0x80C8,
+      description = "GL_BLEND_DST_RGB"
+    },
+    {
+      name = "RL_BLEND_SRC_RGB",
+      type = "INT",
+      value = 0x80C9,
+      description = "GL_BLEND_SRC_RGB"
+    },
+    {
+      name = "RL_BLEND_DST_ALPHA",
+      type = "INT",
+      value = 0x80CA,
+      description = "GL_BLEND_DST_ALPHA"
+    },
+    {
+      name = "RL_BLEND_SRC_ALPHA",
+      type = "INT",
+      value = 0x80CB,
+      description = "GL_BLEND_SRC_ALPHA"
+    },
+    {
+      name = "RL_BLEND_COLOR",
+      type = "INT",
+      value = 0x8005,
+      description = "GL_BLEND_COLOR"
+    },
+    {
       name = "RL_MATRIX_TYPE",
       type = "GUARD",
       value = "",
@@ -344,6 +518,92 @@ return {
     }
   },
   structs = {
+    {
+      name = "Matrix",
+      description = "Matrix, 4x4 components, column major, OpenGL style, right handed",
+      fields = {
+        {
+          type = "float",
+          name = "m0",
+          description = "Matrix first row (4 components)"
+        },
+        {
+          type = "float",
+          name = "m4",
+          description = "Matrix first row (4 components)"
+        },
+        {
+          type = "float",
+          name = "m8",
+          description = "Matrix first row (4 components)"
+        },
+        {
+          type = "float",
+          name = "m12",
+          description = "Matrix first row (4 components)"
+        },
+        {
+          type = "float",
+          name = "m1",
+          description = "Matrix second row (4 components)"
+        },
+        {
+          type = "float",
+          name = "m5",
+          description = "Matrix second row (4 components)"
+        },
+        {
+          type = "float",
+          name = "m9",
+          description = "Matrix second row (4 components)"
+        },
+        {
+          type = "float",
+          name = "m13",
+          description = "Matrix second row (4 components)"
+        },
+        {
+          type = "float",
+          name = "m2",
+          description = "Matrix third row (4 components)"
+        },
+        {
+          type = "float",
+          name = "m6",
+          description = "Matrix third row (4 components)"
+        },
+        {
+          type = "float",
+          name = "m10",
+          description = "Matrix third row (4 components)"
+        },
+        {
+          type = "float",
+          name = "m14",
+          description = "Matrix third row (4 components)"
+        },
+        {
+          type = "float",
+          name = "m3",
+          description = "Matrix fourth row (4 components)"
+        },
+        {
+          type = "float",
+          name = "m7",
+          description = "Matrix fourth row (4 components)"
+        },
+        {
+          type = "float",
+          name = "m11",
+          description = "Matrix fourth row (4 components)"
+        },
+        {
+          type = "float",
+          name = "m15",
+          description = "Matrix fourth row (4 components)"
+        }
+      }
+    },
     {
       name = "rlVertexBuffer",
       description = "Dynamic vertex buffers (position + texcoords + colors + indices arrays)",
@@ -471,92 +731,6 @@ return {
           description = "Current depth value for next draw"
         }
       }
-    },
-    {
-      name = "Matrix",
-      description = "Matrix, 4x4 components, column major, OpenGL style, right handed",
-      fields = {
-        {
-          type = "float",
-          name = "m0",
-          description = "Matrix first row (4 components)"
-        },
-        {
-          type = "float",
-          name = "m4",
-          description = "Matrix first row (4 components)"
-        },
-        {
-          type = "float",
-          name = "m8",
-          description = "Matrix first row (4 components)"
-        },
-        {
-          type = "float",
-          name = "m12",
-          description = "Matrix first row (4 components)"
-        },
-        {
-          type = "float",
-          name = "m1",
-          description = "Matrix second row (4 components)"
-        },
-        {
-          type = "float",
-          name = "m5",
-          description = "Matrix second row (4 components)"
-        },
-        {
-          type = "float",
-          name = "m9",
-          description = "Matrix second row (4 components)"
-        },
-        {
-          type = "float",
-          name = "m13",
-          description = "Matrix second row (4 components)"
-        },
-        {
-          type = "float",
-          name = "m2",
-          description = "Matrix third row (4 components)"
-        },
-        {
-          type = "float",
-          name = "m6",
-          description = "Matrix third row (4 components)"
-        },
-        {
-          type = "float",
-          name = "m10",
-          description = "Matrix third row (4 components)"
-        },
-        {
-          type = "float",
-          name = "m14",
-          description = "Matrix third row (4 components)"
-        },
-        {
-          type = "float",
-          name = "m3",
-          description = "Matrix fourth row (4 components)"
-        },
-        {
-          type = "float",
-          name = "m7",
-          description = "Matrix fourth row (4 components)"
-        },
-        {
-          type = "float",
-          name = "m11",
-          description = "Matrix fourth row (4 components)"
-        },
-        {
-          type = "float",
-          name = "m15",
-          description = "Matrix fourth row (4 components)"
-        }
-      }
     }
   },
   aliases = {
@@ -564,134 +738,32 @@ return {
   enums = {
     {
       name = "rlGlVersion",
-      description = "",
+      description = "OpenGL version",
       values = {
         {
-          name = "OPENGL_11",
+          name = "RL_OPENGL_11",
           value = 1,
-          description = ""
+          description = "OpenGL 1.1"
         },
         {
-          name = "OPENGL_21",
+          name = "RL_OPENGL_21",
           value = 2,
-          description = ""
+          description = "OpenGL 2.1 (GLSL 120)"
         },
         {
-          name = "OPENGL_33",
+          name = "RL_OPENGL_33",
           value = 3,
-          description = ""
+          description = "OpenGL 3.3 (GLSL 330)"
         },
         {
-          name = "OPENGL_43",
+          name = "RL_OPENGL_43",
           value = 4,
-          description = ""
+          description = "OpenGL 4.3 (using GLSL 330)"
         },
         {
-          name = "OPENGL_ES_20",
+          name = "RL_OPENGL_ES_20",
           value = 5,
-          description = ""
-        }
-      }
-    },
-    {
-      name = "rlFramebufferAttachType",
-      description = "",
-      values = {
-        {
-          name = "RL_ATTACHMENT_COLOR_CHANNEL0",
-          value = 0,
-          description = ""
-        },
-        {
-          name = "RL_ATTACHMENT_COLOR_CHANNEL1",
-          value = 1,
-          description = ""
-        },
-        {
-          name = "RL_ATTACHMENT_COLOR_CHANNEL2",
-          value = 2,
-          description = ""
-        },
-        {
-          name = "RL_ATTACHMENT_COLOR_CHANNEL3",
-          value = 3,
-          description = ""
-        },
-        {
-          name = "RL_ATTACHMENT_COLOR_CHANNEL4",
-          value = 4,
-          description = ""
-        },
-        {
-          name = "RL_ATTACHMENT_COLOR_CHANNEL5",
-          value = 5,
-          description = ""
-        },
-        {
-          name = "RL_ATTACHMENT_COLOR_CHANNEL6",
-          value = 6,
-          description = ""
-        },
-        {
-          name = "RL_ATTACHMENT_COLOR_CHANNEL7",
-          value = 7,
-          description = ""
-        },
-        {
-          name = "RL_ATTACHMENT_DEPTH",
-          value = 100,
-          description = ""
-        },
-        {
-          name = "RL_ATTACHMENT_STENCIL",
-          value = 200,
-          description = ""
-        }
-      }
-    },
-    {
-      name = "rlFramebufferAttachTextureType",
-      description = "",
-      values = {
-        {
-          name = "RL_ATTACHMENT_CUBEMAP_POSITIVE_X",
-          value = 0,
-          description = ""
-        },
-        {
-          name = "RL_ATTACHMENT_CUBEMAP_NEGATIVE_X",
-          value = 1,
-          description = ""
-        },
-        {
-          name = "RL_ATTACHMENT_CUBEMAP_POSITIVE_Y",
-          value = 2,
-          description = ""
-        },
-        {
-          name = "RL_ATTACHMENT_CUBEMAP_NEGATIVE_Y",
-          value = 3,
-          description = ""
-        },
-        {
-          name = "RL_ATTACHMENT_CUBEMAP_POSITIVE_Z",
-          value = 4,
-          description = ""
-        },
-        {
-          name = "RL_ATTACHMENT_CUBEMAP_NEGATIVE_Z",
-          value = 5,
-          description = ""
-        },
-        {
-          name = "RL_ATTACHMENT_TEXTURE2D",
-          value = 100,
-          description = ""
-        },
-        {
-          name = "RL_ATTACHMENT_RENDERBUFFER",
-          value = 200,
-          description = ""
+          description = "OpenGL ES 2.0 (GLSL 100)"
         }
       }
     },
@@ -743,7 +815,7 @@ return {
     },
     {
       name = "rlPixelFormat",
-      description = "Texture formats (support depends on OpenGL version)",
+      description = "Texture pixel formats",
       values = {
         {
           name = "RL_PIXELFORMAT_UNCOMPRESSED_GRAYSCALE",
@@ -926,6 +998,11 @@ return {
           name = "RL_BLEND_CUSTOM",
           value = 6,
           description = "Blend textures using custom src/dst factors (use rlSetBlendFactors())"
+        },
+        {
+          name = "RL_BLEND_CUSTOM_SEPARATE",
+          value = 7,
+          description = "Blend textures using custom src/dst factors (use rlSetBlendFactorsSeparate())"
         }
       }
     },
@@ -1141,6 +1218,124 @@ return {
           description = "Shader attribute type: vec4 (4 float)"
         }
       }
+    },
+    {
+      name = "rlFramebufferAttachType",
+      description = "Framebuffer attachment type",
+      values = {
+        {
+          name = "RL_ATTACHMENT_COLOR_CHANNEL0",
+          value = 0,
+          description = "Framebuffer attachment type: color 0"
+        },
+        {
+          name = "RL_ATTACHMENT_COLOR_CHANNEL1",
+          value = 1,
+          description = "Framebuffer attachment type: color 1"
+        },
+        {
+          name = "RL_ATTACHMENT_COLOR_CHANNEL2",
+          value = 2,
+          description = "Framebuffer attachment type: color 2"
+        },
+        {
+          name = "RL_ATTACHMENT_COLOR_CHANNEL3",
+          value = 3,
+          description = "Framebuffer attachment type: color 3"
+        },
+        {
+          name = "RL_ATTACHMENT_COLOR_CHANNEL4",
+          value = 4,
+          description = "Framebuffer attachment type: color 4"
+        },
+        {
+          name = "RL_ATTACHMENT_COLOR_CHANNEL5",
+          value = 5,
+          description = "Framebuffer attachment type: color 5"
+        },
+        {
+          name = "RL_ATTACHMENT_COLOR_CHANNEL6",
+          value = 6,
+          description = "Framebuffer attachment type: color 6"
+        },
+        {
+          name = "RL_ATTACHMENT_COLOR_CHANNEL7",
+          value = 7,
+          description = "Framebuffer attachment type: color 7"
+        },
+        {
+          name = "RL_ATTACHMENT_DEPTH",
+          value = 100,
+          description = "Framebuffer attachment type: depth"
+        },
+        {
+          name = "RL_ATTACHMENT_STENCIL",
+          value = 200,
+          description = "Framebuffer attachment type: stencil"
+        }
+      }
+    },
+    {
+      name = "rlFramebufferAttachTextureType",
+      description = "Framebuffer texture attachment type",
+      values = {
+        {
+          name = "RL_ATTACHMENT_CUBEMAP_POSITIVE_X",
+          value = 0,
+          description = "Framebuffer texture attachment type: cubemap, +X side"
+        },
+        {
+          name = "RL_ATTACHMENT_CUBEMAP_NEGATIVE_X",
+          value = 1,
+          description = "Framebuffer texture attachment type: cubemap, -X side"
+        },
+        {
+          name = "RL_ATTACHMENT_CUBEMAP_POSITIVE_Y",
+          value = 2,
+          description = "Framebuffer texture attachment type: cubemap, +Y side"
+        },
+        {
+          name = "RL_ATTACHMENT_CUBEMAP_NEGATIVE_Y",
+          value = 3,
+          description = "Framebuffer texture attachment type: cubemap, -Y side"
+        },
+        {
+          name = "RL_ATTACHMENT_CUBEMAP_POSITIVE_Z",
+          value = 4,
+          description = "Framebuffer texture attachment type: cubemap, +Z side"
+        },
+        {
+          name = "RL_ATTACHMENT_CUBEMAP_NEGATIVE_Z",
+          value = 5,
+          description = "Framebuffer texture attachment type: cubemap, -Z side"
+        },
+        {
+          name = "RL_ATTACHMENT_TEXTURE2D",
+          value = 100,
+          description = "Framebuffer texture attachment type: texture2d"
+        },
+        {
+          name = "RL_ATTACHMENT_RENDERBUFFER",
+          value = 200,
+          description = "Framebuffer texture attachment type: renderbuffer"
+        }
+      }
+    },
+    {
+      name = "rlCullMode",
+      description = "Face culling mode",
+      values = {
+        {
+          name = "RL_CULL_FACE_FRONT",
+          value = 0,
+          description = ""
+        },
+        {
+          name = "RL_CULL_FACE_BACK",
+          value = 1,
+          description = ""
+        }
+      }
     }
   },
   callbacks = {
@@ -1161,7 +1356,7 @@ return {
     },
     {
       name = "rlPopMatrix",
-      description = "Pop lattest inserted matrix from stack",
+      description = "Pop latest inserted matrix from stack",
       returnType = "void"
     },
     {
@@ -1205,7 +1400,7 @@ return {
       description = "Multiply the current matrix by another matrix",
       returnType = "void",
       params = {
-        {type = "float *", name = "matf"}
+        {type = "const float *", name = "matf"}
       }
     },
     {
@@ -1454,6 +1649,16 @@ return {
       }
     },
     {
+      name = "rlCubemapParameters",
+      description = "Set cubemap parameters (filter, wrap)",
+      returnType = "void",
+      params = {
+        {type = "unsigned int", name = "id"},
+        {type = "int", name = "param"},
+        {type = "int", name = "value"}
+      }
+    },
+    {
       name = "rlEnableShader",
       description = "Enable shader program",
       returnType = "void",
@@ -1526,6 +1731,14 @@ return {
       name = "rlDisableBackfaceCulling",
       description = "Disable backface culling",
       returnType = "void"
+    },
+    {
+      name = "rlSetCullFace",
+      description = "Set face culling mode",
+      returnType = "void",
+      params = {
+        {type = "int", name = "mode"}
+      }
     },
     {
       name = "rlEnableScissorTest",
@@ -1636,6 +1849,19 @@ return {
       }
     },
     {
+      name = "rlSetBlendFactorsSeparate",
+      description = "Set blending mode factors and equations separately (using OpenGL factors)",
+      returnType = "void",
+      params = {
+        {type = "int", name = "glSrcRGB"},
+        {type = "int", name = "glDstRGB"},
+        {type = "int", name = "glSrcAlpha"},
+        {type = "int", name = "glDstAlpha"},
+        {type = "int", name = "glEqRGB"},
+        {type = "int", name = "glEqAlpha"}
+      }
+    },
+    {
       name = "rlglInit",
       description = "Initialize rlgl (buffers, shaders, textures, states)",
       returnType = "void",
@@ -1646,7 +1872,7 @@ return {
     },
     {
       name = "rlglClose",
-      description = "De-inititialize rlgl (buffers, shaders, textures)",
+      description = "De-initialize rlgl (buffers, shaders, textures)",
       returnType = "void"
     },
     {
@@ -2136,7 +2362,7 @@ return {
     },
     {
       name = "rlComputeShaderDispatch",
-      description = "Dispatch compute shader (equivalent to *draw* for graphics pilepine)",
+      description = "Dispatch compute shader (equivalent to *draw* for graphics pipeline)",
       returnType = "void",
       params = {
         {type = "unsigned int", name = "groupX"},
@@ -2149,7 +2375,7 @@ return {
       description = "Load shader storage buffer object (SSBO)",
       returnType = "unsigned int",
       params = {
-        {type = "unsigned long long", name = "size"},
+        {type = "unsigned int", name = "size"},
         {type = "const void *", name = "data"},
         {type = "int", name = "usageHint"}
       }
@@ -2163,38 +2389,19 @@ return {
       }
     },
     {
-      name = "rlUpdateShaderBufferElements",
+      name = "rlUpdateShaderBuffer",
       description = "Update SSBO buffer data",
       returnType = "void",
       params = {
         {type = "unsigned int", name = "id"},
         {type = "const void *", name = "data"},
-        {type = "unsigned long long", name = "dataSize"},
-        {type = "unsigned long long", name = "offset"}
-      }
-    },
-    {
-      name = "rlGetShaderBufferSize",
-      description = "Get SSBO buffer size",
-      returnType = "unsigned long long",
-      params = {
-        {type = "unsigned int", name = "id"}
-      }
-    },
-    {
-      name = "rlReadShaderBufferElements",
-      description = "Bind SSBO buffer",
-      returnType = "void",
-      params = {
-        {type = "unsigned int", name = "id"},
-        {type = "void *", name = "dest"},
-        {type = "unsigned long long", name = "count"},
-        {type = "unsigned long long", name = "offset"}
+        {type = "unsigned int", name = "dataSize"},
+        {type = "unsigned int", name = "offset"}
       }
     },
     {
       name = "rlBindShaderBuffer",
-      description = "Copy SSBO buffer data",
+      description = "Bind SSBO buffer",
       returnType = "void",
       params = {
         {type = "unsigned int", name = "id"},
@@ -2202,15 +2409,34 @@ return {
       }
     },
     {
-      name = "rlCopyBuffersElements",
-      description = "Copy SSBO buffer data",
+      name = "rlReadShaderBuffer",
+      description = "Read SSBO buffer data (GPU->CPU)",
+      returnType = "void",
+      params = {
+        {type = "unsigned int", name = "id"},
+        {type = "void *", name = "dest"},
+        {type = "unsigned int", name = "count"},
+        {type = "unsigned int", name = "offset"}
+      }
+    },
+    {
+      name = "rlCopyShaderBuffer",
+      description = "Copy SSBO data between buffers",
       returnType = "void",
       params = {
         {type = "unsigned int", name = "destId"},
         {type = "unsigned int", name = "srcId"},
-        {type = "unsigned long long", name = "destOffset"},
-        {type = "unsigned long long", name = "srcOffset"},
-        {type = "unsigned long long", name = "count"}
+        {type = "unsigned int", name = "destOffset"},
+        {type = "unsigned int", name = "srcOffset"},
+        {type = "unsigned int", name = "count"}
+      }
+    },
+    {
+      name = "rlGetShaderBufferSize",
+      description = "Get SSBO buffer size",
+      returnType = "unsigned int",
+      params = {
+        {type = "unsigned int", name = "id"}
       }
     },
     {
@@ -2220,8 +2446,8 @@ return {
       params = {
         {type = "unsigned int", name = "id"},
         {type = "unsigned int", name = "index"},
-        {type = "unsigned int", name = "format"},
-        {type = "int", name = "readonly"}
+        {type = "int", name = "format"},
+        {type = "bool", name = "readonly"}
       }
     },
     {
