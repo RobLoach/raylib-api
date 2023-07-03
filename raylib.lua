@@ -15,7 +15,7 @@ return {
     {
       name = "RAYLIB_VERSION_MINOR",
       type = "INT",
-      value = 5,
+      value = 6,
       description = ""
     },
     {
@@ -27,7 +27,7 @@ return {
     {
       name = "RAYLIB_VERSION",
       type = "STRING",
-      value = "4.5",
+      value = "4.6-dev",
       description = ""
     },
     {
@@ -1032,6 +1032,11 @@ return {
           type = "Transform **",
           name = "framePoses",
           description = "Poses array by frame"
+        },
+        {
+          type = "char[32]",
+          name = "name",
+          description = "Animation name"
         }
       }
     },
@@ -3177,6 +3182,11 @@ return {
       }
     },
     {
+      name = "SetWindowFocused",
+      description = "Set window focused (only PLATFORM_DESKTOP)",
+      returnType = "void"
+    },
+    {
       name = "GetWindowHandle",
       description = "Get native window handle",
       returnType = "void *"
@@ -4972,6 +4982,16 @@ return {
       }
     },
     {
+      name = "ExportImageToMemory",
+      description = "Export image to memory buffer",
+      returnType = "unsigned char *",
+      params = {
+        {type = "Image", name = "image"},
+        {type = "const char *", name = "fileType"},
+        {type = "int *", name = "fileSize"}
+      }
+    },
+    {
       name = "ExportImageAsCode",
       description = "Export image as code file defining an array of bytes, returns true on success",
       returnType = "bool",
@@ -4991,30 +5011,32 @@ return {
       }
     },
     {
-      name = "GenImageGradientV",
-      description = "Generate image: vertical gradient",
+      name = "GenImageGradientLinear",
+      description = "Generate image: linear gradient, direction in degrees [0..360], 0=Vertical gradient",
       returnType = "Image",
       params = {
         {type = "int", name = "width"},
         {type = "int", name = "height"},
-        {type = "Color", name = "top"},
-        {type = "Color", name = "bottom"}
-      }
-    },
-    {
-      name = "GenImageGradientH",
-      description = "Generate image: horizontal gradient",
-      returnType = "Image",
-      params = {
-        {type = "int", name = "width"},
-        {type = "int", name = "height"},
-        {type = "Color", name = "left"},
-        {type = "Color", name = "right"}
+        {type = "int", name = "direction"},
+        {type = "Color", name = "start"},
+        {type = "Color", name = "end"}
       }
     },
     {
       name = "GenImageGradientRadial",
       description = "Generate image: radial gradient",
+      returnType = "Image",
+      params = {
+        {type = "int", name = "width"},
+        {type = "int", name = "height"},
+        {type = "float", name = "density"},
+        {type = "Color", name = "inner"},
+        {type = "Color", name = "outer"}
+      }
+    },
+    {
+      name = "GenImageGradientSquare",
+      description = "Generate image: square gradient",
       returnType = "Image",
       params = {
         {type = "int", name = "width"},
@@ -5257,6 +5279,15 @@ return {
       returnType = "void",
       params = {
         {type = "Image *", name = "image"}
+      }
+    },
+    {
+      name = "ImageRotate",
+      description = "Rotate image by input angle in degrees (-359 to 359)",
+      returnType = "void",
+      params = {
+        {type = "Image *", name = "image"},
+        {type = "int", name = "degrees"}
       }
     },
     {
@@ -6060,6 +6091,14 @@ return {
         {type = "float", name = "fontSize"},
         {type = "float", name = "spacing"},
         {type = "Color", name = "tint"}
+      }
+    },
+    {
+      name = "SetTextLineSpacing",
+      description = "Set vertical line spacing when drawing with line-breaks",
+      returnType = "void",
+      params = {
+        {type = "int", name = "spacing"}
       }
     },
     {

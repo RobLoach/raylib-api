@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="Windows-1252" ?>
 <raylibAPI>
-    <Defines count="86">
+    <Defines count="87">
         <Define name="RLGL_H" type="GUARD" value="" desc="" />
         <Define name="RLGL_VERSION" type="STRING" value="4.5" desc="" />
         <Define name="RLAPI" type="UNKNOWN" value="__declspec(dllexport)" desc="We are building the library as a Win32 shared library (.dll)" />
@@ -11,6 +11,7 @@
         <Define name="RL_REALLOC(n,sz)" type="MACRO" value="realloc(n,sz)" desc="" />
         <Define name="RL_FREE(p)" type="MACRO" value="free(p)" desc="" />
         <Define name="GRAPHICS_API_OPENGL_33" type="GUARD" value="" desc="" />
+        <Define name="GRAPHICS_API_OPENGL_ES2" type="GUARD" value="" desc="" />
         <Define name="RLGL_RENDER_TEXTURES_HINT" type="GUARD" value="" desc="" />
         <Define name="RL_DEFAULT_BATCH_BUFFER_ELEMENTS" type="INT" value="8192" desc="" />
         <Define name="RL_DEFAULT_BATCH_BUFFERS" type="INT" value="1" desc="Default number of batch buffers (multi-buffering)" />
@@ -139,12 +140,13 @@
     <Aliases count="0">
     </Aliases>
     <Enums count="11">
-        <Enum name="rlGlVersion" valueCount="5" desc="OpenGL version">
+        <Enum name="rlGlVersion" valueCount="6" desc="OpenGL version">
             <Value name="RL_OPENGL_11" integer="1" desc="OpenGL 1.1" />
             <Value name="RL_OPENGL_21" integer="2" desc="OpenGL 2.1 (GLSL 120)" />
             <Value name="RL_OPENGL_33" integer="3" desc="OpenGL 3.3 (GLSL 330)" />
             <Value name="RL_OPENGL_43" integer="4" desc="OpenGL 4.3 (using GLSL 330)" />
             <Value name="RL_OPENGL_ES_20" integer="5" desc="OpenGL ES 2.0 (GLSL 100)" />
+            <Value name="RL_OPENGL_ES_30" integer="6" desc="OpenGL ES 3.0 (GLSL 300 es)" />
         </Enum>
         <Enum name="rlTraceLogLevel" valueCount="8" desc="Trace log level">
             <Value name="RL_LOG_ALL" integer="0" desc="Display all logs" />

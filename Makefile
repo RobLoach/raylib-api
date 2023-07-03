@@ -1,4 +1,4 @@
-RAYLIB_VERSION?=4.5.0
+RAYLIB_VERSION?=master
 PARSER?=vendor/raylib-parser/parser/raylib_parser
 RAYLIB?=vendor/raylib
 EXTENSION?=txt

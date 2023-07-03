@@ -15,7 +15,7 @@
     {
       "name": "RAYLIB_VERSION_MINOR",
       "type": "INT",
-      "value": 5,
+      "value": 6,
       "description": ""
     },
     {
@@ -27,7 +27,7 @@
     {
       "name": "RAYLIB_VERSION",
       "type": "STRING",
-      "value": "4.5",
+      "value": "4.6-dev",
       "description": ""
     },
     {
@@ -1032,6 +1032,11 @@
           "type": "Transform **",
           "name": "framePoses",
           "description": "Poses array by frame"
+        },
+        {
+          "type": "char[32]",
+          "name": "name",
+          "description": "Animation name"
         }
       ]
     },
@@ -3268,6 +3273,11 @@
           "name": "opacity"
         }
       ]
+    },
+    {
+      "name": "SetWindowFocused",
+      "description": "Set window focused (only PLATFORM_DESKTOP)",
+      "returnType": "void"
     },
     {
       "name": "GetWindowHandle",
@@ -6202,6 +6212,25 @@
       ]
     },
     {
+      "name": "ExportImageToMemory",
+      "description": "Export image to memory buffer",
+      "returnType": "unsigned char *",
+      "params": [
+        {
+          "type": "Image",
+          "name": "image"
+        },
+        {
+          "type": "const char *",
+          "name": "fileType"
+        },
+        {
+          "type": "int *",
+          "name": "fileSize"
+        }
+      ]
+    },
+    {
       "name": "ExportImageAsCode",
       "description": "Export image as code file defining an array of bytes, returns true on success",
       "returnType": "bool",
@@ -6236,8 +6265,8 @@
       ]
     },
     {
-      "name": "GenImageGradientV",
-      "description": "Generate image: vertical gradient",
+      "name": "GenImageGradientLinear",
+      "description": "Generate image: linear gradient, direction in degrees [0..360], 0=Vertical gradient",
       "returnType": "Image",
       "params": [
         {
@@ -6249,41 +6278,49 @@
           "name": "height"
         },
         {
-          "type": "Color",
-          "name": "top"
-        },
-        {
-          "type": "Color",
-          "name": "bottom"
-        }
-      ]
-    },
-    {
-      "name": "GenImageGradientH",
-      "description": "Generate image: horizontal gradient",
-      "returnType": "Image",
-      "params": [
-        {
           "type": "int",
-          "name": "width"
-        },
-        {
-          "type": "int",
-          "name": "height"
+          "name": "direction"
         },
         {
           "type": "Color",
-          "name": "left"
+          "name": "start"
         },
         {
           "type": "Color",
-          "name": "right"
+          "name": "end"
         }
       ]
     },
     {
       "name": "GenImageGradientRadial",
       "description": "Generate image: radial gradient",
+      "returnType": "Image",
+      "params": [
+        {
+          "type": "int",
+          "name": "width"
+        },
+        {
+          "type": "int",
+          "name": "height"
+        },
+        {
+          "type": "float",
+          "name": "density"
+        },
+        {
+          "type": "Color",
+          "name": "inner"
+        },
+        {
+          "type": "Color",
+          "name": "outer"
+        }
+      ]
+    },
+    {
+      "name": "GenImageGradientSquare",
+      "description": "Generate image: square gradient",
       "returnType": "Image",
       "params": [
         {
@@ -6741,6 +6778,21 @@
         {
           "type": "Image *",
           "name": "image"
+        }
+      ]
+    },
+    {
+      "name": "ImageRotate",
+      "description": "Rotate image by input angle in degrees (-359 to 359)",
+      "returnType": "void",
+      "params": [
+        {
+          "type": "Image *",
+          "name": "image"
+        },
+        {
+          "type": "int",
+          "name": "degrees"
         }
       ]
     },
@@ -8258,6 +8310,17 @@
         {
           "type": "Color",
           "name": "tint"
+        }
+      ]
+    },
+    {
+      "name": "SetTextLineSpacing",
+      "description": "Set vertical line spacing when drawing with line-breaks",
+      "returnType": "void",
+      "params": [
+        {
+          "type": "int",
+          "name": "spacing"
         }
       ]
     },

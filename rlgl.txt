@@ -1,5 +1,5 @@
 
-Defines found: 86
+Defines found: 87
 
 Define 001: RLGL_H
   Name: RLGL_H
@@ -51,382 +51,387 @@ Define 010: GRAPHICS_API_OPENGL_33
   Type: GUARD
   Value: 
   Description: 
-Define 011: RLGL_RENDER_TEXTURES_HINT
+Define 011: GRAPHICS_API_OPENGL_ES2
+  Name: GRAPHICS_API_OPENGL_ES2
+  Type: GUARD
+  Value: 
+  Description: 
+Define 012: RLGL_RENDER_TEXTURES_HINT
   Name: RLGL_RENDER_TEXTURES_HINT
   Type: GUARD
   Value: 
   Description: 
-Define 012: RL_DEFAULT_BATCH_BUFFER_ELEMENTS
+Define 013: RL_DEFAULT_BATCH_BUFFER_ELEMENTS
   Name: RL_DEFAULT_BATCH_BUFFER_ELEMENTS
   Type: INT
   Value: 8192
   Description: 
-Define 013: RL_DEFAULT_BATCH_BUFFERS
+Define 014: RL_DEFAULT_BATCH_BUFFERS
   Name: RL_DEFAULT_BATCH_BUFFERS
   Type: INT
   Value: 1
   Description: Default number of batch buffers (multi-buffering)
-Define 014: RL_DEFAULT_BATCH_DRAWCALLS
+Define 015: RL_DEFAULT_BATCH_DRAWCALLS
   Name: RL_DEFAULT_BATCH_DRAWCALLS
   Type: INT
   Value: 256
   Description: Default number of batch draw calls (by state changes: mode, texture)
-Define 015: RL_DEFAULT_BATCH_MAX_TEXTURE_UNITS
+Define 016: RL_DEFAULT_BATCH_MAX_TEXTURE_UNITS
   Name: RL_DEFAULT_BATCH_MAX_TEXTURE_UNITS
   Type: INT
   Value: 4
   Description: Maximum number of textures units that can be activated on batch drawing (SetShaderValueTexture())
-Define 016: RL_MAX_MATRIX_STACK_SIZE
+Define 017: RL_MAX_MATRIX_STACK_SIZE
   Name: RL_MAX_MATRIX_STACK_SIZE
   Type: INT
   Value: 32
   Description: Maximum size of Matrix stack
-Define 017: RL_MAX_SHADER_LOCATIONS
+Define 018: RL_MAX_SHADER_LOCATIONS
   Name: RL_MAX_SHADER_LOCATIONS
   Type: INT
   Value: 32
   Description: Maximum number of shader locations supported
-Define 018: RL_CULL_DISTANCE_NEAR
+Define 019: RL_CULL_DISTANCE_NEAR
   Name: RL_CULL_DISTANCE_NEAR
   Type: DOUBLE
   Value: 0.01
   Description: Default near cull distance
-Define 019: RL_CULL_DISTANCE_FAR
+Define 020: RL_CULL_DISTANCE_FAR
   Name: RL_CULL_DISTANCE_FAR
   Type: DOUBLE
   Value: 1000.0
   Description: Default far cull distance
-Define 020: RL_TEXTURE_WRAP_S
+Define 021: RL_TEXTURE_WRAP_S
   Name: RL_TEXTURE_WRAP_S
   Type: INT
   Value: 0x2802
   Description: GL_TEXTURE_WRAP_S
-Define 021: RL_TEXTURE_WRAP_T
+Define 022: RL_TEXTURE_WRAP_T
   Name: RL_TEXTURE_WRAP_T
   Type: INT
   Value: 0x2803
   Description: GL_TEXTURE_WRAP_T
-Define 022: RL_TEXTURE_MAG_FILTER
+Define 023: RL_TEXTURE_MAG_FILTER
   Name: RL_TEXTURE_MAG_FILTER
   Type: INT
   Value: 0x2800
   Description: GL_TEXTURE_MAG_FILTER
-Define 023: RL_TEXTURE_MIN_FILTER
+Define 024: RL_TEXTURE_MIN_FILTER
   Name: RL_TEXTURE_MIN_FILTER
   Type: INT
   Value: 0x2801
   Description: GL_TEXTURE_MIN_FILTER
-Define 024: RL_TEXTURE_FILTER_NEAREST
+Define 025: RL_TEXTURE_FILTER_NEAREST
   Name: RL_TEXTURE_FILTER_NEAREST
   Type: INT
   Value: 0x2600
   Description: GL_NEAREST
-Define 025: RL_TEXTURE_FILTER_LINEAR
+Define 026: RL_TEXTURE_FILTER_LINEAR
   Name: RL_TEXTURE_FILTER_LINEAR
   Type: INT
   Value: 0x2601
   Description: GL_LINEAR
-Define 026: RL_TEXTURE_FILTER_MIP_NEAREST
+Define 027: RL_TEXTURE_FILTER_MIP_NEAREST
   Name: RL_TEXTURE_FILTER_MIP_NEAREST
   Type: INT
   Value: 0x2700
   Description: GL_NEAREST_MIPMAP_NEAREST
-Define 027: RL_TEXTURE_FILTER_NEAREST_MIP_LINEAR
+Define 028: RL_TEXTURE_FILTER_NEAREST_MIP_LINEAR
   Name: RL_TEXTURE_FILTER_NEAREST_MIP_LINEAR
   Type: INT
   Value: 0x2702
   Description: GL_NEAREST_MIPMAP_LINEAR
-Define 028: RL_TEXTURE_FILTER_LINEAR_MIP_NEAREST
+Define 029: RL_TEXTURE_FILTER_LINEAR_MIP_NEAREST
   Name: RL_TEXTURE_FILTER_LINEAR_MIP_NEAREST
   Type: INT
   Value: 0x2701
   Description: GL_LINEAR_MIPMAP_NEAREST
-Define 029: RL_TEXTURE_FILTER_MIP_LINEAR
+Define 030: RL_TEXTURE_FILTER_MIP_LINEAR
   Name: RL_TEXTURE_FILTER_MIP_LINEAR
   Type: INT
   Value: 0x2703
   Description: GL_LINEAR_MIPMAP_LINEAR
-Define 030: RL_TEXTURE_FILTER_ANISOTROPIC
+Define 031: RL_TEXTURE_FILTER_ANISOTROPIC
   Name: RL_TEXTURE_FILTER_ANISOTROPIC
   Type: INT
   Value: 0x3000
   Description: Anisotropic filter (custom identifier)
-Define 031: RL_TEXTURE_MIPMAP_BIAS_RATIO
+Define 032: RL_TEXTURE_MIPMAP_BIAS_RATIO
   Name: RL_TEXTURE_MIPMAP_BIAS_RATIO
   Type: INT
   Value: 0x4000
   Description: Texture mipmap bias, percentage ratio (custom identifier)
-Define 032: RL_TEXTURE_WRAP_REPEAT
+Define 033: RL_TEXTURE_WRAP_REPEAT
   Name: RL_TEXTURE_WRAP_REPEAT
   Type: INT
   Value: 0x2901
   Description: GL_REPEAT
-Define 033: RL_TEXTURE_WRAP_CLAMP
+Define 034: RL_TEXTURE_WRAP_CLAMP
   Name: RL_TEXTURE_WRAP_CLAMP
   Type: INT
   Value: 0x812F
   Description: GL_CLAMP_TO_EDGE
-Define 034: RL_TEXTURE_WRAP_MIRROR_REPEAT
+Define 035: RL_TEXTURE_WRAP_MIRROR_REPEAT
   Name: RL_TEXTURE_WRAP_MIRROR_REPEAT
   Type: INT
   Value: 0x8370
   Description: GL_MIRRORED_REPEAT
-Define 035: RL_TEXTURE_WRAP_MIRROR_CLAMP
+Define 036: RL_TEXTURE_WRAP_MIRROR_CLAMP
   Name: RL_TEXTURE_WRAP_MIRROR_CLAMP
   Type: INT
   Value: 0x8742
   Description: GL_MIRROR_CLAMP_EXT
-Define 036: RL_MODELVIEW
+Define 037: RL_MODELVIEW
   Name: RL_MODELVIEW
   Type: INT
   Value: 0x1700
   Description: GL_MODELVIEW
-Define 037: RL_PROJECTION
+Define 038: RL_PROJECTION
   Name: RL_PROJECTION
   Type: INT
   Value: 0x1701
   Description: GL_PROJECTION
-Define 038: RL_TEXTURE
+Define 039: RL_TEXTURE
   Name: RL_TEXTURE
   Type: INT
   Value: 0x1702
   Description: GL_TEXTURE
-Define 039: RL_LINES
+Define 040: RL_LINES
   Name: RL_LINES
   Type: INT
   Value: 0x0001
   Description: GL_LINES
-Define 040: RL_TRIANGLES
+Define 041: RL_TRIANGLES
   Name: RL_TRIANGLES
   Type: INT
   Value: 0x0004
   Description: GL_TRIANGLES
-Define 041: RL_QUADS
+Define 042: RL_QUADS
   Name: RL_QUADS
   Type: INT
   Value: 0x0007
   Description: GL_QUADS
-Define 042: RL_UNSIGNED_BYTE
+Define 043: RL_UNSIGNED_BYTE
   Name: RL_UNSIGNED_BYTE
   Type: INT
   Value: 0x1401
   Description: GL_UNSIGNED_BYTE
-Define 043: RL_FLOAT
+Define 044: RL_FLOAT
   Name: RL_FLOAT
   Type: INT
   Value: 0x1406
   Description: GL_FLOAT
-Define 044: RL_STREAM_DRAW
+Define 045: RL_STREAM_DRAW
   Name: RL_STREAM_DRAW
   Type: INT
   Value: 0x88E0
   Description: GL_STREAM_DRAW
-Define 045: RL_STREAM_READ
+Define 046: RL_STREAM_READ
   Name: RL_STREAM_READ
   Type: INT
   Value: 0x88E1
   Description: GL_STREAM_READ
-Define 046: RL_STREAM_COPY
+Define 047: RL_STREAM_COPY
   Name: RL_STREAM_COPY
   Type: INT
   Value: 0x88E2
   Description: GL_STREAM_COPY
-Define 047: RL_STATIC_DRAW
+Define 048: RL_STATIC_DRAW
   Name: RL_STATIC_DRAW
   Type: INT
   Value: 0x88E4
   Description: GL_STATIC_DRAW
-Define 048: RL_STATIC_READ
+Define 049: RL_STATIC_READ
   Name: RL_STATIC_READ
   Type: INT
   Value: 0x88E5
   Description: GL_STATIC_READ
-Define 049: RL_STATIC_COPY
+Define 050: RL_STATIC_COPY
   Name: RL_STATIC_COPY
   Type: INT
   Value: 0x88E6
   Description: GL_STATIC_COPY
-Define 050: RL_DYNAMIC_DRAW
+Define 051: RL_DYNAMIC_DRAW
   Name: RL_DYNAMIC_DRAW
   Type: INT
   Value: 0x88E8
   Description: GL_DYNAMIC_DRAW
-Define 051: RL_DYNAMIC_READ
+Define 052: RL_DYNAMIC_READ
   Name: RL_DYNAMIC_READ
   Type: INT
   Value: 0x88E9
   Description: GL_DYNAMIC_READ
-Define 052: RL_DYNAMIC_COPY
+Define 053: RL_DYNAMIC_COPY
   Name: RL_DYNAMIC_COPY
   Type: INT
   Value: 0x88EA
   Description: GL_DYNAMIC_COPY
-Define 053: RL_FRAGMENT_SHADER
+Define 054: RL_FRAGMENT_SHADER
   Name: RL_FRAGMENT_SHADER
   Type: INT
   Value: 0x8B30
   Description: GL_FRAGMENT_SHADER
-Define 054: RL_VERTEX_SHADER
+Define 055: RL_VERTEX_SHADER
   Name: RL_VERTEX_SHADER
   Type: INT
   Value: 0x8B31
   Description: GL_VERTEX_SHADER
-Define 055: RL_COMPUTE_SHADER
+Define 056: RL_COMPUTE_SHADER
   Name: RL_COMPUTE_SHADER
   Type: INT
   Value: 0x91B9
   Description: GL_COMPUTE_SHADER
-Define 056: RL_ZERO
+Define 057: RL_ZERO
   Name: RL_ZERO
   Type: INT
   Value: 0
   Description: GL_ZERO
-Define 057: RL_ONE
+Define 058: RL_ONE
   Name: RL_ONE
   Type: INT
   Value: 1
   Description: GL_ONE
-Define 058: RL_SRC_COLOR
+Define 059: RL_SRC_COLOR
   Name: RL_SRC_COLOR
   Type: INT
   Value: 0x0300
   Description: GL_SRC_COLOR
-Define 059: RL_ONE_MINUS_SRC_COLOR
+Define 060: RL_ONE_MINUS_SRC_COLOR
   Name: RL_ONE_MINUS_SRC_COLOR
   Type: INT
   Value: 0x0301
   Description: GL_ONE_MINUS_SRC_COLOR
-Define 060: RL_SRC_ALPHA
+Define 061: RL_SRC_ALPHA
   Name: RL_SRC_ALPHA
   Type: INT
   Value: 0x0302
   Description: GL_SRC_ALPHA
-Define 061: RL_ONE_MINUS_SRC_ALPHA
+Define 062: RL_ONE_MINUS_SRC_ALPHA
   Name: RL_ONE_MINUS_SRC_ALPHA
   Type: INT
   Value: 0x0303
   Description: GL_ONE_MINUS_SRC_ALPHA
-Define 062: RL_DST_ALPHA
+Define 063: RL_DST_ALPHA
   Name: RL_DST_ALPHA
   Type: INT
   Value: 0x0304
   Description: GL_DST_ALPHA
-Define 063: RL_ONE_MINUS_DST_ALPHA
+Define 064: RL_ONE_MINUS_DST_ALPHA
   Name: RL_ONE_MINUS_DST_ALPHA
   Type: INT
   Value: 0x0305
   Description: GL_ONE_MINUS_DST_ALPHA
-Define 064: RL_DST_COLOR
+Define 065: RL_DST_COLOR
   Name: RL_DST_COLOR
   Type: INT
   Value: 0x0306
   Description: GL_DST_COLOR
-Define 065: RL_ONE_MINUS_DST_COLOR
+Define 066: RL_ONE_MINUS_DST_COLOR
   Name: RL_ONE_MINUS_DST_COLOR
   Type: INT
   Value: 0x0307
   Description: GL_ONE_MINUS_DST_COLOR
-Define 066: RL_SRC_ALPHA_SATURATE
+Define 067: RL_SRC_ALPHA_SATURATE
   Name: RL_SRC_ALPHA_SATURATE
   Type: INT
   Value: 0x0308
   Description: GL_SRC_ALPHA_SATURATE
-Define 067: RL_CONSTANT_COLOR
+Define 068: RL_CONSTANT_COLOR
   Name: RL_CONSTANT_COLOR
   Type: INT
   Value: 0x8001
   Description: GL_CONSTANT_COLOR
-Define 068: RL_ONE_MINUS_CONSTANT_COLOR
+Define 069: RL_ONE_MINUS_CONSTANT_COLOR
   Name: RL_ONE_MINUS_CONSTANT_COLOR
   Type: INT
   Value: 0x8002
   Description: GL_ONE_MINUS_CONSTANT_COLOR
-Define 069: RL_CONSTANT_ALPHA
+Define 070: RL_CONSTANT_ALPHA
   Name: RL_CONSTANT_ALPHA
   Type: INT
   Value: 0x8003
   Description: GL_CONSTANT_ALPHA
-Define 070: RL_ONE_MINUS_CONSTANT_ALPHA
+Define 071: RL_ONE_MINUS_CONSTANT_ALPHA
   Name: RL_ONE_MINUS_CONSTANT_ALPHA
   Type: INT
   Value: 0x8004
   Description: GL_ONE_MINUS_CONSTANT_ALPHA
-Define 071: RL_FUNC_ADD
+Define 072: RL_FUNC_ADD
   Name: RL_FUNC_ADD
   Type: INT
   Value: 0x8006
   Description: GL_FUNC_ADD
-Define 072: RL_MIN
+Define 073: RL_MIN
   Name: RL_MIN
   Type: INT
   Value: 0x8007
   Description: GL_MIN
-Define 073: RL_MAX
+Define 074: RL_MAX
   Name: RL_MAX
   Type: INT
   Value: 0x8008
   Description: GL_MAX
-Define 074: RL_FUNC_SUBTRACT
+Define 075: RL_FUNC_SUBTRACT
   Name: RL_FUNC_SUBTRACT
   Type: INT
   Value: 0x800A
   Description: GL_FUNC_SUBTRACT
-Define 075: RL_FUNC_REVERSE_SUBTRACT
+Define 076: RL_FUNC_REVERSE_SUBTRACT
   Name: RL_FUNC_REVERSE_SUBTRACT
   Type: INT
   Value: 0x800B
   Description: GL_FUNC_REVERSE_SUBTRACT
-Define 076: RL_BLEND_EQUATION
+Define 077: RL_BLEND_EQUATION
   Name: RL_BLEND_EQUATION
   Type: INT
   Value: 0x8009
   Description: GL_BLEND_EQUATION
-Define 077: RL_BLEND_EQUATION_RGB
+Define 078: RL_BLEND_EQUATION_RGB
   Name: RL_BLEND_EQUATION_RGB
   Type: INT
   Value: 0x8009
   Description: GL_BLEND_EQUATION_RGB   // (Same as BLEND_EQUATION)
-Define 078: RL_BLEND_EQUATION_ALPHA
+Define 079: RL_BLEND_EQUATION_ALPHA
   Name: RL_BLEND_EQUATION_ALPHA
   Type: INT
   Value: 0x883D
   Description: GL_BLEND_EQUATION_ALPHA
-Define 079: RL_BLEND_DST_RGB
+Define 080: RL_BLEND_DST_RGB
   Name: RL_BLEND_DST_RGB
   Type: INT
   Value: 0x80C8
   Description: GL_BLEND_DST_RGB
-Define 080: RL_BLEND_SRC_RGB
+Define 081: RL_BLEND_SRC_RGB
   Name: RL_BLEND_SRC_RGB
   Type: INT
   Value: 0x80C9
   Description: GL_BLEND_SRC_RGB
-Define 081: RL_BLEND_DST_ALPHA
+Define 082: RL_BLEND_DST_ALPHA
   Name: RL_BLEND_DST_ALPHA
   Type: INT
   Value: 0x80CA
   Description: GL_BLEND_DST_ALPHA
-Define 082: RL_BLEND_SRC_ALPHA
+Define 083: RL_BLEND_SRC_ALPHA
   Name: RL_BLEND_SRC_ALPHA
   Type: INT
   Value: 0x80CB
   Description: GL_BLEND_SRC_ALPHA
-Define 083: RL_BLEND_COLOR
+Define 084: RL_BLEND_COLOR
   Name: RL_BLEND_COLOR
   Type: INT
   Value: 0x8005
   Description: GL_BLEND_COLOR
-Define 084: RL_MATRIX_TYPE
+Define 085: RL_MATRIX_TYPE
   Name: RL_MATRIX_TYPE
   Type: GUARD
   Value: 
   Description: 
-Define 085: RL_SHADER_LOC_MAP_DIFFUSE
+Define 086: RL_SHADER_LOC_MAP_DIFFUSE
   Name: RL_SHADER_LOC_MAP_DIFFUSE
   Type: UNKNOWN
   Value: RL_SHADER_LOC_MAP_ALBEDO
   Description: 
-Define 086: RL_SHADER_LOC_MAP_SPECULAR
+Define 087: RL_SHADER_LOC_MAP_SPECULAR
   Name: RL_SHADER_LOC_MAP_SPECULAR
   Type: UNKNOWN
   Value: RL_SHADER_LOC_MAP_METALNESS
@@ -490,7 +495,7 @@ Aliases found: 0
 
 Enums found: 11
 
-Enum 01: rlGlVersion (5 values)
+Enum 01: rlGlVersion (6 values)
   Name: rlGlVersion
   Description: OpenGL version
   Value[RL_OPENGL_11]: 1
@@ -498,6 +503,7 @@ Enum 01: rlGlVersion (5 values)
   Value[RL_OPENGL_33]: 3
   Value[RL_OPENGL_43]: 4
   Value[RL_OPENGL_ES_20]: 5
+  Value[RL_OPENGL_ES_30]: 6
 Enum 02: rlTraceLogLevel (8 values)
   Name: rlTraceLogLevel
   Description: Trace log level
