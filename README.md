@@ -2,7 +2,7 @@
 
 Exports of the [raylib](https://github.com/raysan5/raylib/) API through [raylib's parser](https://github.com/raysan5/raylib/tree/master/parser).
 
-**Target Version:** 4.2.0
+**Target Version:** 4.5.0
 
 ## Features
 
@@ -14,6 +14,7 @@ Versioned exports of the latest raylib APIs through the latest version of the [p
 - reasings
 - rlgl
 - rmem
+- rres
 
 ## Usage
 
