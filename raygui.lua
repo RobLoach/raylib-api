@@ -7,9 +7,27 @@ return {
       description = ""
     },
     {
+      name = "RAYGUI_VERSION_MAJOR",
+      type = "INT",
+      value = 4,
+      description = ""
+    },
+    {
+      name = "RAYGUI_VERSION_MINOR",
+      type = "INT",
+      value = 0,
+      description = ""
+    },
+    {
+      name = "RAYGUI_VERSION_PATCH",
+      type = "INT",
+      value = 0,
+      description = ""
+    },
+    {
       name = "RAYGUI_VERSION",
       type = "STRING",
-      value = "3.2",
+      value = "4.0-dev",
       description = ""
     },
     {
@@ -183,6 +201,37 @@ return {
       }
     },
     {
+      name = "Image",
+      description = "Image, pixel data stored in CPU memory (RAM)",
+      fields = {
+        {
+          type = "void *",
+          name = "data",
+          description = "Image raw data"
+        },
+        {
+          type = "int",
+          name = "width",
+          description = "Image base width"
+        },
+        {
+          type = "int",
+          name = "height",
+          description = "Image base height"
+        },
+        {
+          type = "int",
+          name = "mipmaps",
+          description = "Mipmap levels, 1 by default"
+        },
+        {
+          type = "int",
+          name = "format",
+          description = "Data format (PixelFormat type)"
+        }
+      }
+    },
+    {
       name = "GlyphInfo",
       description = "GlyphInfo, font characters glyphs info",
       fields = {
@@ -225,22 +274,27 @@ return {
         {
           type = "int",
           name = "glyphCount",
-          description = "Number of characters"
+          description = "Number of glyph characters"
+        },
+        {
+          type = "int",
+          name = "glyphPadding",
+          description = "Padding around the glyph characters"
         },
         {
           type = "Texture2D",
           name = "texture",
-          description = "Characters texture atlas"
+          description = "Texture atlas containing the glyphs"
         },
         {
           type = "Rectangle *",
           name = "recs",
-          description = "Characters rectangles in texture"
+          description = "Rectangles in texture for the glyphs"
         },
         {
           type = "GlyphInfo *",
-          name = "chars",
-          description = "Characters info data"
+          name = "glyphs",
+          description = "Glyphs info data"
         }
       }
     },
@@ -511,6 +565,11 @@ return {
           name = "BACKGROUND_COLOR",
           value = 19,
           description = "Background color"
+        },
+        {
+          name = "TEXT_LINE_SPACING",
+          value = 20,
+          description = "Text spacing between lines"
         }
       }
     },
@@ -644,6 +703,21 @@ return {
           name = "TEXT_LINES_SPACING",
           value = 17,
           description = "TextBoxMulti lines separation"
+        },
+        {
+          name = "TEXT_ALIGNMENT_VERTICAL",
+          value = 18,
+          description = "TextBoxMulti vertical alignment: 0-CENTERED, 1-UP, 2-DOWN"
+        },
+        {
+          name = "TEXT_MULTILINE",
+          value = 19,
+          description = "TextBox supports multiple lines"
+        },
+        {
+          name = "TEXT_WRAP_MODE",
+          value = 20,
+          description = "TextBox wrap mode for multiline: 0-NO_WRAP, 1-CHAR_WRAP, 2-WORD_WRAP"
         }
       }
     },
@@ -1755,72 +1829,72 @@ return {
           description = ""
         },
         {
-          name = "ICON_206",
+          name = "ICON_CPU",
           value = 206,
           description = ""
         },
         {
-          name = "ICON_207",
+          name = "ICON_ROM",
           value = 207,
           description = ""
         },
         {
-          name = "ICON_208",
+          name = "ICON_STEP_OVER",
           value = 208,
           description = ""
         },
         {
-          name = "ICON_209",
+          name = "ICON_STEP_INTO",
           value = 209,
           description = ""
         },
         {
-          name = "ICON_210",
+          name = "ICON_STEP_OUT",
           value = 210,
           description = ""
         },
         {
-          name = "ICON_211",
+          name = "ICON_RESTART",
           value = 211,
           description = ""
         },
         {
-          name = "ICON_212",
+          name = "ICON_BREAKPOINT_ON",
           value = 212,
           description = ""
         },
         {
-          name = "ICON_213",
+          name = "ICON_BREAKPOINT_OFF",
           value = 213,
           description = ""
         },
         {
-          name = "ICON_214",
+          name = "ICON_BURGER_MENU",
           value = 214,
           description = ""
         },
         {
-          name = "ICON_215",
+          name = "ICON_CASE_SENSITIVE",
           value = 215,
           description = ""
         },
         {
-          name = "ICON_216",
+          name = "ICON_REG_EXP",
           value = 216,
           description = ""
         },
         {
-          name = "ICON_217",
+          name = "ICON_FOLDER",
           value = 217,
           description = ""
         },
         {
-          name = "ICON_218",
+          name = "ICON_FILE",
           value = 218,
           description = ""
         },
         {
-          name = "ICON_219",
+          name = "ICON_SAND_TIMER",
           value = 219,
           description = ""
         },
@@ -2089,9 +2163,83 @@ return {
       }
     },
     {
+      name = "GuiLoadStyle",
+      description = "Load style file over global style variable (.rgs)",
+      returnType = "void",
+      params = {
+        {type = "const char *", name = "fileName"}
+      }
+    },
+    {
+      name = "GuiLoadStyleDefault",
+      description = "Load style default over global style",
+      returnType = "void"
+    },
+    {
+      name = "GuiEnableTooltip",
+      description = "Enable gui tooltips (global state)",
+      returnType = "void"
+    },
+    {
+      name = "GuiDisableTooltip",
+      description = "Disable gui tooltips (global state)",
+      returnType = "void"
+    },
+    {
+      name = "GuiSetTooltip",
+      description = "Set tooltip string",
+      returnType = "void",
+      params = {
+        {type = "const char *", name = "tooltip"}
+      }
+    },
+    {
+      name = "GuiIconText",
+      description = "Get text with icon id prepended (if supported)",
+      returnType = "const char *",
+      params = {
+        {type = "int", name = "iconId"},
+        {type = "const char *", name = "text"}
+      }
+    },
+    {
+      name = "GuiSetIconScale",
+      description = "Set default icon drawing size",
+      returnType = "void",
+      params = {
+        {type = "int", name = "scale"}
+      }
+    },
+    {
+      name = "GuiGetIcons",
+      description = "Get raygui icons data pointer",
+      returnType = "unsigned int *"
+    },
+    {
+      name = "GuiLoadIcons",
+      description = "Load raygui icons file (.rgi) into internal icons data",
+      returnType = "char **",
+      params = {
+        {type = "const char *", name = "fileName"},
+        {type = "bool", name = "loadIconsName"}
+      }
+    },
+    {
+      name = "GuiDrawIcon",
+      description = "Draw icon using pixel size at specified position",
+      returnType = "void",
+      params = {
+        {type = "int", name = "iconId"},
+        {type = "int", name = "posX"},
+        {type = "int", name = "posY"},
+        {type = "int", name = "pixelSize"},
+        {type = "Color", name = "color"}
+      }
+    },
+    {
       name = "GuiWindowBox",
       description = "Window Box control, shows a window that can be closed",
-      returnType = "bool",
+      returnType = "int",
       params = {
         {type = "Rectangle", name = "bounds"},
         {type = "const char *", name = "title"}
@@ -2100,7 +2248,7 @@ return {
     {
       name = "GuiGroupBox",
       description = "Group Box control with text name",
-      returnType = "void",
+      returnType = "int",
       params = {
         {type = "Rectangle", name = "bounds"},
         {type = "const char *", name = "text"}
@@ -2109,7 +2257,7 @@ return {
     {
       name = "GuiLine",
       description = "Line separator control, could contain text",
-      returnType = "void",
+      returnType = "int",
       params = {
         {type = "Rectangle", name = "bounds"},
         {type = "const char *", name = "text"}
@@ -2118,27 +2266,39 @@ return {
     {
       name = "GuiPanel",
       description = "Panel control, useful to group controls",
-      returnType = "void",
+      returnType = "int",
       params = {
         {type = "Rectangle", name = "bounds"},
         {type = "const char *", name = "text"}
       }
     },
     {
+      name = "GuiTabBar",
+      description = "Tab Bar control, returns TAB to be closed or -1",
+      returnType = "int",
+      params = {
+        {type = "Rectangle", name = "bounds"},
+        {type = "const char **", name = "text"},
+        {type = "int", name = "count"},
+        {type = "int *", name = "active"}
+      }
+    },
+    {
       name = "GuiScrollPanel",
       description = "Scroll Panel control",
-      returnType = "Rectangle",
+      returnType = "int",
       params = {
         {type = "Rectangle", name = "bounds"},
         {type = "const char *", name = "text"},
         {type = "Rectangle", name = "content"},
-        {type = "Vector2 *", name = "scroll"}
+        {type = "Vector2 *", name = "scroll"},
+        {type = "Rectangle *", name = "view"}
       }
     },
     {
       name = "GuiLabel",
       description = "Label control, shows text",
-      returnType = "void",
+      returnType = "int",
       params = {
         {type = "Rectangle", name = "bounds"},
         {type = "const char *", name = "text"}
@@ -2147,7 +2307,7 @@ return {
     {
       name = "GuiButton",
       description = "Button control, returns true when clicked",
-      returnType = "bool",
+      returnType = "int",
       params = {
         {type = "Rectangle", name = "bounds"},
         {type = "const char *", name = "text"}
@@ -2156,7 +2316,7 @@ return {
     {
       name = "GuiLabelButton",
       description = "Label button control, show true when clicked",
-      returnType = "bool",
+      returnType = "int",
       params = {
         {type = "Rectangle", name = "bounds"},
         {type = "const char *", name = "text"}
@@ -2165,11 +2325,11 @@ return {
     {
       name = "GuiToggle",
       description = "Toggle Button control, returns true when active",
-      returnType = "bool",
+      returnType = "int",
       params = {
         {type = "Rectangle", name = "bounds"},
         {type = "const char *", name = "text"},
-        {type = "bool", name = "active"}
+        {type = "bool *", name = "active"}
       }
     },
     {
@@ -2179,17 +2339,17 @@ return {
       params = {
         {type = "Rectangle", name = "bounds"},
         {type = "const char *", name = "text"},
-        {type = "int", name = "active"}
+        {type = "int *", name = "active"}
       }
     },
     {
       name = "GuiCheckBox",
       description = "Check Box control, returns true when active",
-      returnType = "bool",
+      returnType = "int",
       params = {
         {type = "Rectangle", name = "bounds"},
         {type = "const char *", name = "text"},
-        {type = "bool", name = "checked"}
+        {type = "bool *", name = "checked"}
       }
     },
     {
@@ -2199,13 +2359,13 @@ return {
       params = {
         {type = "Rectangle", name = "bounds"},
         {type = "const char *", name = "text"},
-        {type = "int", name = "active"}
+        {type = "int *", name = "active"}
       }
     },
     {
       name = "GuiDropdownBox",
       description = "Dropdown Box control, returns selected item",
-      returnType = "bool",
+      returnType = "int",
       params = {
         {type = "Rectangle", name = "bounds"},
         {type = "const char *", name = "text"},
@@ -2216,7 +2376,7 @@ return {
     {
       name = "GuiSpinner",
       description = "Spinner control, returns selected value",
-      returnType = "bool",
+      returnType = "int",
       params = {
         {type = "Rectangle", name = "bounds"},
         {type = "const char *", name = "text"},
@@ -2229,7 +2389,7 @@ return {
     {
       name = "GuiValueBox",
       description = "Value Box control, updates input text with numbers",
-      returnType = "bool",
+      returnType = "int",
       params = {
         {type = "Rectangle", name = "bounds"},
         {type = "const char *", name = "text"},
@@ -2242,18 +2402,7 @@ return {
     {
       name = "GuiTextBox",
       description = "Text Box control, updates input text",
-      returnType = "bool",
-      params = {
-        {type = "Rectangle", name = "bounds"},
-        {type = "char *", name = "text"},
-        {type = "int", name = "textSize"},
-        {type = "bool", name = "editMode"}
-      }
-    },
-    {
-      name = "GuiTextBoxMulti",
-      description = "Text Box control with multiple lines",
-      returnType = "bool",
+      returnType = "int",
       params = {
         {type = "Rectangle", name = "bounds"},
         {type = "char *", name = "text"},
@@ -2264,12 +2413,12 @@ return {
     {
       name = "GuiSlider",
       description = "Slider control, returns selected value",
-      returnType = "float",
+      returnType = "int",
       params = {
         {type = "Rectangle", name = "bounds"},
         {type = "const char *", name = "textLeft"},
         {type = "const char *", name = "textRight"},
-        {type = "float", name = "value"},
+        {type = "float *", name = "value"},
         {type = "float", name = "minValue"},
         {type = "float", name = "maxValue"}
       }
@@ -2277,12 +2426,12 @@ return {
     {
       name = "GuiSliderBar",
       description = "Slider Bar control, returns selected value",
-      returnType = "float",
+      returnType = "int",
       params = {
         {type = "Rectangle", name = "bounds"},
         {type = "const char *", name = "textLeft"},
         {type = "const char *", name = "textRight"},
-        {type = "float", name = "value"},
+        {type = "float *", name = "value"},
         {type = "float", name = "minValue"},
         {type = "float", name = "maxValue"}
       }
@@ -2290,12 +2439,12 @@ return {
     {
       name = "GuiProgressBar",
       description = "Progress Bar control, shows current progress value",
-      returnType = "float",
+      returnType = "int",
       params = {
         {type = "Rectangle", name = "bounds"},
         {type = "const char *", name = "textLeft"},
         {type = "const char *", name = "textRight"},
-        {type = "float", name = "value"},
+        {type = "float *", name = "value"},
         {type = "float", name = "minValue"},
         {type = "float", name = "maxValue"}
       }
@@ -2303,7 +2452,7 @@ return {
     {
       name = "GuiStatusBar",
       description = "Status Bar control, shows info text",
-      returnType = "void",
+      returnType = "int",
       params = {
         {type = "Rectangle", name = "bounds"},
         {type = "const char *", name = "text"}
@@ -2312,7 +2461,7 @@ return {
     {
       name = "GuiDummyRec",
       description = "Dummy control for placeholders",
-      returnType = "void",
+      returnType = "int",
       params = {
         {type = "Rectangle", name = "bounds"},
         {type = "const char *", name = "text"}
@@ -2321,12 +2470,13 @@ return {
     {
       name = "GuiGrid",
       description = "Grid control, returns mouse cell position",
-      returnType = "Vector2",
+      returnType = "int",
       params = {
         {type = "Rectangle", name = "bounds"},
         {type = "const char *", name = "text"},
         {type = "float", name = "spacing"},
-        {type = "int", name = "subdivs"}
+        {type = "int", name = "subdivs"},
+        {type = "Vector2 *", name = "mouseCell"}
       }
     },
     {
@@ -2337,7 +2487,7 @@ return {
         {type = "Rectangle", name = "bounds"},
         {type = "const char *", name = "text"},
         {type = "int *", name = "scrollIndex"},
-        {type = "int", name = "active"}
+        {type = "int *", name = "active"}
       }
     },
     {
@@ -2348,9 +2498,9 @@ return {
         {type = "Rectangle", name = "bounds"},
         {type = "const char **", name = "text"},
         {type = "int", name = "count"},
-        {type = "int *", name = "focus"},
         {type = "int *", name = "scrollIndex"},
-        {type = "int", name = "active"}
+        {type = "int *", name = "active"},
+        {type = "int *", name = "focus"}
       }
     },
     {
@@ -2375,141 +2525,67 @@ return {
         {type = "const char *", name = "buttons"},
         {type = "char *", name = "text"},
         {type = "int", name = "textMaxSize"},
-        {type = "int *", name = "secretViewActive"}
+        {type = "bool *", name = "secretViewActive"}
       }
     },
     {
       name = "GuiColorPicker",
       description = "Color Picker control (multiple color controls)",
-      returnType = "Color",
+      returnType = "int",
       params = {
         {type = "Rectangle", name = "bounds"},
         {type = "const char *", name = "text"},
-        {type = "Color", name = "color"}
+        {type = "Color *", name = "color"}
       }
     },
     {
       name = "GuiColorPanel",
       description = "Color Panel control",
-      returnType = "Color",
+      returnType = "int",
       params = {
         {type = "Rectangle", name = "bounds"},
         {type = "const char *", name = "text"},
-        {type = "Color", name = "color"}
+        {type = "Color *", name = "color"}
       }
     },
     {
       name = "GuiColorBarAlpha",
       description = "Color Bar Alpha control",
-      returnType = "float",
+      returnType = "int",
       params = {
         {type = "Rectangle", name = "bounds"},
         {type = "const char *", name = "text"},
-        {type = "float", name = "alpha"}
+        {type = "float *", name = "alpha"}
       }
     },
     {
       name = "GuiColorBarHue",
       description = "Color Bar Hue control",
-      returnType = "float",
+      returnType = "int",
       params = {
         {type = "Rectangle", name = "bounds"},
         {type = "const char *", name = "text"},
-        {type = "float", name = "value"}
+        {type = "float *", name = "value"}
       }
     },
     {
-      name = "GuiLoadStyle",
-      description = "Load style file over global style variable (.rgs)",
-      returnType = "void",
+      name = "GuiColorPickerHSV",
+      description = "Color Picker control that avoids conversion to RGB on each call (multiple color controls)",
+      returnType = "int",
       params = {
-        {type = "const char *", name = "fileName"}
+        {type = "Rectangle", name = "bounds"},
+        {type = "const char *", name = "text"},
+        {type = "Vector3 *", name = "colorHsv"}
       }
     },
     {
-      name = "GuiLoadStyleDefault",
-      description = "Load style default over global style",
-      returnType = "void"
-    },
-    {
-      name = "GuiIconText",
-      description = "Get text with icon id prepended (if supported)",
-      returnType = "const char *",
+      name = "GuiColorPanelHSV",
+      description = "Color Panel control that returns HSV color value, used by GuiColorPickerHSV()",
+      returnType = "int",
       params = {
-        {type = "int", name = "iconId"},
-        {type = "const char *", name = "text"}
-      }
-    },
-    {
-      name = "GuiDrawIcon",
-      description = "",
-      returnType = "void",
-      params = {
-        {type = "int", name = "iconId"},
-        {type = "int", name = "posX"},
-        {type = "int", name = "posY"},
-        {type = "int", name = "pixelSize"},
-        {type = "Color", name = "color"}
-      }
-    },
-    {
-      name = "GuiGetIcons",
-      description = "Get full icons data pointer",
-      returnType = "unsigned int *"
-    },
-    {
-      name = "GuiGetIconData",
-      description = "Get icon bit data",
-      returnType = "unsigned int *",
-      params = {
-        {type = "int", name = "iconId"}
-      }
-    },
-    {
-      name = "GuiSetIconData",
-      description = "Set icon bit data",
-      returnType = "void",
-      params = {
-        {type = "int", name = "iconId"},
-        {type = "unsigned int *", name = "data"}
-      }
-    },
-    {
-      name = "GuiSetIconScale",
-      description = "Set icon scale (1 by default)",
-      returnType = "void",
-      params = {
-        {type = "unsigned int", name = "scale"}
-      }
-    },
-    {
-      name = "GuiSetIconPixel",
-      description = "Set icon pixel value",
-      returnType = "void",
-      params = {
-        {type = "int", name = "iconId"},
-        {type = "int", name = "x"},
-        {type = "int", name = "y"}
-      }
-    },
-    {
-      name = "GuiClearIconPixel",
-      description = "Clear icon pixel value",
-      returnType = "void",
-      params = {
-        {type = "int", name = "iconId"},
-        {type = "int", name = "x"},
-        {type = "int", name = "y"}
-      }
-    },
-    {
-      name = "GuiCheckIconPixel",
-      description = "Check icon pixel value",
-      returnType = "bool",
-      params = {
-        {type = "int", name = "iconId"},
-        {type = "int", name = "x"},
-        {type = "int", name = "y"}
+        {type = "Rectangle", name = "bounds"},
+        {type = "const char *", name = "text"},
+        {type = "Vector3 *", name = "colorHsv"}
       }
     }
   }

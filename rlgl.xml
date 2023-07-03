@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="Windows-1252" ?>
 <raylibAPI>
-    <Defines count="57">
+    <Defines count="86">
         <Define name="RLGL_H" type="GUARD" value="" desc="" />
-        <Define name="RLGL_VERSION" type="STRING" value="4.0" desc="" />
+        <Define name="RLGL_VERSION" type="STRING" value="4.5" desc="" />
         <Define name="RLAPI" type="UNKNOWN" value="__declspec(dllexport)" desc="We are building the library as a Win32 shared library (.dll)" />
         <Define name="TRACELOG(level, ...)" type="MACRO" value="(void)0" desc="" />
         <Define name="TRACELOGD(...)" type="MACRO" value="(void)0" desc="" />
@@ -31,6 +31,7 @@
         <Define name="RL_TEXTURE_FILTER_LINEAR_MIP_NEAREST" type="INT" value="0x2701" desc="GL_LINEAR_MIPMAP_NEAREST" />
         <Define name="RL_TEXTURE_FILTER_MIP_LINEAR" type="INT" value="0x2703" desc="GL_LINEAR_MIPMAP_LINEAR" />
         <Define name="RL_TEXTURE_FILTER_ANISOTROPIC" type="INT" value="0x3000" desc="Anisotropic filter (custom identifier)" />
+        <Define name="RL_TEXTURE_MIPMAP_BIAS_RATIO" type="INT" value="0x4000" desc="Texture mipmap bias, percentage ratio (custom identifier)" />
         <Define name="RL_TEXTURE_WRAP_REPEAT" type="INT" value="0x2901" desc="GL_REPEAT" />
         <Define name="RL_TEXTURE_WRAP_CLAMP" type="INT" value="0x812F" desc="GL_CLAMP_TO_EDGE" />
         <Define name="RL_TEXTURE_WRAP_MIRROR_REPEAT" type="INT" value="0x8370" desc="GL_MIRRORED_REPEAT" />
@@ -55,11 +56,57 @@
         <Define name="RL_FRAGMENT_SHADER" type="INT" value="0x8B30" desc="GL_FRAGMENT_SHADER" />
         <Define name="RL_VERTEX_SHADER" type="INT" value="0x8B31" desc="GL_VERTEX_SHADER" />
         <Define name="RL_COMPUTE_SHADER" type="INT" value="0x91B9" desc="GL_COMPUTE_SHADER" />
+        <Define name="RL_ZERO" type="INT" value="0" desc="GL_ZERO" />
+        <Define name="RL_ONE" type="INT" value="1" desc="GL_ONE" />
+        <Define name="RL_SRC_COLOR" type="INT" value="0x0300" desc="GL_SRC_COLOR" />
+        <Define name="RL_ONE_MINUS_SRC_COLOR" type="INT" value="0x0301" desc="GL_ONE_MINUS_SRC_COLOR" />
+        <Define name="RL_SRC_ALPHA" type="INT" value="0x0302" desc="GL_SRC_ALPHA" />
+        <Define name="RL_ONE_MINUS_SRC_ALPHA" type="INT" value="0x0303" desc="GL_ONE_MINUS_SRC_ALPHA" />
+        <Define name="RL_DST_ALPHA" type="INT" value="0x0304" desc="GL_DST_ALPHA" />
+        <Define name="RL_ONE_MINUS_DST_ALPHA" type="INT" value="0x0305" desc="GL_ONE_MINUS_DST_ALPHA" />
+        <Define name="RL_DST_COLOR" type="INT" value="0x0306" desc="GL_DST_COLOR" />
+        <Define name="RL_ONE_MINUS_DST_COLOR" type="INT" value="0x0307" desc="GL_ONE_MINUS_DST_COLOR" />
+        <Define name="RL_SRC_ALPHA_SATURATE" type="INT" value="0x0308" desc="GL_SRC_ALPHA_SATURATE" />
+        <Define name="RL_CONSTANT_COLOR" type="INT" value="0x8001" desc="GL_CONSTANT_COLOR" />
+        <Define name="RL_ONE_MINUS_CONSTANT_COLOR" type="INT" value="0x8002" desc="GL_ONE_MINUS_CONSTANT_COLOR" />
+        <Define name="RL_CONSTANT_ALPHA" type="INT" value="0x8003" desc="GL_CONSTANT_ALPHA" />
+        <Define name="RL_ONE_MINUS_CONSTANT_ALPHA" type="INT" value="0x8004" desc="GL_ONE_MINUS_CONSTANT_ALPHA" />
+        <Define name="RL_FUNC_ADD" type="INT" value="0x8006" desc="GL_FUNC_ADD" />
+        <Define name="RL_MIN" type="INT" value="0x8007" desc="GL_MIN" />
+        <Define name="RL_MAX" type="INT" value="0x8008" desc="GL_MAX" />
+        <Define name="RL_FUNC_SUBTRACT" type="INT" value="0x800A" desc="GL_FUNC_SUBTRACT" />
+        <Define name="RL_FUNC_REVERSE_SUBTRACT" type="INT" value="0x800B" desc="GL_FUNC_REVERSE_SUBTRACT" />
+        <Define name="RL_BLEND_EQUATION" type="INT" value="0x8009" desc="GL_BLEND_EQUATION" />
+        <Define name="RL_BLEND_EQUATION_RGB" type="INT" value="0x8009" desc="GL_BLEND_EQUATION_RGB   // (Same as BLEND_EQUATION)" />
+        <Define name="RL_BLEND_EQUATION_ALPHA" type="INT" value="0x883D" desc="GL_BLEND_EQUATION_ALPHA" />
+        <Define name="RL_BLEND_DST_RGB" type="INT" value="0x80C8" desc="GL_BLEND_DST_RGB" />
+        <Define name="RL_BLEND_SRC_RGB" type="INT" value="0x80C9" desc="GL_BLEND_SRC_RGB" />
+        <Define name="RL_BLEND_DST_ALPHA" type="INT" value="0x80CA" desc="GL_BLEND_DST_ALPHA" />
+        <Define name="RL_BLEND_SRC_ALPHA" type="INT" value="0x80CB" desc="GL_BLEND_SRC_ALPHA" />
+        <Define name="RL_BLEND_COLOR" type="INT" value="0x8005" desc="GL_BLEND_COLOR" />
         <Define name="RL_MATRIX_TYPE" type="GUARD" value="" desc="" />
         <Define name="RL_SHADER_LOC_MAP_DIFFUSE" type="UNKNOWN" value="RL_SHADER_LOC_MAP_ALBEDO" desc="" />
         <Define name="RL_SHADER_LOC_MAP_SPECULAR" type="UNKNOWN" value="RL_SHADER_LOC_MAP_METALNESS" desc="" />
     </Defines>
     <Structs count="4">
+        <Struct name="Matrix" fieldCount="16" desc="Matrix, 4x4 components, column major, OpenGL style, right handed">
+            <Field type="float" name="m0" desc="Matrix first row (4 components)" />
+            <Field type="float" name="m4" desc="Matrix first row (4 components)" />
+            <Field type="float" name="m8" desc="Matrix first row (4 components)" />
+            <Field type="float" name="m12" desc="Matrix first row (4 components)" />
+            <Field type="float" name="m1" desc="Matrix second row (4 components)" />
+            <Field type="float" name="m5" desc="Matrix second row (4 components)" />
+            <Field type="float" name="m9" desc="Matrix second row (4 components)" />
+            <Field type="float" name="m13" desc="Matrix second row (4 components)" />
+            <Field type="float" name="m2" desc="Matrix third row (4 components)" />
+            <Field type="float" name="m6" desc="Matrix third row (4 components)" />
+            <Field type="float" name="m10" desc="Matrix third row (4 components)" />
+            <Field type="float" name="m14" desc="Matrix third row (4 components)" />
+            <Field type="float" name="m3" desc="Matrix fourth row (4 components)" />
+            <Field type="float" name="m7" desc="Matrix fourth row (4 components)" />
+            <Field type="float" name="m11" desc="Matrix fourth row (4 components)" />
+            <Field type="float" name="m15" desc="Matrix fourth row (4 components)" />
+        </Struct>
         <Struct name="rlVertexBuffer" fieldCount="12" desc="Dynamic vertex buffers (position + texcoords + colors + indices arrays)">
             <Field type="int" name="elementCount" desc="Number of elements in the buffer (QUADS)" />
             <Field type="float *" name="vertices" desc="Vertex position (XYZ - 3 components per vertex) (shader-location = 0)" />
@@ -88,56 +135,16 @@
             <Field type="int" name="drawCounter" desc="Draw calls counter" />
             <Field type="float" name="currentDepth" desc="Current depth value for next draw" />
         </Struct>
-        <Struct name="Matrix" fieldCount="16" desc="Matrix, 4x4 components, column major, OpenGL style, right handed">
-            <Field type="float" name="m0" desc="Matrix first row (4 components)" />
-            <Field type="float" name="m4" desc="Matrix first row (4 components)" />
-            <Field type="float" name="m8" desc="Matrix first row (4 components)" />
-            <Field type="float" name="m12" desc="Matrix first row (4 components)" />
-            <Field type="float" name="m1" desc="Matrix second row (4 components)" />
-            <Field type="float" name="m5" desc="Matrix second row (4 components)" />
-            <Field type="float" name="m9" desc="Matrix second row (4 components)" />
-            <Field type="float" name="m13" desc="Matrix second row (4 components)" />
-            <Field type="float" name="m2" desc="Matrix third row (4 components)" />
-            <Field type="float" name="m6" desc="Matrix third row (4 components)" />
-            <Field type="float" name="m10" desc="Matrix third row (4 components)" />
-            <Field type="float" name="m14" desc="Matrix third row (4 components)" />
-            <Field type="float" name="m3" desc="Matrix fourth row (4 components)" />
-            <Field type="float" name="m7" desc="Matrix fourth row (4 components)" />
-            <Field type="float" name="m11" desc="Matrix fourth row (4 components)" />
-            <Field type="float" name="m15" desc="Matrix fourth row (4 components)" />
-        </Struct>
     </Structs>
     <Aliases count="0">
     </Aliases>
-    <Enums count="10">
-        <Enum name="rlGlVersion" valueCount="5" desc="">
-            <Value name="OPENGL_11" integer="1" desc="" />
-            <Value name="OPENGL_21" integer="2" desc="" />
-            <Value name="OPENGL_33" integer="3" desc="" />
-            <Value name="OPENGL_43" integer="4" desc="" />
-            <Value name="OPENGL_ES_20" integer="5" desc="" />
-        </Enum>
-        <Enum name="rlFramebufferAttachType" valueCount="10" desc="">
-            <Value name="RL_ATTACHMENT_COLOR_CHANNEL0" integer="0" desc="" />
-            <Value name="RL_ATTACHMENT_COLOR_CHANNEL1" integer="1" desc="" />
-            <Value name="RL_ATTACHMENT_COLOR_CHANNEL2" integer="2" desc="" />
-            <Value name="RL_ATTACHMENT_COLOR_CHANNEL3" integer="3" desc="" />
-            <Value name="RL_ATTACHMENT_COLOR_CHANNEL4" integer="4" desc="" />
-            <Value name="RL_ATTACHMENT_COLOR_CHANNEL5" integer="5" desc="" />
-            <Value name="RL_ATTACHMENT_COLOR_CHANNEL6" integer="6" desc="" />
-            <Value name="RL_ATTACHMENT_COLOR_CHANNEL7" integer="7" desc="" />
-            <Value name="RL_ATTACHMENT_DEPTH" integer="100" desc="" />
-            <Value name="RL_ATTACHMENT_STENCIL" integer="200" desc="" />
-        </Enum>
-        <Enum name="rlFramebufferAttachTextureType" valueCount="8" desc="">
-            <Value name="RL_ATTACHMENT_CUBEMAP_POSITIVE_X" integer="0" desc="" />
-            <Value name="RL_ATTACHMENT_CUBEMAP_NEGATIVE_X" integer="1" desc="" />
-            <Value name="RL_ATTACHMENT_CUBEMAP_POSITIVE_Y" integer="2" desc="" />
-            <Value name="RL_ATTACHMENT_CUBEMAP_NEGATIVE_Y" integer="3" desc="" />
-            <Value name="RL_ATTACHMENT_CUBEMAP_POSITIVE_Z" integer="4" desc="" />
-            <Value name="RL_ATTACHMENT_CUBEMAP_NEGATIVE_Z" integer="5" desc="" />
-            <Value name="RL_ATTACHMENT_TEXTURE2D" integer="100" desc="" />
-            <Value name="RL_ATTACHMENT_RENDERBUFFER" integer="200" desc="" />
+    <Enums count="11">
+        <Enum name="rlGlVersion" valueCount="5" desc="OpenGL version">
+            <Value name="RL_OPENGL_11" integer="1" desc="OpenGL 1.1" />
+            <Value name="RL_OPENGL_21" integer="2" desc="OpenGL 2.1 (GLSL 120)" />
+            <Value name="RL_OPENGL_33" integer="3" desc="OpenGL 3.3 (GLSL 330)" />
+            <Value name="RL_OPENGL_43" integer="4" desc="OpenGL 4.3 (using GLSL 330)" />
+            <Value name="RL_OPENGL_ES_20" integer="5" desc="OpenGL ES 2.0 (GLSL 100)" />
         </Enum>
         <Enum name="rlTraceLogLevel" valueCount="8" desc="Trace log level">
             <Value name="RL_LOG_ALL" integer="0" desc="Display all logs" />
@@ -149,7 +156,7 @@
             <Value name="RL_LOG_FATAL" integer="6" desc="Fatal logging, used to abort program: exit(EXIT_FAILURE)" />
             <Value name="RL_LOG_NONE" integer="7" desc="Disable logging" />
         </Enum>
-        <Enum name="rlPixelFormat" valueCount="21" desc="Texture formats (support depends on OpenGL version)">
+        <Enum name="rlPixelFormat" valueCount="21" desc="Texture pixel formats">
             <Value name="RL_PIXELFORMAT_UNCOMPRESSED_GRAYSCALE" integer="1" desc="8 bit per pixel (no alpha)" />
             <Value name="RL_PIXELFORMAT_UNCOMPRESSED_GRAY_ALPHA" integer="2" desc="8*2 bpp (2 channels)" />
             <Value name="RL_PIXELFORMAT_UNCOMPRESSED_R5G6B5" integer="3" desc="16 bpp" />
@@ -180,7 +187,7 @@
             <Value name="RL_TEXTURE_FILTER_ANISOTROPIC_8X" integer="4" desc="Anisotropic filtering 8x" />
             <Value name="RL_TEXTURE_FILTER_ANISOTROPIC_16X" integer="5" desc="Anisotropic filtering 16x" />
         </Enum>
-        <Enum name="rlBlendMode" valueCount="7" desc="Color blending modes (pre-defined)">
+        <Enum name="rlBlendMode" valueCount="8" desc="Color blending modes (pre-defined)">
             <Value name="RL_BLEND_ALPHA" integer="0" desc="Blend textures considering alpha (default)" />
             <Value name="RL_BLEND_ADDITIVE" integer="1" desc="Blend textures adding colors" />
             <Value name="RL_BLEND_MULTIPLIED" integer="2" desc="Blend textures multiplying colors" />
@@ -188,6 +195,7 @@
             <Value name="RL_BLEND_SUBTRACT_COLORS" integer="4" desc="Blend textures subtracting colors (alternative)" />
             <Value name="RL_BLEND_ALPHA_PREMULTIPLY" integer="5" desc="Blend premultiplied textures considering alpha" />
             <Value name="RL_BLEND_CUSTOM" integer="6" desc="Blend textures using custom src/dst factors (use rlSetBlendFactors())" />
+            <Value name="RL_BLEND_CUSTOM_SEPARATE" integer="7" desc="Blend textures using custom src/dst factors (use rlSetBlendFactorsSeparate())" />
         </Enum>
         <Enum name="rlShaderLocationIndex" valueCount="26" desc="Shader location point type">
             <Value name="RL_SHADER_LOC_VERTEX_POSITION" integer="0" desc="Shader location: vertex attribute: position" />
@@ -234,16 +242,42 @@
             <Value name="RL_SHADER_ATTRIB_VEC3" integer="2" desc="Shader attribute type: vec3 (3 float)" />
             <Value name="RL_SHADER_ATTRIB_VEC4" integer="3" desc="Shader attribute type: vec4 (4 float)" />
         </Enum>
+        <Enum name="rlFramebufferAttachType" valueCount="10" desc="Framebuffer attachment type">
+            <Value name="RL_ATTACHMENT_COLOR_CHANNEL0" integer="0" desc="Framebuffer attachment type: color 0" />
+            <Value name="RL_ATTACHMENT_COLOR_CHANNEL1" integer="1" desc="Framebuffer attachment type: color 1" />
+            <Value name="RL_ATTACHMENT_COLOR_CHANNEL2" integer="2" desc="Framebuffer attachment type: color 2" />
+            <Value name="RL_ATTACHMENT_COLOR_CHANNEL3" integer="3" desc="Framebuffer attachment type: color 3" />
+            <Value name="RL_ATTACHMENT_COLOR_CHANNEL4" integer="4" desc="Framebuffer attachment type: color 4" />
+            <Value name="RL_ATTACHMENT_COLOR_CHANNEL5" integer="5" desc="Framebuffer attachment type: color 5" />
+            <Value name="RL_ATTACHMENT_COLOR_CHANNEL6" integer="6" desc="Framebuffer attachment type: color 6" />
+            <Value name="RL_ATTACHMENT_COLOR_CHANNEL7" integer="7" desc="Framebuffer attachment type: color 7" />
+            <Value name="RL_ATTACHMENT_DEPTH" integer="100" desc="Framebuffer attachment type: depth" />
+            <Value name="RL_ATTACHMENT_STENCIL" integer="200" desc="Framebuffer attachment type: stencil" />
+        </Enum>
+        <Enum name="rlFramebufferAttachTextureType" valueCount="8" desc="Framebuffer texture attachment type">
+            <Value name="RL_ATTACHMENT_CUBEMAP_POSITIVE_X" integer="0" desc="Framebuffer texture attachment type: cubemap, +X side" />
+            <Value name="RL_ATTACHMENT_CUBEMAP_NEGATIVE_X" integer="1" desc="Framebuffer texture attachment type: cubemap, -X side" />
+            <Value name="RL_ATTACHMENT_CUBEMAP_POSITIVE_Y" integer="2" desc="Framebuffer texture attachment type: cubemap, +Y side" />
+            <Value name="RL_ATTACHMENT_CUBEMAP_NEGATIVE_Y" integer="3" desc="Framebuffer texture attachment type: cubemap, -Y side" />
+            <Value name="RL_ATTACHMENT_CUBEMAP_POSITIVE_Z" integer="4" desc="Framebuffer texture attachment type: cubemap, +Z side" />
+            <Value name="RL_ATTACHMENT_CUBEMAP_NEGATIVE_Z" integer="5" desc="Framebuffer texture attachment type: cubemap, -Z side" />
+            <Value name="RL_ATTACHMENT_TEXTURE2D" integer="100" desc="Framebuffer texture attachment type: texture2d" />
+            <Value name="RL_ATTACHMENT_RENDERBUFFER" integer="200" desc="Framebuffer texture attachment type: renderbuffer" />
+        </Enum>
+        <Enum name="rlCullMode" valueCount="2" desc="Face culling mode">
+            <Value name="RL_CULL_FACE_FRONT" integer="0" desc="" />
+            <Value name="RL_CULL_FACE_BACK" integer="1" desc="" />
+        </Enum>
     </Enums>
     <Callbacks count="0">
     </Callbacks>
-    <Functions count="144">
+    <Functions count="147">
         <Function name="rlMatrixMode" retType="void" paramCount="1" desc="Choose the current matrix to be transformed">
             <Param type="int" name="mode" desc="" />
         </Function>
         <Function name="rlPushMatrix" retType="void" paramCount="0" desc="Push the current matrix to stack">
         </Function>
-        <Function name="rlPopMatrix" retType="void" paramCount="0" desc="Pop lattest inserted matrix from stack">
+        <Function name="rlPopMatrix" retType="void" paramCount="0" desc="Pop latest inserted matrix from stack">
         </Function>
         <Function name="rlLoadIdentity" retType="void" paramCount="0" desc="Reset current matrix to identity matrix">
         </Function>
@@ -264,7 +298,7 @@
             <Param type="float" name="z" desc="" />
         </Function>
         <Function name="rlMultMatrixf" retType="void" paramCount="1" desc="Multiply the current matrix by another matrix">
-            <Param type="float *" name="matf" desc="" />
+            <Param type="const float *" name="matf" desc="" />
         </Function>
         <Function name="rlFrustum" retType="void" paramCount="6" desc="">
             <Param type="double" name="left" desc="" />
@@ -378,6 +412,11 @@
             <Param type="int" name="param" desc="" />
             <Param type="int" name="value" desc="" />
         </Function>
+        <Function name="rlCubemapParameters" retType="void" paramCount="3" desc="Set cubemap parameters (filter, wrap)">
+            <Param type="unsigned int" name="id" desc="" />
+            <Param type="int" name="param" desc="" />
+            <Param type="int" name="value" desc="" />
+        </Function>
         <Function name="rlEnableShader" retType="void" paramCount="1" desc="Enable shader program">
             <Param type="unsigned int" name="id" desc="" />
         </Function>
@@ -406,6 +445,9 @@
         <Function name="rlEnableBackfaceCulling" retType="void" paramCount="0" desc="Enable backface culling">
         </Function>
         <Function name="rlDisableBackfaceCulling" retType="void" paramCount="0" desc="Disable backface culling">
+        </Function>
+        <Function name="rlSetCullFace" retType="void" paramCount="1" desc="Set face culling mode">
+            <Param type="int" name="mode" desc="" />
         </Function>
         <Function name="rlEnableScissorTest" retType="void" paramCount="0" desc="Enable scissor test">
         </Function>
@@ -454,11 +496,19 @@
             <Param type="int" name="glDstFactor" desc="" />
             <Param type="int" name="glEquation" desc="" />
         </Function>
+        <Function name="rlSetBlendFactorsSeparate" retType="void" paramCount="6" desc="Set blending mode factors and equations separately (using OpenGL factors)">
+            <Param type="int" name="glSrcRGB" desc="" />
+            <Param type="int" name="glDstRGB" desc="" />
+            <Param type="int" name="glSrcAlpha" desc="" />
+            <Param type="int" name="glDstAlpha" desc="" />
+            <Param type="int" name="glEqRGB" desc="" />
+            <Param type="int" name="glEqAlpha" desc="" />
+        </Function>
         <Function name="rlglInit" retType="void" paramCount="2" desc="Initialize rlgl (buffers, shaders, textures, states)">
             <Param type="int" name="width" desc="" />
             <Param type="int" name="height" desc="" />
         </Function>
-        <Function name="rlglClose" retType="void" paramCount="0" desc="De-inititialize rlgl (buffers, shaders, textures)">
+        <Function name="rlglClose" retType="void" paramCount="0" desc="De-initialize rlgl (buffers, shaders, textures)">
         </Function>
         <Function name="rlLoadExtensions" retType="void" paramCount="1" desc="Load OpenGL extensions (loader function required)">
             <Param type="void *" name="loader" desc="" />
@@ -686,50 +736,50 @@
         <Function name="rlLoadComputeShaderProgram" retType="unsigned int" paramCount="1" desc="Load compute shader program">
             <Param type="unsigned int" name="shaderId" desc="" />
         </Function>
-        <Function name="rlComputeShaderDispatch" retType="void" paramCount="3" desc="Dispatch compute shader (equivalent to *draw* for graphics pilepine)">
+        <Function name="rlComputeShaderDispatch" retType="void" paramCount="3" desc="Dispatch compute shader (equivalent to *draw* for graphics pipeline)">
             <Param type="unsigned int" name="groupX" desc="" />
             <Param type="unsigned int" name="groupY" desc="" />
             <Param type="unsigned int" name="groupZ" desc="" />
         </Function>
         <Function name="rlLoadShaderBuffer" retType="unsigned int" paramCount="3" desc="Load shader storage buffer object (SSBO)">
-            <Param type="unsigned long long" name="size" desc="" />
+            <Param type="unsigned int" name="size" desc="" />
             <Param type="const void *" name="data" desc="" />
             <Param type="int" name="usageHint" desc="" />
         </Function>
         <Function name="rlUnloadShaderBuffer" retType="void" paramCount="1" desc="Unload shader storage buffer object (SSBO)">
             <Param type="unsigned int" name="ssboId" desc="" />
         </Function>
-        <Function name="rlUpdateShaderBufferElements" retType="void" paramCount="4" desc="Update SSBO buffer data">
+        <Function name="rlUpdateShaderBuffer" retType="void" paramCount="4" desc="Update SSBO buffer data">
             <Param type="unsigned int" name="id" desc="" />
             <Param type="const void *" name="data" desc="" />
-            <Param type="unsigned long long" name="dataSize" desc="" />
-            <Param type="unsigned long long" name="offset" desc="" />
+            <Param type="unsigned int" name="dataSize" desc="" />
+            <Param type="unsigned int" name="offset" desc="" />
         </Function>
-        <Function name="rlGetShaderBufferSize" retType="unsigned long long" paramCount="1" desc="Get SSBO buffer size">
-            <Param type="unsigned int" name="id" desc="" />
-        </Function>
-        <Function name="rlReadShaderBufferElements" retType="void" paramCount="4" desc="Bind SSBO buffer">
-            <Param type="unsigned int" name="id" desc="" />
-            <Param type="void *" name="dest" desc="" />
-            <Param type="unsigned long long" name="count" desc="" />
-            <Param type="unsigned long long" name="offset" desc="" />
-        </Function>
-        <Function name="rlBindShaderBuffer" retType="void" paramCount="2" desc="Copy SSBO buffer data">
+        <Function name="rlBindShaderBuffer" retType="void" paramCount="2" desc="Bind SSBO buffer">
             <Param type="unsigned int" name="id" desc="" />
             <Param type="unsigned int" name="index" desc="" />
         </Function>
-        <Function name="rlCopyBuffersElements" retType="void" paramCount="5" desc="Copy SSBO buffer data">
+        <Function name="rlReadShaderBuffer" retType="void" paramCount="4" desc="Read SSBO buffer data (GPU->CPU)">
+            <Param type="unsigned int" name="id" desc="" />
+            <Param type="void *" name="dest" desc="" />
+            <Param type="unsigned int" name="count" desc="" />
+            <Param type="unsigned int" name="offset" desc="" />
+        </Function>
+        <Function name="rlCopyShaderBuffer" retType="void" paramCount="5" desc="Copy SSBO data between buffers">
             <Param type="unsigned int" name="destId" desc="" />
             <Param type="unsigned int" name="srcId" desc="" />
-            <Param type="unsigned long long" name="destOffset" desc="" />
-            <Param type="unsigned long long" name="srcOffset" desc="" />
-            <Param type="unsigned long long" name="count" desc="" />
+            <Param type="unsigned int" name="destOffset" desc="" />
+            <Param type="unsigned int" name="srcOffset" desc="" />
+            <Param type="unsigned int" name="count" desc="" />
+        </Function>
+        <Function name="rlGetShaderBufferSize" retType="unsigned int" paramCount="1" desc="Get SSBO buffer size">
+            <Param type="unsigned int" name="id" desc="" />
         </Function>
         <Function name="rlBindImageTexture" retType="void" paramCount="4" desc="Bind image texture">
             <Param type="unsigned int" name="id" desc="" />
             <Param type="unsigned int" name="index" desc="" />
-            <Param type="unsigned int" name="format" desc="" />
-            <Param type="int" name="readonly" desc="" />
+            <Param type="int" name="format" desc="" />
+            <Param type="bool" name="readonly" desc="" />
         </Function>
         <Function name="rlGetMatrixModelview" retType="Matrix" paramCount="0" desc="Get internal modelview matrix">
         </Function>
