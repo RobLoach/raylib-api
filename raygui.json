@@ -7,9 +7,27 @@
       "description": ""
     },
     {
+      "name": "RAYGUI_VERSION_MAJOR",
+      "type": "INT",
+      "value": 4,
+      "description": ""
+    },
+    {
+      "name": "RAYGUI_VERSION_MINOR",
+      "type": "INT",
+      "value": 0,
+      "description": ""
+    },
+    {
+      "name": "RAYGUI_VERSION_PATCH",
+      "type": "INT",
+      "value": 0,
+      "description": ""
+    },
+    {
       "name": "RAYGUI_VERSION",
       "type": "STRING",
-      "value": "3.2",
+      "value": "4.0-dev",
       "description": ""
     },
     {
@@ -547,6 +565,11 @@
           "name": "BACKGROUND_COLOR",
           "value": 19,
           "description": "Background color"
+        },
+        {
+          "name": "TEXT_LINE_SPACING",
+          "value": 20,
+          "description": "Text spacing between lines"
         }
       ]
     },
@@ -680,6 +703,21 @@
           "name": "TEXT_LINES_SPACING",
           "value": 17,
           "description": "TextBoxMulti lines separation"
+        },
+        {
+          "name": "TEXT_ALIGNMENT_VERTICAL",
+          "value": 18,
+          "description": "TextBoxMulti vertical alignment: 0-CENTERED, 1-UP, 2-DOWN"
+        },
+        {
+          "name": "TEXT_MULTILINE",
+          "value": 19,
+          "description": "TextBox supports multiple lines"
+        },
+        {
+          "name": "TEXT_WRAP_MODE",
+          "value": 20,
+          "description": "TextBox wrap mode for multiline: 0-NO_WRAP, 1-CHAR_WRAP, 2-WORD_WRAP"
         }
       ]
     },
@@ -1856,7 +1894,7 @@
           "description": ""
         },
         {
-          "name": "ICON_219",
+          "name": "ICON_SAND_TIMER",
           "value": 219,
           "description": ""
         },
@@ -2149,9 +2187,119 @@
       ]
     },
     {
+      "name": "GuiLoadStyle",
+      "description": "Load style file over global style variable (.rgs)",
+      "returnType": "void",
+      "params": [
+        {
+          "type": "const char *",
+          "name": "fileName"
+        }
+      ]
+    },
+    {
+      "name": "GuiLoadStyleDefault",
+      "description": "Load style default over global style",
+      "returnType": "void"
+    },
+    {
+      "name": "GuiEnableTooltip",
+      "description": "Enable gui tooltips (global state)",
+      "returnType": "void"
+    },
+    {
+      "name": "GuiDisableTooltip",
+      "description": "Disable gui tooltips (global state)",
+      "returnType": "void"
+    },
+    {
+      "name": "GuiSetTooltip",
+      "description": "Set tooltip string",
+      "returnType": "void",
+      "params": [
+        {
+          "type": "const char *",
+          "name": "tooltip"
+        }
+      ]
+    },
+    {
+      "name": "GuiIconText",
+      "description": "Get text with icon id prepended (if supported)",
+      "returnType": "const char *",
+      "params": [
+        {
+          "type": "int",
+          "name": "iconId"
+        },
+        {
+          "type": "const char *",
+          "name": "text"
+        }
+      ]
+    },
+    {
+      "name": "GuiSetIconScale",
+      "description": "Set default icon drawing size",
+      "returnType": "void",
+      "params": [
+        {
+          "type": "int",
+          "name": "scale"
+        }
+      ]
+    },
+    {
+      "name": "GuiGetIcons",
+      "description": "Get raygui icons data pointer",
+      "returnType": "unsigned int *"
+    },
+    {
+      "name": "GuiLoadIcons",
+      "description": "Load raygui icons file (.rgi) into internal icons data",
+      "returnType": "char **",
+      "params": [
+        {
+          "type": "const char *",
+          "name": "fileName"
+        },
+        {
+          "type": "bool",
+          "name": "loadIconsName"
+        }
+      ]
+    },
+    {
+      "name": "GuiDrawIcon",
+      "description": "Draw icon using pixel size at specified position",
+      "returnType": "void",
+      "params": [
+        {
+          "type": "int",
+          "name": "iconId"
+        },
+        {
+          "type": "int",
+          "name": "posX"
+        },
+        {
+          "type": "int",
+          "name": "posY"
+        },
+        {
+          "type": "int",
+          "name": "pixelSize"
+        },
+        {
+          "type": "Color",
+          "name": "color"
+        }
+      ]
+    },
+    {
       "name": "GuiWindowBox",
       "description": "Window Box control, shows a window that can be closed",
-      "returnType": "bool",
+      "returnType": "int",
       "params": [
         {
           "type": "Rectangle",
@@ -2166,7 +2314,7 @@
     {
       "name": "GuiGroupBox",
       "description": "Group Box control with text name",
-      "returnType": "void",
+      "returnType": "int",
       "params": [
         {
           "type": "Rectangle",
@@ -2181,7 +2329,7 @@
     {
       "name": "GuiLine",
       "description": "Line separator control, could contain text",
-      "returnType": "void",
+      "returnType": "int",
       "params": [
         {
           "type": "Rectangle",
@@ -2196,7 +2344,7 @@
     {
       "name": "GuiPanel",
       "description": "Panel control, useful to group controls",
-      "returnType": "void",
+      "returnType": "int",
       "params": [
         {
           "type": "Rectangle",
@@ -2234,7 +2382,7 @@
     {
       "name": "GuiScrollPanel",
       "description": "Scroll Panel control",
-      "returnType": "Rectangle",
+      "returnType": "int",
       "params": [
         {
           "type": "Rectangle",
@@ -2251,13 +2399,17 @@
         {
           "type": "Vector2 *",
           "name": "scroll"
+        },
+        {
+          "type": "Rectangle *",
+          "name": "view"
         }
       ]
     },
     {
       "name": "GuiLabel",
       "description": "Label control, shows text",
-      "returnType": "void",
+      "returnType": "int",
       "params": [
         {
           "type": "Rectangle",
@@ -2272,7 +2424,7 @@
     {
       "name": "GuiButton",
       "description": "Button control, returns true when clicked",
-      "returnType": "bool",
+      "returnType": "int",
       "params": [
         {
           "type": "Rectangle",
@@ -2287,7 +2439,7 @@
     {
       "name": "GuiLabelButton",
       "description": "Label button control, show true when clicked",
-      "returnType": "bool",
+      "returnType": "int",
       "params": [
         {
           "type": "Rectangle",
@@ -2302,7 +2454,7 @@
     {
       "name": "GuiToggle",
       "description": "Toggle Button control, returns true when active",
-      "returnType": "bool",
+      "returnType": "int",
       "params": [
         {
           "type": "Rectangle",
@@ -2313,7 +2465,7 @@
           "name": "text"
         },
         {
-          "type": "bool",
+          "type": "bool *",
           "name": "active"
         }
       ]
@@ -2332,7 +2484,7 @@
           "name": "text"
         },
         {
-          "type": "int",
+          "type": "int *",
           "name": "active"
         }
       ]
@@ -2340,7 +2492,7 @@
     {
       "name": "GuiCheckBox",
       "description": "Check Box control, returns true when active",
-      "returnType": "bool",
+      "returnType": "int",
       "params": [
         {
           "type": "Rectangle",
@@ -2351,7 +2503,7 @@
           "name": "text"
         },
         {
-          "type": "bool",
+          "type": "bool *",
           "name": "checked"
         }
       ]
@@ -2370,7 +2522,7 @@
           "name": "text"
         },
         {
-          "type": "int",
+          "type": "int *",
           "name": "active"
         }
       ]
@@ -2378,7 +2530,7 @@
     {
       "name": "GuiDropdownBox",
       "description": "Dropdown Box control, returns selected item",
-      "returnType": "bool",
+      "returnType": "int",
       "params": [
         {
           "type": "Rectangle",
@@ -2401,7 +2553,7 @@
     {
       "name": "GuiSpinner",
       "description": "Spinner control, returns selected value",
-      "returnType": "bool",
+      "returnType": "int",
       "params": [
         {
           "type": "Rectangle",
@@ -2432,7 +2584,7 @@
     {
       "name": "GuiValueBox",
       "description": "Value Box control, updates input text with numbers",
-      "returnType": "bool",
+      "returnType": "int",
       "params": [
         {
           "type": "Rectangle",
@@ -2463,30 +2615,7 @@
     {
       "name": "GuiTextBox",
       "description": "Text Box control, updates input text",
-      "returnType": "bool",
-      "params": [
-        {
-          "type": "Rectangle",
-          "name": "bounds"
-        },
-        {
-          "type": "char *",
-          "name": "text"
-        },
-        {
-          "type": "int",
-          "name": "textSize"
-        },
-        {
-          "type": "bool",
-          "name": "editMode"
-        }
-      ]
-    },
-    {
-      "name": "GuiTextBoxMulti",
-      "description": "Text Box control with multiple lines",
-      "returnType": "bool",
+      "returnType": "int",
       "params": [
         {
           "type": "Rectangle",
@@ -2509,7 +2638,7 @@
     {
       "name": "GuiSlider",
       "description": "Slider control, returns selected value",
-      "returnType": "float",
+      "returnType": "int",
       "params": [
         {
           "type": "Rectangle",
@@ -2524,7 +2653,7 @@
           "name": "textRight"
         },
         {
-          "type": "float",
+          "type": "float *",
           "name": "value"
         },
         {
@@ -2540,7 +2669,7 @@
     {
       "name": "GuiSliderBar",
       "description": "Slider Bar control, returns selected value",
-      "returnType": "float",
+      "returnType": "int",
       "params": [
         {
           "type": "Rectangle",
@@ -2555,7 +2684,7 @@
           "name": "textRight"
         },
         {
-          "type": "float",
+          "type": "float *",
           "name": "value"
         },
         {
@@ -2571,7 +2700,7 @@
     {
       "name": "GuiProgressBar",
       "description": "Progress Bar control, shows current progress value",
-      "returnType": "float",
+      "returnType": "int",
       "params": [
         {
           "type": "Rectangle",
@@ -2586,7 +2715,7 @@
           "name": "textRight"
         },
         {
-          "type": "float",
+          "type": "float *",
           "name": "value"
         },
         {
@@ -2602,7 +2731,7 @@
     {
       "name": "GuiStatusBar",
       "description": "Status Bar control, shows info text",
-      "returnType": "void",
+      "returnType": "int",
       "params": [
         {
           "type": "Rectangle",
@@ -2617,7 +2746,7 @@
     {
       "name": "GuiDummyRec",
       "description": "Dummy control for placeholders",
-      "returnType": "void",
+      "returnType": "int",
       "params": [
         {
           "type": "Rectangle",
@@ -2632,7 +2761,7 @@
     {
       "name": "GuiGrid",
       "description": "Grid control, returns mouse cell position",
-      "returnType": "Vector2",
+      "returnType": "int",
       "params": [
         {
           "type": "Rectangle",
@@ -2649,6 +2778,10 @@
         {
           "type": "int",
           "name": "subdivs"
+        },
+        {
+          "type": "Vector2 *",
+          "name": "mouseCell"
         }
       ]
     },
@@ -2670,7 +2803,7 @@
           "name": "scrollIndex"
         },
         {
-          "type": "int",
+          "type": "int *",
           "name": "active"
         }
       ]
@@ -2694,15 +2827,15 @@
         },
         {
           "type": "int *",
-          "name": "focus"
-        },
-        {
-          "type": "int *",
           "name": "scrollIndex"
         },
         {
-          "type": "int",
+          "type": "int *",
           "name": "active"
+        },
+        {
+          "type": "int *",
+          "name": "focus"
         }
       ]
     },
@@ -2759,7 +2892,7 @@
           "name": "textMaxSize"
         },
         {
-          "type": "int *",
+          "type": "bool *",
           "name": "secretViewActive"
         }
       ]
@@ -2767,7 +2900,7 @@
     {
       "name": "GuiColorPicker",
       "description": "Color Picker control (multiple color controls)",
-      "returnType": "Color",
+      "returnType": "int",
       "params": [
         {
           "type": "Rectangle",
@@ -2778,7 +2911,7 @@
           "name": "text"
         },
         {
-          "type": "Color",
+          "type": "Color *",
           "name": "color"
         }
       ]
@@ -2786,7 +2919,7 @@
     {
       "name": "GuiColorPanel",
       "description": "Color Panel control",
-      "returnType": "Color",
+      "returnType": "int",
       "params": [
         {
           "type": "Rectangle",
@@ -2797,7 +2930,7 @@
           "name": "text"
         },
         {
-          "type": "Color",
+          "type": "Color *",
           "name": "color"
         }
       ]
@@ -2805,7 +2938,7 @@
     {
       "name": "GuiColorBarAlpha",
       "description": "Color Bar Alpha control",
-      "returnType": "float",
+      "returnType": "int",
       "params": [
         {
           "type": "Rectangle",
@@ -2816,7 +2949,7 @@
           "name": "text"
         },
         {
-          "type": "float",
+          "type": "float *",
           "name": "alpha"
         }
       ]
@@ -2824,7 +2957,7 @@
     {
       "name": "GuiColorBarHue",
       "description": "Color Bar Hue control",
-      "returnType": "float",
+      "returnType": "int",
       "params": [
         {
           "type": "Rectangle",
@@ -2835,118 +2968,46 @@
           "name": "text"
         },
         {
-          "type": "float",
+          "type": "float *",
           "name": "value"
         }
       ]
     },
     {
-      "name": "GuiLoadStyle",
-      "description": "Load style file over global style variable (.rgs)",
-      "returnType": "void",
+      "name": "GuiColorPickerHSV",
+      "description": "Color Picker control that avoids conversion to RGB on each call (multiple color controls)",
+      "returnType": "int",
       "params": [
         {
-          "type": "const char *",
-          "name": "fileName"
-        }
-      ]
-    },
-    {
-      "name": "GuiLoadStyleDefault",
-      "description": "Load style default over global style",
-      "returnType": "void"
-    },
-    {
-      "name": "GuiEnableTooltip",
-      "description": "Enable gui tooltips (global state)",
-      "returnType": "void"
-    },
-    {
-      "name": "GuiDisableTooltip",
-      "description": "Disable gui tooltips (global state)",
-      "returnType": "void"
-    },
-    {
-      "name": "GuiSetTooltip",
-      "description": "Set tooltip string",
-      "returnType": "void",
-      "params": [
-        {
-          "type": "const char *",
-          "name": "tooltip"
-        }
-      ]
-    },
-    {
-      "name": "GuiIconText",
-      "description": "Get text with icon id prepended (if supported)",
-      "returnType": "const char *",
-      "params": [
-        {
-          "type": "int",
-          "name": "iconId"
+          "type": "Rectangle",
+          "name": "bounds"
         },
         {
           "type": "const char *",
           "name": "text"
+        },
+        {
+          "type": "Vector3 *",
+          "name": "colorHsv"
         }
       ]
     },
     {
-      "name": "GuiGetIcons",
-      "description": "Get raygui icons data pointer",
-      "returnType": "unsigned int *"
-    },
-    {
-      "name": "GuiLoadIcons",
-      "description": "Load raygui icons file (.rgi) into internal icons data",
-      "returnType": "char **",
+      "name": "GuiColorPanelHSV",
+      "description": "Color Panel control that returns HSV color value, used by GuiColorPickerHSV()",
+      "returnType": "int",
       "params": [
+        {
+          "type": "Rectangle",
+          "name": "bounds"
+        },
         {
           "type": "const char *",
-          "name": "fileName"
+          "name": "text"
         },
         {
-          "type": "bool",
-          "name": "loadIconsName"
-        }
-      ]
-    },
-    {
-      "name": "GuiDrawIcon",
-      "description": "",
-      "returnType": "void",
-      "params": [
-        {
-          "type": "int",
-          "name": "iconId"
-        },
-        {
-          "type": "int",
-          "name": "posX"
-        },
-        {
-          "type": "int",
-          "name": "posY"
-        },
-        {
-          "type": "int",
-          "name": "pixelSize"
-        },
-        {
-          "type": "Color",
-          "name": "color"
-        }
-      ]
-    },
-    {
-      "name": "GuiSetIconScale",
-      "description": "Set icon drawing size",
-      "returnType": "void",
-      "params": [
-        {
-          "type": "int",
-          "name": "scale"
+          "type": "Vector3 *",
+          "name": "colorHsv"
         }
       ]
     }

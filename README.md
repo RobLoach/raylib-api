@@ -8,10 +8,10 @@ Exports of the [raylib](https://github.com/raysan5/raylib/) API through [raylib'
 
 Versioned exports of the latest raylib APIs through the latest version of the [parser](https://github.com/raysan5/raylib/tree/master/parser):
 
-- reasings
 - raygui
 - raylib
 - raymath
+- reasings
 - rlgl
 - rmem
 - rres

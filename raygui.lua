@@ -7,9 +7,27 @@ return {
       description = ""
     },
     {
+      name = "RAYGUI_VERSION_MAJOR",
+      type = "INT",
+      value = 4,
+      description = ""
+    },
+    {
+      name = "RAYGUI_VERSION_MINOR",
+      type = "INT",
+      value = 0,
+      description = ""
+    },
+    {
+      name = "RAYGUI_VERSION_PATCH",
+      type = "INT",
+      value = 0,
+      description = ""
+    },
+    {
       name = "RAYGUI_VERSION",
       type = "STRING",
-      value = "3.2",
+      value = "4.0-dev",
       description = ""
     },
     {
@@ -547,6 +565,11 @@ return {
           name = "BACKGROUND_COLOR",
           value = 19,
           description = "Background color"
+        },
+        {
+          name = "TEXT_LINE_SPACING",
+          value = 20,
+          description = "Text spacing between lines"
         }
       }
     },
@@ -680,6 +703,21 @@ return {
           name = "TEXT_LINES_SPACING",
           value = 17,
           description = "TextBoxMulti lines separation"
+        },
+        {
+          name = "TEXT_ALIGNMENT_VERTICAL",
+          value = 18,
+          description = "TextBoxMulti vertical alignment: 0-CENTERED, 1-UP, 2-DOWN"
+        },
+        {
+          name = "TEXT_MULTILINE",
+          value = 19,
+          description = "TextBox supports multiple lines"
+        },
+        {
+          name = "TEXT_WRAP_MODE",
+          value = 20,
+          description = "TextBox wrap mode for multiline: 0-NO_WRAP, 1-CHAR_WRAP, 2-WORD_WRAP"
         }
       }
     },
@@ -1856,7 +1894,7 @@ return {
           description = ""
         },
         {
-          name = "ICON_219",
+          name = "ICON_SAND_TIMER",
           value = 219,
           description = ""
         },
@@ -2125,347 +2163,6 @@ return {
       }
     },
     {
-      name = "GuiWindowBox",
-      description = "Window Box control, shows a window that can be closed",
-      returnType = "bool",
-      params = {
-        {type = "Rectangle", name = "bounds"},
-        {type = "const char *", name = "title"}
-      }
-    },
-    {
-      name = "GuiGroupBox",
-      description = "Group Box control with text name",
-      returnType = "void",
-      params = {
-        {type = "Rectangle", name = "bounds"},
-        {type = "const char *", name = "text"}
-      }
-    },
-    {
-      name = "GuiLine",
-      description = "Line separator control, could contain text",
-      returnType = "void",
-      params = {
-        {type = "Rectangle", name = "bounds"},
-        {type = "const char *", name = "text"}
-      }
-    },
-    {
-      name = "GuiPanel",
-      description = "Panel control, useful to group controls",
-      returnType = "void",
-      params = {
-        {type = "Rectangle", name = "bounds"},
-        {type = "const char *", name = "text"}
-      }
-    },
-    {
-      name = "GuiTabBar",
-      description = "Tab Bar control, returns TAB to be closed or -1",
-      returnType = "int",
-      params = {
-        {type = "Rectangle", name = "bounds"},
-        {type = "const char **", name = "text"},
-        {type = "int", name = "count"},
-        {type = "int *", name = "active"}
-      }
-    },
-    {
-      name = "GuiScrollPanel",
-      description = "Scroll Panel control",
-      returnType = "Rectangle",
-      params = {
-        {type = "Rectangle", name = "bounds"},
-        {type = "const char *", name = "text"},
-        {type = "Rectangle", name = "content"},
-        {type = "Vector2 *", name = "scroll"}
-      }
-    },
-    {
-      name = "GuiLabel",
-      description = "Label control, shows text",
-      returnType = "void",
-      params = {
-        {type = "Rectangle", name = "bounds"},
-        {type = "const char *", name = "text"}
-      }
-    },
-    {
-      name = "GuiButton",
-      description = "Button control, returns true when clicked",
-      returnType = "bool",
-      params = {
-        {type = "Rectangle", name = "bounds"},
-        {type = "const char *", name = "text"}
-      }
-    },
-    {
-      name = "GuiLabelButton",
-      description = "Label button control, show true when clicked",
-      returnType = "bool",
-      params = {
-        {type = "Rectangle", name = "bounds"},
-        {type = "const char *", name = "text"}
-      }
-    },
-    {
-      name = "GuiToggle",
-      description = "Toggle Button control, returns true when active",
-      returnType = "bool",
-      params = {
-        {type = "Rectangle", name = "bounds"},
-        {type = "const char *", name = "text"},
-        {type = "bool", name = "active"}
-      }
-    },
-    {
-      name = "GuiToggleGroup",
-      description = "Toggle Group control, returns active toggle index",
-      returnType = "int",
-      params = {
-        {type = "Rectangle", name = "bounds"},
-        {type = "const char *", name = "text"},
-        {type = "int", name = "active"}
-      }
-    },
-    {
-      name = "GuiCheckBox",
-      description = "Check Box control, returns true when active",
-      returnType = "bool",
-      params = {
-        {type = "Rectangle", name = "bounds"},
-        {type = "const char *", name = "text"},
-        {type = "bool", name = "checked"}
-      }
-    },
-    {
-      name = "GuiComboBox",
-      description = "Combo Box control, returns selected item index",
-      returnType = "int",
-      params = {
-        {type = "Rectangle", name = "bounds"},
-        {type = "const char *", name = "text"},
-        {type = "int", name = "active"}
-      }
-    },
-    {
-      name = "GuiDropdownBox",
-      description = "Dropdown Box control, returns selected item",
-      returnType = "bool",
-      params = {
-        {type = "Rectangle", name = "bounds"},
-        {type = "const char *", name = "text"},
-        {type = "int *", name = "active"},
-        {type = "bool", name = "editMode"}
-      }
-    },
-    {
-      name = "GuiSpinner",
-      description = "Spinner control, returns selected value",
-      returnType = "bool",
-      params = {
-        {type = "Rectangle", name = "bounds"},
-        {type = "const char *", name = "text"},
-        {type = "int *", name = "value"},
-        {type = "int", name = "minValue"},
-        {type = "int", name = "maxValue"},
-        {type = "bool", name = "editMode"}
-      }
-    },
-    {
-      name = "GuiValueBox",
-      description = "Value Box control, updates input text with numbers",
-      returnType = "bool",
-      params = {
-        {type = "Rectangle", name = "bounds"},
-        {type = "const char *", name = "text"},
-        {type = "int *", name = "value"},
-        {type = "int", name = "minValue"},
-        {type = "int", name = "maxValue"},
-        {type = "bool", name = "editMode"}
-      }
-    },
-    {
-      name = "GuiTextBox",
-      description = "Text Box control, updates input text",
-      returnType = "bool",
-      params = {
-        {type = "Rectangle", name = "bounds"},
-        {type = "char *", name = "text"},
-        {type = "int", name = "textSize"},
-        {type = "bool", name = "editMode"}
-      }
-    },
-    {
-      name = "GuiTextBoxMulti",
-      description = "Text Box control with multiple lines",
-      returnType = "bool",
-      params = {
-        {type = "Rectangle", name = "bounds"},
-        {type = "char *", name = "text"},
-        {type = "int", name = "textSize"},
-        {type = "bool", name = "editMode"}
-      }
-    },
-    {
-      name = "GuiSlider",
-      description = "Slider control, returns selected value",
-      returnType = "float",
-      params = {
-        {type = "Rectangle", name = "bounds"},
-        {type = "const char *", name = "textLeft"},
-        {type = "const char *", name = "textRight"},
-        {type = "float", name = "value"},
-        {type = "float", name = "minValue"},
-        {type = "float", name = "maxValue"}
-      }
-    },
-    {
-      name = "GuiSliderBar",
-      description = "Slider Bar control, returns selected value",
-      returnType = "float",
-      params = {
-        {type = "Rectangle", name = "bounds"},
-        {type = "const char *", name = "textLeft"},
-        {type = "const char *", name = "textRight"},
-        {type = "float", name = "value"},
-        {type = "float", name = "minValue"},
-        {type = "float", name = "maxValue"}
-      }
-    },
-    {
-      name = "GuiProgressBar",
-      description = "Progress Bar control, shows current progress value",
-      returnType = "float",
-      params = {
-        {type = "Rectangle", name = "bounds"},
-        {type = "const char *", name = "textLeft"},
-        {type = "const char *", name = "textRight"},
-        {type = "float", name = "value"},
-        {type = "float", name = "minValue"},
-        {type = "float", name = "maxValue"}
-      }
-    },
-    {
-      name = "GuiStatusBar",
-      description = "Status Bar control, shows info text",
-      returnType = "void",
-      params = {
-        {type = "Rectangle", name = "bounds"},
-        {type = "const char *", name = "text"}
-      }
-    },
-    {
-      name = "GuiDummyRec",
-      description = "Dummy control for placeholders",
-      returnType = "void",
-      params = {
-        {type = "Rectangle", name = "bounds"},
-        {type = "const char *", name = "text"}
-      }
-    },
-    {
-      name = "GuiGrid",
-      description = "Grid control, returns mouse cell position",
-      returnType = "Vector2",
-      params = {
-        {type = "Rectangle", name = "bounds"},
-        {type = "const char *", name = "text"},
-        {type = "float", name = "spacing"},
-        {type = "int", name = "subdivs"}
-      }
-    },
-    {
-      name = "GuiListView",
-      description = "List View control, returns selected list item index",
-      returnType = "int",
-      params = {
-        {type = "Rectangle", name = "bounds"},
-        {type = "const char *", name = "text"},
-        {type = "int *", name = "scrollIndex"},
-        {type = "int", name = "active"}
-      }
-    },
-    {
-      name = "GuiListViewEx",
-      description = "List View with extended parameters",
-      returnType = "int",
-      params = {
-        {type = "Rectangle", name = "bounds"},
-        {type = "const char **", name = "text"},
-        {type = "int", name = "count"},
-        {type = "int *", name = "focus"},
-        {type = "int *", name = "scrollIndex"},
-        {type = "int", name = "active"}
-      }
-    },
-    {
-      name = "GuiMessageBox",
-      description = "Message Box control, displays a message",
-      returnType = "int",
-      params = {
-        {type = "Rectangle", name = "bounds"},
-        {type = "const char *", name = "title"},
-        {type = "const char *", name = "message"},
-        {type = "const char *", name = "buttons"}
-      }
-    },
-    {
-      name = "GuiTextInputBox",
-      description = "Text Input Box control, ask for text, supports secret",
-      returnType = "int",
-      params = {
-        {type = "Rectangle", name = "bounds"},
-        {type = "const char *", name = "title"},
-        {type = "const char *", name = "message"},
-        {type = "const char *", name = "buttons"},
-        {type = "char *", name = "text"},
-        {type = "int", name = "textMaxSize"},
-        {type = "int *", name = "secretViewActive"}
-      }
-    },
-    {
-      name = "GuiColorPicker",
-      description = "Color Picker control (multiple color controls)",
-      returnType = "Color",
-      params = {
-        {type = "Rectangle", name = "bounds"},
-        {type = "const char *", name = "text"},
-        {type = "Color", name = "color"}
-      }
-    },
-    {
-      name = "GuiColorPanel",
-      description = "Color Panel control",
-      returnType = "Color",
-      params = {
-        {type = "Rectangle", name = "bounds"},
-        {type = "const char *", name = "text"},
-        {type = "Color", name = "color"}
-      }
-    },
-    {
-      name = "GuiColorBarAlpha",
-      description = "Color Bar Alpha control",
-      returnType = "float",
-      params = {
-        {type = "Rectangle", name = "bounds"},
-        {type = "const char *", name = "text"},
-        {type = "float", name = "alpha"}
-      }
-    },
-    {
-      name = "GuiColorBarHue",
-      description = "Color Bar Hue control",
-      returnType = "float",
-      params = {
-        {type = "Rectangle", name = "bounds"},
-        {type = "const char *", name = "text"},
-        {type = "float", name = "value"}
-      }
-    },
-    {
       name = "GuiLoadStyle",
       description = "Load style file over global style variable (.rgs)",
       returnType = "void",
@@ -2506,6 +2203,14 @@ return {
       }
     },
     {
+      name = "GuiSetIconScale",
+      description = "Set default icon drawing size",
+      returnType = "void",
+      params = {
+        {type = "int", name = "scale"}
+      }
+    },
+    {
       name = "GuiGetIcons",
       description = "Get raygui icons data pointer",
       returnType = "unsigned int *"
@@ -2521,7 +2226,7 @@ return {
     },
     {
       name = "GuiDrawIcon",
-      description = "",
+      description = "Draw icon using pixel size at specified position",
       returnType = "void",
       params = {
         {type = "int", name = "iconId"},
@@ -2532,11 +2237,355 @@ return {
       }
     },
     {
-      name = "GuiSetIconScale",
-      description = "Set icon drawing size",
-      returnType = "void",
+      name = "GuiWindowBox",
+      description = "Window Box control, shows a window that can be closed",
+      returnType = "int",
       params = {
-        {type = "int", name = "scale"}
+        {type = "Rectangle", name = "bounds"},
+        {type = "const char *", name = "title"}
+      }
+    },
+    {
+      name = "GuiGroupBox",
+      description = "Group Box control with text name",
+      returnType = "int",
+      params = {
+        {type = "Rectangle", name = "bounds"},
+        {type = "const char *", name = "text"}
+      }
+    },
+    {
+      name = "GuiLine",
+      description = "Line separator control, could contain text",
+      returnType = "int",
+      params = {
+        {type = "Rectangle", name = "bounds"},
+        {type = "const char *", name = "text"}
+      }
+    },
+    {
+      name = "GuiPanel",
+      description = "Panel control, useful to group controls",
+      returnType = "int",
+      params = {
+        {type = "Rectangle", name = "bounds"},
+        {type = "const char *", name = "text"}
+      }
+    },
+    {
+      name = "GuiTabBar",
+      description = "Tab Bar control, returns TAB to be closed or -1",
+      returnType = "int",
+      params = {
+        {type = "Rectangle", name = "bounds"},
+        {type = "const char **", name = "text"},
+        {type = "int", name = "count"},
+        {type = "int *", name = "active"}
+      }
+    },
+    {
+      name = "GuiScrollPanel",
+      description = "Scroll Panel control",
+      returnType = "int",
+      params = {
+        {type = "Rectangle", name = "bounds"},
+        {type = "const char *", name = "text"},
+        {type = "Rectangle", name = "content"},
+        {type = "Vector2 *", name = "scroll"},
+        {type = "Rectangle *", name = "view"}
+      }
+    },
+    {
+      name = "GuiLabel",
+      description = "Label control, shows text",
+      returnType = "int",
+      params = {
+        {type = "Rectangle", name = "bounds"},
+        {type = "const char *", name = "text"}
+      }
+    },
+    {
+      name = "GuiButton",
+      description = "Button control, returns true when clicked",
+      returnType = "int",
+      params = {
+        {type = "Rectangle", name = "bounds"},
+        {type = "const char *", name = "text"}
+      }
+    },
+    {
+      name = "GuiLabelButton",
+      description = "Label button control, show true when clicked",
+      returnType = "int",
+      params = {
+        {type = "Rectangle", name = "bounds"},
+        {type = "const char *", name = "text"}
+      }
+    },
+    {
+      name = "GuiToggle",
+      description = "Toggle Button control, returns true when active",
+      returnType = "int",
+      params = {
+        {type = "Rectangle", name = "bounds"},
+        {type = "const char *", name = "text"},
+        {type = "bool *", name = "active"}
+      }
+    },
+    {
+      name = "GuiToggleGroup",
+      description = "Toggle Group control, returns active toggle index",
+      returnType = "int",
+      params = {
+        {type = "Rectangle", name = "bounds"},
+        {type = "const char *", name = "text"},
+        {type = "int *", name = "active"}
+      }
+    },
+    {
+      name = "GuiCheckBox",
+      description = "Check Box control, returns true when active",
+      returnType = "int",
+      params = {
+        {type = "Rectangle", name = "bounds"},
+        {type = "const char *", name = "text"},
+        {type = "bool *", name = "checked"}
+      }
+    },
+    {
+      name = "GuiComboBox",
+      description = "Combo Box control, returns selected item index",
+      returnType = "int",
+      params = {
+        {type = "Rectangle", name = "bounds"},
+        {type = "const char *", name = "text"},
+        {type = "int *", name = "active"}
+      }
+    },
+    {
+      name = "GuiDropdownBox",
+      description = "Dropdown Box control, returns selected item",
+      returnType = "int",
+      params = {
+        {type = "Rectangle", name = "bounds"},
+        {type = "const char *", name = "text"},
+        {type = "int *", name = "active"},
+        {type = "bool", name = "editMode"}
+      }
+    },
+    {
+      name = "GuiSpinner",
+      description = "Spinner control, returns selected value",
+      returnType = "int",
+      params = {
+        {type = "Rectangle", name = "bounds"},
+        {type = "const char *", name = "text"},
+        {type = "int *", name = "value"},
+        {type = "int", name = "minValue"},
+        {type = "int", name = "maxValue"},
+        {type = "bool", name = "editMode"}
+      }
+    },
+    {
+      name = "GuiValueBox",
+      description = "Value Box control, updates input text with numbers",
+      returnType = "int",
+      params = {
+        {type = "Rectangle", name = "bounds"},
+        {type = "const char *", name = "text"},
+        {type = "int *", name = "value"},
+        {type = "int", name = "minValue"},
+        {type = "int", name = "maxValue"},
+        {type = "bool", name = "editMode"}
+      }
+    },
+    {
+      name = "GuiTextBox",
+      description = "Text Box control, updates input text",
+      returnType = "int",
+      params = {
+        {type = "Rectangle", name = "bounds"},
+        {type = "char *", name = "text"},
+        {type = "int", name = "textSize"},
+        {type = "bool", name = "editMode"}
+      }
+    },
+    {
+      name = "GuiSlider",
+      description = "Slider control, returns selected value",
+      returnType = "int",
+      params = {
+        {type = "Rectangle", name = "bounds"},
+        {type = "const char *", name = "textLeft"},
+        {type = "const char *", name = "textRight"},
+        {type = "float *", name = "value"},
+        {type = "float", name = "minValue"},
+        {type = "float", name = "maxValue"}
+      }
+    },
+    {
+      name = "GuiSliderBar",
+      description = "Slider Bar control, returns selected value",
+      returnType = "int",
+      params = {
+        {type = "Rectangle", name = "bounds"},
+        {type = "const char *", name = "textLeft"},
+        {type = "const char *", name = "textRight"},
+        {type = "float *", name = "value"},
+        {type = "float", name = "minValue"},
+        {type = "float", name = "maxValue"}
+      }
+    },
+    {
+      name = "GuiProgressBar",
+      description = "Progress Bar control, shows current progress value",
+      returnType = "int",
+      params = {
+        {type = "Rectangle", name = "bounds"},
+        {type = "const char *", name = "textLeft"},
+        {type = "const char *", name = "textRight"},
+        {type = "float *", name = "value"},
+        {type = "float", name = "minValue"},
+        {type = "float", name = "maxValue"}
+      }
+    },
+    {
+      name = "GuiStatusBar",
+      description = "Status Bar control, shows info text",
+      returnType = "int",
+      params = {
+        {type = "Rectangle", name = "bounds"},
+        {type = "const char *", name = "text"}
+      }
+    },
+    {
+      name = "GuiDummyRec",
+      description = "Dummy control for placeholders",
+      returnType = "int",
+      params = {
+        {type = "Rectangle", name = "bounds"},
+        {type = "const char *", name = "text"}
+      }
+    },
+    {
+      name = "GuiGrid",
+      description = "Grid control, returns mouse cell position",
+      returnType = "int",
+      params = {
+        {type = "Rectangle", name = "bounds"},
+        {type = "const char *", name = "text"},
+        {type = "float", name = "spacing"},
+        {type = "int", name = "subdivs"},
+        {type = "Vector2 *", name = "mouseCell"}
+      }
+    },
+    {
+      name = "GuiListView",
+      description = "List View control, returns selected list item index",
+      returnType = "int",
+      params = {
+        {type = "Rectangle", name = "bounds"},
+        {type = "const char *", name = "text"},
+        {type = "int *", name = "scrollIndex"},
+        {type = "int *", name = "active"}
+      }
+    },
+    {
+      name = "GuiListViewEx",
+      description = "List View with extended parameters",
+      returnType = "int",
+      params = {
+        {type = "Rectangle", name = "bounds"},
+        {type = "const char **", name = "text"},
+        {type = "int", name = "count"},
+        {type = "int *", name = "scrollIndex"},
+        {type = "int *", name = "active"},
+        {type = "int *", name = "focus"}
+      }
+    },
+    {
+      name = "GuiMessageBox",
+      description = "Message Box control, displays a message",
+      returnType = "int",
+      params = {
+        {type = "Rectangle", name = "bounds"},
+        {type = "const char *", name = "title"},
+        {type = "const char *", name = "message"},
+        {type = "const char *", name = "buttons"}
+      }
+    },
+    {
+      name = "GuiTextInputBox",
+      description = "Text Input Box control, ask for text, supports secret",
+      returnType = "int",
+      params = {
+        {type = "Rectangle", name = "bounds"},
+        {type = "const char *", name = "title"},
+        {type = "const char *", name = "message"},
+        {type = "const char *", name = "buttons"},
+        {type = "char *", name = "text"},
+        {type = "int", name = "textMaxSize"},
+        {type = "bool *", name = "secretViewActive"}
+      }
+    },
+    {
+      name = "GuiColorPicker",
+      description = "Color Picker control (multiple color controls)",
+      returnType = "int",
+      params = {
+        {type = "Rectangle", name = "bounds"},
+        {type = "const char *", name = "text"},
+        {type = "Color *", name = "color"}
+      }
+    },
+    {
+      name = "GuiColorPanel",
+      description = "Color Panel control",
+      returnType = "int",
+      params = {
+        {type = "Rectangle", name = "bounds"},
+        {type = "const char *", name = "text"},
+        {type = "Color *", name = "color"}
+      }
+    },
+    {
+      name = "GuiColorBarAlpha",
+      description = "Color Bar Alpha control",
+      returnType = "int",
+      params = {
+        {type = "Rectangle", name = "bounds"},
+        {type = "const char *", name = "text"},
+        {type = "float *", name = "alpha"}
+      }
+    },
+    {
+      name = "GuiColorBarHue",
+      description = "Color Bar Hue control",
+      returnType = "int",
+      params = {
+        {type = "Rectangle", name = "bounds"},
+        {type = "const char *", name = "text"},
+        {type = "float *", name = "value"}
+      }
+    },
+    {
+      name = "GuiColorPickerHSV",
+      description = "Color Picker control that avoids conversion to RGB on each call (multiple color controls)",
+      returnType = "int",
+      params = {
+        {type = "Rectangle", name = "bounds"},
+        {type = "const char *", name = "text"},
+        {type = "Vector3 *", name = "colorHsv"}
+      }
+    },
+    {
+      name = "GuiColorPanelHSV",
+      description = "Color Panel control that returns HSV color value, used by GuiColorPickerHSV()",
+      returnType = "int",
+      params = {
+        {type = "Rectangle", name = "bounds"},
+        {type = "const char *", name = "text"},
+        {type = "Vector3 *", name = "colorHsv"}
       }
     }
   }
