@@ -1,5 +1,5 @@
 
-Defines found: 86
+Defines found: 87
 
 Define 001: RLGL_H
   Name: RLGL_H
@@ -51,382 +51,387 @@ Define 010: GRAPHICS_API_OPENGL_33
   Type: GUARD
   Value: 
   Description: 
-Define 011: RLGL_RENDER_TEXTURES_HINT
+Define 011: GRAPHICS_API_OPENGL_ES2
+  Name: GRAPHICS_API_OPENGL_ES2
+  Type: GUARD
+  Value: 
+  Description: 
+Define 012: RLGL_RENDER_TEXTURES_HINT
   Name: RLGL_RENDER_TEXTURES_HINT
   Type: GUARD
   Value: 
   Description: 
-Define 012: RL_DEFAULT_BATCH_BUFFER_ELEMENTS
+Define 013: RL_DEFAULT_BATCH_BUFFER_ELEMENTS
   Name: RL_DEFAULT_BATCH_BUFFER_ELEMENTS
   Type: INT
   Value: 8192
   Description: 
-Define 013: RL_DEFAULT_BATCH_BUFFERS
+Define 014: RL_DEFAULT_BATCH_BUFFERS
   Name: RL_DEFAULT_BATCH_BUFFERS
   Type: INT
   Value: 1
   Description: Default number of batch buffers (multi-buffering)
-Define 014: RL_DEFAULT_BATCH_DRAWCALLS
+Define 015: RL_DEFAULT_BATCH_DRAWCALLS
   Name: RL_DEFAULT_BATCH_DRAWCALLS
   Type: INT
   Value: 256
   Description: Default number of batch draw calls (by state changes: mode, texture)
-Define 015: RL_DEFAULT_BATCH_MAX_TEXTURE_UNITS
+Define 016: RL_DEFAULT_BATCH_MAX_TEXTURE_UNITS
   Name: RL_DEFAULT_BATCH_MAX_TEXTURE_UNITS
   Type: INT
   Value: 4
   Description: Maximum number of textures units that can be activated on batch drawing (SetShaderValueTexture())
-Define 016: RL_MAX_MATRIX_STACK_SIZE
+Define 017: RL_MAX_MATRIX_STACK_SIZE
   Name: RL_MAX_MATRIX_STACK_SIZE
   Type: INT
   Value: 32
   Description: Maximum size of Matrix stack
-Define 017: RL_MAX_SHADER_LOCATIONS
+Define 018: RL_MAX_SHADER_LOCATIONS
   Name: RL_MAX_SHADER_LOCATIONS
   Type: INT
   Value: 32
   Description: Maximum number of shader locations supported
-Define 018: RL_CULL_DISTANCE_NEAR
+Define 019: RL_CULL_DISTANCE_NEAR
   Name: RL_CULL_DISTANCE_NEAR
   Type: DOUBLE
   Value: 0.01
   Description: Default near cull distance
-Define 019: RL_CULL_DISTANCE_FAR
+Define 020: RL_CULL_DISTANCE_FAR
   Name: RL_CULL_DISTANCE_FAR
   Type: DOUBLE
   Value: 1000.0
   Description: Default far cull distance
-Define 020: RL_TEXTURE_WRAP_S
+Define 021: RL_TEXTURE_WRAP_S
   Name: RL_TEXTURE_WRAP_S
   Type: INT
   Value: 0x2802
   Description: GL_TEXTURE_WRAP_S
-Define 021: RL_TEXTURE_WRAP_T
+Define 022: RL_TEXTURE_WRAP_T
   Name: RL_TEXTURE_WRAP_T
   Type: INT
   Value: 0x2803
   Description: GL_TEXTURE_WRAP_T
-Define 022: RL_TEXTURE_MAG_FILTER
+Define 023: RL_TEXTURE_MAG_FILTER
   Name: RL_TEXTURE_MAG_FILTER
   Type: INT
   Value: 0x2800
   Description: GL_TEXTURE_MAG_FILTER
-Define 023: RL_TEXTURE_MIN_FILTER
+Define 024: RL_TEXTURE_MIN_FILTER
   Name: RL_TEXTURE_MIN_FILTER
   Type: INT
   Value: 0x2801
   Description: GL_TEXTURE_MIN_FILTER
-Define 024: RL_TEXTURE_FILTER_NEAREST
+Define 025: RL_TEXTURE_FILTER_NEAREST
   Name: RL_TEXTURE_FILTER_NEAREST
   Type: INT
   Value: 0x2600
   Description: GL_NEAREST
-Define 025: RL_TEXTURE_FILTER_LINEAR
+Define 026: RL_TEXTURE_FILTER_LINEAR
   Name: RL_TEXTURE_FILTER_LINEAR
   Type: INT
   Value: 0x2601
   Description: GL_LINEAR
-Define 026: RL_TEXTURE_FILTER_MIP_NEAREST
+Define 027: RL_TEXTURE_FILTER_MIP_NEAREST
   Name: RL_TEXTURE_FILTER_MIP_NEAREST
   Type: INT
   Value: 0x2700
   Description: GL_NEAREST_MIPMAP_NEAREST
-Define 027: RL_TEXTURE_FILTER_NEAREST_MIP_LINEAR
+Define 028: RL_TEXTURE_FILTER_NEAREST_MIP_LINEAR
   Name: RL_TEXTURE_FILTER_NEAREST_MIP_LINEAR
   Type: INT
   Value: 0x2702
   Description: GL_NEAREST_MIPMAP_LINEAR
-Define 028: RL_TEXTURE_FILTER_LINEAR_MIP_NEAREST
+Define 029: RL_TEXTURE_FILTER_LINEAR_MIP_NEAREST
   Name: RL_TEXTURE_FILTER_LINEAR_MIP_NEAREST
   Type: INT
   Value: 0x2701
   Description: GL_LINEAR_MIPMAP_NEAREST
-Define 029: RL_TEXTURE_FILTER_MIP_LINEAR
+Define 030: RL_TEXTURE_FILTER_MIP_LINEAR
   Name: RL_TEXTURE_FILTER_MIP_LINEAR
   Type: INT
   Value: 0x2703
   Description: GL_LINEAR_MIPMAP_LINEAR
-Define 030: RL_TEXTURE_FILTER_ANISOTROPIC
+Define 031: RL_TEXTURE_FILTER_ANISOTROPIC
   Name: RL_TEXTURE_FILTER_ANISOTROPIC
   Type: INT
   Value: 0x3000
   Description: Anisotropic filter (custom identifier)
-Define 031: RL_TEXTURE_MIPMAP_BIAS_RATIO
+Define 032: RL_TEXTURE_MIPMAP_BIAS_RATIO
   Name: RL_TEXTURE_MIPMAP_BIAS_RATIO
   Type: INT
   Value: 0x4000
   Description: Texture mipmap bias, percentage ratio (custom identifier)
-Define 032: RL_TEXTURE_WRAP_REPEAT
+Define 033: RL_TEXTURE_WRAP_REPEAT
   Name: RL_TEXTURE_WRAP_REPEAT
   Type: INT
   Value: 0x2901
   Description: GL_REPEAT
-Define 033: RL_TEXTURE_WRAP_CLAMP
+Define 034: RL_TEXTURE_WRAP_CLAMP
   Name: RL_TEXTURE_WRAP_CLAMP
   Type: INT
   Value: 0x812F
   Description: GL_CLAMP_TO_EDGE
-Define 034: RL_TEXTURE_WRAP_MIRROR_REPEAT
+Define 035: RL_TEXTURE_WRAP_MIRROR_REPEAT
   Name: RL_TEXTURE_WRAP_MIRROR_REPEAT
   Type: INT
   Value: 0x8370
   Description: GL_MIRRORED_REPEAT
-Define 035: RL_TEXTURE_WRAP_MIRROR_CLAMP
+Define 036: RL_TEXTURE_WRAP_MIRROR_CLAMP
   Name: RL_TEXTURE_WRAP_MIRROR_CLAMP
   Type: INT
   Value: 0x8742
   Description: GL_MIRROR_CLAMP_EXT
-Define 036: RL_MODELVIEW
+Define 037: RL_MODELVIEW
   Name: RL_MODELVIEW
   Type: INT
   Value: 0x1700
   Description: GL_MODELVIEW
-Define 037: RL_PROJECTION
+Define 038: RL_PROJECTION
   Name: RL_PROJECTION
   Type: INT
   Value: 0x1701
   Description: GL_PROJECTION
-Define 038: RL_TEXTURE
+Define 039: RL_TEXTURE
   Name: RL_TEXTURE
   Type: INT
   Value: 0x1702
   Description: GL_TEXTURE
-Define 039: RL_LINES
+Define 040: RL_LINES
   Name: RL_LINES
   Type: INT
   Value: 0x0001
   Description: GL_LINES
-Define 040: RL_TRIANGLES
+Define 041: RL_TRIANGLES
   Name: RL_TRIANGLES
   Type: INT
   Value: 0x0004
   Description: GL_TRIANGLES
-Define 041: RL_QUADS
+Define 042: RL_QUADS
   Name: RL_QUADS
   Type: INT
   Value: 0x0007
   Description: GL_QUADS
-Define 042: RL_UNSIGNED_BYTE
+Define 043: RL_UNSIGNED_BYTE
   Name: RL_UNSIGNED_BYTE
   Type: INT
   Value: 0x1401
   Description: GL_UNSIGNED_BYTE
-Define 043: RL_FLOAT
+Define 044: RL_FLOAT
   Name: RL_FLOAT
   Type: INT
   Value: 0x1406
   Description: GL_FLOAT
-Define 044: RL_STREAM_DRAW
+Define 045: RL_STREAM_DRAW
   Name: RL_STREAM_DRAW
   Type: INT
   Value: 0x88E0
   Description: GL_STREAM_DRAW
-Define 045: RL_STREAM_READ
+Define 046: RL_STREAM_READ
   Name: RL_STREAM_READ
   Type: INT
   Value: 0x88E1
   Description: GL_STREAM_READ
-Define 046: RL_STREAM_COPY
+Define 047: RL_STREAM_COPY
   Name: RL_STREAM_COPY
   Type: INT
   Value: 0x88E2
   Description: GL_STREAM_COPY
-Define 047: RL_STATIC_DRAW
+Define 048: RL_STATIC_DRAW
   Name: RL_STATIC_DRAW
   Type: INT
   Value: 0x88E4
   Description: GL_STATIC_DRAW
-Define 048: RL_STATIC_READ
+Define 049: RL_STATIC_READ
   Name: RL_STATIC_READ
   Type: INT
   Value: 0x88E5
   Description: GL_STATIC_READ
-Define 049: RL_STATIC_COPY
+Define 050: RL_STATIC_COPY
   Name: RL_STATIC_COPY
   Type: INT
   Value: 0x88E6
   Description: GL_STATIC_COPY
-Define 050: RL_DYNAMIC_DRAW
+Define 051: RL_DYNAMIC_DRAW
   Name: RL_DYNAMIC_DRAW
   Type: INT
   Value: 0x88E8
   Description: GL_DYNAMIC_DRAW
-Define 051: RL_DYNAMIC_READ
+Define 052: RL_DYNAMIC_READ
   Name: RL_DYNAMIC_READ
   Type: INT
   Value: 0x88E9
   Description: GL_DYNAMIC_READ
-Define 052: RL_DYNAMIC_COPY
+Define 053: RL_DYNAMIC_COPY
   Name: RL_DYNAMIC_COPY
   Type: INT
   Value: 0x88EA
   Description: GL_DYNAMIC_COPY
-Define 053: RL_FRAGMENT_SHADER
+Define 054: RL_FRAGMENT_SHADER
   Name: RL_FRAGMENT_SHADER
   Type: INT
   Value: 0x8B30
   Description: GL_FRAGMENT_SHADER
-Define 054: RL_VERTEX_SHADER
+Define 055: RL_VERTEX_SHADER
   Name: RL_VERTEX_SHADER
   Type: INT
   Value: 0x8B31
   Description: GL_VERTEX_SHADER
-Define 055: RL_COMPUTE_SHADER
+Define 056: RL_COMPUTE_SHADER
   Name: RL_COMPUTE_SHADER
   Type: INT
   Value: 0x91B9
   Description: GL_COMPUTE_SHADER
-Define 056: RL_ZERO
+Define 057: RL_ZERO
   Name: RL_ZERO
   Type: INT
   Value: 0
   Description: GL_ZERO
-Define 057: RL_ONE
+Define 058: RL_ONE
   Name: RL_ONE
   Type: INT
   Value: 1
   Description: GL_ONE
-Define 058: RL_SRC_COLOR
+Define 059: RL_SRC_COLOR
   Name: RL_SRC_COLOR
   Type: INT
   Value: 0x0300
   Description: GL_SRC_COLOR
-Define 059: RL_ONE_MINUS_SRC_COLOR
+Define 060: RL_ONE_MINUS_SRC_COLOR
   Name: RL_ONE_MINUS_SRC_COLOR
   Type: INT
   Value: 0x0301
   Description: GL_ONE_MINUS_SRC_COLOR
-Define 060: RL_SRC_ALPHA
+Define 061: RL_SRC_ALPHA
   Name: RL_SRC_ALPHA
   Type: INT
   Value: 0x0302
   Description: GL_SRC_ALPHA
-Define 061: RL_ONE_MINUS_SRC_ALPHA
+Define 062: RL_ONE_MINUS_SRC_ALPHA
   Name: RL_ONE_MINUS_SRC_ALPHA
   Type: INT
   Value: 0x0303
   Description: GL_ONE_MINUS_SRC_ALPHA
-Define 062: RL_DST_ALPHA
+Define 063: RL_DST_ALPHA
   Name: RL_DST_ALPHA
   Type: INT
   Value: 0x0304
   Description: GL_DST_ALPHA
-Define 063: RL_ONE_MINUS_DST_ALPHA
+Define 064: RL_ONE_MINUS_DST_ALPHA
   Name: RL_ONE_MINUS_DST_ALPHA
   Type: INT
   Value: 0x0305
   Description: GL_ONE_MINUS_DST_ALPHA
-Define 064: RL_DST_COLOR
+Define 065: RL_DST_COLOR
   Name: RL_DST_COLOR
   Type: INT
   Value: 0x0306
   Description: GL_DST_COLOR
-Define 065: RL_ONE_MINUS_DST_COLOR
+Define 066: RL_ONE_MINUS_DST_COLOR
   Name: RL_ONE_MINUS_DST_COLOR
   Type: INT
   Value: 0x0307
   Description: GL_ONE_MINUS_DST_COLOR
-Define 066: RL_SRC_ALPHA_SATURATE
+Define 067: RL_SRC_ALPHA_SATURATE
   Name: RL_SRC_ALPHA_SATURATE
   Type: INT
   Value: 0x0308
   Description: GL_SRC_ALPHA_SATURATE
-Define 067: RL_CONSTANT_COLOR
+Define 068: RL_CONSTANT_COLOR
   Name: RL_CONSTANT_COLOR
   Type: INT
   Value: 0x8001
   Description: GL_CONSTANT_COLOR
-Define 068: RL_ONE_MINUS_CONSTANT_COLOR
+Define 069: RL_ONE_MINUS_CONSTANT_COLOR
   Name: RL_ONE_MINUS_CONSTANT_COLOR
   Type: INT
   Value: 0x8002
   Description: GL_ONE_MINUS_CONSTANT_COLOR
-Define 069: RL_CONSTANT_ALPHA
+Define 070: RL_CONSTANT_ALPHA
   Name: RL_CONSTANT_ALPHA
   Type: INT
   Value: 0x8003
   Description: GL_CONSTANT_ALPHA
-Define 070: RL_ONE_MINUS_CONSTANT_ALPHA
+Define 071: RL_ONE_MINUS_CONSTANT_ALPHA
   Name: RL_ONE_MINUS_CONSTANT_ALPHA
   Type: INT
   Value: 0x8004
   Description: GL_ONE_MINUS_CONSTANT_ALPHA
-Define 071: RL_FUNC_ADD
+Define 072: RL_FUNC_ADD
   Name: RL_FUNC_ADD
   Type: INT
   Value: 0x8006
   Description: GL_FUNC_ADD
-Define 072: RL_MIN
+Define 073: RL_MIN
   Name: RL_MIN
   Type: INT
   Value: 0x8007
   Description: GL_MIN
-Define 073: RL_MAX
+Define 074: RL_MAX
   Name: RL_MAX
   Type: INT
   Value: 0x8008
   Description: GL_MAX
-Define 074: RL_FUNC_SUBTRACT
+Define 075: RL_FUNC_SUBTRACT
   Name: RL_FUNC_SUBTRACT
   Type: INT
   Value: 0x800A
   Description: GL_FUNC_SUBTRACT
-Define 075: RL_FUNC_REVERSE_SUBTRACT
+Define 076: RL_FUNC_REVERSE_SUBTRACT
   Name: RL_FUNC_REVERSE_SUBTRACT
   Type: INT
   Value: 0x800B
   Description: GL_FUNC_REVERSE_SUBTRACT
-Define 076: RL_BLEND_EQUATION
+Define 077: RL_BLEND_EQUATION
   Name: RL_BLEND_EQUATION
   Type: INT
   Value: 0x8009
   Description: GL_BLEND_EQUATION
-Define 077: RL_BLEND_EQUATION_RGB
+Define 078: RL_BLEND_EQUATION_RGB
   Name: RL_BLEND_EQUATION_RGB
   Type: INT
   Value: 0x8009
   Description: GL_BLEND_EQUATION_RGB   // (Same as BLEND_EQUATION)
-Define 078: RL_BLEND_EQUATION_ALPHA
+Define 079: RL_BLEND_EQUATION_ALPHA
   Name: RL_BLEND_EQUATION_ALPHA
   Type: INT
   Value: 0x883D
   Description: GL_BLEND_EQUATION_ALPHA
-Define 079: RL_BLEND_DST_RGB
+Define 080: RL_BLEND_DST_RGB
   Name: RL_BLEND_DST_RGB
   Type: INT
   Value: 0x80C8
   Description: GL_BLEND_DST_RGB
-Define 080: RL_BLEND_SRC_RGB
+Define 081: RL_BLEND_SRC_RGB
   Name: RL_BLEND_SRC_RGB
   Type: INT
   Value: 0x80C9
   Description: GL_BLEND_SRC_RGB
-Define 081: RL_BLEND_DST_ALPHA
+Define 082: RL_BLEND_DST_ALPHA
   Name: RL_BLEND_DST_ALPHA
   Type: INT
   Value: 0x80CA
   Description: GL_BLEND_DST_ALPHA
-Define 082: RL_BLEND_SRC_ALPHA
+Define 083: RL_BLEND_SRC_ALPHA
   Name: RL_BLEND_SRC_ALPHA
   Type: INT
   Value: 0x80CB
   Description: GL_BLEND_SRC_ALPHA
-Define 083: RL_BLEND_COLOR
+Define 084: RL_BLEND_COLOR
   Name: RL_BLEND_COLOR
   Type: INT
   Value: 0x8005
   Description: GL_BLEND_COLOR
-Define 084: RL_MATRIX_TYPE
+Define 085: RL_MATRIX_TYPE
   Name: RL_MATRIX_TYPE
   Type: GUARD
   Value: 
   Description: 
-Define 085: RL_SHADER_LOC_MAP_DIFFUSE
+Define 086: RL_SHADER_LOC_MAP_DIFFUSE
   Name: RL_SHADER_LOC_MAP_DIFFUSE
   Type: UNKNOWN
   Value: RL_SHADER_LOC_MAP_ALBEDO
   Description: 
-Define 086: RL_SHADER_LOC_MAP_SPECULAR
+Define 087: RL_SHADER_LOC_MAP_SPECULAR
   Name: RL_SHADER_LOC_MAP_SPECULAR
   Type: UNKNOWN
   Value: RL_SHADER_LOC_MAP_METALNESS
@@ -490,7 +495,7 @@ Aliases found: 0
 
 Enums found: 11
 
-Enum 01: rlGlVersion (5 values)
+Enum 01: rlGlVersion (6 values)
   Name: rlGlVersion
   Description: OpenGL version
   Value[RL_OPENGL_11]: 1
@@ -498,6 +503,7 @@ Enum 01: rlGlVersion (5 values)
   Value[RL_OPENGL_33]: 3
   Value[RL_OPENGL_43]: 4
   Value[RL_OPENGL_ES_20]: 5
+  Value[RL_OPENGL_ES_30]: 6
 Enum 02: rlTraceLogLevel (8 values)
   Name: rlTraceLogLevel
   Description: Trace log level
@@ -509,7 +515,7 @@ Enum 02: rlTraceLogLevel (8 values)
   Value[RL_LOG_ERROR]: 5
   Value[RL_LOG_FATAL]: 6
   Value[RL_LOG_NONE]: 7
-Enum 03: rlPixelFormat (21 values)
+Enum 03: rlPixelFormat (24 values)
   Name: rlPixelFormat
   Description: Texture pixel formats
   Value[RL_PIXELFORMAT_UNCOMPRESSED_GRAYSCALE]: 1
@@ -522,17 +528,20 @@ Enum 03: rlPixelFormat (21 values)
   Value[RL_PIXELFORMAT_UNCOMPRESSED_R32]: 8
   Value[RL_PIXELFORMAT_UNCOMPRESSED_R32G32B32]: 9
   Value[RL_PIXELFORMAT_UNCOMPRESSED_R32G32B32A32]: 10
-  Value[RL_PIXELFORMAT_COMPRESSED_DXT1_RGB]: 11
-  Value[RL_PIXELFORMAT_COMPRESSED_DXT1_RGBA]: 12
-  Value[RL_PIXELFORMAT_COMPRESSED_DXT3_RGBA]: 13
-  Value[RL_PIXELFORMAT_COMPRESSED_DXT5_RGBA]: 14
-  Value[RL_PIXELFORMAT_COMPRESSED_ETC1_RGB]: 15
-  Value[RL_PIXELFORMAT_COMPRESSED_ETC2_RGB]: 16
-  Value[RL_PIXELFORMAT_COMPRESSED_ETC2_EAC_RGBA]: 17
-  Value[RL_PIXELFORMAT_COMPRESSED_PVRT_RGB]: 18
-  Value[RL_PIXELFORMAT_COMPRESSED_PVRT_RGBA]: 19
-  Value[RL_PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA]: 20
-  Value[RL_PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA]: 21
+  Value[RL_PIXELFORMAT_UNCOMPRESSED_R16]: 11
+  Value[RL_PIXELFORMAT_UNCOMPRESSED_R16G16B16]: 12
+  Value[RL_PIXELFORMAT_UNCOMPRESSED_R16G16B16A16]: 13
+  Value[RL_PIXELFORMAT_COMPRESSED_DXT1_RGB]: 14
+  Value[RL_PIXELFORMAT_COMPRESSED_DXT1_RGBA]: 15
+  Value[RL_PIXELFORMAT_COMPRESSED_DXT3_RGBA]: 16
+  Value[RL_PIXELFORMAT_COMPRESSED_DXT5_RGBA]: 17
+  Value[RL_PIXELFORMAT_COMPRESSED_ETC1_RGB]: 18
+  Value[RL_PIXELFORMAT_COMPRESSED_ETC2_RGB]: 19
+  Value[RL_PIXELFORMAT_COMPRESSED_ETC2_EAC_RGBA]: 20
+  Value[RL_PIXELFORMAT_COMPRESSED_PVRT_RGB]: 21
+  Value[RL_PIXELFORMAT_COMPRESSED_PVRT_RGBA]: 22
+  Value[RL_PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA]: 23
+  Value[RL_PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA]: 24
 Enum 04: rlTextureFilter (6 values)
   Name: rlTextureFilter
   Description: Texture parameters: filter mode
@@ -634,7 +643,7 @@ Enum 11: rlCullMode (2 values)
 Callbacks found: 0
 
 
-Functions found: 147
+Functions found: 149
 
 Function 001: rlMatrixMode() (1 input parameters)
   Name: rlMatrixMode
@@ -891,62 +900,75 @@ Function 043: rlActiveDrawBuffers() (1 input parameters)
   Return type: void
   Description: Activate multiple draw color buffers
   Param[1]: count (type: int)
-Function 044: rlEnableColorBlend() (0 input parameters)
+Function 044: rlBlitFramebuffer() (9 input parameters)
+  Name: rlBlitFramebuffer
+  Return type: void
+  Description: Blit active framebuffer to main framebuffer
+  Param[1]: srcX (type: int)
+  Param[2]: srcY (type: int)
+  Param[3]: srcWidth (type: int)
+  Param[4]: srcHeight (type: int)
+  Param[5]: dstX (type: int)
+  Param[6]: dstY (type: int)
+  Param[7]: dstWidth (type: int)
+  Param[8]: dstHeight (type: int)
+  Param[9]: bufferMask (type: int)
+Function 045: rlEnableColorBlend() (0 input parameters)
   Name: rlEnableColorBlend
   Return type: void
   Description: Enable color blending
   No input parameters
-Function 045: rlDisableColorBlend() (0 input parameters)
+Function 046: rlDisableColorBlend() (0 input parameters)
   Name: rlDisableColorBlend
   Return type: void
   Description: Disable color blending
   No input parameters
-Function 046: rlEnableDepthTest() (0 input parameters)
+Function 047: rlEnableDepthTest() (0 input parameters)
   Name: rlEnableDepthTest
   Return type: void
   Description: Enable depth test
   No input parameters
-Function 047: rlDisableDepthTest() (0 input parameters)
+Function 048: rlDisableDepthTest() (0 input parameters)
   Name: rlDisableDepthTest
   Return type: void
   Description: Disable depth test
   No input parameters
-Function 048: rlEnableDepthMask() (0 input parameters)
+Function 049: rlEnableDepthMask() (0 input parameters)
   Name: rlEnableDepthMask
   Return type: void
   Description: Enable depth write
   No input parameters
-Function 049: rlDisableDepthMask() (0 input parameters)
+Function 050: rlDisableDepthMask() (0 input parameters)
   Name: rlDisableDepthMask
   Return type: void
   Description: Disable depth write
   No input parameters
-Function 050: rlEnableBackfaceCulling() (0 input parameters)
+Function 051: rlEnableBackfaceCulling() (0 input parameters)
   Name: rlEnableBackfaceCulling
   Return type: void
   Description: Enable backface culling
   No input parameters
-Function 051: rlDisableBackfaceCulling() (0 input parameters)
+Function 052: rlDisableBackfaceCulling() (0 input parameters)
   Name: rlDisableBackfaceCulling
   Return type: void
   Description: Disable backface culling
   No input parameters
-Function 052: rlSetCullFace() (1 input parameters)
+Function 053: rlSetCullFace() (1 input parameters)
   Name: rlSetCullFace
   Return type: void
   Description: Set face culling mode
   Param[1]: mode (type: int)
-Function 053: rlEnableScissorTest() (0 input parameters)
+Function 054: rlEnableScissorTest() (0 input parameters)
   Name: rlEnableScissorTest
   Return type: void
   Description: Enable scissor test
   No input parameters
-Function 054: rlDisableScissorTest() (0 input parameters)
+Function 055: rlDisableScissorTest() (0 input parameters)
   Name: rlDisableScissorTest
   Return type: void
   Description: Disable scissor test
   No input parameters
-Function 055: rlScissor() (4 input parameters)
+Function 056: rlScissor() (4 input parameters)
   Name: rlScissor
   Return type: void
   Description: Scissor test
@@ -954,52 +976,57 @@ Function 055: rlScissor() (4 input parameters)
   Param[2]: y (type: int)
   Param[3]: width (type: int)
   Param[4]: height (type: int)
-Function 056: rlEnableWireMode() (0 input parameters)
+Function 057: rlEnableWireMode() (0 input parameters)
   Name: rlEnableWireMode
   Return type: void
   Description: Enable wire mode
   No input parameters
-Function 057: rlDisableWireMode() (0 input parameters)
+Function 058: rlEnablePointMode() (0 input parameters)
+  Name: rlEnablePointMode
+  Return type: void
+  Description: Enable point mode
+  No input parameters
+Function 059: rlDisableWireMode() (0 input parameters)
   Name: rlDisableWireMode
   Return type: void
-  Description: Disable wire mode
+  Description: Disable wire mode ( and point ) maybe rename
   No input parameters
-Function 058: rlSetLineWidth() (1 input parameters)
+Function 060: rlSetLineWidth() (1 input parameters)
   Name: rlSetLineWidth
   Return type: void
   Description: Set the line drawing width
   Param[1]: width (type: float)
-Function 059: rlGetLineWidth() (0 input parameters)
+Function 061: rlGetLineWidth() (0 input parameters)
   Name: rlGetLineWidth
   Return type: float
   Description: Get the line drawing width
   No input parameters
-Function 060: rlEnableSmoothLines() (0 input parameters)
+Function 062: rlEnableSmoothLines() (0 input parameters)
   Name: rlEnableSmoothLines
   Return type: void
   Description: Enable line aliasing
   No input parameters
-Function 061: rlDisableSmoothLines() (0 input parameters)
+Function 063: rlDisableSmoothLines() (0 input parameters)
   Name: rlDisableSmoothLines
   Return type: void
   Description: Disable line aliasing
   No input parameters
-Function 062: rlEnableStereoRender() (0 input parameters)
+Function 064: rlEnableStereoRender() (0 input parameters)
   Name: rlEnableStereoRender
   Return type: void
   Description: Enable stereo rendering
   No input parameters
-Function 063: rlDisableStereoRender() (0 input parameters)
+Function 065: rlDisableStereoRender() (0 input parameters)
   Name: rlDisableStereoRender
   Return type: void
   Description: Disable stereo rendering
   No input parameters
-Function 064: rlIsStereoRenderEnabled() (0 input parameters)
+Function 066: rlIsStereoRenderEnabled() (0 input parameters)
   Name: rlIsStereoRenderEnabled
   Return type: bool
   Description: Check if stereo render is enabled
   No input parameters
-Function 065: rlClearColor() (4 input parameters)
+Function 067: rlClearColor() (4 input parameters)
   Name: rlClearColor
   Return type: void
   Description: Clear color buffer with color
@@ -1007,29 +1034,29 @@ Function 065: rlClearColor() (4 input parameters)
   Param[2]: g (type: unsigned char)
   Param[3]: b (type: unsigned char)
   Param[4]: a (type: unsigned char)
-Function 066: rlClearScreenBuffers() (0 input parameters)
+Function 068: rlClearScreenBuffers() (0 input parameters)
   Name: rlClearScreenBuffers
   Return type: void
   Description: Clear used screen buffers (color and depth)
   No input parameters
-Function 067: rlCheckErrors() (0 input parameters)
+Function 069: rlCheckErrors() (0 input parameters)
   Name: rlCheckErrors
   Return type: void
   Description: Check and log OpenGL error codes
   No input parameters
-Function 068: rlSetBlendMode() (1 input parameters)
+Function 070: rlSetBlendMode() (1 input parameters)
   Name: rlSetBlendMode
   Return type: void
   Description: Set blending mode
   Param[1]: mode (type: int)
-Function 069: rlSetBlendFactors() (3 input parameters)
+Function 071: rlSetBlendFactors() (3 input parameters)
   Name: rlSetBlendFactors
   Return type: void
   Description: Set blending mode factor and equation (using OpenGL factors)
   Param[1]: glSrcFactor (type: int)
   Param[2]: glDstFactor (type: int)
   Param[3]: glEquation (type: int)
-Function 070: rlSetBlendFactorsSeparate() (6 input parameters)
+Function 072: rlSetBlendFactorsSeparate() (6 input parameters)
   Name: rlSetBlendFactorsSeparate
   Return type: void
   Description: Set blending mode factors and equations separately (using OpenGL factors)
@@ -1039,118 +1066,118 @@ Function 070: rlSetBlendFactorsSeparate() (6 input parameters)
   Param[4]: glDstAlpha (type: int)
   Param[5]: glEqRGB (type: int)
   Param[6]: glEqAlpha (type: int)
-Function 071: rlglInit() (2 input parameters)
+Function 073: rlglInit() (2 input parameters)
   Name: rlglInit
   Return type: void
   Description: Initialize rlgl (buffers, shaders, textures, states)
   Param[1]: width (type: int)
   Param[2]: height (type: int)
-Function 072: rlglClose() (0 input parameters)
+Function 074: rlglClose() (0 input parameters)
   Name: rlglClose
   Return type: void
   Description: De-initialize rlgl (buffers, shaders, textures)
   No input parameters
-Function 073: rlLoadExtensions() (1 input parameters)
+Function 075: rlLoadExtensions() (1 input parameters)
   Name: rlLoadExtensions
   Return type: void
   Description: Load OpenGL extensions (loader function required)
   Param[1]: loader (type: void *)
-Function 074: rlGetVersion() (0 input parameters)
+Function 076: rlGetVersion() (0 input parameters)
   Name: rlGetVersion
   Return type: int
   Description: Get current OpenGL version
   No input parameters
-Function 075: rlSetFramebufferWidth() (1 input parameters)
+Function 077: rlSetFramebufferWidth() (1 input parameters)
   Name: rlSetFramebufferWidth
   Return type: void
   Description: Set current framebuffer width
   Param[1]: width (type: int)
-Function 076: rlGetFramebufferWidth() (0 input parameters)
+Function 078: rlGetFramebufferWidth() (0 input parameters)
   Name: rlGetFramebufferWidth
   Return type: int
   Description: Get default framebuffer width
   No input parameters
-Function 077: rlSetFramebufferHeight() (1 input parameters)
+Function 079: rlSetFramebufferHeight() (1 input parameters)
   Name: rlSetFramebufferHeight
   Return type: void
   Description: Set current framebuffer height
   Param[1]: height (type: int)
-Function 078: rlGetFramebufferHeight() (0 input parameters)
+Function 080: rlGetFramebufferHeight() (0 input parameters)
   Name: rlGetFramebufferHeight
   Return type: int
   Description: Get default framebuffer height
   No input parameters
-Function 079: rlGetTextureIdDefault() (0 input parameters)
+Function 081: rlGetTextureIdDefault() (0 input parameters)
   Name: rlGetTextureIdDefault
   Return type: unsigned int
   Description: Get default texture id
   No input parameters
-Function 080: rlGetShaderIdDefault() (0 input parameters)
+Function 082: rlGetShaderIdDefault() (0 input parameters)
   Name: rlGetShaderIdDefault
   Return type: unsigned int
   Description: Get default shader id
   No input parameters
-Function 081: rlGetShaderLocsDefault() (0 input parameters)
+Function 083: rlGetShaderLocsDefault() (0 input parameters)
   Name: rlGetShaderLocsDefault
   Return type: int *
   Description: Get default shader locations
   No input parameters
-Function 082: rlLoadRenderBatch() (2 input parameters)
+Function 084: rlLoadRenderBatch() (2 input parameters)
   Name: rlLoadRenderBatch
   Return type: rlRenderBatch
   Description: Load a render batch system
   Param[1]: numBuffers (type: int)
   Param[2]: bufferElements (type: int)
-Function 083: rlUnloadRenderBatch() (1 input parameters)
+Function 085: rlUnloadRenderBatch() (1 input parameters)
   Name: rlUnloadRenderBatch
   Return type: void
   Description: Unload render batch system
   Param[1]: batch (type: rlRenderBatch)
-Function 084: rlDrawRenderBatch() (1 input parameters)
+Function 086: rlDrawRenderBatch() (1 input parameters)
   Name: rlDrawRenderBatch
   Return type: void
   Description: Draw render batch data (Update->Draw->Reset)
   Param[1]: batch (type: rlRenderBatch *)
-Function 085: rlSetRenderBatchActive() (1 input parameters)
+Function 087: rlSetRenderBatchActive() (1 input parameters)
   Name: rlSetRenderBatchActive
   Return type: void
   Description: Set the active render batch for rlgl (NULL for default internal)
   Param[1]: batch (type: rlRenderBatch *)
-Function 086: rlDrawRenderBatchActive() (0 input parameters)
+Function 088: rlDrawRenderBatchActive() (0 input parameters)
   Name: rlDrawRenderBatchActive
   Return type: void
   Description: Update and draw internal render batch
   No input parameters
-Function 087: rlCheckRenderBatchLimit() (1 input parameters)
+Function 089: rlCheckRenderBatchLimit() (1 input parameters)
   Name: rlCheckRenderBatchLimit
   Return type: bool
   Description: Check internal buffer overflow for a given number of vertex
   Param[1]: vCount (type: int)
-Function 088: rlSetTexture() (1 input parameters)
+Function 090: rlSetTexture() (1 input parameters)
   Name: rlSetTexture
   Return type: void
   Description: Set current texture for render batch and check buffers limits
   Param[1]: id (type: unsigned int)
-Function 089: rlLoadVertexArray() (0 input parameters)
+Function 091: rlLoadVertexArray() (0 input parameters)
   Name: rlLoadVertexArray
   Return type: unsigned int
   Description: Load vertex array (vao) if supported
   No input parameters
-Function 090: rlLoadVertexBuffer() (3 input parameters)
+Function 092: rlLoadVertexBuffer() (3 input parameters)
   Name: rlLoadVertexBuffer
   Return type: unsigned int
   Description: Load a vertex buffer attribute
   Param[1]: buffer (type: const void *)
   Param[2]: size (type: int)
   Param[3]: dynamic (type: bool)
-Function 091: rlLoadVertexBufferElement() (3 input parameters)
+Function 093: rlLoadVertexBufferElement() (3 input parameters)
   Name: rlLoadVertexBufferElement
   Return type: unsigned int
   Description: Load a new attributes element buffer
   Param[1]: buffer (type: const void *)
   Param[2]: size (type: int)
   Param[3]: dynamic (type: bool)
-Function 092: rlUpdateVertexBuffer() (4 input parameters)
+Function 094: rlUpdateVertexBuffer() (4 input parameters)
   Name: rlUpdateVertexBuffer
   Return type: void
   Description: Update GPU buffer with new data
@@ -1158,7 +1185,7 @@ Function 092: rlUpdateVertexBuffer() (4 input parameters)
   Param[2]: data (type: const void *)
   Param[3]: dataSize (type: int)
   Param[4]: offset (type: int)
-Function 093: rlUpdateVertexBufferElements() (4 input parameters)
+Function 095: rlUpdateVertexBufferElements() (4 input parameters)
   Name: rlUpdateVertexBufferElements
   Return type: void
   Description: Update vertex buffer elements with new data
@@ -1166,17 +1193,17 @@ Function 093: rlUpdateVertexBufferElements() (4 input parameters)
   Param[2]: data (type: const void *)
   Param[3]: dataSize (type: int)
   Param[4]: offset (type: int)
-Function 094: rlUnloadVertexArray() (1 input parameters)
+Function 096: rlUnloadVertexArray() (1 input parameters)
   Name: rlUnloadVertexArray
   Return type: void
   Description: 
   Param[1]: vaoId (type: unsigned int)
-Function 095: rlUnloadVertexBuffer() (1 input parameters)
+Function 097: rlUnloadVertexBuffer() (1 input parameters)
   Name: rlUnloadVertexBuffer
   Return type: void
   Description: 
   Param[1]: vboId (type: unsigned int)
-Function 096: rlSetVertexAttribute() (6 input parameters)
+Function 098: rlSetVertexAttribute() (6 input parameters)
   Name: rlSetVertexAttribute
   Return type: void
   Description: 
@@ -1186,13 +1213,13 @@ Function 096: rlSetVertexAttribute() (6 input parameters)
   Param[4]: normalized (type: bool)
   Param[5]: stride (type: int)
   Param[6]: pointer (type: const void *)
-Function 097: rlSetVertexAttributeDivisor() (2 input parameters)
+Function 099: rlSetVertexAttributeDivisor() (2 input parameters)
   Name: rlSetVertexAttributeDivisor
   Return type: void
   Description: 
   Param[1]: index (type: unsigned int)
   Param[2]: divisor (type: int)
-Function 098: rlSetVertexAttributeDefault() (4 input parameters)
+Function 100: rlSetVertexAttributeDefault() (4 input parameters)
   Name: rlSetVertexAttributeDefault
   Return type: void
   Description: Set vertex attribute default value
@@ -1200,27 +1227,27 @@ Function 098: rlSetVertexAttributeDefault() (4 input parameters)
   Param[2]: value (type: const void *)
   Param[3]: attribType (type: int)
   Param[4]: count (type: int)
-Function 099: rlDrawVertexArray() (2 input parameters)
+Function 101: rlDrawVertexArray() (2 input parameters)
   Name: rlDrawVertexArray
   Return type: void
   Description: 
   Param[1]: offset (type: int)
   Param[2]: count (type: int)
-Function 100: rlDrawVertexArrayElements() (3 input parameters)
+Function 102: rlDrawVertexArrayElements() (3 input parameters)
   Name: rlDrawVertexArrayElements
   Return type: void
   Description: 
   Param[1]: offset (type: int)
   Param[2]: count (type: int)
   Param[3]: buffer (type: const void *)
-Function 101: rlDrawVertexArrayInstanced() (3 input parameters)
+Function 103: rlDrawVertexArrayInstanced() (3 input parameters)
   Name: rlDrawVertexArrayInstanced
   Return type: void
   Description: 
   Param[1]: offset (type: int)
   Param[2]: count (type: int)
   Param[3]: instances (type: int)
-Function 102: rlDrawVertexArrayElementsInstanced() (4 input parameters)
+Function 104: rlDrawVertexArrayElementsInstanced() (4 input parameters)
   Name: rlDrawVertexArrayElementsInstanced
   Return type: void
   Description: 
@@ -1228,7 +1255,7 @@ Function 102: rlDrawVertexArrayElementsInstanced() (4 input parameters)
   Param[2]: count (type: int)
   Param[3]: buffer (type: const void *)
   Param[4]: instances (type: int)
-Function 103: rlLoadTexture() (5 input parameters)
+Function 105: rlLoadTexture() (5 input parameters)
   Name: rlLoadTexture
   Return type: unsigned int
   Description: Load texture in GPU
@@ -1237,21 +1264,21 @@ Function 103: rlLoadTexture() (5 input parameters)
   Param[3]: height (type: int)
   Param[4]: format (type: int)
   Param[5]: mipmapCount (type: int)
-Function 104: rlLoadTextureDepth() (3 input parameters)
+Function 106: rlLoadTextureDepth() (3 input parameters)
   Name: rlLoadTextureDepth
   Return type: unsigned int
   Description: Load depth texture/renderbuffer (to be attached to fbo)
   Param[1]: width (type: int)
   Param[2]: height (type: int)
   Param[3]: useRenderBuffer (type: bool)
-Function 105: rlLoadTextureCubemap() (3 input parameters)
+Function 107: rlLoadTextureCubemap() (3 input parameters)
   Name: rlLoadTextureCubemap
   Return type: unsigned int
   Description: Load texture cubemap
   Param[1]: data (type: const void *)
   Param[2]: size (type: int)
   Param[3]: format (type: int)
-Function 106: rlUpdateTexture() (7 input parameters)
+Function 108: rlUpdateTexture() (7 input parameters)
   Name: rlUpdateTexture
   Return type: void
   Description: Update GPU texture with new data
@@ -1262,7 +1289,7 @@ Function 106: rlUpdateTexture() (7 input parameters)
   Param[5]: height (type: int)
   Param[6]: format (type: int)
   Param[7]: data (type: const void *)
-Function 107: rlGetGlTextureFormats() (4 input parameters)
+Function 109: rlGetGlTextureFormats() (4 input parameters)
   Name: rlGetGlTextureFormats
   Return type: void
   Description: Get OpenGL internal formats
@@ -1270,17 +1297,17 @@ Function 107: rlGetGlTextureFormats() (4 input parameters)
   Param[2]: glInternalFormat (type: unsigned int *)
   Param[3]: glFormat (type: unsigned int *)
   Param[4]: glType (type: unsigned int *)
-Function 108: rlGetPixelFormatName() (1 input parameters)
+Function 110: rlGetPixelFormatName() (1 input parameters)
   Name: rlGetPixelFormatName
   Return type: const char *
   Description: Get name string for pixel format
   Param[1]: format (type: unsigned int)
-Function 109: rlUnloadTexture() (1 input parameters)
+Function 111: rlUnloadTexture() (1 input parameters)
   Name: rlUnloadTexture
   Return type: void
   Description: Unload texture from GPU memory
   Param[1]: id (type: unsigned int)
-Function 110: rlGenTextureMipmaps() (5 input parameters)
+Function 112: rlGenTextureMipmaps() (5 input parameters)
   Name: rlGenTextureMipmaps
   Return type: void
   Description: Generate mipmap data for selected texture
@@ -1289,7 +1316,7 @@ Function 110: rlGenTextureMipmaps() (5 input parameters)
   Param[3]: height (type: int)
   Param[4]: format (type: int)
   Param[5]: mipmaps (type: int *)
-Function 111: rlReadTexturePixels() (4 input parameters)
+Function 113: rlReadTexturePixels() (4 input parameters)
   Name: rlReadTexturePixels
   Return type: void *
   Description: Read texture pixel data
@@ -1297,19 +1324,19 @@ Function 111: rlReadTexturePixels() (4 input parameters)
   Param[2]: width (type: int)
   Param[3]: height (type: int)
   Param[4]: format (type: int)
-Function 112: rlReadScreenPixels() (2 input parameters)
+Function 114: rlReadScreenPixels() (2 input parameters)
   Name: rlReadScreenPixels
   Return type: unsigned char *
   Description: Read screen pixel data (color buffer)
   Param[1]: width (type: int)
   Param[2]: height (type: int)
-Function 113: rlLoadFramebuffer() (2 input parameters)
+Function 115: rlLoadFramebuffer() (2 input parameters)
   Name: rlLoadFramebuffer
   Return type: unsigned int
   Description: Load an empty framebuffer
   Param[1]: width (type: int)
   Param[2]: height (type: int)
-Function 114: rlFramebufferAttach() (5 input parameters)
+Function 116: rlFramebufferAttach() (5 input parameters)
   Name: rlFramebufferAttach
   Return type: void
   Description: Attach texture/renderbuffer to a framebuffer
@@ -1318,52 +1345,52 @@ Function 114: rlFramebufferAttach() (5 input parameters)
   Param[3]: attachType (type: int)
   Param[4]: texType (type: int)
   Param[5]: mipLevel (type: int)
-Function 115: rlFramebufferComplete() (1 input parameters)
+Function 117: rlFramebufferComplete() (1 input parameters)
   Name: rlFramebufferComplete
   Return type: bool
   Description: Verify framebuffer is complete
   Param[1]: id (type: unsigned int)
-Function 116: rlUnloadFramebuffer() (1 input parameters)
+Function 118: rlUnloadFramebuffer() (1 input parameters)
   Name: rlUnloadFramebuffer
   Return type: void
   Description: Delete framebuffer from GPU
   Param[1]: id (type: unsigned int)
-Function 117: rlLoadShaderCode() (2 input parameters)
+Function 119: rlLoadShaderCode() (2 input parameters)
   Name: rlLoadShaderCode
   Return type: unsigned int
   Description: Load shader from code strings
   Param[1]: vsCode (type: const char *)
   Param[2]: fsCode (type: const char *)
-Function 118: rlCompileShader() (2 input parameters)
+Function 120: rlCompileShader() (2 input parameters)
   Name: rlCompileShader
   Return type: unsigned int
   Description: Compile custom shader and return shader id (type: RL_VERTEX_SHADER, RL_FRAGMENT_SHADER, RL_COMPUTE_SHADER)
   Param[1]: shaderCode (type: const char *)
   Param[2]: type (type: int)
-Function 119: rlLoadShaderProgram() (2 input parameters)
+Function 121: rlLoadShaderProgram() (2 input parameters)
   Name: rlLoadShaderProgram
   Return type: unsigned int
   Description: Load custom shader program
   Param[1]: vShaderId (type: unsigned int)
   Param[2]: fShaderId (type: unsigned int)
-Function 120: rlUnloadShaderProgram() (1 input parameters)
+Function 122: rlUnloadShaderProgram() (1 input parameters)
   Name: rlUnloadShaderProgram
   Return type: void
   Description: Unload shader program
   Param[1]: id (type: unsigned int)
-Function 121: rlGetLocationUniform() (2 input parameters)
+Function 123: rlGetLocationUniform() (2 input parameters)
   Name: rlGetLocationUniform
   Return type: int
   Description: Get shader location uniform
   Param[1]: shaderId (type: unsigned int)
   Param[2]: uniformName (type: const char *)
-Function 122: rlGetLocationAttrib() (2 input parameters)
+Function 124: rlGetLocationAttrib() (2 input parameters)
   Name: rlGetLocationAttrib
   Return type: int
   Description: Get shader location attribute
   Param[1]: shaderId (type: unsigned int)
   Param[2]: attribName (type: const char *)
-Function 123: rlSetUniform() (4 input parameters)
+Function 125: rlSetUniform() (4 input parameters)
   Name: rlSetUniform
   Return type: void
   Description: Set shader value uniform
@@ -1371,49 +1398,49 @@ Function 123: rlSetUniform() (4 input parameters)
   Param[2]: value (type: const void *)
   Param[3]: uniformType (type: int)
   Param[4]: count (type: int)
-Function 124: rlSetUniformMatrix() (2 input parameters)
+Function 126: rlSetUniformMatrix() (2 input parameters)
   Name: rlSetUniformMatrix
   Return type: void
   Description: Set shader value matrix
   Param[1]: locIndex (type: int)
   Param[2]: mat (type: Matrix)
-Function 125: rlSetUniformSampler() (2 input parameters)
+Function 127: rlSetUniformSampler() (2 input parameters)
   Name: rlSetUniformSampler
   Return type: void
   Description: Set shader value sampler
   Param[1]: locIndex (type: int)
   Param[2]: textureId (type: unsigned int)
-Function 126: rlSetShader() (2 input parameters)
+Function 128: rlSetShader() (2 input parameters)
   Name: rlSetShader
   Return type: void
   Description: Set shader currently active (id and locations)
   Param[1]: id (type: unsigned int)
   Param[2]: locs (type: int *)
-Function 127: rlLoadComputeShaderProgram() (1 input parameters)
+Function 129: rlLoadComputeShaderProgram() (1 input parameters)
   Name: rlLoadComputeShaderProgram
   Return type: unsigned int
   Description: Load compute shader program
   Param[1]: shaderId (type: unsigned int)
-Function 128: rlComputeShaderDispatch() (3 input parameters)
+Function 130: rlComputeShaderDispatch() (3 input parameters)
   Name: rlComputeShaderDispatch
   Return type: void
   Description: Dispatch compute shader (equivalent to *draw* for graphics pipeline)
   Param[1]: groupX (type: unsigned int)
   Param[2]: groupY (type: unsigned int)
   Param[3]: groupZ (type: unsigned int)
-Function 129: rlLoadShaderBuffer() (3 input parameters)
+Function 131: rlLoadShaderBuffer() (3 input parameters)
   Name: rlLoadShaderBuffer
   Return type: unsigned int
   Description: Load shader storage buffer object (SSBO)
   Param[1]: size (type: unsigned int)
   Param[2]: data (type: const void *)
   Param[3]: usageHint (type: int)
-Function 130: rlUnloadShaderBuffer() (1 input parameters)
+Function 132: rlUnloadShaderBuffer() (1 input parameters)
   Name: rlUnloadShaderBuffer
   Return type: void
   Description: Unload shader storage buffer object (SSBO)
   Param[1]: ssboId (type: unsigned int)
-Function 131: rlUpdateShaderBuffer() (4 input parameters)
+Function 133: rlUpdateShaderBuffer() (4 input parameters)
   Name: rlUpdateShaderBuffer
   Return type: void
   Description: Update SSBO buffer data
@@ -1421,13 +1448,13 @@ Function 131: rlUpdateShaderBuffer() (4 input parameters)
   Param[2]: data (type: const void *)
   Param[3]: dataSize (type: unsigned int)
   Param[4]: offset (type: unsigned int)
-Function 132: rlBindShaderBuffer() (2 input parameters)
+Function 134: rlBindShaderBuffer() (2 input parameters)
   Name: rlBindShaderBuffer
   Return type: void
   Description: Bind SSBO buffer
   Param[1]: id (type: unsigned int)
   Param[2]: index (type: unsigned int)
-Function 133: rlReadShaderBuffer() (4 input parameters)
+Function 135: rlReadShaderBuffer() (4 input parameters)
   Name: rlReadShaderBuffer
   Return type: void
   Description: Read SSBO buffer data (GPU->CPU)
@@ -1435,7 +1462,7 @@ Function 133: rlReadShaderBuffer() (4 input parameters)
   Param[2]: dest (type: void *)
   Param[3]: count (type: unsigned int)
   Param[4]: offset (type: unsigned int)
-Function 134: rlCopyShaderBuffer() (5 input parameters)
+Function 136: rlCopyShaderBuffer() (5 input parameters)
   Name: rlCopyShaderBuffer
   Return type: void
   Description: Copy SSBO data between buffers
@@ -1444,12 +1471,12 @@ Function 134: rlCopyShaderBuffer() (5 input parameters)
   Param[3]: destOffset (type: unsigned int)
   Param[4]: srcOffset (type: unsigned int)
   Param[5]: count (type: unsigned int)
-Function 135: rlGetShaderBufferSize() (1 input parameters)
+Function 137: rlGetShaderBufferSize() (1 input parameters)
   Name: rlGetShaderBufferSize
   Return type: unsigned int
   Description: Get SSBO buffer size
   Param[1]: id (type: unsigned int)
-Function 136: rlBindImageTexture() (4 input parameters)
+Function 138: rlBindImageTexture() (4 input parameters)
   Name: rlBindImageTexture
   Return type: void
   Description: Bind image texture
@@ -1457,59 +1484,59 @@ Function 136: rlBindImageTexture() (4 input parameters)
   Param[2]: index (type: unsigned int)
   Param[3]: format (type: int)
   Param[4]: readonly (type: bool)
-Function 137: rlGetMatrixModelview() (0 input parameters)
+Function 139: rlGetMatrixModelview() (0 input parameters)
   Name: rlGetMatrixModelview
   Return type: Matrix
   Description: Get internal modelview matrix
   No input parameters
-Function 138: rlGetMatrixProjection() (0 input parameters)
+Function 140: rlGetMatrixProjection() (0 input parameters)
   Name: rlGetMatrixProjection
   Return type: Matrix
   Description: Get internal projection matrix
   No input parameters
-Function 139: rlGetMatrixTransform() (0 input parameters)
+Function 141: rlGetMatrixTransform() (0 input parameters)
   Name: rlGetMatrixTransform
   Return type: Matrix
   Description: Get internal accumulated transform matrix
   No input parameters
-Function 140: rlGetMatrixProjectionStereo() (1 input parameters)
+Function 142: rlGetMatrixProjectionStereo() (1 input parameters)
   Name: rlGetMatrixProjectionStereo
   Return type: Matrix
   Description: Get internal projection matrix for stereo render (selected eye)
   Param[1]: eye (type: int)
-Function 141: rlGetMatrixViewOffsetStereo() (1 input parameters)
+Function 143: rlGetMatrixViewOffsetStereo() (1 input parameters)
   Name: rlGetMatrixViewOffsetStereo
   Return type: Matrix
   Description: Get internal view offset matrix for stereo render (selected eye)
   Param[1]: eye (type: int)
-Function 142: rlSetMatrixProjection() (1 input parameters)
+Function 144: rlSetMatrixProjection() (1 input parameters)
   Name: rlSetMatrixProjection
   Return type: void
   Description: Set a custom projection matrix (replaces internal projection matrix)
   Param[1]: proj (type: Matrix)
-Function 143: rlSetMatrixModelview() (1 input parameters)
+Function 145: rlSetMatrixModelview() (1 input parameters)
   Name: rlSetMatrixModelview
   Return type: void
   Description: Set a custom modelview matrix (replaces internal modelview matrix)
   Param[1]: view (type: Matrix)
-Function 144: rlSetMatrixProjectionStereo() (2 input parameters)
+Function 146: rlSetMatrixProjectionStereo() (2 input parameters)
   Name: rlSetMatrixProjectionStereo
   Return type: void
   Description: Set eyes projection matrices for stereo rendering
   Param[1]: right (type: Matrix)
   Param[2]: left (type: Matrix)
-Function 145: rlSetMatrixViewOffsetStereo() (2 input parameters)
+Function 147: rlSetMatrixViewOffsetStereo() (2 input parameters)
   Name: rlSetMatrixViewOffsetStereo
   Return type: void
   Description: Set eyes view offsets matrices for stereo rendering
   Param[1]: right (type: Matrix)
   Param[2]: left (type: Matrix)
-Function 146: rlLoadDrawCube() (0 input parameters)
+Function 148: rlLoadDrawCube() (0 input parameters)
   Name: rlLoadDrawCube
   Return type: void
   Description: Load and draw a cube
   No input parameters
-Function 147: rlLoadDrawQuad() (0 input parameters)
+Function 149: rlLoadDrawQuad() (0 input parameters)
   Name: rlLoadDrawQuad
   Return type: void
   Description: Load and draw a quad

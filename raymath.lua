@@ -718,6 +718,24 @@ return {
       }
     },
     {
+      name = "Vector3Project",
+      description = "",
+      returnType = "Vector3",
+      params = {
+        {type = "Vector3", name = "v1"},
+        {type = "Vector3", name = "v2"}
+      }
+    },
+    {
+      name = "Vector3Reject",
+      description = "",
+      returnType = "Vector3",
+      params = {
+        {type = "Vector3", name = "v1"},
+        {type = "Vector3", name = "v2"}
+      }
+    },
+    {
       name = "Vector3OrthoNormalize",
       description = "",
       returnType = "void",
@@ -1018,10 +1036,10 @@ return {
       description = "",
       returnType = "Matrix",
       params = {
-        {type = "double", name = "fovy"},
+        {type = "double", name = "fovY"},
         {type = "double", name = "aspect"},
-        {type = "double", name = "near"},
-        {type = "double", name = "far"}
+        {type = "double", name = "nearPlane"},
+        {type = "double", name = "farPlane"}
       }
     },
     {
@@ -1033,8 +1051,8 @@ return {
         {type = "double", name = "right"},
         {type = "double", name = "bottom"},
         {type = "double", name = "top"},
-        {type = "double", name = "near"},
-        {type = "double", name = "far"}
+        {type = "double", name = "nearPlane"},
+        {type = "double", name = "farPlane"}
       }
     },
     {

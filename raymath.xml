@@ -63,7 +63,7 @@
     </Enums>
     <Callbacks count="0">
     </Callbacks>
-    <Functions count="112">
+    <Functions count="114">
         <Function name="Clamp" retType="float" paramCount="3" desc="">
             <Param type="float" name="value" desc="" />
             <Param type="float" name="min" desc="" />
@@ -265,6 +265,14 @@
         <Function name="Vector3Normalize" retType="Vector3" paramCount="1" desc="">
             <Param type="Vector3" name="v" desc="" />
         </Function>
+        <Function name="Vector3Project" retType="Vector3" paramCount="2" desc="">
+            <Param type="Vector3" name="v1" desc="" />
+            <Param type="Vector3" name="v2" desc="" />
+        </Function>
+        <Function name="Vector3Reject" retType="Vector3" paramCount="2" desc="">
+            <Param type="Vector3" name="v1" desc="" />
+            <Param type="Vector3" name="v2" desc="" />
+        </Function>
         <Function name="Vector3OrthoNormalize" retType="void" paramCount="2" desc="">
             <Param type="Vector3 *" name="v1" desc="" />
             <Param type="Vector3 *" name="v2" desc="" />
@@ -399,18 +407,18 @@
             <Param type="double" name="far" desc="" />
         </Function>
         <Function name="MatrixPerspective" retType="Matrix" paramCount="4" desc="">
-            <Param type="double" name="fovy" desc="" />
+            <Param type="double" name="fovY" desc="" />
             <Param type="double" name="aspect" desc="" />
-            <Param type="double" name="near" desc="" />
-            <Param type="double" name="far" desc="" />
+            <Param type="double" name="nearPlane" desc="" />
+            <Param type="double" name="farPlane" desc="" />
         </Function>
         <Function name="MatrixOrtho" retType="Matrix" paramCount="6" desc="">
             <Param type="double" name="left" desc="" />
             <Param type="double" name="right" desc="" />
             <Param type="double" name="bottom" desc="" />
             <Param type="double" name="top" desc="" />
-            <Param type="double" name="near" desc="" />
-            <Param type="double" name="far" desc="" />
+            <Param type="double" name="nearPlane" desc="" />
+            <Param type="double" name="farPlane" desc="" />
         </Function>
         <Function name="MatrixLookAt" retType="Matrix" paramCount="3" desc="">
             <Param type="Vector3" name="eye" desc="" />

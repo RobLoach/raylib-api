@@ -5,7 +5,7 @@
         <Define name="RAYGUI_VERSION_MAJOR" type="INT" value="4" desc="" />
         <Define name="RAYGUI_VERSION_MINOR" type="INT" value="0" desc="" />
         <Define name="RAYGUI_VERSION_PATCH" type="INT" value="0" desc="" />
-        <Define name="RAYGUI_VERSION" type="STRING" value="4.0-dev" desc="" />
+        <Define name="RAYGUI_VERSION" type="STRING" value="4.0" desc="" />
         <Define name="RAYGUIAPI" type="UNKNOWN" value="__declspec(dllexport)" desc="We are building the library as a Win32 shared library (.dll)" />
         <Define name="RAYGUI_MALLOC(sz)" type="MACRO" value="malloc(sz)" desc="" />
         <Define name="RAYGUI_CALLOC(n,sz)" type="MACRO" value="calloc(n,sz)" desc="" />
@@ -15,7 +15,7 @@
         <Define name="SCROLLBAR_LEFT_SIDE" type="INT" value="0" desc="" />
         <Define name="SCROLLBAR_RIGHT_SIDE" type="INT" value="1" desc="" />
     </Defines>
-    <Structs count="9">
+    <Structs count="10">
         <Struct name="Vector2" fieldCount="2" desc="Vector2 type">
             <Field type="float" name="x" desc="" />
             <Field type="float" name="y" desc="" />
@@ -66,15 +66,23 @@
             <Field type="Rectangle *" name="recs" desc="Rectangles in texture for the glyphs" />
             <Field type="GlyphInfo *" name="glyphs" desc="Glyphs info data" />
         </Struct>
-        <Struct name="GuiStyleProp" fieldCount="3" desc="Style property">
-            <Field type="unsigned short" name="controlId" desc="" />
-            <Field type="unsigned short" name="propertyId" desc="" />
-            <Field type="unsigned int" name="propertyValue" desc="" />
+        <Struct name="GuiStyleProp" fieldCount="3" desc="NOTE: Used when exporting style as code for convenience">
+            <Field type="unsigned short" name="controlId" desc="Control identifier" />
+            <Field type="unsigned short" name="propertyId" desc="Property identifier" />
+            <Field type="int" name="propertyValue" desc="Property value" />
+        </Struct>
+        <Struct name="GuiTextStyle" fieldCount="6" desc="NOTE: Text style is defined by control">
+            <Field type="unsigned int" name="size" desc="" />
+            <Field type="int" name="charSpacing" desc="" />
+            <Field type="int" name="lineSpacing" desc="" />
+            <Field type="int" name="alignmentH" desc="" />
+            <Field type="int" name="alignmentV" desc="" />
+            <Field type="int" name="padding" desc="" />
         </Struct>
     </Structs>
     <Aliases count="0">
     </Aliases>
-    <Enums count="17">
+    <Enums count="19">
         <Enum name="GuiState" valueCount="4" desc="Gui control state">
             <Value name="STATE_NORMAL" integer="0" desc="" />
             <Value name="STATE_FOCUSED" integer="1" desc="" />
@@ -86,12 +94,22 @@
             <Value name="TEXT_ALIGN_CENTER" integer="1" desc="" />
             <Value name="TEXT_ALIGN_RIGHT" integer="2" desc="" />
         </Enum>
+        <Enum name="GuiTextAlignmentVertical" valueCount="3" desc="Gui control text alignment vertical">
+            <Value name="TEXT_ALIGN_TOP" integer="0" desc="" />
+            <Value name="TEXT_ALIGN_MIDDLE" integer="1" desc="" />
+            <Value name="TEXT_ALIGN_BOTTOM" integer="2" desc="" />
+        </Enum>
+        <Enum name="GuiTextWrapMode" valueCount="3" desc="Gui control text wrap mode">
+            <Value name="TEXT_WRAP_NONE" integer="0" desc="" />
+            <Value name="TEXT_WRAP_CHAR" integer="1" desc="" />
+            <Value name="TEXT_WRAP_WORD" integer="2" desc="" />
+        </Enum>
         <Enum name="GuiControl" valueCount="16" desc="Gui controls">
             <Value name="DEFAULT" integer="0" desc="" />
             <Value name="LABEL" integer="1" desc="Used also for: LABELBUTTON" />
             <Value name="BUTTON" integer="2" desc="" />
             <Value name="TOGGLE" integer="3" desc="Used also for: TOGGLEGROUP" />
-            <Value name="SLIDER" integer="4" desc="Used also for: SLIDERBAR" />
+            <Value name="SLIDER" integer="4" desc="Used also for: SLIDERBAR, TOGGLESLIDER" />
             <Value name="PROGRESSBAR" integer="5" desc="" />
             <Value name="CHECKBOX" integer="6" desc="" />
             <Value name="COMBOBOX" integer="7" desc="" />
@@ -104,30 +122,31 @@
             <Value name="SCROLLBAR" integer="14" desc="" />
             <Value name="STATUSBAR" integer="15" desc="" />
         </Enum>
-        <Enum name="GuiControlProperty" valueCount="16" desc="Gui base properties for every control">
-            <Value name="BORDER_COLOR_NORMAL" integer="0" desc="" />
-            <Value name="BASE_COLOR_NORMAL" integer="1" desc="" />
-            <Value name="TEXT_COLOR_NORMAL" integer="2" desc="" />
-            <Value name="BORDER_COLOR_FOCUSED" integer="3" desc="" />
-            <Value name="BASE_COLOR_FOCUSED" integer="4" desc="" />
-            <Value name="TEXT_COLOR_FOCUSED" integer="5" desc="" />
-            <Value name="BORDER_COLOR_PRESSED" integer="6" desc="" />
-            <Value name="BASE_COLOR_PRESSED" integer="7" desc="" />
-            <Value name="TEXT_COLOR_PRESSED" integer="8" desc="" />
-            <Value name="BORDER_COLOR_DISABLED" integer="9" desc="" />
-            <Value name="BASE_COLOR_DISABLED" integer="10" desc="" />
-            <Value name="TEXT_COLOR_DISABLED" integer="11" desc="" />
-            <Value name="BORDER_WIDTH" integer="12" desc="" />
-            <Value name="TEXT_PADDING" integer="13" desc="" />
-            <Value name="TEXT_ALIGNMENT" integer="14" desc="" />
-            <Value name="RESERVED" integer="15" desc="" />
+        <Enum name="GuiControlProperty" valueCount="15" desc="Gui base properties for every control">
+            <Value name="BORDER_COLOR_NORMAL" integer="0" desc="Control border color in STATE_NORMAL" />
+            <Value name="BASE_COLOR_NORMAL" integer="1" desc="Control base color in STATE_NORMAL" />
+            <Value name="TEXT_COLOR_NORMAL" integer="2" desc="Control text color in STATE_NORMAL" />
+            <Value name="BORDER_COLOR_FOCUSED" integer="3" desc="Control border color in STATE_FOCUSED" />
+            <Value name="BASE_COLOR_FOCUSED" integer="4" desc="Control base color in STATE_FOCUSED" />
+            <Value name="TEXT_COLOR_FOCUSED" integer="5" desc="Control text color in STATE_FOCUSED" />
+            <Value name="BORDER_COLOR_PRESSED" integer="6" desc="Control border color in STATE_PRESSED" />
+            <Value name="BASE_COLOR_PRESSED" integer="7" desc="Control base color in STATE_PRESSED" />
+            <Value name="TEXT_COLOR_PRESSED" integer="8" desc="Control text color in STATE_PRESSED" />
+            <Value name="BORDER_COLOR_DISABLED" integer="9" desc="Control border color in STATE_DISABLED" />
+            <Value name="BASE_COLOR_DISABLED" integer="10" desc="Control base color in STATE_DISABLED" />
+            <Value name="TEXT_COLOR_DISABLED" integer="11" desc="Control text color in STATE_DISABLED" />
+            <Value name="BORDER_WIDTH" integer="12" desc="Control border size, 0 for no border" />
+            <Value name="TEXT_PADDING" integer="13" desc="Control text padding, not considering border" />
+            <Value name="TEXT_ALIGNMENT" integer="14" desc="Control text horizontal alignment inside control text bound (after border and padding)" />
         </Enum>
-        <Enum name="GuiDefaultProperty" valueCount="5" desc="DEFAULT extended properties">
+        <Enum name="GuiDefaultProperty" valueCount="7" desc="DEFAULT extended properties">
             <Value name="TEXT_SIZE" integer="16" desc="Text size (glyphs max height)" />
             <Value name="TEXT_SPACING" integer="17" desc="Text spacing between glyphs" />
             <Value name="LINE_COLOR" integer="18" desc="Line control color" />
             <Value name="BACKGROUND_COLOR" integer="19" desc="Background color" />
             <Value name="TEXT_LINE_SPACING" integer="20" desc="Text spacing between lines" />
+            <Value name="TEXT_ALIGNMENT_VERTICAL" integer="21" desc="Text vertical alignment inside text bounds (after border and padding)" />
+            <Value name="TEXT_WRAP_MODE" integer="22" desc="Text wrap-mode inside text bounds" />
         </Enum>
         <Enum name="GuiToggleProperty" valueCount="1" desc="Toggle/ToggleGroup">
             <Value name="GROUP_PADDING" integer="16" desc="ToggleGroup separation between toggles" />
@@ -140,12 +159,12 @@
             <Value name="PROGRESS_PADDING" integer="16" desc="ProgressBar internal padding" />
         </Enum>
         <Enum name="GuiScrollBarProperty" valueCount="6" desc="ScrollBar">
-            <Value name="ARROWS_SIZE" integer="16" desc="" />
-            <Value name="ARROWS_VISIBLE" integer="17" desc="" />
-            <Value name="SCROLL_SLIDER_PADDING" integer="18" desc="(SLIDERBAR, SLIDER_PADDING)" />
-            <Value name="SCROLL_SLIDER_SIZE" integer="19" desc="" />
-            <Value name="SCROLL_PADDING" integer="20" desc="" />
-            <Value name="SCROLL_SPEED" integer="21" desc="" />
+            <Value name="ARROWS_SIZE" integer="16" desc="ScrollBar arrows size" />
+            <Value name="ARROWS_VISIBLE" integer="17" desc="ScrollBar arrows visible" />
+            <Value name="SCROLL_SLIDER_PADDING" integer="18" desc="ScrollBar slider internal padding" />
+            <Value name="SCROLL_SLIDER_SIZE" integer="19" desc="ScrollBar slider size" />
+            <Value name="SCROLL_PADDING" integer="20" desc="ScrollBar scroll padding from arrows" />
+            <Value name="SCROLL_SPEED" integer="21" desc="ScrollBar scrolling speed" />
         </Enum>
         <Enum name="GuiCheckBoxProperty" valueCount="1" desc="CheckBox">
             <Value name="CHECK_PADDING" integer="16" desc="CheckBox internal check padding" />
@@ -158,12 +177,8 @@
             <Value name="ARROW_PADDING" integer="16" desc="DropdownBox arrow separation from border and items" />
             <Value name="DROPDOWN_ITEMS_SPACING" integer="17" desc="DropdownBox items separation" />
         </Enum>
-        <Enum name="GuiTextBoxProperty" valueCount="5" desc="TextBox/TextBoxMulti/ValueBox/Spinner">
-            <Value name="TEXT_INNER_PADDING" integer="16" desc="TextBox/TextBoxMulti/ValueBox/Spinner inner text padding" />
-            <Value name="TEXT_LINES_SPACING" integer="17" desc="TextBoxMulti lines separation" />
-            <Value name="TEXT_ALIGNMENT_VERTICAL" integer="18" desc="TextBoxMulti vertical alignment: 0-CENTERED, 1-UP, 2-DOWN" />
-            <Value name="TEXT_MULTILINE" integer="19" desc="TextBox supports multiple lines" />
-            <Value name="TEXT_WRAP_MODE" integer="20" desc="TextBox wrap mode for multiline: 0-NO_WRAP, 1-CHAR_WRAP, 2-WORD_WRAP" />
+        <Enum name="GuiTextBoxProperty" valueCount="1" desc="TextBox/TextBoxMulti/ValueBox/Spinner">
+            <Value name="TEXT_READONLY" integer="16" desc="TextBox in read-only mode: 0-text editable, 1-text no-editable" />
         </Enum>
         <Enum name="GuiSpinnerProperty" valueCount="2" desc="Spinner">
             <Value name="SPIN_BUTTON_WIDTH" integer="16" desc="Spinner left/right buttons width" />
@@ -173,7 +188,7 @@
             <Value name="LIST_ITEMS_HEIGHT" integer="16" desc="ListView items height" />
             <Value name="LIST_ITEMS_SPACING" integer="17" desc="ListView items separation" />
             <Value name="SCROLLBAR_WIDTH" integer="18" desc="ListView scrollbar size (usually width)" />
-            <Value name="SCROLLBAR_SIDE" integer="19" desc="ListView scrollbar side (0-left, 1-right)" />
+            <Value name="SCROLLBAR_SIDE" integer="19" desc="ListView scrollbar side (0-SCROLLBAR_LEFT_SIDE, 1-SCROLLBAR_RIGHT_SIDE)" />
         </Enum>
         <Enum name="GuiColorPickerProperty" valueCount="5" desc="ColorPicker">
             <Value name="COLOR_SELECTOR_SIZE" integer="16" desc="" />
@@ -443,7 +458,7 @@
     </Enums>
     <Callbacks count="0">
     </Callbacks>
-    <Functions count="55">
+    <Functions count="56">
         <Function name="GuiEnable" retType="void" paramCount="0" desc="Enable gui controls (global state)">
         </Function>
         <Function name="GuiDisable" retType="void" paramCount="0" desc="Disable gui controls (global state)">
@@ -454,7 +469,7 @@
         </Function>
         <Function name="GuiIsLocked" retType="bool" paramCount="0" desc="Check if gui is locked (global state)">
         </Function>
-        <Function name="GuiFade" retType="void" paramCount="1" desc="Set gui controls alpha (global state), alpha goes from 0.0f to 1.0f">
+        <Function name="GuiSetAlpha" retType="void" paramCount="1" desc="Set gui controls alpha (global state), alpha goes from 0.0f to 1.0f">
             <Param type="float" name="alpha" desc="" />
         </Function>
         <Function name="GuiSetState" retType="void" paramCount="1" desc="Set gui state (global state)">
@@ -555,6 +570,11 @@
             <Param type="bool *" name="active" desc="" />
         </Function>
         <Function name="GuiToggleGroup" retType="int" paramCount="3" desc="Toggle Group control, returns active toggle index">
+            <Param type="Rectangle" name="bounds" desc="" />
+            <Param type="const char *" name="text" desc="" />
+            <Param type="int *" name="active" desc="" />
+        </Function>
+        <Function name="GuiToggleSlider" retType="int" paramCount="3" desc="Toggle Slider control, returns true when clicked">
             <Param type="Rectangle" name="bounds" desc="" />
             <Param type="const char *" name="text" desc="" />
             <Param type="int *" name="active" desc="" />
