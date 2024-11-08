@@ -14,7 +14,7 @@ Define 002: RAYGUI_VERSION_MAJOR
 Define 003: RAYGUI_VERSION_MINOR
   Name: RAYGUI_VERSION_MINOR
   Type: INT
-  Value: 0
+  Value: 5
   Description: 
 Define 004: RAYGUI_VERSION_PATCH
   Name: RAYGUI_VERSION_PATCH
@@ -24,7 +24,7 @@ Define 004: RAYGUI_VERSION_PATCH
 Define 005: RAYGUI_VERSION
   Name: RAYGUI_VERSION
   Type: STRING
-  Value: "4.0"
+  Value: "4.5-dev"
   Description: 
 Define 006: RAYGUIAPI
   Name: RAYGUIAPI
@@ -251,11 +251,13 @@ Enum 13: GuiComboBoxProperty (2 values)
   Description: ComboBox
   Value[COMBO_BUTTON_WIDTH]: 16
   Value[COMBO_BUTTON_SPACING]: 17
-Enum 14: GuiDropdownBoxProperty (2 values)
+Enum 14: GuiDropdownBoxProperty (4 values)
   Name: GuiDropdownBoxProperty
   Description: DropdownBox
   Value[ARROW_PADDING]: 16
   Value[DROPDOWN_ITEMS_SPACING]: 17
+  Value[DROPDOWN_ARROW_HIDDEN]: 18
+  Value[DROPDOWN_ROLL_UP]: 19
 Enum 15: GuiTextBoxProperty (1 values)
   Name: GuiTextBoxProperty
   Description: TextBox/TextBoxMulti/ValueBox/Spinner
@@ -265,13 +267,14 @@ Enum 16: GuiSpinnerProperty (2 values)
   Description: Spinner
   Value[SPIN_BUTTON_WIDTH]: 16
   Value[SPIN_BUTTON_SPACING]: 17
-Enum 17: GuiListViewProperty (4 values)
+Enum 17: GuiListViewProperty (5 values)
   Name: GuiListViewProperty
   Description: ListView
   Value[LIST_ITEMS_HEIGHT]: 16
   Value[LIST_ITEMS_SPACING]: 17
   Value[SCROLLBAR_WIDTH]: 18
   Value[SCROLLBAR_SIDE]: 19
+  Value[LIST_ITEMS_BORDER_WIDTH]: 20
 Enum 18: GuiColorPickerProperty (5 values)
   Name: GuiColorPickerProperty
   Description: ColorPicker
@@ -503,15 +506,15 @@ Enum 19: GuiIconName (256 values)
   Value[ICON_FOLDER]: 217
   Value[ICON_FILE]: 218
   Value[ICON_SAND_TIMER]: 219
-  Value[ICON_220]: 220
-  Value[ICON_221]: 221
-  Value[ICON_222]: 222
-  Value[ICON_223]: 223
-  Value[ICON_224]: 224
-  Value[ICON_225]: 225
-  Value[ICON_226]: 226
-  Value[ICON_227]: 227
-  Value[ICON_228]: 228
+  Value[ICON_WARNING]: 220
+  Value[ICON_HELP_BOX]: 221
+  Value[ICON_INFO_BOX]: 222
+  Value[ICON_PRIORITY]: 223
+  Value[ICON_LAYERS_ISO]: 224
+  Value[ICON_LAYERS2]: 225
+  Value[ICON_MLAYERS]: 226
+  Value[ICON_MAPS]: 227
+  Value[ICON_HOT]: 228
   Value[ICON_229]: 229
   Value[ICON_230]: 230
   Value[ICON_231]: 231
@@ -543,7 +546,7 @@ Enum 19: GuiIconName (256 values)
 Callbacks found: 0
 
 
-Functions found: 56
+Functions found: 57
 
 Function 001: GuiEnable() (0 input parameters)
   Name: GuiEnable
@@ -708,7 +711,7 @@ Function 028: GuiScrollPanel() (5 input parameters)
 Function 029: GuiLabel() (2 input parameters)
   Name: GuiLabel
   Return type: int
-  Description: Label control, shows text
+  Description: Label control
   Param[1]: bounds (type: Rectangle)
   Param[2]: text (type: const char *)
 Function 030: GuiButton() (2 input parameters)
@@ -720,27 +723,27 @@ Function 030: GuiButton() (2 input parameters)
 Function 031: GuiLabelButton() (2 input parameters)
   Name: GuiLabelButton
   Return type: int
-  Description: Label button control, show true when clicked
+  Description: Label button control, returns true when clicked
   Param[1]: bounds (type: Rectangle)
   Param[2]: text (type: const char *)
 Function 032: GuiToggle() (3 input parameters)
   Name: GuiToggle
   Return type: int
-  Description: Toggle Button control, returns true when active
+  Description: Toggle Button control
   Param[1]: bounds (type: Rectangle)
   Param[2]: text (type: const char *)
   Param[3]: active (type: bool *)
 Function 033: GuiToggleGroup() (3 input parameters)
   Name: GuiToggleGroup
   Return type: int
-  Description: Toggle Group control, returns active toggle index
+  Description: Toggle Group control
   Param[1]: bounds (type: Rectangle)
   Param[2]: text (type: const char *)
   Param[3]: active (type: int *)
 Function 034: GuiToggleSlider() (3 input parameters)
   Name: GuiToggleSlider
   Return type: int
-  Description: Toggle Slider control, returns true when clicked
+  Description: Toggle Slider control
   Param[1]: bounds (type: Rectangle)
   Param[2]: text (type: const char *)
   Param[3]: active (type: int *)
@@ -754,14 +757,14 @@ Function 035: GuiCheckBox() (3 input parameters)
 Function 036: GuiComboBox() (3 input parameters)
   Name: GuiComboBox
   Return type: int
-  Description: Combo Box control, returns selected item index
+  Description: Combo Box control
   Param[1]: bounds (type: Rectangle)
   Param[2]: text (type: const char *)
   Param[3]: active (type: int *)
 Function 037: GuiDropdownBox() (4 input parameters)
   Name: GuiDropdownBox
   Return type: int
-  Description: Dropdown Box control, returns selected item
+  Description: Dropdown Box control
   Param[1]: bounds (type: Rectangle)
   Param[2]: text (type: const char *)
   Param[3]: active (type: int *)
@@ -769,7 +772,7 @@ Function 037: GuiDropdownBox() (4 input parameters)
 Function 038: GuiSpinner() (6 input parameters)
   Name: GuiSpinner
   Return type: int
-  Description: Spinner control, returns selected value
+  Description: Spinner control
   Param[1]: bounds (type: Rectangle)
   Param[2]: text (type: const char *)
   Param[3]: value (type: int *)
@@ -786,7 +789,16 @@ Function 039: GuiValueBox() (6 input parameters)
   Param[4]: minValue (type: int)
   Param[5]: maxValue (type: int)
   Param[6]: editMode (type: bool)
-Function 040: GuiTextBox() (4 input parameters)
+Function 040: GuiValueBoxFloat() (5 input parameters)
+  Name: GuiValueBoxFloat
+  Return type: int
+  Description: Value box control for float values
+  Param[1]: bounds (type: Rectangle)
+  Param[2]: text (type: const char *)
+  Param[3]: textValue (type: char *)
+  Param[4]: value (type: float *)
+  Param[5]: editMode (type: bool)
+Function 041: GuiTextBox() (4 input parameters)
   Name: GuiTextBox
   Return type: int
   Description: Text Box control, updates input text
@@ -794,66 +806,66 @@ Function 040: GuiTextBox() (4 input parameters)
   Param[2]: text (type: char *)
   Param[3]: textSize (type: int)
   Param[4]: editMode (type: bool)
-Function 041: GuiSlider() (6 input parameters)
+Function 042: GuiSlider() (6 input parameters)
   Name: GuiSlider
   Return type: int
-  Description: Slider control, returns selected value
+  Description: Slider control
   Param[1]: bounds (type: Rectangle)
   Param[2]: textLeft (type: const char *)
   Param[3]: textRight (type: const char *)
   Param[4]: value (type: float *)
   Param[5]: minValue (type: float)
   Param[6]: maxValue (type: float)
-Function 042: GuiSliderBar() (6 input parameters)
+Function 043: GuiSliderBar() (6 input parameters)
   Name: GuiSliderBar
   Return type: int
-  Description: Slider Bar control, returns selected value
+  Description: Slider Bar control
   Param[1]: bounds (type: Rectangle)
   Param[2]: textLeft (type: const char *)
   Param[3]: textRight (type: const char *)
   Param[4]: value (type: float *)
   Param[5]: minValue (type: float)
   Param[6]: maxValue (type: float)
-Function 043: GuiProgressBar() (6 input parameters)
+Function 044: GuiProgressBar() (6 input parameters)
   Name: GuiProgressBar
   Return type: int
-  Description: Progress Bar control, shows current progress value
+  Description: Progress Bar control
   Param[1]: bounds (type: Rectangle)
   Param[2]: textLeft (type: const char *)
   Param[3]: textRight (type: const char *)
   Param[4]: value (type: float *)
   Param[5]: minValue (type: float)
   Param[6]: maxValue (type: float)
-Function 044: GuiStatusBar() (2 input parameters)
+Function 045: GuiStatusBar() (2 input parameters)
   Name: GuiStatusBar
   Return type: int
   Description: Status Bar control, shows info text
   Param[1]: bounds (type: Rectangle)
   Param[2]: text (type: const char *)
-Function 045: GuiDummyRec() (2 input parameters)
+Function 046: GuiDummyRec() (2 input parameters)
   Name: GuiDummyRec
   Return type: int
   Description: Dummy control for placeholders
   Param[1]: bounds (type: Rectangle)
   Param[2]: text (type: const char *)
-Function 046: GuiGrid() (5 input parameters)
+Function 047: GuiGrid() (5 input parameters)
   Name: GuiGrid
   Return type: int
-  Description: Grid control, returns mouse cell position
+  Description: Grid control
   Param[1]: bounds (type: Rectangle)
   Param[2]: text (type: const char *)
   Param[3]: spacing (type: float)
   Param[4]: subdivs (type: int)
   Param[5]: mouseCell (type: Vector2 *)
-Function 047: GuiListView() (4 input parameters)
+Function 048: GuiListView() (4 input parameters)
   Name: GuiListView
   Return type: int
-  Description: List View control, returns selected list item index
+  Description: List View control
   Param[1]: bounds (type: Rectangle)
   Param[2]: text (type: const char *)
   Param[3]: scrollIndex (type: int *)
   Param[4]: active (type: int *)
-Function 048: GuiListViewEx() (6 input parameters)
+Function 049: GuiListViewEx() (6 input parameters)
   Name: GuiListViewEx
   Return type: int
   Description: List View with extended parameters
@@ -863,7 +875,7 @@ Function 048: GuiListViewEx() (6 input parameters)
   Param[4]: scrollIndex (type: int *)
   Param[5]: active (type: int *)
   Param[6]: focus (type: int *)
-Function 049: GuiMessageBox() (4 input parameters)
+Function 050: GuiMessageBox() (4 input parameters)
   Name: GuiMessageBox
   Return type: int
   Description: Message Box control, displays a message
@@ -871,7 +883,7 @@ Function 049: GuiMessageBox() (4 input parameters)
   Param[2]: title (type: const char *)
   Param[3]: message (type: const char *)
   Param[4]: buttons (type: const char *)
-Function 050: GuiTextInputBox() (7 input parameters)
+Function 051: GuiTextInputBox() (7 input parameters)
   Name: GuiTextInputBox
   Return type: int
   Description: Text Input Box control, ask for text, supports secret
@@ -882,45 +894,45 @@ Function 050: GuiTextInputBox() (7 input parameters)
   Param[5]: text (type: char *)
   Param[6]: textMaxSize (type: int)
   Param[7]: secretViewActive (type: bool *)
-Function 051: GuiColorPicker() (3 input parameters)
+Function 052: GuiColorPicker() (3 input parameters)
   Name: GuiColorPicker
   Return type: int
   Description: Color Picker control (multiple color controls)
   Param[1]: bounds (type: Rectangle)
   Param[2]: text (type: const char *)
   Param[3]: color (type: Color *)
-Function 052: GuiColorPanel() (3 input parameters)
+Function 053: GuiColorPanel() (3 input parameters)
   Name: GuiColorPanel
   Return type: int
   Description: Color Panel control
   Param[1]: bounds (type: Rectangle)
   Param[2]: text (type: const char *)
   Param[3]: color (type: Color *)
-Function 053: GuiColorBarAlpha() (3 input parameters)
+Function 054: GuiColorBarAlpha() (3 input parameters)
   Name: GuiColorBarAlpha
   Return type: int
   Description: Color Bar Alpha control
   Param[1]: bounds (type: Rectangle)
   Param[2]: text (type: const char *)
   Param[3]: alpha (type: float *)
-Function 054: GuiColorBarHue() (3 input parameters)
+Function 055: GuiColorBarHue() (3 input parameters)
   Name: GuiColorBarHue
   Return type: int
   Description: Color Bar Hue control
   Param[1]: bounds (type: Rectangle)
   Param[2]: text (type: const char *)
   Param[3]: value (type: float *)
-Function 055: GuiColorPickerHSV() (3 input parameters)
+Function 056: GuiColorPickerHSV() (3 input parameters)
   Name: GuiColorPickerHSV
   Return type: int
   Description: Color Picker control that avoids conversion to RGB on each call (multiple color controls)
   Param[1]: bounds (type: Rectangle)
   Param[2]: text (type: const char *)
   Param[3]: colorHsv (type: Vector3 *)
-Function 056: GuiColorPanelHSV() (3 input parameters)
+Function 057: GuiColorPanelHSV() (3 input parameters)
   Name: GuiColorPanelHSV
   Return type: int
-  Description: Color Panel control that returns HSV color value, used by GuiColorPickerHSV()
+  Description: Color Panel control that updates Hue-Saturation-Value color value, used by GuiColorPickerHSV()
   Param[1]: bounds (type: Rectangle)
   Param[2]: text (type: const char *)
   Param[3]: colorHsv (type: Vector3 *)

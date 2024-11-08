@@ -387,7 +387,7 @@ return {
       description = "Compute CRC32 for provided data",
       returnType = "unsigned int",
       params = {
-        {type = "unsigned char *", name = "data"},
+        {type = "const unsigned char *", name = "data"},
         {type = "int", name = "len"}
       }
     },

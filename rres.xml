@@ -109,7 +109,7 @@
             <Param type="const char *" name="fileName" desc="" />
         </Function>
         <Function name="rresComputeCRC32" retType="unsigned int" paramCount="2" desc="Compute CRC32 for provided data">
-            <Param type="unsigned char *" name="data" desc="" />
+            <Param type="const unsigned char *" name="data" desc="" />
             <Param type="int" name="len" desc="" />
         </Function>
         <Function name="rresSetCipherPassword" retType="void" paramCount="1" desc="Set password to be used on data decryption">

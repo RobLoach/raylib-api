@@ -181,7 +181,7 @@ Function 011: rresComputeCRC32() (2 input parameters)
   Name: rresComputeCRC32
   Return type: unsigned int
   Description: Compute CRC32 for provided data
-  Param[1]: data (type: unsigned char *)
+  Param[1]: data (type: const unsigned char *)
   Param[2]: len (type: int)
 Function 012: rresSetCipherPassword() (1 input parameters)
   Name: rresSetCipherPassword

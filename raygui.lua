@@ -15,7 +15,7 @@ return {
     {
       name = "RAYGUI_VERSION_MINOR",
       type = "INT",
-      value = 0,
+      value = 5,
       description = ""
     },
     {
@@ -27,7 +27,7 @@ return {
     {
       name = "RAYGUI_VERSION",
       type = "STRING",
-      value = "4.0",
+      value = "4.5-dev",
       description = ""
     },
     {
@@ -770,6 +770,16 @@ return {
           name = "DROPDOWN_ITEMS_SPACING",
           value = 17,
           description = "DropdownBox items separation"
+        },
+        {
+          name = "DROPDOWN_ARROW_HIDDEN",
+          value = 18,
+          description = "DropdownBox arrow hidden"
+        },
+        {
+          name = "DROPDOWN_ROLL_UP",
+          value = 19,
+          description = "DropdownBox roll up flag (default rolls down)"
         }
       }
     },
@@ -823,6 +833,11 @@ return {
           name = "SCROLLBAR_SIDE",
           value = 19,
           description = "ListView scrollbar side (0-SCROLLBAR_LEFT_SIDE, 1-SCROLLBAR_RIGHT_SIDE)"
+        },
+        {
+          name = "LIST_ITEMS_BORDER_WIDTH",
+          value = 20,
+          description = "ListView items border width"
         }
       }
     },
@@ -1962,47 +1977,47 @@ return {
           description = ""
         },
         {
-          name = "ICON_220",
+          name = "ICON_WARNING",
           value = 220,
           description = ""
         },
         {
-          name = "ICON_221",
+          name = "ICON_HELP_BOX",
           value = 221,
           description = ""
         },
         {
-          name = "ICON_222",
+          name = "ICON_INFO_BOX",
           value = 222,
           description = ""
         },
         {
-          name = "ICON_223",
+          name = "ICON_PRIORITY",
           value = 223,
           description = ""
         },
         {
-          name = "ICON_224",
+          name = "ICON_LAYERS_ISO",
           value = 224,
           description = ""
         },
         {
-          name = "ICON_225",
+          name = "ICON_LAYERS2",
           value = 225,
           description = ""
         },
         {
-          name = "ICON_226",
+          name = "ICON_MLAYERS",
           value = 226,
           description = ""
         },
         {
-          name = "ICON_227",
+          name = "ICON_MAPS",
           value = 227,
           description = ""
         },
         {
-          name = "ICON_228",
+          name = "ICON_HOT",
           value = 228,
           description = ""
         },
@@ -2360,7 +2375,7 @@ return {
     },
     {
       name = "GuiLabel",
-      description = "Label control, shows text",
+      description = "Label control",
       returnType = "int",
       params = {
         {type = "Rectangle", name = "bounds"},
@@ -2378,7 +2393,7 @@ return {
     },
     {
       name = "GuiLabelButton",
-      description = "Label button control, show true when clicked",
+      description = "Label button control, returns true when clicked",
       returnType = "int",
       params = {
         {type = "Rectangle", name = "bounds"},
@@ -2387,7 +2402,7 @@ return {
     },
     {
       name = "GuiToggle",
-      description = "Toggle Button control, returns true when active",
+      description = "Toggle Button control",
       returnType = "int",
       params = {
         {type = "Rectangle", name = "bounds"},
@@ -2397,7 +2412,7 @@ return {
     },
     {
       name = "GuiToggleGroup",
-      description = "Toggle Group control, returns active toggle index",
+      description = "Toggle Group control",
       returnType = "int",
       params = {
         {type = "Rectangle", name = "bounds"},
@@ -2407,7 +2422,7 @@ return {
     },
     {
       name = "GuiToggleSlider",
-      description = "Toggle Slider control, returns true when clicked",
+      description = "Toggle Slider control",
       returnType = "int",
       params = {
         {type = "Rectangle", name = "bounds"},
@@ -2427,7 +2442,7 @@ return {
     },
     {
       name = "GuiComboBox",
-      description = "Combo Box control, returns selected item index",
+      description = "Combo Box control",
       returnType = "int",
       params = {
         {type = "Rectangle", name = "bounds"},
@@ -2437,7 +2452,7 @@ return {
     },
     {
       name = "GuiDropdownBox",
-      description = "Dropdown Box control, returns selected item",
+      description = "Dropdown Box control",
       returnType = "int",
       params = {
         {type = "Rectangle", name = "bounds"},
@@ -2448,7 +2463,7 @@ return {
     },
     {
       name = "GuiSpinner",
-      description = "Spinner control, returns selected value",
+      description = "Spinner control",
       returnType = "int",
       params = {
         {type = "Rectangle", name = "bounds"},
@@ -2473,6 +2488,18 @@ return {
       }
     },
     {
+      name = "GuiValueBoxFloat",
+      description = "Value box control for float values",
+      returnType = "int",
+      params = {
+        {type = "Rectangle", name = "bounds"},
+        {type = "const char *", name = "text"},
+        {type = "char *", name = "textValue"},
+        {type = "float *", name = "value"},
+        {type = "bool", name = "editMode"}
+      }
+    },
+    {
       name = "GuiTextBox",
       description = "Text Box control, updates input text",
       returnType = "int",
@@ -2485,7 +2512,7 @@ return {
     },
     {
       name = "GuiSlider",
-      description = "Slider control, returns selected value",
+      description = "Slider control",
       returnType = "int",
       params = {
         {type = "Rectangle", name = "bounds"},
@@ -2498,7 +2525,7 @@ return {
     },
     {
       name = "GuiSliderBar",
-      description = "Slider Bar control, returns selected value",
+      description = "Slider Bar control",
       returnType = "int",
       params = {
         {type = "Rectangle", name = "bounds"},
@@ -2511,7 +2538,7 @@ return {
     },
     {
       name = "GuiProgressBar",
-      description = "Progress Bar control, shows current progress value",
+      description = "Progress Bar control",
       returnType = "int",
       params = {
         {type = "Rectangle", name = "bounds"},
@@ -2542,7 +2569,7 @@ return {
     },
     {
       name = "GuiGrid",
-      description = "Grid control, returns mouse cell position",
+      description = "Grid control",
       returnType = "int",
       params = {
         {type = "Rectangle", name = "bounds"},
@@ -2554,7 +2581,7 @@ return {
     },
     {
       name = "GuiListView",
-      description = "List View control, returns selected list item index",
+      description = "List View control",
       returnType = "int",
       params = {
         {type = "Rectangle", name = "bounds"},
@@ -2653,7 +2680,7 @@ return {
     },
     {
       name = "GuiColorPanelHSV",
-      description = "Color Panel control that returns HSV color value, used by GuiColorPickerHSV()",
+      description = "Color Panel control that updates Hue-Saturation-Value color value, used by GuiColorPickerHSV()",
       returnType = "int",
       params = {
         {type = "Rectangle", name = "bounds"},
