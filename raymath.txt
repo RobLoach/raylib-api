@@ -10,7 +10,7 @@ Define 002: RMAPI
   Name: RMAPI
   Type: UNKNOWN
   Value: __declspec(dllexport) extern inline
-  Description: We are building raylib as a Win32 shared library (.dll).
+  Description: We are building raylib as a Win32 shared library (.dll)
 Define 003: PI
   Name: PI
   Type: FLOAT
@@ -128,7 +128,7 @@ Enums found: 0
 Callbacks found: 0
 
 
-Functions found: 114
+Functions found: 143
 
 Function 001: Clamp() (3 input parameters)
   Name: Clamp
@@ -294,214 +294,249 @@ Function 027: Vector2Reflect() (2 input parameters)
   Description: 
   Param[1]: v (type: Vector2)
   Param[2]: normal (type: Vector2)
-Function 028: Vector2Rotate() (2 input parameters)
+Function 028: Vector2Min() (2 input parameters)
+  Name: Vector2Min
+  Return type: Vector2
+  Description: 
+  Param[1]: v1 (type: Vector2)
+  Param[2]: v2 (type: Vector2)
+Function 029: Vector2Max() (2 input parameters)
+  Name: Vector2Max
+  Return type: Vector2
+  Description: 
+  Param[1]: v1 (type: Vector2)
+  Param[2]: v2 (type: Vector2)
+Function 030: Vector2Rotate() (2 input parameters)
   Name: Vector2Rotate
   Return type: Vector2
   Description: 
   Param[1]: v (type: Vector2)
   Param[2]: angle (type: float)
-Function 029: Vector2MoveTowards() (3 input parameters)
+Function 031: Vector2MoveTowards() (3 input parameters)
   Name: Vector2MoveTowards
   Return type: Vector2
   Description: 
   Param[1]: v (type: Vector2)
   Param[2]: target (type: Vector2)
   Param[3]: maxDistance (type: float)
-Function 030: Vector2Invert() (1 input parameters)
+Function 032: Vector2Invert() (1 input parameters)
   Name: Vector2Invert
   Return type: Vector2
   Description: 
   Param[1]: v (type: Vector2)
-Function 031: Vector2Clamp() (3 input parameters)
+Function 033: Vector2Clamp() (3 input parameters)
   Name: Vector2Clamp
   Return type: Vector2
   Description: 
   Param[1]: v (type: Vector2)
   Param[2]: min (type: Vector2)
   Param[3]: max (type: Vector2)
-Function 032: Vector2ClampValue() (3 input parameters)
+Function 034: Vector2ClampValue() (3 input parameters)
   Name: Vector2ClampValue
   Return type: Vector2
   Description: 
   Param[1]: v (type: Vector2)
   Param[2]: min (type: float)
   Param[3]: max (type: float)
-Function 033: Vector2Equals() (2 input parameters)
+Function 035: Vector2Equals() (2 input parameters)
   Name: Vector2Equals
   Return type: int
   Description: 
   Param[1]: p (type: Vector2)
   Param[2]: q (type: Vector2)
-Function 034: Vector3Zero() (0 input parameters)
+Function 036: Vector2Refract() (3 input parameters)
+  Name: Vector2Refract
+  Return type: Vector2
+  Description: 
+  Param[1]: v (type: Vector2)
+  Param[2]: n (type: Vector2)
+  Param[3]: r (type: float)
+Function 037: Vector3Zero() (0 input parameters)
   Name: Vector3Zero
   Return type: Vector3
   Description: 
   No input parameters
-Function 035: Vector3One() (0 input parameters)
+Function 038: Vector3One() (0 input parameters)
   Name: Vector3One
   Return type: Vector3
   Description: 
   No input parameters
-Function 036: Vector3Add() (2 input parameters)
+Function 039: Vector3Add() (2 input parameters)
   Name: Vector3Add
   Return type: Vector3
   Description: 
   Param[1]: v1 (type: Vector3)
   Param[2]: v2 (type: Vector3)
-Function 037: Vector3AddValue() (2 input parameters)
+Function 040: Vector3AddValue() (2 input parameters)
   Name: Vector3AddValue
   Return type: Vector3
   Description: 
   Param[1]: v (type: Vector3)
   Param[2]: add (type: float)
-Function 038: Vector3Subtract() (2 input parameters)
+Function 041: Vector3Subtract() (2 input parameters)
   Name: Vector3Subtract
   Return type: Vector3
   Description: 
   Param[1]: v1 (type: Vector3)
   Param[2]: v2 (type: Vector3)
-Function 039: Vector3SubtractValue() (2 input parameters)
+Function 042: Vector3SubtractValue() (2 input parameters)
   Name: Vector3SubtractValue
   Return type: Vector3
   Description: 
   Param[1]: v (type: Vector3)
   Param[2]: sub (type: float)
-Function 040: Vector3Scale() (2 input parameters)
+Function 043: Vector3Scale() (2 input parameters)
   Name: Vector3Scale
   Return type: Vector3
   Description: 
   Param[1]: v (type: Vector3)
   Param[2]: scalar (type: float)
-Function 041: Vector3Multiply() (2 input parameters)
+Function 044: Vector3Multiply() (2 input parameters)
   Name: Vector3Multiply
   Return type: Vector3
   Description: 
   Param[1]: v1 (type: Vector3)
   Param[2]: v2 (type: Vector3)
-Function 042: Vector3CrossProduct() (2 input parameters)
+Function 045: Vector3CrossProduct() (2 input parameters)
   Name: Vector3CrossProduct
   Return type: Vector3
   Description: 
   Param[1]: v1 (type: Vector3)
   Param[2]: v2 (type: Vector3)
-Function 043: Vector3Perpendicular() (1 input parameters)
+Function 046: Vector3Perpendicular() (1 input parameters)
   Name: Vector3Perpendicular
   Return type: Vector3
   Description: 
   Param[1]: v (type: Vector3)
-Function 044: Vector3Length() (1 input parameters)
+Function 047: Vector3Length() (1 input parameters)
   Name: Vector3Length
   Return type: float
   Description: 
   Param[1]: v (type: const Vector3)
-Function 045: Vector3LengthSqr() (1 input parameters)
+Function 048: Vector3LengthSqr() (1 input parameters)
   Name: Vector3LengthSqr
   Return type: float
   Description: 
   Param[1]: v (type: const Vector3)
-Function 046: Vector3DotProduct() (2 input parameters)
+Function 049: Vector3DotProduct() (2 input parameters)
   Name: Vector3DotProduct
   Return type: float
   Description: 
   Param[1]: v1 (type: Vector3)
   Param[2]: v2 (type: Vector3)
-Function 047: Vector3Distance() (2 input parameters)
+Function 050: Vector3Distance() (2 input parameters)
   Name: Vector3Distance
   Return type: float
   Description: 
   Param[1]: v1 (type: Vector3)
   Param[2]: v2 (type: Vector3)
-Function 048: Vector3DistanceSqr() (2 input parameters)
+Function 051: Vector3DistanceSqr() (2 input parameters)
   Name: Vector3DistanceSqr
   Return type: float
   Description: 
   Param[1]: v1 (type: Vector3)
   Param[2]: v2 (type: Vector3)
-Function 049: Vector3Angle() (2 input parameters)
+Function 052: Vector3Angle() (2 input parameters)
   Name: Vector3Angle
   Return type: float
   Description: 
   Param[1]: v1 (type: Vector3)
   Param[2]: v2 (type: Vector3)
-Function 050: Vector3Negate() (1 input parameters)
+Function 053: Vector3Negate() (1 input parameters)
   Name: Vector3Negate
   Return type: Vector3
   Description: 
   Param[1]: v (type: Vector3)
-Function 051: Vector3Divide() (2 input parameters)
+Function 054: Vector3Divide() (2 input parameters)
   Name: Vector3Divide
   Return type: Vector3
   Description: 
   Param[1]: v1 (type: Vector3)
   Param[2]: v2 (type: Vector3)
-Function 052: Vector3Normalize() (1 input parameters)
+Function 055: Vector3Normalize() (1 input parameters)
   Name: Vector3Normalize
   Return type: Vector3
   Description: 
   Param[1]: v (type: Vector3)
-Function 053: Vector3Project() (2 input parameters)
+Function 056: Vector3Project() (2 input parameters)
   Name: Vector3Project
   Return type: Vector3
   Description: 
   Param[1]: v1 (type: Vector3)
   Param[2]: v2 (type: Vector3)
-Function 054: Vector3Reject() (2 input parameters)
+Function 057: Vector3Reject() (2 input parameters)
   Name: Vector3Reject
   Return type: Vector3
   Description: 
   Param[1]: v1 (type: Vector3)
   Param[2]: v2 (type: Vector3)
-Function 055: Vector3OrthoNormalize() (2 input parameters)
+Function 058: Vector3OrthoNormalize() (2 input parameters)
   Name: Vector3OrthoNormalize
   Return type: void
   Description: 
   Param[1]: v1 (type: Vector3 *)
   Param[2]: v2 (type: Vector3 *)
-Function 056: Vector3Transform() (2 input parameters)
+Function 059: Vector3Transform() (2 input parameters)
   Name: Vector3Transform
   Return type: Vector3
   Description: 
   Param[1]: v (type: Vector3)
   Param[2]: mat (type: Matrix)
-Function 057: Vector3RotateByQuaternion() (2 input parameters)
+Function 060: Vector3RotateByQuaternion() (2 input parameters)
   Name: Vector3RotateByQuaternion
   Return type: Vector3
   Description: 
   Param[1]: v (type: Vector3)
   Param[2]: q (type: Quaternion)
-Function 058: Vector3RotateByAxisAngle() (3 input parameters)
+Function 061: Vector3RotateByAxisAngle() (3 input parameters)
   Name: Vector3RotateByAxisAngle
   Return type: Vector3
   Description: 
   Param[1]: v (type: Vector3)
   Param[2]: axis (type: Vector3)
   Param[3]: angle (type: float)
-Function 059: Vector3Lerp() (3 input parameters)
+Function 062: Vector3MoveTowards() (3 input parameters)
+  Name: Vector3MoveTowards
+  Return type: Vector3
+  Description: 
+  Param[1]: v (type: Vector3)
+  Param[2]: target (type: Vector3)
+  Param[3]: maxDistance (type: float)
+Function 063: Vector3Lerp() (3 input parameters)
   Name: Vector3Lerp
   Return type: Vector3
   Description: 
   Param[1]: v1 (type: Vector3)
   Param[2]: v2 (type: Vector3)
   Param[3]: amount (type: float)
-Function 060: Vector3Reflect() (2 input parameters)
+Function 064: Vector3CubicHermite() (5 input parameters)
+  Name: Vector3CubicHermite
+  Return type: Vector3
+  Description: 
+  Param[1]: v1 (type: Vector3)
+  Param[2]: tangent1 (type: Vector3)
+  Param[3]: v2 (type: Vector3)
+  Param[4]: tangent2 (type: Vector3)
+  Param[5]: amount (type: float)
+Function 065: Vector3Reflect() (2 input parameters)
   Name: Vector3Reflect
   Return type: Vector3
   Description: 
   Param[1]: v (type: Vector3)
   Param[2]: normal (type: Vector3)
-Function 061: Vector3Min() (2 input parameters)
+Function 066: Vector3Min() (2 input parameters)
   Name: Vector3Min
   Return type: Vector3
   Description: 
   Param[1]: v1 (type: Vector3)
   Param[2]: v2 (type: Vector3)
-Function 062: Vector3Max() (2 input parameters)
+Function 067: Vector3Max() (2 input parameters)
   Name: Vector3Max
   Return type: Vector3
   Description: 
   Param[1]: v1 (type: Vector3)
   Param[2]: v2 (type: Vector3)
-Function 063: Vector3Barycenter() (4 input parameters)
+Function 068: Vector3Barycenter() (4 input parameters)
   Name: Vector3Barycenter
   Return type: Vector3
   Description: 
@@ -509,139 +544,266 @@ Function 063: Vector3Barycenter() (4 input parameters)
   Param[2]: a (type: Vector3)
   Param[3]: b (type: Vector3)
   Param[4]: c (type: Vector3)
-Function 064: Vector3Unproject() (3 input parameters)
+Function 069: Vector3Unproject() (3 input parameters)
   Name: Vector3Unproject
   Return type: Vector3
   Description: 
   Param[1]: source (type: Vector3)
   Param[2]: projection (type: Matrix)
   Param[3]: view (type: Matrix)
-Function 065: Vector3ToFloatV() (1 input parameters)
+Function 070: Vector3ToFloatV() (1 input parameters)
   Name: Vector3ToFloatV
   Return type: float3
   Description: 
   Param[1]: v (type: Vector3)
-Function 066: Vector3Invert() (1 input parameters)
+Function 071: Vector3Invert() (1 input parameters)
   Name: Vector3Invert
   Return type: Vector3
   Description: 
   Param[1]: v (type: Vector3)
-Function 067: Vector3Clamp() (3 input parameters)
+Function 072: Vector3Clamp() (3 input parameters)
   Name: Vector3Clamp
   Return type: Vector3
   Description: 
   Param[1]: v (type: Vector3)
   Param[2]: min (type: Vector3)
   Param[3]: max (type: Vector3)
-Function 068: Vector3ClampValue() (3 input parameters)
+Function 073: Vector3ClampValue() (3 input parameters)
   Name: Vector3ClampValue
   Return type: Vector3
   Description: 
   Param[1]: v (type: Vector3)
   Param[2]: min (type: float)
   Param[3]: max (type: float)
-Function 069: Vector3Equals() (2 input parameters)
+Function 074: Vector3Equals() (2 input parameters)
   Name: Vector3Equals
   Return type: int
   Description: 
   Param[1]: p (type: Vector3)
   Param[2]: q (type: Vector3)
-Function 070: Vector3Refract() (3 input parameters)
+Function 075: Vector3Refract() (3 input parameters)
   Name: Vector3Refract
   Return type: Vector3
   Description: 
   Param[1]: v (type: Vector3)
   Param[2]: n (type: Vector3)
   Param[3]: r (type: float)
-Function 071: MatrixDeterminant() (1 input parameters)
+Function 076: Vector4Zero() (0 input parameters)
+  Name: Vector4Zero
+  Return type: Vector4
+  Description: 
+  No input parameters
+Function 077: Vector4One() (0 input parameters)
+  Name: Vector4One
+  Return type: Vector4
+  Description: 
+  No input parameters
+Function 078: Vector4Add() (2 input parameters)
+  Name: Vector4Add
+  Return type: Vector4
+  Description: 
+  Param[1]: v1 (type: Vector4)
+  Param[2]: v2 (type: Vector4)
+Function 079: Vector4AddValue() (2 input parameters)
+  Name: Vector4AddValue
+  Return type: Vector4
+  Description: 
+  Param[1]: v (type: Vector4)
+  Param[2]: add (type: float)
+Function 080: Vector4Subtract() (2 input parameters)
+  Name: Vector4Subtract
+  Return type: Vector4
+  Description: 
+  Param[1]: v1 (type: Vector4)
+  Param[2]: v2 (type: Vector4)
+Function 081: Vector4SubtractValue() (2 input parameters)
+  Name: Vector4SubtractValue
+  Return type: Vector4
+  Description: 
+  Param[1]: v (type: Vector4)
+  Param[2]: add (type: float)
+Function 082: Vector4Length() (1 input parameters)
+  Name: Vector4Length
+  Return type: float
+  Description: 
+  Param[1]: v (type: Vector4)
+Function 083: Vector4LengthSqr() (1 input parameters)
+  Name: Vector4LengthSqr
+  Return type: float
+  Description: 
+  Param[1]: v (type: Vector4)
+Function 084: Vector4DotProduct() (2 input parameters)
+  Name: Vector4DotProduct
+  Return type: float
+  Description: 
+  Param[1]: v1 (type: Vector4)
+  Param[2]: v2 (type: Vector4)
+Function 085: Vector4Distance() (2 input parameters)
+  Name: Vector4Distance
+  Return type: float
+  Description: 
+  Param[1]: v1 (type: Vector4)
+  Param[2]: v2 (type: Vector4)
+Function 086: Vector4DistanceSqr() (2 input parameters)
+  Name: Vector4DistanceSqr
+  Return type: float
+  Description: 
+  Param[1]: v1 (type: Vector4)
+  Param[2]: v2 (type: Vector4)
+Function 087: Vector4Scale() (2 input parameters)
+  Name: Vector4Scale
+  Return type: Vector4
+  Description: 
+  Param[1]: v (type: Vector4)
+  Param[2]: scale (type: float)
+Function 088: Vector4Multiply() (2 input parameters)
+  Name: Vector4Multiply
+  Return type: Vector4
+  Description: 
+  Param[1]: v1 (type: Vector4)
+  Param[2]: v2 (type: Vector4)
+Function 089: Vector4Negate() (1 input parameters)
+  Name: Vector4Negate
+  Return type: Vector4
+  Description: 
+  Param[1]: v (type: Vector4)
+Function 090: Vector4Divide() (2 input parameters)
+  Name: Vector4Divide
+  Return type: Vector4
+  Description: 
+  Param[1]: v1 (type: Vector4)
+  Param[2]: v2 (type: Vector4)
+Function 091: Vector4Normalize() (1 input parameters)
+  Name: Vector4Normalize
+  Return type: Vector4
+  Description: 
+  Param[1]: v (type: Vector4)
+Function 092: Vector4Min() (2 input parameters)
+  Name: Vector4Min
+  Return type: Vector4
+  Description: 
+  Param[1]: v1 (type: Vector4)
+  Param[2]: v2 (type: Vector4)
+Function 093: Vector4Max() (2 input parameters)
+  Name: Vector4Max
+  Return type: Vector4
+  Description: 
+  Param[1]: v1 (type: Vector4)
+  Param[2]: v2 (type: Vector4)
+Function 094: Vector4Lerp() (3 input parameters)
+  Name: Vector4Lerp
+  Return type: Vector4
+  Description: 
+  Param[1]: v1 (type: Vector4)
+  Param[2]: v2 (type: Vector4)
+  Param[3]: amount (type: float)
+Function 095: Vector4MoveTowards() (3 input parameters)
+  Name: Vector4MoveTowards
+  Return type: Vector4
+  Description: 
+  Param[1]: v (type: Vector4)
+  Param[2]: target (type: Vector4)
+  Param[3]: maxDistance (type: float)
+Function 096: Vector4Invert() (1 input parameters)
+  Name: Vector4Invert
+  Return type: Vector4
+  Description: 
+  Param[1]: v (type: Vector4)
+Function 097: Vector4Equals() (2 input parameters)
+  Name: Vector4Equals
+  Return type: int
+  Description: 
+  Param[1]: p (type: Vector4)
+  Param[2]: q (type: Vector4)
+Function 098: MatrixDeterminant() (1 input parameters)
   Name: MatrixDeterminant
   Return type: float
   Description: 
   Param[1]: mat (type: Matrix)
-Function 072: MatrixTrace() (1 input parameters)
+Function 099: MatrixTrace() (1 input parameters)
   Name: MatrixTrace
   Return type: float
   Description: 
   Param[1]: mat (type: Matrix)
-Function 073: MatrixTranspose() (1 input parameters)
+Function 100: MatrixTranspose() (1 input parameters)
   Name: MatrixTranspose
   Return type: Matrix
   Description: 
   Param[1]: mat (type: Matrix)
-Function 074: MatrixInvert() (1 input parameters)
+Function 101: MatrixInvert() (1 input parameters)
   Name: MatrixInvert
   Return type: Matrix
   Description: 
   Param[1]: mat (type: Matrix)
-Function 075: MatrixIdentity() (0 input parameters)
+Function 102: MatrixIdentity() (0 input parameters)
   Name: MatrixIdentity
   Return type: Matrix
   Description: 
   No input parameters
-Function 076: MatrixAdd() (2 input parameters)
+Function 103: MatrixAdd() (2 input parameters)
   Name: MatrixAdd
   Return type: Matrix
   Description: 
   Param[1]: left (type: Matrix)
   Param[2]: right (type: Matrix)
-Function 077: MatrixSubtract() (2 input parameters)
+Function 104: MatrixSubtract() (2 input parameters)
   Name: MatrixSubtract
   Return type: Matrix
   Description: 
   Param[1]: left (type: Matrix)
   Param[2]: right (type: Matrix)
-Function 078: MatrixMultiply() (2 input parameters)
+Function 105: MatrixMultiply() (2 input parameters)
   Name: MatrixMultiply
   Return type: Matrix
   Description: 
   Param[1]: left (type: Matrix)
   Param[2]: right (type: Matrix)
-Function 079: MatrixTranslate() (3 input parameters)
+Function 106: MatrixTranslate() (3 input parameters)
   Name: MatrixTranslate
   Return type: Matrix
   Description: 
   Param[1]: x (type: float)
   Param[2]: y (type: float)
   Param[3]: z (type: float)
-Function 080: MatrixRotate() (2 input parameters)
+Function 107: MatrixRotate() (2 input parameters)
   Name: MatrixRotate
   Return type: Matrix
   Description: 
   Param[1]: axis (type: Vector3)
   Param[2]: angle (type: float)
-Function 081: MatrixRotateX() (1 input parameters)
+Function 108: MatrixRotateX() (1 input parameters)
   Name: MatrixRotateX
   Return type: Matrix
   Description: 
   Param[1]: angle (type: float)
-Function 082: MatrixRotateY() (1 input parameters)
+Function 109: MatrixRotateY() (1 input parameters)
   Name: MatrixRotateY
   Return type: Matrix
   Description: 
   Param[1]: angle (type: float)
-Function 083: MatrixRotateZ() (1 input parameters)
+Function 110: MatrixRotateZ() (1 input parameters)
   Name: MatrixRotateZ
   Return type: Matrix
   Description: 
   Param[1]: angle (type: float)
-Function 084: MatrixRotateXYZ() (1 input parameters)
+Function 111: MatrixRotateXYZ() (1 input parameters)
   Name: MatrixRotateXYZ
   Return type: Matrix
   Description: 
   Param[1]: angle (type: Vector3)
-Function 085: MatrixRotateZYX() (1 input parameters)
+Function 112: MatrixRotateZYX() (1 input parameters)
   Name: MatrixRotateZYX
   Return type: Matrix
   Description: 
   Param[1]: angle (type: Vector3)
-Function 086: MatrixScale() (3 input parameters)
+Function 113: MatrixScale() (3 input parameters)
   Name: MatrixScale
   Return type: Matrix
   Description: 
   Param[1]: x (type: float)
   Param[2]: y (type: float)
   Param[3]: z (type: float)
-Function 087: MatrixFrustum() (6 input parameters)
+Function 114: MatrixFrustum() (6 input parameters)
   Name: MatrixFrustum
   Return type: Matrix
   Description: 
@@ -649,9 +811,9 @@ Function 087: MatrixFrustum() (6 input parameters)
   Param[2]: right (type: double)
   Param[3]: bottom (type: double)
   Param[4]: top (type: double)
-  Param[5]: near (type: double)
-  Param[6]: far (type: double)
-Function 088: MatrixPerspective() (4 input parameters)
+  Param[5]: nearPlane (type: double)
+  Param[6]: farPlane (type: double)
+Function 115: MatrixPerspective() (4 input parameters)
   Name: MatrixPerspective
   Return type: Matrix
   Description: 
@@ -659,7 +821,7 @@ Function 088: MatrixPerspective() (4 input parameters)
   Param[2]: aspect (type: double)
   Param[3]: nearPlane (type: double)
   Param[4]: farPlane (type: double)
-Function 089: MatrixOrtho() (6 input parameters)
+Function 116: MatrixOrtho() (6 input parameters)
   Name: MatrixOrtho
   Return type: Matrix
   Description: 
@@ -669,151 +831,168 @@ Function 089: MatrixOrtho() (6 input parameters)
   Param[4]: top (type: double)
   Param[5]: nearPlane (type: double)
   Param[6]: farPlane (type: double)
-Function 090: MatrixLookAt() (3 input parameters)
+Function 117: MatrixLookAt() (3 input parameters)
   Name: MatrixLookAt
   Return type: Matrix
   Description: 
   Param[1]: eye (type: Vector3)
   Param[2]: target (type: Vector3)
   Param[3]: up (type: Vector3)
-Function 091: MatrixToFloatV() (1 input parameters)
+Function 118: MatrixToFloatV() (1 input parameters)
   Name: MatrixToFloatV
   Return type: float16
   Description: 
   Param[1]: mat (type: Matrix)
-Function 092: QuaternionAdd() (2 input parameters)
+Function 119: QuaternionAdd() (2 input parameters)
   Name: QuaternionAdd
   Return type: Quaternion
   Description: 
   Param[1]: q1 (type: Quaternion)
   Param[2]: q2 (type: Quaternion)
-Function 093: QuaternionAddValue() (2 input parameters)
+Function 120: QuaternionAddValue() (2 input parameters)
   Name: QuaternionAddValue
   Return type: Quaternion
   Description: 
   Param[1]: q (type: Quaternion)
   Param[2]: add (type: float)
-Function 094: QuaternionSubtract() (2 input parameters)
+Function 121: QuaternionSubtract() (2 input parameters)
   Name: QuaternionSubtract
   Return type: Quaternion
   Description: 
   Param[1]: q1 (type: Quaternion)
   Param[2]: q2 (type: Quaternion)
-Function 095: QuaternionSubtractValue() (2 input parameters)
+Function 122: QuaternionSubtractValue() (2 input parameters)
   Name: QuaternionSubtractValue
   Return type: Quaternion
   Description: 
   Param[1]: q (type: Quaternion)
   Param[2]: sub (type: float)
-Function 096: QuaternionIdentity() (0 input parameters)
+Function 123: QuaternionIdentity() (0 input parameters)
   Name: QuaternionIdentity
   Return type: Quaternion
   Description: 
   No input parameters
-Function 097: QuaternionLength() (1 input parameters)
+Function 124: QuaternionLength() (1 input parameters)
   Name: QuaternionLength
   Return type: float
   Description: 
   Param[1]: q (type: Quaternion)
-Function 098: QuaternionNormalize() (1 input parameters)
+Function 125: QuaternionNormalize() (1 input parameters)
   Name: QuaternionNormalize
   Return type: Quaternion
   Description: 
   Param[1]: q (type: Quaternion)
-Function 099: QuaternionInvert() (1 input parameters)
+Function 126: QuaternionInvert() (1 input parameters)
   Name: QuaternionInvert
   Return type: Quaternion
   Description: 
   Param[1]: q (type: Quaternion)
-Function 100: QuaternionMultiply() (2 input parameters)
+Function 127: QuaternionMultiply() (2 input parameters)
   Name: QuaternionMultiply
   Return type: Quaternion
   Description: 
   Param[1]: q1 (type: Quaternion)
   Param[2]: q2 (type: Quaternion)
-Function 101: QuaternionScale() (2 input parameters)
+Function 128: QuaternionScale() (2 input parameters)
   Name: QuaternionScale
   Return type: Quaternion
   Description: 
   Param[1]: q (type: Quaternion)
   Param[2]: mul (type: float)
-Function 102: QuaternionDivide() (2 input parameters)
+Function 129: QuaternionDivide() (2 input parameters)
   Name: QuaternionDivide
   Return type: Quaternion
   Description: 
   Param[1]: q1 (type: Quaternion)
   Param[2]: q2 (type: Quaternion)
-Function 103: QuaternionLerp() (3 input parameters)
+Function 130: QuaternionLerp() (3 input parameters)
   Name: QuaternionLerp
   Return type: Quaternion
   Description: 
   Param[1]: q1 (type: Quaternion)
   Param[2]: q2 (type: Quaternion)
   Param[3]: amount (type: float)
-Function 104: QuaternionNlerp() (3 input parameters)
+Function 131: QuaternionNlerp() (3 input parameters)
   Name: QuaternionNlerp
   Return type: Quaternion
   Description: 
   Param[1]: q1 (type: Quaternion)
   Param[2]: q2 (type: Quaternion)
   Param[3]: amount (type: float)
-Function 105: QuaternionSlerp() (3 input parameters)
+Function 132: QuaternionSlerp() (3 input parameters)
   Name: QuaternionSlerp
   Return type: Quaternion
   Description: 
   Param[1]: q1 (type: Quaternion)
   Param[2]: q2 (type: Quaternion)
   Param[3]: amount (type: float)
-Function 106: QuaternionFromVector3ToVector3() (2 input parameters)
+Function 133: QuaternionCubicHermiteSpline() (5 input parameters)
+  Name: QuaternionCubicHermiteSpline
+  Return type: Quaternion
+  Description: 
+  Param[1]: q1 (type: Quaternion)
+  Param[2]: outTangent1 (type: Quaternion)
+  Param[3]: q2 (type: Quaternion)
+  Param[4]: inTangent2 (type: Quaternion)
+  Param[5]: t (type: float)
+Function 134: QuaternionFromVector3ToVector3() (2 input parameters)
   Name: QuaternionFromVector3ToVector3
   Return type: Quaternion
   Description: 
   Param[1]: from (type: Vector3)
   Param[2]: to (type: Vector3)
-Function 107: QuaternionFromMatrix() (1 input parameters)
+Function 135: QuaternionFromMatrix() (1 input parameters)
   Name: QuaternionFromMatrix
   Return type: Quaternion
   Description: 
   Param[1]: mat (type: Matrix)
-Function 108: QuaternionToMatrix() (1 input parameters)
+Function 136: QuaternionToMatrix() (1 input parameters)
   Name: QuaternionToMatrix
   Return type: Matrix
   Description: 
   Param[1]: q (type: Quaternion)
-Function 109: QuaternionFromAxisAngle() (2 input parameters)
+Function 137: QuaternionFromAxisAngle() (2 input parameters)
   Name: QuaternionFromAxisAngle
   Return type: Quaternion
   Description: 
   Param[1]: axis (type: Vector3)
   Param[2]: angle (type: float)
-Function 110: QuaternionToAxisAngle() (3 input parameters)
+Function 138: QuaternionToAxisAngle() (3 input parameters)
   Name: QuaternionToAxisAngle
   Return type: void
   Description: 
   Param[1]: q (type: Quaternion)
   Param[2]: outAxis (type: Vector3 *)
   Param[3]: outAngle (type: float *)
-Function 111: QuaternionFromEuler() (3 input parameters)
+Function 139: QuaternionFromEuler() (3 input parameters)
   Name: QuaternionFromEuler
   Return type: Quaternion
   Description: 
   Param[1]: pitch (type: float)
   Param[2]: yaw (type: float)
   Param[3]: roll (type: float)
-Function 112: QuaternionToEuler() (1 input parameters)
+Function 140: QuaternionToEuler() (1 input parameters)
   Name: QuaternionToEuler
   Return type: Vector3
   Description: 
   Param[1]: q (type: Quaternion)
-Function 113: QuaternionTransform() (2 input parameters)
+Function 141: QuaternionTransform() (2 input parameters)
   Name: QuaternionTransform
   Return type: Quaternion
   Description: 
   Param[1]: q (type: Quaternion)
   Param[2]: mat (type: Matrix)
-Function 114: QuaternionEquals() (2 input parameters)
+Function 142: QuaternionEquals() (2 input parameters)
   Name: QuaternionEquals
   Return type: int
   Description: 
   Param[1]: p (type: Quaternion)
   Param[2]: q (type: Quaternion)
+Function 143: MatrixDecompose() (4 input parameters)
+  Name: MatrixDecompose
+  Return type: void
+  Description: 
+  Param[1]: mat (type: Matrix)
+  Param[2]: translation (type: Vector3 *)
+  Param[3]: rotation (type: Quaternion *)
+  Param[4]: scale (type: Vector3 *)

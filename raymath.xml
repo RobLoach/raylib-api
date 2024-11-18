@@ -2,7 +2,7 @@
 <raylibAPI>
     <Defines count="13">
         <Define name="RAYMATH_H" type="GUARD" value="" desc="" />
-        <Define name="RMAPI" type="UNKNOWN" value="__declspec(dllexport) extern inline" desc="We are building raylib as a Win32 shared library (.dll)." />
+        <Define name="RMAPI" type="UNKNOWN" value="__declspec(dllexport) extern inline" desc="We are building raylib as a Win32 shared library (.dll)" />
         <Define name="PI" type="FLOAT" value="3.14159265358979323846" desc="" />
         <Define name="EPSILON" type="FLOAT" value="0.000001" desc="" />
         <Define name="DEG2RAD" type="FLOAT_MATH" value="(PI/180.0f)" desc="" />
@@ -63,7 +63,7 @@
     </Enums>
     <Callbacks count="0">
     </Callbacks>
-    <Functions count="114">
+    <Functions count="143">
         <Function name="Clamp" retType="float" paramCount="3" desc="">
             <Param type="float" name="value" desc="" />
             <Param type="float" name="min" desc="" />
@@ -172,6 +172,14 @@
             <Param type="Vector2" name="v" desc="" />
             <Param type="Vector2" name="normal" desc="" />
         </Function>
+        <Function name="Vector2Min" retType="Vector2" paramCount="2" desc="">
+            <Param type="Vector2" name="v1" desc="" />
+            <Param type="Vector2" name="v2" desc="" />
+        </Function>
+        <Function name="Vector2Max" retType="Vector2" paramCount="2" desc="">
+            <Param type="Vector2" name="v1" desc="" />
+            <Param type="Vector2" name="v2" desc="" />
+        </Function>
         <Function name="Vector2Rotate" retType="Vector2" paramCount="2" desc="">
             <Param type="Vector2" name="v" desc="" />
             <Param type="float" name="angle" desc="" />
@@ -197,6 +205,11 @@
         <Function name="Vector2Equals" retType="int" paramCount="2" desc="">
             <Param type="Vector2" name="p" desc="" />
             <Param type="Vector2" name="q" desc="" />
+        </Function>
+        <Function name="Vector2Refract" retType="Vector2" paramCount="3" desc="">
+            <Param type="Vector2" name="v" desc="" />
+            <Param type="Vector2" name="n" desc="" />
+            <Param type="float" name="r" desc="" />
         </Function>
         <Function name="Vector3Zero" retType="Vector3" paramCount="0" desc="">
         </Function>
@@ -290,9 +303,21 @@
             <Param type="Vector3" name="axis" desc="" />
             <Param type="float" name="angle" desc="" />
         </Function>
+        <Function name="Vector3MoveTowards" retType="Vector3" paramCount="3" desc="">
+            <Param type="Vector3" name="v" desc="" />
+            <Param type="Vector3" name="target" desc="" />
+            <Param type="float" name="maxDistance" desc="" />
+        </Function>
         <Function name="Vector3Lerp" retType="Vector3" paramCount="3" desc="">
             <Param type="Vector3" name="v1" desc="" />
             <Param type="Vector3" name="v2" desc="" />
+            <Param type="float" name="amount" desc="" />
+        </Function>
+        <Function name="Vector3CubicHermite" retType="Vector3" paramCount="5" desc="">
+            <Param type="Vector3" name="v1" desc="" />
+            <Param type="Vector3" name="tangent1" desc="" />
+            <Param type="Vector3" name="v2" desc="" />
+            <Param type="Vector3" name="tangent2" desc="" />
             <Param type="float" name="amount" desc="" />
         </Function>
         <Function name="Vector3Reflect" retType="Vector3" paramCount="2" desc="">
@@ -342,6 +367,87 @@
             <Param type="Vector3" name="v" desc="" />
             <Param type="Vector3" name="n" desc="" />
             <Param type="float" name="r" desc="" />
+        </Function>
+        <Function name="Vector4Zero" retType="Vector4" paramCount="0" desc="">
+        </Function>
+        <Function name="Vector4One" retType="Vector4" paramCount="0" desc="">
+        </Function>
+        <Function name="Vector4Add" retType="Vector4" paramCount="2" desc="">
+            <Param type="Vector4" name="v1" desc="" />
+            <Param type="Vector4" name="v2" desc="" />
+        </Function>
+        <Function name="Vector4AddValue" retType="Vector4" paramCount="2" desc="">
+            <Param type="Vector4" name="v" desc="" />
+            <Param type="float" name="add" desc="" />
+        </Function>
+        <Function name="Vector4Subtract" retType="Vector4" paramCount="2" desc="">
+            <Param type="Vector4" name="v1" desc="" />
+            <Param type="Vector4" name="v2" desc="" />
+        </Function>
+        <Function name="Vector4SubtractValue" retType="Vector4" paramCount="2" desc="">
+            <Param type="Vector4" name="v" desc="" />
+            <Param type="float" name="add" desc="" />
+        </Function>
+        <Function name="Vector4Length" retType="float" paramCount="1" desc="">
+            <Param type="Vector4" name="v" desc="" />
+        </Function>
+        <Function name="Vector4LengthSqr" retType="float" paramCount="1" desc="">
+            <Param type="Vector4" name="v" desc="" />
+        </Function>
+        <Function name="Vector4DotProduct" retType="float" paramCount="2" desc="">
+            <Param type="Vector4" name="v1" desc="" />
+            <Param type="Vector4" name="v2" desc="" />
+        </Function>
+        <Function name="Vector4Distance" retType="float" paramCount="2" desc="">
+            <Param type="Vector4" name="v1" desc="" />
+            <Param type="Vector4" name="v2" desc="" />
+        </Function>
+        <Function name="Vector4DistanceSqr" retType="float" paramCount="2" desc="">
+            <Param type="Vector4" name="v1" desc="" />
+            <Param type="Vector4" name="v2" desc="" />
+        </Function>
+        <Function name="Vector4Scale" retType="Vector4" paramCount="2" desc="">
+            <Param type="Vector4" name="v" desc="" />
+            <Param type="float" name="scale" desc="" />
+        </Function>
+        <Function name="Vector4Multiply" retType="Vector4" paramCount="2" desc="">
+            <Param type="Vector4" name="v1" desc="" />
+            <Param type="Vector4" name="v2" desc="" />
+        </Function>
+        <Function name="Vector4Negate" retType="Vector4" paramCount="1" desc="">
+            <Param type="Vector4" name="v" desc="" />
+        </Function>
+        <Function name="Vector4Divide" retType="Vector4" paramCount="2" desc="">
+            <Param type="Vector4" name="v1" desc="" />
+            <Param type="Vector4" name="v2" desc="" />
+        </Function>
+        <Function name="Vector4Normalize" retType="Vector4" paramCount="1" desc="">
+            <Param type="Vector4" name="v" desc="" />
+        </Function>
+        <Function name="Vector4Min" retType="Vector4" paramCount="2" desc="">
+            <Param type="Vector4" name="v1" desc="" />
+            <Param type="Vector4" name="v2" desc="" />
+        </Function>
+        <Function name="Vector4Max" retType="Vector4" paramCount="2" desc="">
+            <Param type="Vector4" name="v1" desc="" />
+            <Param type="Vector4" name="v2" desc="" />
+        </Function>
+        <Function name="Vector4Lerp" retType="Vector4" paramCount="3" desc="">
+            <Param type="Vector4" name="v1" desc="" />
+            <Param type="Vector4" name="v2" desc="" />
+            <Param type="float" name="amount" desc="" />
+        </Function>
+        <Function name="Vector4MoveTowards" retType="Vector4" paramCount="3" desc="">
+            <Param type="Vector4" name="v" desc="" />
+            <Param type="Vector4" name="target" desc="" />
+            <Param type="float" name="maxDistance" desc="" />
+        </Function>
+        <Function name="Vector4Invert" retType="Vector4" paramCount="1" desc="">
+            <Param type="Vector4" name="v" desc="" />
+        </Function>
+        <Function name="Vector4Equals" retType="int" paramCount="2" desc="">
+            <Param type="Vector4" name="p" desc="" />
+            <Param type="Vector4" name="q" desc="" />
         </Function>
         <Function name="MatrixDeterminant" retType="float" paramCount="1" desc="">
             <Param type="Matrix" name="mat" desc="" />
@@ -403,8 +509,8 @@
             <Param type="double" name="right" desc="" />
             <Param type="double" name="bottom" desc="" />
             <Param type="double" name="top" desc="" />
-            <Param type="double" name="near" desc="" />
-            <Param type="double" name="far" desc="" />
+            <Param type="double" name="nearPlane" desc="" />
+            <Param type="double" name="farPlane" desc="" />
         </Function>
         <Function name="MatrixPerspective" retType="Matrix" paramCount="4" desc="">
             <Param type="double" name="fovY" desc="" />
@@ -482,6 +588,13 @@
             <Param type="Quaternion" name="q2" desc="" />
             <Param type="float" name="amount" desc="" />
         </Function>
+        <Function name="QuaternionCubicHermiteSpline" retType="Quaternion" paramCount="5" desc="">
+            <Param type="Quaternion" name="q1" desc="" />
+            <Param type="Quaternion" name="outTangent1" desc="" />
+            <Param type="Quaternion" name="q2" desc="" />
+            <Param type="Quaternion" name="inTangent2" desc="" />
+            <Param type="float" name="t" desc="" />
+        </Function>
         <Function name="QuaternionFromVector3ToVector3" retType="Quaternion" paramCount="2" desc="">
             <Param type="Vector3" name="from" desc="" />
             <Param type="Vector3" name="to" desc="" />
@@ -516,6 +629,12 @@
         <Function name="QuaternionEquals" retType="int" paramCount="2" desc="">
             <Param type="Quaternion" name="p" desc="" />
             <Param type="Quaternion" name="q" desc="" />
+        </Function>
+        <Function name="MatrixDecompose" retType="void" paramCount="4" desc="">
+            <Param type="Matrix" name="mat" desc="" />
+            <Param type="Vector3 *" name="translation" desc="" />
+            <Param type="Quaternion *" name="rotation" desc="" />
+            <Param type="Vector3 *" name="scale" desc="" />
         </Function>
     </Functions>
 </raylibAPI>
