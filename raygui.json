@@ -27,32 +27,20 @@
     {
       "name": "RAYGUI_VERSION",
       "type": "STRING",
-      "value": "4.5-dev",
+      "value": "5.0-dev",
       "description": ""
     },
     {
       "name": "RAYGUIAPI",
       "type": "UNKNOWN",
       "value": "__declspec(dllexport)",
-      "description": "We are building the library as a Win32 shared library (.dll)"
+      "description": "Building the library as a Win32 shared library (.dll)"
     },
     {
-      "name": "RAYGUI_MALLOC(sz)",
-      "type": "MACRO",
-      "value": "malloc(sz)",
-      "description": ""
-    },
-    {
-      "name": "RAYGUI_CALLOC(n,sz)",
-      "type": "MACRO",
-      "value": "calloc(n,sz)",
-      "description": ""
-    },
-    {
-      "name": "RAYGUI_FREE(p)",
-      "type": "MACRO",
-      "value": "free(p)",
-      "description": ""
+      "name": "_CRT_SECURE_NO_WARNINGS",
+      "type": "GUARD",
+      "value": "",
+      "description": "Disable unsafe warnings on scanf() functions in MSVC"
     },
     {
       "name": "RAYGUI_SUPPORT_LOG_INFO",
@@ -64,6 +52,60 @@
       "name": "RAYGUI_LOG(...)",
       "type": "MACRO",
       "value": "printf(__VA_ARGS__)",
+      "description": ""
+    },
+    {
+      "name": "GUI_BUTTON_DOWN",
+      "type": "UNKNOWN",
+      "value": "(IsMouseButtonDown(MOUSE_LEFT_BUTTON) || IsGamepadButtonDown(0, GAMEPAD_BUTTON_RIGHT_FACE_DOWN))",
+      "description": ""
+    },
+    {
+      "name": "GUI_BUTTON_DOWN_ALT",
+      "type": "UNKNOWN",
+      "value": "(IsMouseButtonDown(MOUSE_RIGHT_BUTTON) || IsGamepadButtonDown(0, GAMEPAD_BUTTON_RIGHT_FACE_RIGHT))",
+      "description": ""
+    },
+    {
+      "name": "GUI_BUTTON_PRESSED",
+      "type": "UNKNOWN",
+      "value": "(IsMouseButtonPressed(MOUSE_LEFT_BUTTON) || IsGamepadButtonPressed(0, GAMEPAD_BUTTON_RIGHT_FACE_DOWN))",
+      "description": ""
+    },
+    {
+      "name": "GUI_BUTTON_RELEASED",
+      "type": "UNKNOWN",
+      "value": "(IsMouseButtonReleased(MOUSE_LEFT_BUTTON) || IsGamepadButtonReleased(0, GAMEPAD_BUTTON_RIGHT_FACE_DOWN))",
+      "description": ""
+    },
+    {
+      "name": "GUI_SCROLL_DELTA",
+      "type": "UNKNOWN",
+      "value": "((float)IsGamepadButtonDown(0, GAMEPAD_BUTTON_RIGHT_TRIGGER_2) - (float)IsGamepadButtonDown(0, GAMEPAD_BUTTON_LEFT_TRIGGER_2))",
+      "description": ""
+    },
+    {
+      "name": "GUI_POINTER_POSITION",
+      "type": "UNKNOWN",
+      "value": "GetMousePosition()",
+      "description": ""
+    },
+    {
+      "name": "GUI_KEY_DOWN(key)",
+      "type": "MACRO",
+      "value": "IsKeyDown(key)",
+      "description": ""
+    },
+    {
+      "name": "GUI_KEY_PRESSED(key)",
+      "type": "MACRO",
+      "value": "IsKeyPressed(key)",
+      "description": ""
+    },
+    {
+      "name": "GUI_INPUT_KEY",
+      "type": "UNKNOWN",
+      "value": "GetCharPressed()",
       "description": ""
     },
     {
@@ -170,7 +212,7 @@
       ]
     },
     {
-      "name": "Texture2D",
+      "name": "Texture",
       "description": "It should be redesigned to be provided by user",
       "fields": [
         {
@@ -357,6 +399,11 @@
     }
   ],
   "aliases": [
+    {
+      "type": "Texture",
+      "name": "Texture2D",
+      "description": "Texture2D, same as Texture"
+    }
   ],
   "enums": [
     {
@@ -508,9 +555,9 @@
           "description": ""
         },
         {
-          "name": "SPINNER",
+          "name": "CONTROL11",
           "value": 11,
-          "description": "Uses: BUTTON, VALUEBOX"
+          "description": ""
         },
         {
           "name": "LISTVIEW",
@@ -691,6 +738,11 @@
           "name": "PROGRESS_PADDING",
           "value": 16,
           "description": "ProgressBar internal padding"
+        },
+        {
+          "name": "PROGRESS_SIDE",
+          "value": 17,
+          "description": "ProgressBar increment side: 0-left->right, 1-right-left "
         }
       ]
     },
@@ -795,16 +847,16 @@
       ]
     },
     {
-      "name": "GuiSpinnerProperty",
-      "description": "Spinner",
+      "name": "GuiValueBoxProperty",
+      "description": "ValueBox/Spinner",
       "values": [
         {
-          "name": "SPIN_BUTTON_WIDTH",
+          "name": "SPINNER_BUTTON_WIDTH",
           "value": 16,
           "description": "Spinner left/right buttons width"
         },
         {
-          "name": "SPIN_BUTTON_SPACING",
+          "name": "SPINNER_BUTTON_SPACING",
           "value": 17,
           "description": "Spinner buttons separation"
         }
@@ -835,8 +887,13 @@
           "description": "ListView scrollbar side (0-SCROLLBAR_LEFT_SIDE, 1-SCROLLBAR_RIGHT_SIDE)"
         },
         {
-          "name": "LIST_ITEMS_BORDER_WIDTH",
+          "name": "LIST_ITEMS_BORDER_NORMAL",
           "value": 20,
+          "description": "ListView items border enabled in normal state"
+        },
+        {
+          "name": "LIST_ITEMS_BORDER_WIDTH",
+          "value": 21,
           "description": "ListView items border width"
         }
       ]
@@ -2022,107 +2079,107 @@
           "description": ""
         },
         {
-          "name": "ICON_229",
+          "name": "ICON_LABEL",
           "value": 229,
           "description": ""
         },
         {
-          "name": "ICON_230",
+          "name": "ICON_NAME_ID",
           "value": 230,
           "description": ""
         },
         {
-          "name": "ICON_231",
+          "name": "ICON_SLICING",
           "value": 231,
           "description": ""
         },
         {
-          "name": "ICON_232",
+          "name": "ICON_MANUAL_CONTROL",
           "value": 232,
           "description": ""
         },
         {
-          "name": "ICON_233",
+          "name": "ICON_COLLISION",
           "value": 233,
           "description": ""
         },
         {
-          "name": "ICON_234",
+          "name": "ICON_CIRCLE_ADD",
           "value": 234,
           "description": ""
         },
         {
-          "name": "ICON_235",
+          "name": "ICON_CIRCLE_ADD_FILL",
           "value": 235,
           "description": ""
         },
         {
-          "name": "ICON_236",
+          "name": "ICON_CIRCLE_WARNING",
           "value": 236,
           "description": ""
         },
         {
-          "name": "ICON_237",
+          "name": "ICON_CIRCLE_WARNING_FILL",
           "value": 237,
           "description": ""
         },
         {
-          "name": "ICON_238",
+          "name": "ICON_BOX_MORE",
           "value": 238,
           "description": ""
         },
         {
-          "name": "ICON_239",
+          "name": "ICON_BOX_MORE_FILL",
           "value": 239,
           "description": ""
         },
         {
-          "name": "ICON_240",
+          "name": "ICON_BOX_MINUS",
           "value": 240,
           "description": ""
         },
         {
-          "name": "ICON_241",
+          "name": "ICON_BOX_MINUS_FILL",
           "value": 241,
           "description": ""
         },
         {
-          "name": "ICON_242",
+          "name": "ICON_UNION",
           "value": 242,
           "description": ""
         },
         {
-          "name": "ICON_243",
+          "name": "ICON_INTERSECTION",
           "value": 243,
           "description": ""
         },
         {
-          "name": "ICON_244",
+          "name": "ICON_DIFFERENCE",
           "value": 244,
           "description": ""
         },
         {
-          "name": "ICON_245",
+          "name": "ICON_SPHERE",
           "value": 245,
           "description": ""
         },
         {
-          "name": "ICON_246",
+          "name": "ICON_CYLINDER",
           "value": 246,
           "description": ""
         },
         {
-          "name": "ICON_247",
+          "name": "ICON_CONE",
           "value": 247,
           "description": ""
         },
         {
-          "name": "ICON_248",
+          "name": "ICON_ELLIPSOID",
           "value": 248,
           "description": ""
         },
         {
-          "name": "ICON_249",
+          "name": "ICON_CAPSULE",
           "value": 249,
           "description": ""
         },
@@ -2375,6 +2432,17 @@
       ]
     },
     {
+      "name": "GuiGetTextWidth",
+      "description": "Get text width considering gui style and icon size (if required)",
+      "returnType": "int",
+      "params": [
+        {
+          "type": "const char *",
+          "name": "text"
+        }
+      ]
+    },
+    {
       "name": "GuiWindowBox",
       "description": "Window Box control, shows a window that can be closed",
       "returnType": "int",
@@ -2444,7 +2512,7 @@
           "name": "bounds"
         },
         {
-          "type": "const char **",
+          "type": "char **",
           "name": "text"
         },
         {
@@ -2942,7 +3010,7 @@
           "name": "bounds"
         },
         {
-          "type": "const char **",
+          "type": "char **",
           "name": "text"
         },
         {

@@ -10,7 +10,7 @@ return {
       name = "RRESAPI",
       type = "UNKNOWN",
       value = "__declspec(dllexport)",
-      description = "We are building the library as a Win32 shared library (.dll)"
+      description = "Building the library as a Win32 shared library (.dll)"
     },
     {
       name = "RRES_MALLOC(sz)",
@@ -250,22 +250,22 @@ return {
         {
           type = "int",
           name = "x",
-          description = "Glyph rectangle in the atlas image"
+          description = "Glyph rectangle X in the atlas image"
         },
         {
           type = "int",
           name = "y",
-          description = "Glyph rectangle in the atlas image"
+          description = "Glyph rectangle Y in the atlas image"
         },
         {
           type = "int",
           name = "width",
-          description = "Glyph rectangle in the atlas image"
+          description = "Glyph rectangle width in the atlas image"
         },
         {
           type = "int",
           name = "height",
-          description = "Glyph rectangle in the atlas image"
+          description = "Glyph rectangle height in the atlas image"
         },
         {
           type = "int",
@@ -275,12 +275,12 @@ return {
         {
           type = "int",
           name = "offsetX",
-          description = "Glyph drawing offset (from base line)"
+          description = "Glyph drawing offset X (from base line)"
         },
         {
           type = "int",
           name = "offsetY",
-          description = "Glyph drawing offset (from base line)"
+          description = "Glyph drawing offset Y (from base line)"
         },
         {
           type = "int",
@@ -303,7 +303,7 @@ return {
       returnType = "rresResourceChunk",
       params = {
         {type = "const char *", name = "fileName"},
-        {type = "int", name = "rresId"}
+        {type = "unsigned int", name = "rresId"}
       }
     },
     {
@@ -320,7 +320,7 @@ return {
       returnType = "rresResourceMulti",
       params = {
         {type = "const char *", name = "fileName"},
-        {type = "int", name = "rresId"}
+        {type = "unsigned int", name = "rresId"}
       }
     },
     {
@@ -337,7 +337,7 @@ return {
       returnType = "rresResourceChunkInfo",
       params = {
         {type = "const char *", name = "fileName"},
-        {type = "int", name = "rresId"}
+        {type = "unsigned int", name = "rresId"}
       }
     },
     {
@@ -376,7 +376,7 @@ return {
     {
       name = "rresGetResourceId",
       description = "Get resource id for a provided filename",
-      returnType = "int",
+      returnType = "unsigned int",
       params = {
         {type = "rresCentralDir", name = "dir"},
         {type = "const char *", name = "fileName"}

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="Windows-1252" ?>
 <raylibAPI>
-    <Defines count="13">
+    <Defines count="21">
         <Define name="RAYMATH_H" type="GUARD" value="" desc="" />
-        <Define name="RMAPI" type="UNKNOWN" value="__declspec(dllexport) extern inline" desc="We are building raylib as a Win32 shared library (.dll)" />
+        <Define name="RMAPI" type="UNKNOWN" value="__declspec(dllexport) extern inline" desc="Building raylib as a Win32 shared library (.dll)" />
         <Define name="PI" type="FLOAT" value="3.14159265358979323846" desc="" />
         <Define name="EPSILON" type="FLOAT" value="0.000001" desc="" />
         <Define name="DEG2RAD" type="FLOAT_MATH" value="(PI/180.0f)" desc="" />
@@ -14,6 +14,14 @@
         <Define name="RL_VECTOR4_TYPE" type="GUARD" value="" desc="" />
         <Define name="RL_QUATERNION_TYPE" type="GUARD" value="" desc="" />
         <Define name="RL_MATRIX_TYPE" type="GUARD" value="" desc="" />
+        <Define name="RL_FLOAT3_TYPE" type="GUARD" value="" desc="" />
+        <Define name="RL_FLOAT16_TYPE" type="GUARD" value="" desc="" />
+        <Define name="RAYMATH_SSE42_ENABLED" type="GUARD" value="" desc="" />
+        <Define name="RAYMATH_SSE41_ENABLED" type="GUARD" value="" desc="" />
+        <Define name="RAYMATH_SSSE3_ENABLED" type="GUARD" value="" desc="" />
+        <Define name="RAYMATH_SSE3_ENABLED" type="GUARD" value="" desc="" />
+        <Define name="RAYMATH_SSE2_ENABLED" type="GUARD" value="" desc="" />
+        <Define name="RAYMATH_SSE_ENABLED" type="GUARD" value="" desc="" />
     </Defines>
     <Structs count="6">
         <Struct name="Vector2" fieldCount="2" desc="Vector2 type">
@@ -49,7 +57,7 @@
             <Field type="float" name="m11" desc="Matrix fourth row (4 components)" />
             <Field type="float" name="m15" desc="Matrix fourth row (4 components)" />
         </Struct>
-        <Struct name="float3" fieldCount="1" desc="NOTE: Helper types to be used instead of array return types for *ToFloat functions">
+        <Struct name="float3" fieldCount="1" desc="">
             <Field type="float[3]" name="v" desc="" />
         </Struct>
         <Struct name="float16" fieldCount="1" desc="">
@@ -63,7 +71,7 @@
     </Enums>
     <Callbacks count="0">
     </Callbacks>
-    <Functions count="143">
+    <Functions count="146">
         <Function name="Clamp" retType="float" paramCount="3" desc="">
             <Param type="float" name="value" desc="" />
             <Param type="float" name="min" desc="" />
@@ -122,6 +130,10 @@
             <Param type="Vector2" name="v" desc="" />
         </Function>
         <Function name="Vector2DotProduct" retType="float" paramCount="2" desc="">
+            <Param type="Vector2" name="v1" desc="" />
+            <Param type="Vector2" name="v2" desc="" />
+        </Function>
+        <Function name="Vector2CrossProduct" retType="float" paramCount="2" desc="">
             <Param type="Vector2" name="v1" desc="" />
             <Param type="Vector2" name="v2" desc="" />
         </Function>
@@ -475,6 +487,10 @@
             <Param type="Matrix" name="left" desc="" />
             <Param type="Matrix" name="right" desc="" />
         </Function>
+        <Function name="MatrixMultiplyValue" retType="Matrix" paramCount="2" desc="">
+            <Param type="Matrix" name="left" desc="" />
+            <Param type="float" name="value" desc="" />
+        </Function>
         <Function name="MatrixTranslate" retType="Matrix" paramCount="3" desc="">
             <Param type="float" name="x" desc="" />
             <Param type="float" name="y" desc="" />
@@ -629,6 +645,11 @@
         <Function name="QuaternionEquals" retType="int" paramCount="2" desc="">
             <Param type="Quaternion" name="p" desc="" />
             <Param type="Quaternion" name="q" desc="" />
+        </Function>
+        <Function name="MatrixCompose" retType="Matrix" paramCount="3" desc="">
+            <Param type="Vector3" name="translation" desc="" />
+            <Param type="Quaternion" name="rotation" desc="" />
+            <Param type="Vector3" name="scale" desc="" />
         </Function>
         <Function name="MatrixDecompose" retType="void" paramCount="4" desc="">
             <Param type="Matrix" name="mat" desc="" />

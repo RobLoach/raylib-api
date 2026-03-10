@@ -3,24 +3,23 @@
     <Defines count="98">
         <Define name="RLGL_H" type="GUARD" value="" desc="" />
         <Define name="RLGL_VERSION" type="STRING" value="5.0" desc="" />
-        <Define name="RLAPI" type="UNKNOWN" value="__declspec(dllexport)" desc="We are building the library as a Win32 shared library (.dll)" />
+        <Define name="RLAPI" type="UNKNOWN" value="__declspec(dllexport)" desc="Building the library as a Win32 shared library (.dll)" />
         <Define name="TRACELOG(level, ...)" type="MACRO" value="(void)0" desc="" />
-        <Define name="TRACELOGD(...)" type="MACRO" value="(void)0" desc="" />
         <Define name="RL_MALLOC(sz)" type="MACRO" value="malloc(sz)" desc="" />
         <Define name="RL_CALLOC(n,sz)" type="MACRO" value="calloc(n,sz)" desc="" />
         <Define name="RL_REALLOC(n,sz)" type="MACRO" value="realloc(n,sz)" desc="" />
         <Define name="RL_FREE(p)" type="MACRO" value="free(p)" desc="" />
         <Define name="GRAPHICS_API_OPENGL_33" type="GUARD" value="" desc="" />
+        <Define name="GRAPHICS_API_OPENGL_11" type="GUARD" value="" desc="" />
         <Define name="GRAPHICS_API_OPENGL_ES2" type="GUARD" value="" desc="" />
-        <Define name="RLGL_RENDER_TEXTURES_HINT" type="GUARD" value="" desc="" />
         <Define name="RL_DEFAULT_BATCH_BUFFER_ELEMENTS" type="INT" value="8192" desc="" />
         <Define name="RL_DEFAULT_BATCH_BUFFERS" type="INT" value="1" desc="Default number of batch buffers (multi-buffering)" />
         <Define name="RL_DEFAULT_BATCH_DRAWCALLS" type="INT" value="256" desc="Default number of batch draw calls (by state changes: mode, texture)" />
         <Define name="RL_DEFAULT_BATCH_MAX_TEXTURE_UNITS" type="INT" value="4" desc="Maximum number of textures units that can be activated on batch drawing (SetShaderValueTexture())" />
         <Define name="RL_MAX_MATRIX_STACK_SIZE" type="INT" value="32" desc="Maximum size of Matrix stack" />
         <Define name="RL_MAX_SHADER_LOCATIONS" type="INT" value="32" desc="Maximum number of shader locations supported" />
-        <Define name="RL_CULL_DISTANCE_NEAR" type="DOUBLE" value="0.01" desc="Default near cull distance" />
-        <Define name="RL_CULL_DISTANCE_FAR" type="DOUBLE" value="1000.0" desc="Default far cull distance" />
+        <Define name="RL_CULL_DISTANCE_NEAR" type="DOUBLE" value="0.05" desc="Default near cull distance" />
+        <Define name="RL_CULL_DISTANCE_FAR" type="DOUBLE" value="4000.0" desc="Default far cull distance" />
         <Define name="RL_TEXTURE_WRAP_S" type="INT" value="0x2802" desc="GL_TEXTURE_WRAP_S" />
         <Define name="RL_TEXTURE_WRAP_T" type="INT" value="0x2803" desc="GL_TEXTURE_WRAP_T" />
         <Define name="RL_TEXTURE_MAG_FILTER" type="INT" value="0x2800" desc="GL_TEXTURE_MAG_FILTER" />
@@ -94,8 +93,9 @@
         <Define name="RL_DEFAULT_SHADER_ATTRIB_LOCATION_TANGENT" type="INT" value="4" desc="" />
         <Define name="RL_DEFAULT_SHADER_ATTRIB_LOCATION_TEXCOORD2" type="INT" value="5" desc="" />
         <Define name="RL_DEFAULT_SHADER_ATTRIB_LOCATION_INDICES" type="INT" value="6" desc="" />
-        <Define name="RL_DEFAULT_SHADER_ATTRIB_LOCATION_BONEIDS" type="INT" value="7" desc="" />
+        <Define name="RL_DEFAULT_SHADER_ATTRIB_LOCATION_BONEINDICES" type="INT" value="7" desc="" />
         <Define name="RL_DEFAULT_SHADER_ATTRIB_LOCATION_BONEWEIGHTS" type="INT" value="8" desc="" />
+        <Define name="RL_DEFAULT_SHADER_ATTRIB_LOCATION_INSTANCETRANSFORM" type="INT" value="9" desc="" />
         <Define name="RL_MATRIX_TYPE" type="GUARD" value="" desc="" />
         <Define name="RL_SHADER_LOC_MAP_DIFFUSE" type="UNKNOWN" value="RL_SHADER_LOC_MAP_ALBEDO" desc="" />
         <Define name="RL_SHADER_LOC_MAP_SPECULAR" type="UNKNOWN" value="RL_SHADER_LOC_MAP_METALNESS" desc="" />
@@ -152,7 +152,8 @@
     <Aliases count="0">
     </Aliases>
     <Enums count="11">
-        <Enum name="rlGlVersion" valueCount="6" desc="OpenGL version">
+        <Enum name="rlGlVersion" valueCount="7" desc="OpenGL version">
+            <Value name="RL_OPENGL_11_SOFTWARE" integer="0" desc="Software rendering" />
             <Value name="RL_OPENGL_11" integer="1" desc="OpenGL 1.1" />
             <Value name="RL_OPENGL_21" integer="2" desc="OpenGL 2.1 (GLSL 120)" />
             <Value name="RL_OPENGL_33" integer="3" desc="OpenGL 3.3 (GLSL 330)" />
@@ -197,7 +198,7 @@
             <Value name="RL_PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA" integer="24" desc="2 bpp" />
         </Enum>
         <Enum name="rlTextureFilter" valueCount="6" desc="Texture parameters: filter mode">
-            <Value name="RL_TEXTURE_FILTER_POINT" integer="0" desc="No filter, just pixel approximation" />
+            <Value name="RL_TEXTURE_FILTER_POINT" integer="0" desc="No filter, pixel approximation" />
             <Value name="RL_TEXTURE_FILTER_BILINEAR" integer="1" desc="Linear filtering" />
             <Value name="RL_TEXTURE_FILTER_TRILINEAR" integer="2" desc="Trilinear filtering (linear with mipmaps)" />
             <Value name="RL_TEXTURE_FILTER_ANISOTROPIC_4X" integer="3" desc="Anisotropic filtering 4x" />
@@ -292,7 +293,7 @@
     </Enums>
     <Callbacks count="0">
     </Callbacks>
-    <Functions count="156">
+    <Functions count="163">
         <Function name="rlMatrixMode" retType="void" paramCount="1" desc="Choose the current matrix to be transformed">
             <Param type="int" name="mode" desc="" />
         </Function>
@@ -511,11 +512,18 @@
             <Param type="int" name="width" desc="" />
             <Param type="int" name="height" desc="" />
         </Function>
-        <Function name="rlEnableWireMode" retType="void" paramCount="0" desc="Enable wire mode">
-        </Function>
         <Function name="rlEnablePointMode" retType="void" paramCount="0" desc="Enable point mode">
         </Function>
-        <Function name="rlDisableWireMode" retType="void" paramCount="0" desc="Disable wire (and point) mode">
+        <Function name="rlDisablePointMode" retType="void" paramCount="0" desc="Disable point mode">
+        </Function>
+        <Function name="rlSetPointSize" retType="void" paramCount="1" desc="Set the point drawing size">
+            <Param type="float" name="size" desc="" />
+        </Function>
+        <Function name="rlGetPointSize" retType="float" paramCount="0" desc="Get the point drawing size">
+        </Function>
+        <Function name="rlEnableWireMode" retType="void" paramCount="0" desc="Enable wire mode">
+        </Function>
+        <Function name="rlDisableWireMode" retType="void" paramCount="0" desc="Disable wire mode">
         </Function>
         <Function name="rlSetLineWidth" retType="void" paramCount="1" desc="Set the line drawing width">
             <Param type="float" name="width" desc="" />
@@ -566,6 +574,9 @@
         </Function>
         <Function name="rlLoadExtensions" retType="void" paramCount="1" desc="Load OpenGL extensions (loader function required)">
             <Param type="void *" name="loader" desc="" />
+        </Function>
+        <Function name="rlGetProcAddress" retType="void *" paramCount="1" desc="Get OpenGL procedure address">
+            <Param type="const char *" name="procName" desc="" />
         </Function>
         <Function name="rlGetVersion" retType="int" paramCount="0" desc="Get current OpenGL version">
         </Function>
@@ -733,7 +744,7 @@
         <Function name="rlLoadFramebuffer" retType="unsigned int" paramCount="0" desc="Load an empty framebuffer">
         </Function>
         <Function name="rlFramebufferAttach" retType="void" paramCount="5" desc="Attach texture/renderbuffer to a framebuffer">
-            <Param type="unsigned int" name="fboId" desc="" />
+            <Param type="unsigned int" name="id" desc="" />
             <Param type="unsigned int" name="texId" desc="" />
             <Param type="int" name="attachType" desc="" />
             <Param type="int" name="texType" desc="" />
@@ -745,27 +756,45 @@
         <Function name="rlUnloadFramebuffer" retType="void" paramCount="1" desc="Delete framebuffer from GPU">
             <Param type="unsigned int" name="id" desc="" />
         </Function>
-        <Function name="rlLoadShaderCode" retType="unsigned int" paramCount="2" desc="Load shader from code strings">
+        <Function name="rlCopyFramebuffer" retType="void" paramCount="6" desc="Copy framebuffer pixel data to internal buffer">
+            <Param type="int" name="x" desc="" />
+            <Param type="int" name="y" desc="" />
+            <Param type="int" name="width" desc="" />
+            <Param type="int" name="height" desc="" />
+            <Param type="int" name="format" desc="" />
+            <Param type="void *" name="pixels" desc="" />
+        </Function>
+        <Function name="rlResizeFramebuffer" retType="void" paramCount="2" desc="Resize internal framebuffer">
+            <Param type="int" name="width" desc="" />
+            <Param type="int" name="height" desc="" />
+        </Function>
+        <Function name="rlLoadShader" retType="unsigned int" paramCount="2" desc="Load (compile) shader and return shader id (type: RL_VERTEX_SHADER, RL_FRAGMENT_SHADER, RL_COMPUTE_SHADER)">
+            <Param type="const char *" name="code" desc="" />
+            <Param type="int" name="type" desc="" />
+        </Function>
+        <Function name="rlLoadShaderProgram" retType="unsigned int" paramCount="2" desc="Load shader from code strings">
             <Param type="const char *" name="vsCode" desc="" />
             <Param type="const char *" name="fsCode" desc="" />
         </Function>
-        <Function name="rlCompileShader" retType="unsigned int" paramCount="2" desc="Compile custom shader and return shader id (type: RL_VERTEX_SHADER, RL_FRAGMENT_SHADER, RL_COMPUTE_SHADER)">
-            <Param type="const char *" name="shaderCode" desc="" />
-            <Param type="int" name="type" desc="" />
+        <Function name="rlLoadShaderProgramEx" retType="unsigned int" paramCount="2" desc="Load shader program, using already loaded shader ids">
+            <Param type="unsigned int" name="vsId" desc="" />
+            <Param type="unsigned int" name="fsId" desc="" />
         </Function>
-        <Function name="rlLoadShaderProgram" retType="unsigned int" paramCount="2" desc="Load custom shader program">
-            <Param type="unsigned int" name="vShaderId" desc="" />
-            <Param type="unsigned int" name="fShaderId" desc="" />
+        <Function name="rlLoadShaderProgramCompute" retType="unsigned int" paramCount="1" desc="Load compute shader program">
+            <Param type="unsigned int" name="csId" desc="" />
+        </Function>
+        <Function name="rlUnloadShader" retType="void" paramCount="1" desc="Unload shader, loaded with rlLoadShader()">
+            <Param type="unsigned int" name="id" desc="" />
         </Function>
         <Function name="rlUnloadShaderProgram" retType="void" paramCount="1" desc="Unload shader program">
             <Param type="unsigned int" name="id" desc="" />
         </Function>
-        <Function name="rlGetLocationUniform" retType="int" paramCount="2" desc="Get shader location uniform">
-            <Param type="unsigned int" name="shaderId" desc="" />
+        <Function name="rlGetLocationUniform" retType="int" paramCount="2" desc="Get shader location uniform, requires shader program id">
+            <Param type="unsigned int" name="id" desc="" />
             <Param type="const char *" name="uniformName" desc="" />
         </Function>
-        <Function name="rlGetLocationAttrib" retType="int" paramCount="2" desc="Get shader location attribute">
-            <Param type="unsigned int" name="shaderId" desc="" />
+        <Function name="rlGetLocationAttrib" retType="int" paramCount="2" desc="Get shader location attribute, requires shader program id">
+            <Param type="unsigned int" name="id" desc="" />
             <Param type="const char *" name="attribName" desc="" />
         </Function>
         <Function name="rlSetUniform" retType="void" paramCount="4" desc="Set shader value uniform">
@@ -790,9 +819,6 @@
         <Function name="rlSetShader" retType="void" paramCount="2" desc="Set shader currently active (id and locations)">
             <Param type="unsigned int" name="id" desc="" />
             <Param type="int *" name="locs" desc="" />
-        </Function>
-        <Function name="rlLoadComputeShaderProgram" retType="unsigned int" paramCount="1" desc="Load compute shader program">
-            <Param type="unsigned int" name="shaderId" desc="" />
         </Function>
         <Function name="rlComputeShaderDispatch" retType="void" paramCount="3" desc="Dispatch compute shader (equivalent to *draw* for graphics pipeline)">
             <Param type="unsigned int" name="groupX" desc="" />

@@ -10,7 +10,7 @@ Define 002: RRESAPI
   Name: RRESAPI
   Type: UNKNOWN
   Value: __declspec(dllexport)
-  Description: We are building the library as a Win32 shared library (.dll)
+  Description: Building the library as a Win32 shared library (.dll)
 Define 003: RRES_MALLOC(sz)
   Name: RRES_MALLOC(sz)
   Type: MACRO
@@ -102,13 +102,13 @@ Struct 07: rresCentralDir (2 fields)
 Struct 08: rresFontGlyphInfo (8 fields)
   Name: rresFontGlyphInfo
   Description: NOTE: And array of this type conforms the rresResourceChunkData
-  Field[1]: int x // Glyph rectangle in the atlas image
-  Field[2]: int y // Glyph rectangle in the atlas image
-  Field[3]: int width // Glyph rectangle in the atlas image
-  Field[4]: int height // Glyph rectangle in the atlas image
+  Field[1]: int x // Glyph rectangle X in the atlas image
+  Field[2]: int y // Glyph rectangle Y in the atlas image
+  Field[3]: int width // Glyph rectangle width in the atlas image
+  Field[4]: int height // Glyph rectangle height in the atlas image
   Field[5]: int value // Glyph codepoint value
-  Field[6]: int offsetX // Glyph drawing offset (from base line)
-  Field[7]: int offsetY // Glyph drawing offset (from base line)
+  Field[6]: int offsetX // Glyph drawing offset X (from base line)
+  Field[7]: int offsetY // Glyph drawing offset Y (from base line)
   Field[8]: int advanceX // Glyph advance X for next character
 
 Aliases found: 0
@@ -127,7 +127,7 @@ Function 001: rresLoadResourceChunk() (2 input parameters)
   Return type: rresResourceChunk
   Description: Load one resource chunk for provided id
   Param[1]: fileName (type: const char *)
-  Param[2]: rresId (type: int)
+  Param[2]: rresId (type: unsigned int)
 Function 002: rresUnloadResourceChunk() (1 input parameters)
   Name: rresUnloadResourceChunk
   Return type: void
@@ -138,7 +138,7 @@ Function 003: rresLoadResourceMulti() (2 input parameters)
   Return type: rresResourceMulti
   Description: Load resource for provided id (multiple resource chunks)
   Param[1]: fileName (type: const char *)
-  Param[2]: rresId (type: int)
+  Param[2]: rresId (type: unsigned int)
 Function 004: rresUnloadResourceMulti() (1 input parameters)
   Name: rresUnloadResourceMulti
   Return type: void
@@ -149,7 +149,7 @@ Function 005: rresLoadResourceChunkInfo() (2 input parameters)
   Return type: rresResourceChunkInfo
   Description: Load resource chunk info for provided id
   Param[1]: fileName (type: const char *)
-  Param[2]: rresId (type: int)
+  Param[2]: rresId (type: unsigned int)
 Function 006: rresLoadResourceChunkInfoAll() (2 input parameters)
   Name: rresLoadResourceChunkInfoAll
   Return type: rresResourceChunkInfo *
@@ -173,7 +173,7 @@ Function 009: rresGetDataType() (1 input parameters)
   Param[1]: fourCC (type: const unsigned char *)
 Function 010: rresGetResourceId() (2 input parameters)
   Name: rresGetResourceId
-  Return type: int
+  Return type: unsigned int
   Description: Get resource id for a provided filename
   Param[1]: dir (type: rresCentralDir)
   Param[2]: fileName (type: const char *)

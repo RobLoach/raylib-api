@@ -1,5 +1,4 @@
-RAYLIB_VERSION?=5.5
-PARSER?=vendor/raylib-parser/parser/raylib_parser
+PARSER?=vendor/raylib-parser/tools/rlparser/rlparser
 RAYLIB?=vendor/raylib
 EXTENSION?=txt
 FORMAT?=DEFAULT
@@ -14,7 +13,7 @@ vendor/raylib-parser:
 	git clone https://github.com/raysan5/raylib.git --depth 2 vendor/raylib-parser
 
 vendor/raylib:
-	git clone https://github.com/raysan5/raylib.git --depth 1 --branch $(RAYLIB_VERSION) vendor/raylib
+	git clone https://github.com/raysan5/raylib.git --depth 1 vendor/raylib
 
 vendor/reasings:
 	git clone https://github.com/raylib-extras/reasings.git --depth 1 vendor/reasings

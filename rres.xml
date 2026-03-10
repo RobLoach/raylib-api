@@ -2,7 +2,7 @@
 <raylibAPI>
     <Defines count="9">
         <Define name="RRES_H" type="GUARD" value="" desc="" />
-        <Define name="RRESAPI" type="UNKNOWN" value="__declspec(dllexport)" desc="We are building the library as a Win32 shared library (.dll)" />
+        <Define name="RRESAPI" type="UNKNOWN" value="__declspec(dllexport)" desc="Building the library as a Win32 shared library (.dll)" />
         <Define name="RRES_MALLOC(sz)" type="MACRO" value="malloc(sz)" desc="" />
         <Define name="RRES_CALLOC(ptr,sz)" type="MACRO" value="calloc(ptr,sz)" desc="" />
         <Define name="RRES_REALLOC(ptr,sz)" type="MACRO" value="realloc(ptr,sz)" desc="" />
@@ -56,13 +56,13 @@
             <Field type="rresDirEntry *" name="entries" desc="Central directory entries" />
         </Struct>
         <Struct name="rresFontGlyphInfo" fieldCount="8" desc="NOTE: And array of this type conforms the rresResourceChunkData">
-            <Field type="int" name="x" desc="Glyph rectangle in the atlas image" />
-            <Field type="int" name="y" desc="Glyph rectangle in the atlas image" />
-            <Field type="int" name="width" desc="Glyph rectangle in the atlas image" />
-            <Field type="int" name="height" desc="Glyph rectangle in the atlas image" />
+            <Field type="int" name="x" desc="Glyph rectangle X in the atlas image" />
+            <Field type="int" name="y" desc="Glyph rectangle Y in the atlas image" />
+            <Field type="int" name="width" desc="Glyph rectangle width in the atlas image" />
+            <Field type="int" name="height" desc="Glyph rectangle height in the atlas image" />
             <Field type="int" name="value" desc="Glyph codepoint value" />
-            <Field type="int" name="offsetX" desc="Glyph drawing offset (from base line)" />
-            <Field type="int" name="offsetY" desc="Glyph drawing offset (from base line)" />
+            <Field type="int" name="offsetX" desc="Glyph drawing offset X (from base line)" />
+            <Field type="int" name="offsetY" desc="Glyph drawing offset Y (from base line)" />
             <Field type="int" name="advanceX" desc="Glyph advance X for next character" />
         </Struct>
     </Structs>
@@ -75,21 +75,21 @@
     <Functions count="13">
         <Function name="rresLoadResourceChunk" retType="rresResourceChunk" paramCount="2" desc="Load one resource chunk for provided id">
             <Param type="const char *" name="fileName" desc="" />
-            <Param type="int" name="rresId" desc="" />
+            <Param type="unsigned int" name="rresId" desc="" />
         </Function>
         <Function name="rresUnloadResourceChunk" retType="void" paramCount="1" desc="Unload resource chunk from memory">
             <Param type="rresResourceChunk" name="chunk" desc="" />
         </Function>
         <Function name="rresLoadResourceMulti" retType="rresResourceMulti" paramCount="2" desc="Load resource for provided id (multiple resource chunks)">
             <Param type="const char *" name="fileName" desc="" />
-            <Param type="int" name="rresId" desc="" />
+            <Param type="unsigned int" name="rresId" desc="" />
         </Function>
         <Function name="rresUnloadResourceMulti" retType="void" paramCount="1" desc="Unload resource from memory (multiple resource chunks)">
             <Param type="rresResourceMulti" name="multi" desc="" />
         </Function>
         <Function name="rresLoadResourceChunkInfo" retType="rresResourceChunkInfo" paramCount="2" desc="Load resource chunk info for provided id">
             <Param type="const char *" name="fileName" desc="" />
-            <Param type="int" name="rresId" desc="" />
+            <Param type="unsigned int" name="rresId" desc="" />
         </Function>
         <Function name="rresLoadResourceChunkInfoAll" retType="rresResourceChunkInfo *" paramCount="2" desc="Load all resource chunks info">
             <Param type="const char *" name="fileName" desc="" />
@@ -104,7 +104,7 @@
         <Function name="rresGetDataType" retType="unsigned int" paramCount="1" desc="Get rresResourceDataType from FourCC code">
             <Param type="const unsigned char *" name="fourCC" desc="" />
         </Function>
-        <Function name="rresGetResourceId" retType="int" paramCount="2" desc="Get resource id for a provided filename">
+        <Function name="rresGetResourceId" retType="unsigned int" paramCount="2" desc="Get resource id for a provided filename">
             <Param type="rresCentralDir" name="dir" desc="" />
             <Param type="const char *" name="fileName" desc="" />
         </Function>

@@ -16,16 +16,10 @@ return {
       name = "RLAPI",
       type = "UNKNOWN",
       value = "__declspec(dllexport)",
-      description = "We are building the library as a Win32 shared library (.dll)"
+      description = "Building the library as a Win32 shared library (.dll)"
     },
     {
       name = "TRACELOG(level, ...)",
-      type = "MACRO",
-      value = "(void)0",
-      description = ""
-    },
-    {
-      name = "TRACELOGD(...)",
       type = "MACRO",
       value = "(void)0",
       description = ""
@@ -61,13 +55,13 @@ return {
       description = ""
     },
     {
-      name = "GRAPHICS_API_OPENGL_ES2",
+      name = "GRAPHICS_API_OPENGL_11",
       type = "GUARD",
       value = "",
       description = ""
     },
     {
-      name = "RLGL_RENDER_TEXTURES_HINT",
+      name = "GRAPHICS_API_OPENGL_ES2",
       type = "GUARD",
       value = "",
       description = ""
@@ -111,13 +105,13 @@ return {
     {
       name = "RL_CULL_DISTANCE_NEAR",
       type = "DOUBLE",
-      value = 0.01,
+      value = 0.05,
       description = "Default near cull distance"
     },
     {
       name = "RL_CULL_DISTANCE_FAR",
       type = "DOUBLE",
-      value = 1000.0,
+      value = 4000.0,
       description = "Default far cull distance"
     },
     {
@@ -559,7 +553,7 @@ return {
       description = ""
     },
     {
-      name = "RL_DEFAULT_SHADER_ATTRIB_LOCATION_BONEIDS",
+      name = "RL_DEFAULT_SHADER_ATTRIB_LOCATION_BONEINDICES",
       type = "INT",
       value = 7,
       description = ""
@@ -568,6 +562,12 @@ return {
       name = "RL_DEFAULT_SHADER_ATTRIB_LOCATION_BONEWEIGHTS",
       type = "INT",
       value = 8,
+      description = ""
+    },
+    {
+      name = "RL_DEFAULT_SHADER_ATTRIB_LOCATION_INSTANCETRANSFORM",
+      type = "INT",
+      value = 9,
       description = ""
     },
     {
@@ -818,6 +818,11 @@ return {
       description = "OpenGL version",
       values = {
         {
+          name = "RL_OPENGL_11_SOFTWARE",
+          value = 0,
+          description = "Software rendering"
+        },
+        {
           name = "RL_OPENGL_11",
           value = 1,
           description = "OpenGL 1.1"
@@ -1028,7 +1033,7 @@ return {
         {
           name = "RL_TEXTURE_FILTER_POINT",
           value = 0,
-          description = "No filter, just pixel approximation"
+          description = "No filter, pixel approximation"
         },
         {
           name = "RL_TEXTURE_FILTER_BILINEAR",
@@ -1939,18 +1944,36 @@ return {
       }
     },
     {
-      name = "rlEnableWireMode",
-      description = "Enable wire mode",
-      returnType = "void"
-    },
-    {
       name = "rlEnablePointMode",
       description = "Enable point mode",
       returnType = "void"
     },
     {
+      name = "rlDisablePointMode",
+      description = "Disable point mode",
+      returnType = "void"
+    },
+    {
+      name = "rlSetPointSize",
+      description = "Set the point drawing size",
+      returnType = "void",
+      params = {
+        {type = "float", name = "size"}
+      }
+    },
+    {
+      name = "rlGetPointSize",
+      description = "Get the point drawing size",
+      returnType = "float"
+    },
+    {
+      name = "rlEnableWireMode",
+      description = "Enable wire mode",
+      returnType = "void"
+    },
+    {
       name = "rlDisableWireMode",
-      description = "Disable wire (and point) mode",
+      description = "Disable wire mode",
       returnType = "void"
     },
     {
@@ -2063,6 +2086,14 @@ return {
       returnType = "void",
       params = {
         {type = "void *", name = "loader"}
+      }
+    },
+    {
+      name = "rlGetProcAddress",
+      description = "Get OpenGL procedure address",
+      returnType = "void *",
+      params = {
+        {type = "const char *", name = "procName"}
       }
     },
     {
@@ -2417,7 +2448,7 @@ return {
       description = "Attach texture/renderbuffer to a framebuffer",
       returnType = "void",
       params = {
-        {type = "unsigned int", name = "fboId"},
+        {type = "unsigned int", name = "id"},
         {type = "unsigned int", name = "texId"},
         {type = "int", name = "attachType"},
         {type = "int", name = "texType"},
@@ -2441,7 +2472,38 @@ return {
       }
     },
     {
-      name = "rlLoadShaderCode",
+      name = "rlCopyFramebuffer",
+      description = "Copy framebuffer pixel data to internal buffer",
+      returnType = "void",
+      params = {
+        {type = "int", name = "x"},
+        {type = "int", name = "y"},
+        {type = "int", name = "width"},
+        {type = "int", name = "height"},
+        {type = "int", name = "format"},
+        {type = "void *", name = "pixels"}
+      }
+    },
+    {
+      name = "rlResizeFramebuffer",
+      description = "Resize internal framebuffer",
+      returnType = "void",
+      params = {
+        {type = "int", name = "width"},
+        {type = "int", name = "height"}
+      }
+    },
+    {
+      name = "rlLoadShader",
+      description = "Load (compile) shader and return shader id (type: RL_VERTEX_SHADER, RL_FRAGMENT_SHADER, RL_COMPUTE_SHADER)",
+      returnType = "unsigned int",
+      params = {
+        {type = "const char *", name = "code"},
+        {type = "int", name = "type"}
+      }
+    },
+    {
+      name = "rlLoadShaderProgram",
       description = "Load shader from code strings",
       returnType = "unsigned int",
       params = {
@@ -2450,21 +2512,28 @@ return {
       }
     },
     {
-      name = "rlCompileShader",
-      description = "Compile custom shader and return shader id (type: RL_VERTEX_SHADER, RL_FRAGMENT_SHADER, RL_COMPUTE_SHADER)",
+      name = "rlLoadShaderProgramEx",
+      description = "Load shader program, using already loaded shader ids",
       returnType = "unsigned int",
       params = {
-        {type = "const char *", name = "shaderCode"},
-        {type = "int", name = "type"}
+        {type = "unsigned int", name = "vsId"},
+        {type = "unsigned int", name = "fsId"}
       }
     },
     {
-      name = "rlLoadShaderProgram",
-      description = "Load custom shader program",
+      name = "rlLoadShaderProgramCompute",
+      description = "Load compute shader program",
       returnType = "unsigned int",
       params = {
-        {type = "unsigned int", name = "vShaderId"},
-        {type = "unsigned int", name = "fShaderId"}
+        {type = "unsigned int", name = "csId"}
+      }
+    },
+    {
+      name = "rlUnloadShader",
+      description = "Unload shader, loaded with rlLoadShader()",
+      returnType = "void",
+      params = {
+        {type = "unsigned int", name = "id"}
       }
     },
     {
@@ -2477,19 +2546,19 @@ return {
     },
     {
       name = "rlGetLocationUniform",
-      description = "Get shader location uniform",
+      description = "Get shader location uniform, requires shader program id",
       returnType = "int",
       params = {
-        {type = "unsigned int", name = "shaderId"},
+        {type = "unsigned int", name = "id"},
         {type = "const char *", name = "uniformName"}
       }
     },
     {
       name = "rlGetLocationAttrib",
-      description = "Get shader location attribute",
+      description = "Get shader location attribute, requires shader program id",
       returnType = "int",
       params = {
-        {type = "unsigned int", name = "shaderId"},
+        {type = "unsigned int", name = "id"},
         {type = "const char *", name = "attribName"}
       }
     },
@@ -2539,14 +2608,6 @@ return {
       params = {
         {type = "unsigned int", name = "id"},
         {type = "int *", name = "locs"}
-      }
-    },
-    {
-      name = "rlLoadComputeShaderProgram",
-      description = "Load compute shader program",
-      returnType = "unsigned int",
-      params = {
-        {type = "unsigned int", name = "shaderId"}
       }
     },
     {
