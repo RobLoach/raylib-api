@@ -1,5 +1,5 @@
-RAYLIB_VERSION?=5.5
-PARSER?=vendor/raylib-parser/parser/raylib_parser
+RAYLIB_VERSION?=6.0
+PARSER?=vendor/raylib-parser/tools/rlparser
 RAYLIB?=vendor/raylib
 EXTENSION?=txt
 FORMAT?=DEFAULT
