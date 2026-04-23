@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="Windows-1252" ?>
 <raylibAPI>
-    <Defines count="13">
+    <Defines count="20">
         <Define name="RAYGUI_H" type="GUARD" value="" desc="" />
         <Define name="RAYGUI_VERSION_MAJOR" type="INT" value="4" desc="" />
         <Define name="RAYGUI_VERSION_MINOR" type="INT" value="5" desc="" />
         <Define name="RAYGUI_VERSION_PATCH" type="INT" value="0" desc="" />
-        <Define name="RAYGUI_VERSION" type="STRING" value="4.5-dev" desc="" />
-        <Define name="RAYGUIAPI" type="UNKNOWN" value="__declspec(dllexport)" desc="We are building the library as a Win32 shared library (.dll)" />
-        <Define name="RAYGUI_MALLOC(sz)" type="MACRO" value="malloc(sz)" desc="" />
-        <Define name="RAYGUI_CALLOC(n,sz)" type="MACRO" value="calloc(n,sz)" desc="" />
-        <Define name="RAYGUI_FREE(p)" type="MACRO" value="free(p)" desc="" />
+        <Define name="RAYGUI_VERSION" type="STRING" value="5.0-dev" desc="" />
+        <Define name="RAYGUIAPI" type="UNKNOWN" value="__declspec(dllexport)" desc="Building the library as a Win32 shared library (.dll)" />
+        <Define name="_CRT_SECURE_NO_WARNINGS" type="GUARD" value="" desc="Disable unsafe warnings on scanf() functions in MSVC" />
         <Define name="RAYGUI_SUPPORT_LOG_INFO" type="GUARD" value="" desc="" />
         <Define name="RAYGUI_LOG(...)" type="MACRO" value="printf(__VA_ARGS__)" desc="" />
+        <Define name="GUI_BUTTON_DOWN" type="UNKNOWN" value="(IsMouseButtonDown(MOUSE_LEFT_BUTTON) || IsGamepadButtonDown(0, GAMEPAD_BUTTON_RIGHT_FACE_DOWN))" desc="" />
+        <Define name="GUI_BUTTON_DOWN_ALT" type="UNKNOWN" value="(IsMouseButtonDown(MOUSE_RIGHT_BUTTON) || IsGamepadButtonDown(0, GAMEPAD_BUTTON_RIGHT_FACE_RIGHT))" desc="" />
+        <Define name="GUI_BUTTON_PRESSED" type="UNKNOWN" value="(IsMouseButtonPressed(MOUSE_LEFT_BUTTON) || IsGamepadButtonPressed(0, GAMEPAD_BUTTON_RIGHT_FACE_DOWN))" desc="" />
+        <Define name="GUI_BUTTON_RELEASED" type="UNKNOWN" value="(IsMouseButtonReleased(MOUSE_LEFT_BUTTON) || IsGamepadButtonReleased(0, GAMEPAD_BUTTON_RIGHT_FACE_DOWN))" desc="" />
+        <Define name="GUI_SCROLL_DELTA" type="UNKNOWN" value="((float)IsGamepadButtonDown(0, GAMEPAD_BUTTON_RIGHT_TRIGGER_2) - (float)IsGamepadButtonDown(0, GAMEPAD_BUTTON_LEFT_TRIGGER_2))" desc="" />
+        <Define name="GUI_POINTER_POSITION" type="UNKNOWN" value="GetMousePosition()" desc="" />
+        <Define name="GUI_KEY_DOWN(key)" type="MACRO" value="IsKeyDown(key)" desc="" />
+        <Define name="GUI_KEY_PRESSED(key)" type="MACRO" value="IsKeyPressed(key)" desc="" />
+        <Define name="GUI_INPUT_KEY" type="UNKNOWN" value="GetCharPressed()" desc="" />
         <Define name="SCROLLBAR_LEFT_SIDE" type="INT" value="0" desc="" />
         <Define name="SCROLLBAR_RIGHT_SIDE" type="INT" value="1" desc="" />
     </Defines>
@@ -37,7 +44,7 @@
             <Field type="float" name="width" desc="" />
             <Field type="float" name="height" desc="" />
         </Struct>
-        <Struct name="Texture2D" fieldCount="5" desc="It should be redesigned to be provided by user">
+        <Struct name="Texture" fieldCount="5" desc="It should be redesigned to be provided by user">
             <Field type="unsigned int" name="id" desc="OpenGL texture id" />
             <Field type="int" name="width" desc="Texture base width" />
             <Field type="int" name="height" desc="Texture base height" />
@@ -80,7 +87,8 @@
             <Field type="int" name="padding" desc="" />
         </Struct>
     </Structs>
-    <Aliases count="0">
+    <Aliases count="1">
+        <Alias type="Texture2D" name="Texture" desc="Texture2D, same as Texture" />
     </Aliases>
     <Enums count="19">
         <Enum name="GuiState" valueCount="4" desc="Gui control state">
@@ -116,7 +124,7 @@
             <Value name="DROPDOWNBOX" integer="8" desc="" />
             <Value name="TEXTBOX" integer="9" desc="Used also for: TEXTBOXMULTI" />
             <Value name="VALUEBOX" integer="10" desc="" />
-            <Value name="SPINNER" integer="11" desc="Uses: BUTTON, VALUEBOX" />
+            <Value name="CONTROL11" integer="11" desc="" />
             <Value name="LISTVIEW" integer="12" desc="" />
             <Value name="COLORPICKER" integer="13" desc="" />
             <Value name="SCROLLBAR" integer="14" desc="" />
@@ -155,8 +163,9 @@
             <Value name="SLIDER_WIDTH" integer="16" desc="Slider size of internal bar" />
             <Value name="SLIDER_PADDING" integer="17" desc="Slider/SliderBar internal bar padding" />
         </Enum>
-        <Enum name="GuiProgressBarProperty" valueCount="1" desc="ProgressBar">
+        <Enum name="GuiProgressBarProperty" valueCount="2" desc="ProgressBar">
             <Value name="PROGRESS_PADDING" integer="16" desc="ProgressBar internal padding" />
+            <Value name="PROGRESS_SIDE" integer="17" desc="ProgressBar increment side: 0-left->right, 1-right-left " />
         </Enum>
         <Enum name="GuiScrollBarProperty" valueCount="6" desc="ScrollBar">
             <Value name="ARROWS_SIZE" integer="16" desc="ScrollBar arrows size" />
@@ -182,16 +191,17 @@
         <Enum name="GuiTextBoxProperty" valueCount="1" desc="TextBox/TextBoxMulti/ValueBox/Spinner">
             <Value name="TEXT_READONLY" integer="16" desc="TextBox in read-only mode: 0-text editable, 1-text no-editable" />
         </Enum>
-        <Enum name="GuiSpinnerProperty" valueCount="2" desc="Spinner">
-            <Value name="SPIN_BUTTON_WIDTH" integer="16" desc="Spinner left/right buttons width" />
-            <Value name="SPIN_BUTTON_SPACING" integer="17" desc="Spinner buttons separation" />
+        <Enum name="GuiValueBoxProperty" valueCount="2" desc="ValueBox/Spinner">
+            <Value name="SPINNER_BUTTON_WIDTH" integer="16" desc="Spinner left/right buttons width" />
+            <Value name="SPINNER_BUTTON_SPACING" integer="17" desc="Spinner buttons separation" />
         </Enum>
-        <Enum name="GuiListViewProperty" valueCount="5" desc="ListView">
+        <Enum name="GuiListViewProperty" valueCount="6" desc="ListView">
             <Value name="LIST_ITEMS_HEIGHT" integer="16" desc="ListView items height" />
             <Value name="LIST_ITEMS_SPACING" integer="17" desc="ListView items separation" />
             <Value name="SCROLLBAR_WIDTH" integer="18" desc="ListView scrollbar size (usually width)" />
             <Value name="SCROLLBAR_SIDE" integer="19" desc="ListView scrollbar side (0-SCROLLBAR_LEFT_SIDE, 1-SCROLLBAR_RIGHT_SIDE)" />
-            <Value name="LIST_ITEMS_BORDER_WIDTH" integer="20" desc="ListView items border width" />
+            <Value name="LIST_ITEMS_BORDER_NORMAL" integer="20" desc="ListView items border enabled in normal state" />
+            <Value name="LIST_ITEMS_BORDER_WIDTH" integer="21" desc="ListView items border width" />
         </Enum>
         <Enum name="GuiColorPickerProperty" valueCount="5" desc="ColorPicker">
             <Value name="COLOR_SELECTOR_SIZE" integer="16" desc="" />
@@ -430,27 +440,27 @@
             <Value name="ICON_MLAYERS" integer="226" desc="" />
             <Value name="ICON_MAPS" integer="227" desc="" />
             <Value name="ICON_HOT" integer="228" desc="" />
-            <Value name="ICON_229" integer="229" desc="" />
-            <Value name="ICON_230" integer="230" desc="" />
-            <Value name="ICON_231" integer="231" desc="" />
-            <Value name="ICON_232" integer="232" desc="" />
-            <Value name="ICON_233" integer="233" desc="" />
-            <Value name="ICON_234" integer="234" desc="" />
-            <Value name="ICON_235" integer="235" desc="" />
-            <Value name="ICON_236" integer="236" desc="" />
-            <Value name="ICON_237" integer="237" desc="" />
-            <Value name="ICON_238" integer="238" desc="" />
-            <Value name="ICON_239" integer="239" desc="" />
-            <Value name="ICON_240" integer="240" desc="" />
-            <Value name="ICON_241" integer="241" desc="" />
-            <Value name="ICON_242" integer="242" desc="" />
-            <Value name="ICON_243" integer="243" desc="" />
-            <Value name="ICON_244" integer="244" desc="" />
-            <Value name="ICON_245" integer="245" desc="" />
-            <Value name="ICON_246" integer="246" desc="" />
-            <Value name="ICON_247" integer="247" desc="" />
-            <Value name="ICON_248" integer="248" desc="" />
-            <Value name="ICON_249" integer="249" desc="" />
+            <Value name="ICON_LABEL" integer="229" desc="" />
+            <Value name="ICON_NAME_ID" integer="230" desc="" />
+            <Value name="ICON_SLICING" integer="231" desc="" />
+            <Value name="ICON_MANUAL_CONTROL" integer="232" desc="" />
+            <Value name="ICON_COLLISION" integer="233" desc="" />
+            <Value name="ICON_CIRCLE_ADD" integer="234" desc="" />
+            <Value name="ICON_CIRCLE_ADD_FILL" integer="235" desc="" />
+            <Value name="ICON_CIRCLE_WARNING" integer="236" desc="" />
+            <Value name="ICON_CIRCLE_WARNING_FILL" integer="237" desc="" />
+            <Value name="ICON_BOX_MORE" integer="238" desc="" />
+            <Value name="ICON_BOX_MORE_FILL" integer="239" desc="" />
+            <Value name="ICON_BOX_MINUS" integer="240" desc="" />
+            <Value name="ICON_BOX_MINUS_FILL" integer="241" desc="" />
+            <Value name="ICON_UNION" integer="242" desc="" />
+            <Value name="ICON_INTERSECTION" integer="243" desc="" />
+            <Value name="ICON_DIFFERENCE" integer="244" desc="" />
+            <Value name="ICON_SPHERE" integer="245" desc="" />
+            <Value name="ICON_CYLINDER" integer="246" desc="" />
+            <Value name="ICON_CONE" integer="247" desc="" />
+            <Value name="ICON_ELLIPSOID" integer="248" desc="" />
+            <Value name="ICON_CAPSULE" integer="249" desc="" />
             <Value name="ICON_250" integer="250" desc="" />
             <Value name="ICON_251" integer="251" desc="" />
             <Value name="ICON_252" integer="252" desc="" />
@@ -461,7 +471,7 @@
     </Enums>
     <Callbacks count="0">
     </Callbacks>
-    <Functions count="57">
+    <Functions count="58">
         <Function name="GuiEnable" retType="void" paramCount="0" desc="Enable gui controls (global state)">
         </Function>
         <Function name="GuiDisable" retType="void" paramCount="0" desc="Disable gui controls (global state)">
@@ -526,6 +536,9 @@
             <Param type="int" name="pixelSize" desc="" />
             <Param type="Color" name="color" desc="" />
         </Function>
+        <Function name="GuiGetTextWidth" retType="int" paramCount="1" desc="Get text width considering gui style and icon size (if required)">
+            <Param type="const char *" name="text" desc="" />
+        </Function>
         <Function name="GuiWindowBox" retType="int" paramCount="2" desc="Window Box control, shows a window that can be closed">
             <Param type="Rectangle" name="bounds" desc="" />
             <Param type="const char *" name="title" desc="" />
@@ -544,7 +557,7 @@
         </Function>
         <Function name="GuiTabBar" retType="int" paramCount="4" desc="Tab Bar control, returns TAB to be closed or -1">
             <Param type="Rectangle" name="bounds" desc="" />
-            <Param type="const char **" name="text" desc="" />
+            <Param type="char **" name="text" desc="" />
             <Param type="int" name="count" desc="" />
             <Param type="int *" name="active" desc="" />
         </Function>
@@ -674,7 +687,7 @@
         </Function>
         <Function name="GuiListViewEx" retType="int" paramCount="6" desc="List View with extended parameters">
             <Param type="Rectangle" name="bounds" desc="" />
-            <Param type="const char **" name="text" desc="" />
+            <Param type="char **" name="text" desc="" />
             <Param type="int" name="count" desc="" />
             <Param type="int *" name="scrollIndex" desc="" />
             <Param type="int *" name="active" desc="" />

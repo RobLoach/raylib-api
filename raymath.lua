@@ -10,7 +10,7 @@ return {
       name = "RMAPI",
       type = "UNKNOWN",
       value = "__declspec(dllexport) extern inline",
-      description = "We are building raylib as a Win32 shared library (.dll)"
+      description = "Building raylib as a Win32 shared library (.dll)"
     },
     {
       name = "PI",
@@ -74,6 +74,54 @@ return {
     },
     {
       name = "RL_MATRIX_TYPE",
+      type = "GUARD",
+      value = "",
+      description = ""
+    },
+    {
+      name = "RL_FLOAT3_TYPE",
+      type = "GUARD",
+      value = "",
+      description = ""
+    },
+    {
+      name = "RL_FLOAT16_TYPE",
+      type = "GUARD",
+      value = "",
+      description = ""
+    },
+    {
+      name = "RAYMATH_SSE42_ENABLED",
+      type = "GUARD",
+      value = "",
+      description = ""
+    },
+    {
+      name = "RAYMATH_SSE41_ENABLED",
+      type = "GUARD",
+      value = "",
+      description = ""
+    },
+    {
+      name = "RAYMATH_SSSE3_ENABLED",
+      type = "GUARD",
+      value = "",
+      description = ""
+    },
+    {
+      name = "RAYMATH_SSE3_ENABLED",
+      type = "GUARD",
+      value = "",
+      description = ""
+    },
+    {
+      name = "RAYMATH_SSE2_ENABLED",
+      type = "GUARD",
+      value = "",
+      description = ""
+    },
+    {
+      name = "RAYMATH_SSE_ENABLED",
       type = "GUARD",
       value = "",
       description = ""
@@ -231,7 +279,7 @@ return {
     },
     {
       name = "float3",
-      description = "NOTE: Helper types to be used instead of array return types for *ToFloat functions",
+      description = "",
       fields = {
         {
           type = "float[3]",
@@ -389,6 +437,15 @@ return {
     },
     {
       name = "Vector2DotProduct",
+      description = "",
+      returnType = "float",
+      params = {
+        {type = "Vector2", name = "v1"},
+        {type = "Vector2", name = "v2"}
+      }
+    },
+    {
+      name = "Vector2CrossProduct",
       description = "",
       returnType = "float",
       params = {
@@ -1187,6 +1244,15 @@ return {
       }
     },
     {
+      name = "MatrixMultiplyValue",
+      description = "",
+      returnType = "Matrix",
+      params = {
+        {type = "Matrix", name = "left"},
+        {type = "float", name = "value"}
+      }
+    },
+    {
       name = "MatrixTranslate",
       description = "",
       returnType = "Matrix",
@@ -1522,6 +1588,16 @@ return {
       params = {
         {type = "Quaternion", name = "p"},
         {type = "Quaternion", name = "q"}
+      }
+    },
+    {
+      name = "MatrixCompose",
+      description = "",
+      returnType = "Matrix",
+      params = {
+        {type = "Vector3", name = "translation"},
+        {type = "Quaternion", name = "rotation"},
+        {type = "Vector3", name = "scale"}
       }
     },
     {
