@@ -1,5 +1,5 @@
-RAYLIB_VERSION?=5.5
-PARSER?=vendor/raylib-parser/parser/raylib_parser
+RAYLIB_VERSION?=6.0
+PARSER?=vendor/raylib-parser/tools/rlparser/rlparser
 RAYLIB?=vendor/raylib
 EXTENSION?=txt
 FORMAT?=DEFAULT
@@ -31,7 +31,8 @@ vendor/rres:
 vendor: vendor/raylib-parser vendor/raylib vendor/reasings vendor/rmem vendor/raygui vendor/rres
 
 $(PARSER): vendor
-	$(MAKE) -C vendor/raylib-parser/parser
+	$(MAKE) -C vendor/raylib-parser/tools/rlparser
+	chmod +x vendor/raylib-parser/tools/rlparser/rlparser
 
 parse: $(PARSER)
 	$(PARSER) -i $(RAYLIB)/src/raylib.h -o raylib.$(EXTENSION) -f $(FORMAT) -d RLAPI
