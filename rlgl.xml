@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="Windows-1252" ?>
 <raylibAPI>
-    <Defines count="98">
+    <Defines count="99">
         <Define name="RLGL_H" type="GUARD" value="" desc="" />
         <Define name="RLGL_VERSION" type="STRING" value="6.0" desc="" />
         <Define name="RLAPI" type="UNKNOWN" value="__declspec(dllexport)" desc="Building the library as a Win32 shared library (.dll)" />
@@ -96,6 +96,7 @@
         <Define name="RL_DEFAULT_SHADER_ATTRIB_LOCATION_BONEINDICES" type="INT" value="7" desc="" />
         <Define name="RL_DEFAULT_SHADER_ATTRIB_LOCATION_BONEWEIGHTS" type="INT" value="8" desc="" />
         <Define name="RL_DEFAULT_SHADER_ATTRIB_LOCATION_INSTANCETRANSFORM" type="INT" value="9" desc="" />
+        <Define name="RL_BOOL_TYPE" type="GUARD" value="" desc="" />
         <Define name="RL_MATRIX_TYPE" type="GUARD" value="" desc="" />
         <Define name="RL_SHADER_LOC_MAP_DIFFUSE" type="UNKNOWN" value="RL_SHADER_LOC_MAP_ALBEDO" desc="" />
         <Define name="RL_SHADER_LOC_MAP_SPECULAR" type="UNKNOWN" value="RL_SHADER_LOC_MAP_METALNESS" desc="" />

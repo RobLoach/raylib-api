@@ -1,4 +1,4 @@
-RAYLIB_VERSION?=6.0
+RAYLIB_VERSION?=6.2
 PARSER?=vendor/raylib-parser/tools/rlparser/rlparser
 RAYLIB?=vendor/raylib
 EXTENSION?=txt

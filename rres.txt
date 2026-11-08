@@ -33,8 +33,8 @@ Define 006: RRES_FREE(ptr)
   Description: 
 Define 007: RRES_SUPPORT_LOG_INFO
   Name: RRES_SUPPORT_LOG_INFO
-  Type: GUARD
-  Value: 
+  Type: INT
+  Value: 1
   Description: 
 Define 008: RRES_LOG(...)
   Name: RRES_LOG(...)

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="Windows-1252" ?>
 <raylibAPI>
-    <Defines count="20">
+    <Defines count="22">
         <Define name="RAYGUI_H" type="GUARD" value="" desc="" />
-        <Define name="RAYGUI_VERSION_MAJOR" type="INT" value="4" desc="" />
-        <Define name="RAYGUI_VERSION_MINOR" type="INT" value="5" desc="" />
+        <Define name="RAYGUI_VERSION_MAJOR" type="INT" value="5" desc="" />
+        <Define name="RAYGUI_VERSION_MINOR" type="INT" value="1" desc="" />
         <Define name="RAYGUI_VERSION_PATCH" type="INT" value="0" desc="" />
-        <Define name="RAYGUI_VERSION" type="STRING" value="5.0-dev" desc="" />
+        <Define name="RAYGUI_VERSION" type="STRING" value="5.1-dev" desc="" />
         <Define name="RAYGUIAPI" type="UNKNOWN" value="__declspec(dllexport)" desc="Building the library as a Win32 shared library (.dll)" />
         <Define name="_CRT_SECURE_NO_WARNINGS" type="GUARD" value="" desc="Disable unsafe warnings on scanf() functions in MSVC" />
         <Define name="RAYGUI_SUPPORT_LOG_INFO" type="GUARD" value="" desc="" />
@@ -13,12 +13,14 @@
         <Define name="GUI_BUTTON_DOWN" type="UNKNOWN" value="(IsMouseButtonDown(MOUSE_LEFT_BUTTON) || IsGamepadButtonDown(0, GAMEPAD_BUTTON_RIGHT_FACE_DOWN))" desc="" />
         <Define name="GUI_BUTTON_DOWN_ALT" type="UNKNOWN" value="(IsMouseButtonDown(MOUSE_RIGHT_BUTTON) || IsGamepadButtonDown(0, GAMEPAD_BUTTON_RIGHT_FACE_RIGHT))" desc="" />
         <Define name="GUI_BUTTON_PRESSED" type="UNKNOWN" value="(IsMouseButtonPressed(MOUSE_LEFT_BUTTON) || IsGamepadButtonPressed(0, GAMEPAD_BUTTON_RIGHT_FACE_DOWN))" desc="" />
+        <Define name="GUI_BUTTON_PRESSED_MID" type="UNKNOWN" value="(IsMouseButtonPressed(MOUSE_MIDDLE_BUTTON) || IsGamepadButtonPressed(0, GAMEPAD_BUTTON_RIGHT_FACE_UP))" desc="" />
         <Define name="GUI_BUTTON_RELEASED" type="UNKNOWN" value="(IsMouseButtonReleased(MOUSE_LEFT_BUTTON) || IsGamepadButtonReleased(0, GAMEPAD_BUTTON_RIGHT_FACE_DOWN))" desc="" />
         <Define name="GUI_SCROLL_DELTA" type="UNKNOWN" value="((float)IsGamepadButtonDown(0, GAMEPAD_BUTTON_RIGHT_TRIGGER_2) - (float)IsGamepadButtonDown(0, GAMEPAD_BUTTON_LEFT_TRIGGER_2))" desc="" />
         <Define name="GUI_POINTER_POSITION" type="UNKNOWN" value="GetMousePosition()" desc="" />
         <Define name="GUI_KEY_DOWN(key)" type="MACRO" value="IsKeyDown(key)" desc="" />
         <Define name="GUI_KEY_PRESSED(key)" type="MACRO" value="IsKeyPressed(key)" desc="" />
         <Define name="GUI_INPUT_KEY" type="UNKNOWN" value="GetCharPressed()" desc="" />
+        <Define name="BLANK" type="UNKNOWN" value="(Color){ 0, 0, 0, 0 }" desc="Blank (Transparent)" />
         <Define name="SCROLLBAR_LEFT_SIDE" type="INT" value="0" desc="" />
         <Define name="SCROLLBAR_RIGHT_SIDE" type="INT" value="1" desc="" />
     </Defines>
@@ -90,7 +92,13 @@
     <Aliases count="1">
         <Alias type="Texture2D" name="Texture" desc="Texture2D, same as Texture" />
     </Aliases>
-    <Enums count="19">
+    <Enums count="21">
+        <Enum name="GuiResult" valueCount="4" desc="Gui control result">
+            <Value name="RESULT_NONE" integer="0" desc="" />
+            <Value name="RESULT_PRESSED" integer="1" desc="" />
+            <Value name="RESULT_CHANGED" integer="2" desc="" />
+            <Value name="RESULT_TAB_CLOSE" integer="4" desc="GuiTabBar(), tab close request" />
+        </Enum>
         <Enum name="GuiState" valueCount="4" desc="Gui control state">
             <Value name="STATE_NORMAL" integer="0" desc="" />
             <Value name="STATE_FOCUSED" integer="1" desc="" />
@@ -124,13 +132,13 @@
             <Value name="DROPDOWNBOX" integer="8" desc="" />
             <Value name="TEXTBOX" integer="9" desc="Used also for: TEXTBOXMULTI" />
             <Value name="VALUEBOX" integer="10" desc="" />
-            <Value name="CONTROL11" integer="11" desc="" />
+            <Value name="TABBAR" integer="11" desc="" />
             <Value name="LISTVIEW" integer="12" desc="" />
             <Value name="COLORPICKER" integer="13" desc="" />
             <Value name="SCROLLBAR" integer="14" desc="" />
             <Value name="STATUSBAR" integer="15" desc="" />
         </Enum>
-        <Enum name="GuiControlProperty" valueCount="15" desc="Gui base properties for every control">
+        <Enum name="GuiControlProperty" valueCount="16" desc="Controls BASE properties for every control (RAYGUI_MAX_PROPS_BASE = 16)">
             <Value name="BORDER_COLOR_NORMAL" integer="0" desc="Control border color in STATE_NORMAL" />
             <Value name="BASE_COLOR_NORMAL" integer="1" desc="Control base color in STATE_NORMAL" />
             <Value name="TEXT_COLOR_NORMAL" integer="2" desc="Control text color in STATE_NORMAL" />
@@ -145,19 +153,22 @@
             <Value name="TEXT_COLOR_DISABLED" integer="11" desc="Control text color in STATE_DISABLED" />
             <Value name="BORDER_WIDTH" integer="12" desc="Control border size, 0 for no border" />
             <Value name="TEXT_PADDING" integer="13" desc="Control text padding, not considering border" />
-            <Value name="TEXT_ALIGNMENT" integer="14" desc="Control text horizontal alignment inside control text bound (after border and padding)" />
+            <Value name="TEXT_ALIGNMENT" integer="14" desc="Control text horizontal alignment inside control text bound (after border and padding): 0-Left, 1-Center, 2-Right" />
+            <Value name="BASEPROP16" integer="15" desc="Not used yet..." />
         </Enum>
-        <Enum name="GuiDefaultProperty" valueCount="7" desc="DEFAULT extended properties">
+        <Enum name="GuiDefaultProperty" valueCount="8" desc="DEFAULT control, extended properties">
             <Value name="TEXT_SIZE" integer="16" desc="Text size (glyphs max height)" />
             <Value name="TEXT_SPACING" integer="17" desc="Text spacing between glyphs" />
             <Value name="LINE_COLOR" integer="18" desc="Line control color" />
             <Value name="BACKGROUND_COLOR" integer="19" desc="Background color" />
             <Value name="TEXT_LINE_SPACING" integer="20" desc="Text spacing between lines" />
-            <Value name="TEXT_ALIGNMENT_VERTICAL" integer="21" desc="Text vertical alignment inside text bounds (after border and padding)" />
+            <Value name="TEXT_ALIGNMENT_VERTICAL" integer="21" desc="Text vertical alignment inside text bounds (after border and padding): 0-Top, 1-Middle, 2-Bottom" />
             <Value name="TEXT_WRAP_MODE" integer="22" desc="Text wrap-mode inside text bounds" />
+            <Value name="EXTPROP08" integer="23" desc="Not used yet..." />
         </Enum>
-        <Enum name="GuiToggleProperty" valueCount="1" desc="Toggle/ToggleGroup">
+        <Enum name="GuiToggleProperty" valueCount="2" desc="Toggle/ToggleGroup">
             <Value name="GROUP_PADDING" integer="16" desc="ToggleGroup separation between toggles" />
+            <Value name="GROUP_WIDTH_FULL" integer="17" desc="ToggleGroup bounds width considers all items: 0-Width per item, 1-Full width" />
         </Enum>
         <Enum name="GuiSliderProperty" valueCount="2" desc="Slider/SliderBar">
             <Value name="SLIDER_WIDTH" integer="16" desc="Slider size of internal bar" />
@@ -165,7 +176,7 @@
         </Enum>
         <Enum name="GuiProgressBarProperty" valueCount="2" desc="ProgressBar">
             <Value name="PROGRESS_PADDING" integer="16" desc="ProgressBar internal padding" />
-            <Value name="PROGRESS_SIDE" integer="17" desc="ProgressBar increment side: 0-left->right, 1-right-left " />
+            <Value name="PROGRESS_SIDE" integer="17" desc="ProgressBar increment side: 0-Left->Right, 1-Right->Left" />
         </Enum>
         <Enum name="GuiScrollBarProperty" valueCount="6" desc="ScrollBar">
             <Value name="ARROWS_SIZE" integer="16" desc="ScrollBar arrows size" />
@@ -182,35 +193,41 @@
             <Value name="COMBO_BUTTON_WIDTH" integer="16" desc="ComboBox right button width" />
             <Value name="COMBO_BUTTON_SPACING" integer="17" desc="ComboBox button separation" />
         </Enum>
-        <Enum name="GuiDropdownBoxProperty" valueCount="4" desc="DropdownBox">
+        <Enum name="GuiDropdownBoxProperty" valueCount="5" desc="DropdownBox">
             <Value name="ARROW_PADDING" integer="16" desc="DropdownBox arrow separation from border and items" />
             <Value name="DROPDOWN_ITEMS_SPACING" integer="17" desc="DropdownBox items separation" />
             <Value name="DROPDOWN_ARROW_HIDDEN" integer="18" desc="DropdownBox arrow hidden" />
-            <Value name="DROPDOWN_ROLL_UP" integer="19" desc="DropdownBox roll up flag (default rolls down)" />
+            <Value name="DROPDOWN_ROLL_UP" integer="19" desc="DropdownBox roll up flag: 0-Roll down, 1-Roll up" />
+            <Value name="DROPDOWN_MAX_HEIGHT" integer="20" desc="DropdownBox max height, using scrollbar if required, 0-No limit" />
         </Enum>
         <Enum name="GuiTextBoxProperty" valueCount="1" desc="TextBox/TextBoxMulti/ValueBox/Spinner">
-            <Value name="TEXT_READONLY" integer="16" desc="TextBox in read-only mode: 0-text editable, 1-text no-editable" />
+            <Value name="TEXT_READONLY" integer="16" desc="TextBox in read-only mode: 0-Text editable, 1-Text read-only" />
         </Enum>
         <Enum name="GuiValueBoxProperty" valueCount="2" desc="ValueBox/Spinner">
             <Value name="SPINNER_BUTTON_WIDTH" integer="16" desc="Spinner left/right buttons width" />
             <Value name="SPINNER_BUTTON_SPACING" integer="17" desc="Spinner buttons separation" />
         </Enum>
-        <Enum name="GuiListViewProperty" valueCount="6" desc="ListView">
+        <Enum name="GuiTabBarProperty" valueCount="3" desc="TabBar">
+            <Value name="TAB_ITEMS_WIDTH" integer="16" desc="TabBar tab items width" />
+            <Value name="TAB_CLOSE_BUTTON" integer="17" desc="TabBar tab close button: 0-Not shown, 1-Shown" />
+            <Value name="TAB_LINE_SIDE" integer="18" desc="TabBar tabs side: 0-Bottom, 1-Top" />
+        </Enum>
+        <Enum name="GuiListViewProperty" valueCount="6" desc="">
             <Value name="LIST_ITEMS_HEIGHT" integer="16" desc="ListView items height" />
             <Value name="LIST_ITEMS_SPACING" integer="17" desc="ListView items separation" />
             <Value name="SCROLLBAR_WIDTH" integer="18" desc="ListView scrollbar size (usually width)" />
-            <Value name="SCROLLBAR_SIDE" integer="19" desc="ListView scrollbar side (0-SCROLLBAR_LEFT_SIDE, 1-SCROLLBAR_RIGHT_SIDE)" />
+            <Value name="SCROLLBAR_SIDE" integer="19" desc="ListView scrollbar side: 0-Left side, 1-Right Side" />
             <Value name="LIST_ITEMS_BORDER_NORMAL" integer="20" desc="ListView items border enabled in normal state" />
             <Value name="LIST_ITEMS_BORDER_WIDTH" integer="21" desc="ListView items border width" />
         </Enum>
         <Enum name="GuiColorPickerProperty" valueCount="5" desc="ColorPicker">
-            <Value name="COLOR_SELECTOR_SIZE" integer="16" desc="" />
+            <Value name="COLOR_SELECTOR_SIZE" integer="16" desc="ColorPicker selector square size" />
             <Value name="HUEBAR_WIDTH" integer="17" desc="ColorPicker right hue bar width" />
             <Value name="HUEBAR_PADDING" integer="18" desc="ColorPicker right hue bar separation from panel" />
             <Value name="HUEBAR_SELECTOR_HEIGHT" integer="19" desc="ColorPicker right hue bar selector height" />
             <Value name="HUEBAR_SELECTOR_OVERFLOW" integer="20" desc="ColorPicker right hue bar selector overflow" />
         </Enum>
-        <Enum name="GuiIconName" valueCount="256" desc="">
+        <Enum name="GuiIconName" valueCount="257" desc="">
             <Value name="ICON_NONE" integer="0" desc="" />
             <Value name="ICON_FOLDER_FILE_OPEN" integer="1" desc="" />
             <Value name="ICON_FILE_SAVE_CLASSIC" integer="2" desc="" />
@@ -461,17 +478,18 @@
             <Value name="ICON_CONE" integer="247" desc="" />
             <Value name="ICON_ELLIPSOID" integer="248" desc="" />
             <Value name="ICON_CAPSULE" integer="249" desc="" />
-            <Value name="ICON_250" integer="250" desc="" />
-            <Value name="ICON_251" integer="251" desc="" />
-            <Value name="ICON_252" integer="252" desc="" />
-            <Value name="ICON_253" integer="253" desc="" />
-            <Value name="ICON_254" integer="254" desc="" />
-            <Value name="ICON_255" integer="255" desc="" />
+            <Value name="ICON_FILETYPE_FONT" integer="250" desc="" />
+            <Value name="ICON_FILETYPE_3D" integer="251" desc="" />
+            <Value name="ICON_FILETYPE_CODE_XML" integer="252" desc="" />
+            <Value name="ICON_FILETYPE_CODE_C" integer="253" desc="" />
+            <Value name="ICON_FILETYPE_CODE_PYTHON" integer="254" desc="" />
+            <Value name="ICON_FILETYPE_CODE_JS" integer="255" desc="" />
+            <Value name="ICON_FILETYPE_ICON" integer="256" desc="" />
         </Enum>
     </Enums>
     <Callbacks count="0">
     </Callbacks>
-    <Functions count="58">
+    <Functions count="61">
         <Function name="GuiEnable" retType="void" paramCount="0" desc="Enable gui controls (global state)">
         </Function>
         <Function name="GuiDisable" retType="void" paramCount="0" desc="Disable gui controls (global state)">
@@ -507,6 +525,10 @@
         <Function name="GuiLoadStyle" retType="void" paramCount="1" desc="Load style file over global style variable (.rgs)">
             <Param type="const char *" name="fileName" desc="" />
         </Function>
+        <Function name="GuiLoadStyleFromMemory" retType="void" paramCount="2" desc="Load style from memory (binary only)">
+            <Param type="const unsigned char *" name="fileData" desc="" />
+            <Param type="int" name="dataSize" desc="" />
+        </Function>
         <Function name="GuiLoadStyleDefault" retType="void" paramCount="0" desc="Load style default over global style">
         </Function>
         <Function name="GuiEnableTooltip" retType="void" paramCount="0" desc="Enable gui tooltips (global state)">
@@ -527,6 +549,11 @@
         </Function>
         <Function name="GuiLoadIcons" retType="char **" paramCount="2" desc="Load raygui icons file (.rgi) into internal icons data">
             <Param type="const char *" name="fileName" desc="" />
+            <Param type="bool" name="loadIconsName" desc="" />
+        </Function>
+        <Function name="GuiLoadIconsFromMemory" retType="char **" paramCount="3" desc="Load raygui icons file (.rgi) from memory into internal icons data">
+            <Param type="const unsigned char *" name="fileData" desc="" />
+            <Param type="int" name="dataSize" desc="" />
             <Param type="bool" name="loadIconsName" desc="" />
         </Function>
         <Function name="GuiDrawIcon" retType="void" paramCount="5" desc="Draw icon using pixel size at specified position">
@@ -554,12 +581,6 @@
         <Function name="GuiPanel" retType="int" paramCount="2" desc="Panel control, useful to group controls">
             <Param type="Rectangle" name="bounds" desc="" />
             <Param type="const char *" name="text" desc="" />
-        </Function>
-        <Function name="GuiTabBar" retType="int" paramCount="4" desc="Tab Bar control, returns TAB to be closed or -1">
-            <Param type="Rectangle" name="bounds" desc="" />
-            <Param type="char **" name="text" desc="" />
-            <Param type="int" name="count" desc="" />
-            <Param type="int *" name="active" desc="" />
         </Function>
         <Function name="GuiScrollPanel" retType="int" paramCount="5" desc="Scroll Panel control">
             <Param type="Rectangle" name="bounds" desc="" />
@@ -685,7 +706,7 @@
             <Param type="int *" name="scrollIndex" desc="" />
             <Param type="int *" name="active" desc="" />
         </Function>
-        <Function name="GuiListViewEx" retType="int" paramCount="6" desc="List View with extended parameters">
+        <Function name="GuiListViewEx" retType="int" paramCount="6" desc="List View control, using text entries list and returning focus entry">
             <Param type="Rectangle" name="bounds" desc="" />
             <Param type="char **" name="text" desc="" />
             <Param type="int" name="count" desc="" />
@@ -693,22 +714,38 @@
             <Param type="int *" name="active" desc="" />
             <Param type="int *" name="focus" desc="" />
         </Function>
-        <Function name="GuiMessageBox" retType="int" paramCount="4" desc="Message Box control, displays a message">
+        <Function name="GuiTabBar" retType="int" paramCount="4" desc="Tab Bar control">
             <Param type="Rectangle" name="bounds" desc="" />
-            <Param type="const char *" name="title" desc="" />
-            <Param type="const char *" name="message" desc="" />
-            <Param type="const char *" name="buttons" desc="" />
+            <Param type="const char *" name="text" desc="" />
+            <Param type="int *" name="hscroll" desc="" />
+            <Param type="int *" name="active" desc="" />
         </Function>
-        <Function name="GuiTextInputBox" retType="int" paramCount="7" desc="Text Input Box control, ask for text, supports secret">
+        <Function name="GuiTabBarEx" retType="int" paramCount="6" desc="Tab Bar control, using text entries list and returning focus entry">
+            <Param type="Rectangle" name="bounds" desc="" />
+            <Param type="char **" name="text" desc="" />
+            <Param type="int" name="count" desc="" />
+            <Param type="int *" name="hscroll" desc="" />
+            <Param type="int *" name="active" desc="" />
+            <Param type="int *" name="focus" desc="" />
+        </Function>
+        <Function name="GuiMessageBox" retType="int" paramCount="5" desc="Message Box control, displays a message">
             <Param type="Rectangle" name="bounds" desc="" />
             <Param type="const char *" name="title" desc="" />
             <Param type="const char *" name="message" desc="" />
-            <Param type="const char *" name="buttons" desc="" />
+            <Param type="const char *" name="btnText" desc="" />
+            <Param type="int *" name="btnActive" desc="" />
+        </Function>
+        <Function name="GuiTextInputBox" retType="int" paramCount="8" desc="Text Input Box control, ask for text, supports secret">
+            <Param type="Rectangle" name="bounds" desc="" />
+            <Param type="const char *" name="title" desc="" />
+            <Param type="const char *" name="message" desc="" />
             <Param type="char *" name="text" desc="" />
-            <Param type="int" name="textMaxSize" desc="" />
+            <Param type="int" name="textSize" desc="" />
+            <Param type="const char *" name="btnText" desc="" />
+            <Param type="int *" name="btnActive" desc="" />
             <Param type="bool *" name="secretViewActive" desc="" />
         </Function>
-        <Function name="GuiColorPicker" retType="int" paramCount="3" desc="Color Picker control (multiple color controls)">
+        <Function name="GuiColorPicker" retType="int" paramCount="3" desc="Color Picker control, includes Color bar controls">
             <Param type="Rectangle" name="bounds" desc="" />
             <Param type="const char *" name="text" desc="" />
             <Param type="Color *" name="color" desc="" />
@@ -728,12 +765,12 @@
             <Param type="const char *" name="text" desc="" />
             <Param type="float *" name="value" desc="" />
         </Function>
-        <Function name="GuiColorPickerHSV" retType="int" paramCount="3" desc="Color Picker control that avoids conversion to RGB on each call (multiple color controls)">
+        <Function name="GuiColorPickerHSV" retType="int" paramCount="3" desc="Color Picker control, using Hue-Saturation-Value color data, includes Color bar controls">
             <Param type="Rectangle" name="bounds" desc="" />
             <Param type="const char *" name="text" desc="" />
             <Param type="Vector3 *" name="colorHsv" desc="" />
         </Function>
-        <Function name="GuiColorPanelHSV" retType="int" paramCount="3" desc="Color Panel control that updates Hue-Saturation-Value color value, used by GuiColorPickerHSV()">
+        <Function name="GuiColorPanelHSV" retType="int" paramCount="3" desc="Color Panel control, using Hue-Saturation-Value color data">
             <Param type="Rectangle" name="bounds" desc="" />
             <Param type="const char *" name="text" desc="" />
             <Param type="Vector3 *" name="colorHsv" desc="" />
