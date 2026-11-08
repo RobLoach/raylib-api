@@ -1,4 +1,4 @@
-RAYLIB_VERSION?=6.0
+RAYLIB_VERSION?=6.2
 PARSER?=vendor/raylib-parser/tools/rlparser/rlparser
 RAYLIB?=vendor/raylib
 EXTENSION?=txt
@@ -37,6 +37,7 @@ $(PARSER): vendor
 parse: $(PARSER)
 	$(PARSER) -i $(RAYLIB)/src/raylib.h -o raylib.$(EXTENSION) -f $(FORMAT) -d RLAPI
 	$(PARSER) -i $(RAYLIB)/src/raymath.h -o raymath.$(EXTENSION) -f $(FORMAT) -d RMAPI
+	$(PARSER) -i $(RAYLIB)/src/rcamera.h -o rcamera.$(EXTENSION) -f $(FORMAT) -d RLAPI -t "CAMERA IMPLEMENTATION"
 	$(PARSER) -i $(RAYLIB)/src/rlgl.h -o rlgl.$(EXTENSION) -f $(FORMAT) -d RLAPI -t "RLGL IMPLEMENTATION"
 	$(PARSER) -i vendor/reasings/src/reasings.h -o reasings.$(EXTENSION) -f $(FORMAT) -d EASEDEF
 	$(PARSER) -i vendor/raygui/src/raygui.h -o raygui.$(EXTENSION) -f $(FORMAT) -d RAYGUIAPI -t "RAYGUI IMPLEMENTATION"

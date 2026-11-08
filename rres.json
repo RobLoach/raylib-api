@@ -38,8 +38,8 @@
     },
     {
       "name": "RRES_SUPPORT_LOG_INFO",
-      "type": "GUARD",
-      "value": "",
+      "type": "INT",
+      "value": 1,
       "description": ""
     },
     {

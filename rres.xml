@@ -7,7 +7,7 @@
         <Define name="RRES_CALLOC(ptr,sz)" type="MACRO" value="calloc(ptr,sz)" desc="" />
         <Define name="RRES_REALLOC(ptr,sz)" type="MACRO" value="realloc(ptr,sz)" desc="" />
         <Define name="RRES_FREE(ptr)" type="MACRO" value="free(ptr)" desc="" />
-        <Define name="RRES_SUPPORT_LOG_INFO" type="GUARD" value="" desc="" />
+        <Define name="RRES_SUPPORT_LOG_INFO" type="INT" value="1" desc="" />
         <Define name="RRES_LOG(...)" type="MACRO" value="printf(__VA_ARGS__)" desc="" />
         <Define name="RRES_MAX_FILENAME_SIZE" type="INT" value="1024" desc="" />
     </Defines>

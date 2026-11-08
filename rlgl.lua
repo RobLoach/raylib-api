@@ -571,6 +571,12 @@ return {
       description = ""
     },
     {
+      name = "RL_BOOL_TYPE",
+      type = "GUARD",
+      value = "",
+      description = ""
+    },
+    {
       name = "RL_MATRIX_TYPE",
       type = "GUARD",
       value = "",

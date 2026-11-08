@@ -1,5 +1,5 @@
 
-Defines found: 98
+Defines found: 99
 
 Define 001: RLGL_H
   Name: RLGL_H
@@ -476,17 +476,22 @@ Define 095: RL_DEFAULT_SHADER_ATTRIB_LOCATION_INSTANCETRANSFORM
   Type: INT
   Value: 9
   Description: 
-Define 096: RL_MATRIX_TYPE
+Define 096: RL_BOOL_TYPE
+  Name: RL_BOOL_TYPE
+  Type: GUARD
+  Value: 
+  Description: 
+Define 097: RL_MATRIX_TYPE
   Name: RL_MATRIX_TYPE
   Type: GUARD
   Value: 
   Description: 
-Define 097: RL_SHADER_LOC_MAP_DIFFUSE
+Define 098: RL_SHADER_LOC_MAP_DIFFUSE
   Name: RL_SHADER_LOC_MAP_DIFFUSE
   Type: UNKNOWN
   Value: RL_SHADER_LOC_MAP_ALBEDO
   Description: 
-Define 098: RL_SHADER_LOC_MAP_SPECULAR
+Define 099: RL_SHADER_LOC_MAP_SPECULAR
   Name: RL_SHADER_LOC_MAP_SPECULAR
   Type: UNKNOWN
   Value: RL_SHADER_LOC_MAP_METALNESS

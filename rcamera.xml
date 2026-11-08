@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="Windows-1252" ?>
+<raylibAPI>
+    <Defines count="5">
+        <Define name="RCAMERA_H" type="GUARD" value="" desc="" />
+        <Define name="__declspec(x)" type="MACRO" value="__attribute__((x))" desc="" />
+        <Define name="RLAPI" type="UNKNOWN" value="__declspec(dllexport)" desc="Building the library as a Win32 shared library (.dll)" />
+        <Define name="CAMERA_CULL_DISTANCE_NEAR" type="DOUBLE" value="0.05" desc="" />
+        <Define name="CAMERA_CULL_DISTANCE_FAR" type="DOUBLE" value="4000.0" desc="" />
+    </Defines>
+    <Structs count="4">
+        <Struct name="Vector2" fieldCount="2" desc="Vector2, 2 components">
+            <Field type="float" name="x" desc="Vector x component" />
+            <Field type="float" name="y" desc="Vector y component" />
+        </Struct>
+        <Struct name="Vector3" fieldCount="3" desc="Vector3, 3 components">
+            <Field type="float" name="x" desc="Vector x component" />
+            <Field type="float" name="y" desc="Vector y component" />
+            <Field type="float" name="z" desc="Vector z component" />
+        </Struct>
+        <Struct name="Matrix" fieldCount="16" desc="Matrix, 4x4 components, column major, OpenGL style, right-handed">
+            <Field type="float" name="m0" desc="Matrix first row (4 components)" />
+            <Field type="float" name="m4" desc="Matrix first row (4 components)" />
+            <Field type="float" name="m8" desc="Matrix first row (4 components)" />
+            <Field type="float" name="m12" desc="Matrix first row (4 components)" />
+            <Field type="float" name="m1" desc="Matrix second row (4 components)" />
+            <Field type="float" name="m5" desc="Matrix second row (4 components)" />
+            <Field type="float" name="m9" desc="Matrix second row (4 components)" />
+            <Field type="float" name="m13" desc="Matrix second row (4 components)" />
+            <Field type="float" name="m2" desc="Matrix third row (4 components)" />
+            <Field type="float" name="m6" desc="Matrix third row (4 components)" />
+            <Field type="float" name="m10" desc="Matrix third row (4 components)" />
+            <Field type="float" name="m14" desc="Matrix third row (4 components)" />
+            <Field type="float" name="m3" desc="Matrix fourth row (4 components)" />
+            <Field type="float" name="m7" desc="Matrix fourth row (4 components)" />
+            <Field type="float" name="m11" desc="Matrix fourth row (4 components)" />
+            <Field type="float" name="m15" desc="Matrix fourth row (4 components)" />
+        </Struct>
+        <Struct name="Camera3D" fieldCount="5" desc="Camera type, defines a camera position/orientation in 3d space">
+            <Field type="Vector3" name="position" desc="Camera position" />
+            <Field type="Vector3" name="target" desc="Camera target it looks-at" />
+            <Field type="Vector3" name="up" desc="Camera up vector (rotation over its axis)" />
+            <Field type="float" name="fovy" desc="Camera field-of-view aperture in Y (degrees) in perspective, used as near plane width in orthographic" />
+            <Field type="int" name="projection" desc="Camera projection type: CAMERA_PERSPECTIVE or CAMERA_ORTHOGRAPHIC" />
+        </Struct>
+    </Structs>
+    <Aliases count="1">
+        <Alias type="Camera" name="Camera3D" desc="Camera type fallback, defaults to Camera3D" />
+    </Aliases>
+    <Enums count="2">
+        <Enum name="CameraProjection" valueCount="2" desc="Camera projection">
+            <Value name="CAMERA_PERSPECTIVE" integer="0" desc="Perspective projection" />
+            <Value name="CAMERA_ORTHOGRAPHIC" integer="1" desc="Orthographic projection" />
+        </Enum>
+        <Enum name="CameraMode" valueCount="5" desc="Camera system modes">
+            <Value name="CAMERA_CUSTOM" integer="0" desc="Camera custom, controlled by user (UpdateCamera() does nothing)" />
+            <Value name="CAMERA_FREE" integer="1" desc="Camera free mode" />
+            <Value name="CAMERA_ORBITAL" integer="2" desc="Camera orbital, around target, zoom supported" />
+            <Value name="CAMERA_FIRST_PERSON" integer="3" desc="Camera first person" />
+            <Value name="CAMERA_THIRD_PERSON" integer="4" desc="Camera third person" />
+        </Enum>
+    </Enums>
+    <Callbacks count="0">
+    </Callbacks>
+    <Functions count="12">
+        <Function name="GetCameraForward" retType="Vector3" paramCount="1" desc="">
+            <Param type="Camera *" name="camera" desc="" />
+        </Function>
+        <Function name="GetCameraUp" retType="Vector3" paramCount="1" desc="">
+            <Param type="Camera *" name="camera" desc="" />
+        </Function>
+        <Function name="GetCameraRight" retType="Vector3" paramCount="1" desc="">
+            <Param type="Camera *" name="camera" desc="" />
+        </Function>
+        <Function name="CameraMoveForward" retType="void" paramCount="3" desc="">
+            <Param type="Camera *" name="camera" desc="" />
+            <Param type="float" name="distance" desc="" />
+            <Param type="bool" name="moveInWorldPlane" desc="" />
+        </Function>
+        <Function name="CameraMoveUp" retType="void" paramCount="2" desc="">
+            <Param type="Camera *" name="camera" desc="" />
+            <Param type="float" name="distance" desc="" />
+        </Function>
+        <Function name="CameraMoveRight" retType="void" paramCount="3" desc="">
+            <Param type="Camera *" name="camera" desc="" />
+            <Param type="float" name="distance" desc="" />
+            <Param type="bool" name="moveInWorldPlane" desc="" />
+        </Function>
+        <Function name="CameraMoveToTarget" retType="void" paramCount="2" desc="">
+            <Param type="Camera *" name="camera" desc="" />
+            <Param type="float" name="delta" desc="" />
+        </Function>
+        <Function name="CameraYaw" retType="void" paramCount="3" desc="">
+            <Param type="Camera *" name="camera" desc="" />
+            <Param type="float" name="angle" desc="" />
+            <Param type="bool" name="rotateAroundTarget" desc="" />
+        </Function>
+        <Function name="CameraPitch" retType="void" paramCount="5" desc="">
+            <Param type="Camera *" name="camera" desc="" />
+            <Param type="float" name="angle" desc="" />
+            <Param type="bool" name="lockView" desc="" />
+            <Param type="bool" name="rotateAroundTarget" desc="" />
+            <Param type="bool" name="rotateUp" desc="" />
+        </Function>
+        <Function name="CameraRoll" retType="void" paramCount="2" desc="">
+            <Param type="Camera *" name="camera" desc="" />
+            <Param type="float" name="angle" desc="" />
+        </Function>
+        <Function name="GetCameraViewMatrix" retType="Matrix" paramCount="1" desc="">
+            <Param type="Camera *" name="camera" desc="" />
+        </Function>
+        <Function name="GetCameraProjectionMatrix" retType="Matrix" paramCount="2" desc="">
+            <Param type="Camera *" name="camera" desc="" />
+            <Param type="float" name="aspect" desc="" />
+        </Function>
+    </Functions>
+</raylibAPI>
