@@ -11,6 +11,7 @@ Versioned exports of the latest raylib APIs through the latest version of the [p
 - raygui
 - raylib
 - raymath
+- rcamera
 - reasings
 - rlgl
 - rmem

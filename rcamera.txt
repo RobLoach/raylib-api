@@ -1,0 +1,172 @@
+
+Defines found: 5
+
+Define 001: RCAMERA_H
+  Name: RCAMERA_H
+  Type: GUARD
+  Value: 
+  Description: 
+Define 002: __declspec(x)
+  Name: __declspec(x)
+  Type: MACRO
+  Value: __attribute__((x))
+  Description: 
+Define 003: RLAPI
+  Name: RLAPI
+  Type: UNKNOWN
+  Value: __declspec(dllexport)
+  Description: Building the library as a Win32 shared library (.dll)
+Define 004: CAMERA_CULL_DISTANCE_NEAR
+  Name: CAMERA_CULL_DISTANCE_NEAR
+  Type: DOUBLE
+  Value: 0.05
+  Description: 
+Define 005: CAMERA_CULL_DISTANCE_FAR
+  Name: CAMERA_CULL_DISTANCE_FAR
+  Type: DOUBLE
+  Value: 4000.0
+  Description: 
+
+Structures found: 4
+
+Struct 01: Vector2 (2 fields)
+  Name: Vector2
+  Description: Vector2, 2 components
+  Field[1]: float x // Vector x component
+  Field[2]: float y // Vector y component
+Struct 02: Vector3 (3 fields)
+  Name: Vector3
+  Description: Vector3, 3 components
+  Field[1]: float x // Vector x component
+  Field[2]: float y // Vector y component
+  Field[3]: float z // Vector z component
+Struct 03: Matrix (16 fields)
+  Name: Matrix
+  Description: Matrix, 4x4 components, column major, OpenGL style, right-handed
+  Field[1]: float m0 // Matrix first row (4 components)
+  Field[2]: float m4 // Matrix first row (4 components)
+  Field[3]: float m8 // Matrix first row (4 components)
+  Field[4]: float m12 // Matrix first row (4 components)
+  Field[5]: float m1 // Matrix second row (4 components)
+  Field[6]: float m5 // Matrix second row (4 components)
+  Field[7]: float m9 // Matrix second row (4 components)
+  Field[8]: float m13 // Matrix second row (4 components)
+  Field[9]: float m2 // Matrix third row (4 components)
+  Field[10]: float m6 // Matrix third row (4 components)
+  Field[11]: float m10 // Matrix third row (4 components)
+  Field[12]: float m14 // Matrix third row (4 components)
+  Field[13]: float m3 // Matrix fourth row (4 components)
+  Field[14]: float m7 // Matrix fourth row (4 components)
+  Field[15]: float m11 // Matrix fourth row (4 components)
+  Field[16]: float m15 // Matrix fourth row (4 components)
+Struct 04: Camera3D (5 fields)
+  Name: Camera3D
+  Description: Camera type, defines a camera position/orientation in 3d space
+  Field[1]: Vector3 position // Camera position
+  Field[2]: Vector3 target // Camera target it looks-at
+  Field[3]: Vector3 up // Camera up vector (rotation over its axis)
+  Field[4]: float fovy // Camera field-of-view aperture in Y (degrees) in perspective, used as near plane width in orthographic
+  Field[5]: int projection // Camera projection type: CAMERA_PERSPECTIVE or CAMERA_ORTHOGRAPHIC
+
+Aliases found: 1
+
+Alias 001: Camera
+  Type: Camera3D
+  Name: Camera
+  Description: Camera type fallback, defaults to Camera3D
+
+Enums found: 2
+
+Enum 01: CameraProjection (2 values)
+  Name: CameraProjection
+  Description: Camera projection
+  Value[CAMERA_PERSPECTIVE]: 0
+  Value[CAMERA_ORTHOGRAPHIC]: 1
+Enum 02: CameraMode (5 values)
+  Name: CameraMode
+  Description: Camera system modes
+  Value[CAMERA_CUSTOM]: 0
+  Value[CAMERA_FREE]: 1
+  Value[CAMERA_ORBITAL]: 2
+  Value[CAMERA_FIRST_PERSON]: 3
+  Value[CAMERA_THIRD_PERSON]: 4
+
+Callbacks found: 0
+
+
+Functions found: 12
+
+Function 001: GetCameraForward() (1 input parameters)
+  Name: GetCameraForward
+  Return type: Vector3
+  Description: 
+  Param[1]: camera (type: Camera *)
+Function 002: GetCameraUp() (1 input parameters)
+  Name: GetCameraUp
+  Return type: Vector3
+  Description: 
+  Param[1]: camera (type: Camera *)
+Function 003: GetCameraRight() (1 input parameters)
+  Name: GetCameraRight
+  Return type: Vector3
+  Description: 
+  Param[1]: camera (type: Camera *)
+Function 004: CameraMoveForward() (3 input parameters)
+  Name: CameraMoveForward
+  Return type: void
+  Description: 
+  Param[1]: camera (type: Camera *)
+  Param[2]: distance (type: float)
+  Param[3]: moveInWorldPlane (type: bool)
+Function 005: CameraMoveUp() (2 input parameters)
+  Name: CameraMoveUp
+  Return type: void
+  Description: 
+  Param[1]: camera (type: Camera *)
+  Param[2]: distance (type: float)
+Function 006: CameraMoveRight() (3 input parameters)
+  Name: CameraMoveRight
+  Return type: void
+  Description: 
+  Param[1]: camera (type: Camera *)
+  Param[2]: distance (type: float)
+  Param[3]: moveInWorldPlane (type: bool)
+Function 007: CameraMoveToTarget() (2 input parameters)
+  Name: CameraMoveToTarget
+  Return type: void
+  Description: 
+  Param[1]: camera (type: Camera *)
+  Param[2]: delta (type: float)
+Function 008: CameraYaw() (3 input parameters)
+  Name: CameraYaw
+  Return type: void
+  Description: 
+  Param[1]: camera (type: Camera *)
+  Param[2]: angle (type: float)
+  Param[3]: rotateAroundTarget (type: bool)
+Function 009: CameraPitch() (5 input parameters)
+  Name: CameraPitch
+  Return type: void
+  Description: 
+  Param[1]: camera (type: Camera *)
+  Param[2]: angle (type: float)
+  Param[3]: lockView (type: bool)
+  Param[4]: rotateAroundTarget (type: bool)
+  Param[5]: rotateUp (type: bool)
+Function 010: CameraRoll() (2 input parameters)
+  Name: CameraRoll
+  Return type: void
+  Description: 
+  Param[1]: camera (type: Camera *)
+  Param[2]: angle (type: float)
+Function 011: GetCameraViewMatrix() (1 input parameters)
+  Name: GetCameraViewMatrix
+  Return type: Matrix
+  Description: 
+  Param[1]: camera (type: Camera *)
+Function 012: GetCameraProjectionMatrix() (2 input parameters)
+  Name: GetCameraProjectionMatrix
+  Return type: Matrix
+  Description: 
+  Param[1]: camera (type: Camera *)
+  Param[2]: aspect (type: float)
